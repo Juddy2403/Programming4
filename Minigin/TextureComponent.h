@@ -9,8 +9,8 @@ class TextureComponent : public Component
 public:
 	TextureComponent() = default;
 	TextureComponent(const std::string& filename);
-	virtual void Update(dae::GameObject& gameObj);
-	virtual void Render(const dae::GameObject& gameObj) const;
+	virtual void Update(dae::GameObject& gameObj) override;
+	virtual void Render(const dae::GameObject& gameObj) const override;
 	void SetTexture(const std::string& filename);
 protected:
 	bool m_NeedsUpdate{true};

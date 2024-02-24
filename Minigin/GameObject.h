@@ -1,14 +1,11 @@
 #pragma once
 #include <memory>
 #include "Transform.h"
-#include "Component.h"
 #include <vector>
 
 class Component;
 namespace dae
 {
-	//class Texture2D;
-	// todo: this should become final.
 	class GameObject final
 	{
 	private:

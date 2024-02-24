@@ -1,7 +1,4 @@
-//#include <string>
 #include "GameObject.h"
-//#include "ResourceManager.h"
-//#include "Renderer.h"
 #include "Component.h"
 
 dae::GameObject::~GameObject() = default;
@@ -20,9 +17,9 @@ void dae::GameObject::Render() const
 {
 	/*const auto& pos = m_Transform.GetPosition();
 	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);*/
-	for (auto component : m_Components)
+	for (const auto& component : m_Components)
 	{
-		component.get()->Render(*this);
+		component->Render(*this);
 	}
 }
 

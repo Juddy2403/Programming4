@@ -1,12 +1,13 @@
 #pragma once
 #include "GameObject.h"
 
+using namespace dae;
 class dae::GameObject;
 class Component
 {
 public:
-	virtual void Update(dae::GameObject& gameObj) = 0;
-	virtual void Render(const dae::GameObject& gameObj) const = 0;
+	virtual void Update(GameObject& gameObj) = 0;
+	virtual void Render(const GameObject& gameObj) const = 0;
 	virtual void Transform();
 	
 	Component() = default;
