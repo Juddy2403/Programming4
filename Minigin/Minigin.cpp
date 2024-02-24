@@ -11,6 +11,7 @@
 #include "ResourceManager.h"
 
 SDL_Window* g_window{};
+constexpr float msPerUpdate{ 1 / 60.f * 1000 };
 
 void PrintSDLVersion()
 {
@@ -84,11 +85,28 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& input = InputManager::GetInstance();
 
 	// todo: this update loop could use some work.
+	float previous = static_cast<float>(GetTickCount64()) / 1000.f; //its probably in ms since its ULONGLONG
+	float lag = 0.f;
 	bool doContinue = true;
 	while (doContinue)
 	{
+		const auto current = static_cast<float>(GetTickCount64()) / 1000.f;
+		const float elapsed = current - previous;
+		previous = current;
+		lag += elapsed;
+		
 		doContinue = input.ProcessInput();
-		sceneManager.Update();
+
+		while(lag >= msPerUpdate)
+		{
+			//fixed update happens here (physics and networking)
+			lag -= msPerUpdate;
+		}
+		sceneManager.Update(elapsed);
+		//should pass lag/msPerUpdate to Render
 		renderer.Render();
+
+		//const auto sleep_time = current_time + milliseconds(ms_per_frame) - high_resolution_clock::now();
+		//sleep for the sleep time
 	}
 }
