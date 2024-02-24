@@ -1,0 +1,18 @@
+#include "Time.h"
+
+float Time::GetElapsed() const
+{
+    return m_ElapsedTime.count();
+}
+
+high_resolution_clock::time_point Time::GetCurrent() const
+{
+    return m_Current;
+}
+
+void Time::Update()
+{
+    m_Current = high_resolution_clock::now();
+    m_ElapsedTime = duration<float>(m_Current - m_Previous);
+    m_Previous = m_Current;
+}

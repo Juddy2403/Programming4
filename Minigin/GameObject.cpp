@@ -1,12 +1,15 @@
 #include "GameObject.h"
 #include "Component.h"
 
+dae::GameObject::GameObject(std::string name):
+	m_Name{name}
+{
+}
+
 dae::GameObject::~GameObject() = default;
 
-void dae::GameObject::Update(float elapsedSec)
+void dae::GameObject::Update()
 {
-	(void)elapsedSec; //TODO: remove this
-
 	for (auto component : m_Components)
 	{
 		component.get()->Update(*this);
@@ -36,4 +39,9 @@ void dae::GameObject::SetPosition(float x, float y)
 glm::vec3 dae::GameObject::GetPosition() const
 {
 	return m_Transform.GetPosition();
+}
+
+std::string dae::GameObject::GetName() const
+{
+	return m_Name;
 }

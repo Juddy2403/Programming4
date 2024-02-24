@@ -2,6 +2,10 @@
 #include "GameObject.h"
 
 #include <algorithm>
+#include <sstream>
+#include <iomanip>
+#include "TextComponent.h"
+#include "Time.h"
 
 using namespace dae;
 
@@ -26,12 +30,27 @@ void Scene::RemoveAll()
 	m_objects.clear();
 }
 
-void Scene::Update(float elapsedSec)
+void Scene::Update()
 {
+	auto& time = Time::GetInstance();
+	m_FpsUpdateCounter += time.GetElapsed();
 	for(auto& object : m_objects)
 	{
-		object->Update(elapsedSec);
+		if (object->GetName() == "FPSCounter" && m_FpsUpdateCounter >= m_FpsUpdateRate)
+		{
+			m_FpsUpdateCounter -= m_FpsUpdateRate;
+			const float fpsCounter{ 1.f / time.GetElapsed() };
+			std::stringstream stream{};
+			stream << std::fixed << std::setprecision(1) << fpsCounter; 
+			object->GetComponent<TextComponent>()->SetText(stream.str());
+		}
+		object->Update();
 	}
+	if(m_FpsUpdateCounter >= m_FpsUpdateRate) m_FpsUpdateCounter -= m_FpsUpdateRate;
+}
+
+void dae::Scene::FixedUpdate()
+{ 
 }
 
 void Scene::Render() const

@@ -4,14 +4,17 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <thread>
 #include "Minigin.h"
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "Time.h"
+using namespace std::chrono;
 
 SDL_Window* g_window{};
-constexpr float msPerUpdate{ 1 / 60.f * 1000 };
+constexpr duration<float, std::milli> g_MsPerUpdate{ 1000 / 160.f };
 
 void PrintSDLVersion()
 {
@@ -44,7 +47,6 @@ void PrintSDLVersion()
 dae::Minigin::Minigin(const std::string &dataPath)
 {
 	PrintSDLVersion();
-	
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
@@ -75,7 +77,6 @@ dae::Minigin::~Minigin()
 	g_window = nullptr;
 	SDL_Quit();
 }
-
 void dae::Minigin::Run(const std::function<void()>& load)
 {
 	load();
@@ -83,30 +84,28 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
-
-	// todo: this update loop could use some work.
-	float previous = static_cast<float>(GetTickCount64()) / 1000.f; //its probably in ms since its ULONGLONG
+	auto& time = Time::GetInstance();
+	time.Update();
 	float lag = 0.f;
 	bool doContinue = true;
 	while (doContinue)
 	{
-		const auto current = static_cast<float>(GetTickCount64()) / 1000.f;
-		const float elapsed = current - previous;
-		previous = current;
-		lag += elapsed;
+		time.Update();
+		lag += time.GetElapsed();
 		
 		doContinue = input.ProcessInput();
 
-		while(lag >= msPerUpdate)
+		while(lag >= g_MsPerUpdate.count())
 		{
 			//fixed update happens here (physics and networking)
-			lag -= msPerUpdate;
+			lag -= g_MsPerUpdate.count();
 		}
-		sceneManager.Update(elapsed);
+		sceneManager.Update();
 		//should pass lag/msPerUpdate to Render
 		renderer.Render();
 
-		//const auto sleep_time = current_time + milliseconds(ms_per_frame) - high_resolution_clock::now();
-		//sleep for the sleep time
+		const duration<float,std::milli> sleep_time = time.GetCurrent() + g_MsPerUpdate - high_resolution_clock::now();
+		if(sleep_time.count() > 0)
+		std::this_thread::sleep_for(sleep_time);
 	}
 }

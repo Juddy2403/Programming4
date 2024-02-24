@@ -12,7 +12,8 @@ namespace dae
 		void Remove(std::shared_ptr<GameObject> object);
 		void RemoveAll();
 
-		void Update(float elapsedSec);
+		void Update();
+		void FixedUpdate();
 		void Render() const;
 
 		~Scene();
@@ -23,7 +24,8 @@ namespace dae
 
 	private: 
 		explicit Scene(const std::string& name);
-
+		float m_FpsUpdateCounter{};
+		const float m_FpsUpdateRate{ 0.5f };
 		std::string m_name;
 		std::vector < std::shared_ptr<GameObject>> m_objects{};
 

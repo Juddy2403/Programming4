@@ -2,12 +2,6 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
-TextureComponent::TextureComponent(const std::string& filename):
-	m_NeedsUpdate{true}
-{
-	SetTexture(filename);
-}
-
 void TextureComponent::Update(dae::GameObject& gameObj)
 {
 	(void)gameObj; //TODO:remove this

@@ -2,6 +2,7 @@
 #include <memory>
 #include "Transform.h"
 #include <vector>
+#include <string>
 
 class Component;
 namespace dae
@@ -10,16 +11,24 @@ namespace dae
 	{
 	private:
 		Transform m_Transform{};
-		// todo: mmm, every gameobject has a texture? Is that correct? - should be part of a texture component 
-		//std::shared_ptr<Texture2D> m_texture{};
 		std::vector<std::shared_ptr<Component>> m_Components{};
+		std::string m_Name{};
 	public:
-		void Update(float elapsedSec);
+		void Update();
 		void Render() const;
 
 		//void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
 		glm::vec3 GetPosition() const;
+		std::string GetName() const;
+
+		GameObject() = default;
+		GameObject(std::string name);
+		~GameObject();
+		GameObject(const GameObject& other) = delete;
+		GameObject(GameObject&& other) = delete;
+		GameObject& operator=(const GameObject& other) = delete;
+		GameObject& operator=(GameObject&& other) = delete;
 
 #pragma region Component Handling
 		template<typename T, typename... Args>
@@ -32,7 +41,7 @@ namespace dae
 		std::shared_ptr<T> GetComponent() const {
 			static_assert(std::is_base_of<Component, T>::value, "T must be a subclass of Component");
 			for (const auto& componentPtr : m_Components) {
-				if (std::shared_ptr<T> desiredComponent = std::dynamic_pointer_cast<T>(componentPtr)) 
+				if (std::shared_ptr<T> desiredComponent = std::dynamic_pointer_cast<T>(componentPtr))
 				{
 					return desiredComponent;
 				}
@@ -40,7 +49,7 @@ namespace dae
 			return nullptr; // Component not found
 		}
 		template<typename T>
-		void RemoveComponent()  {
+		void RemoveComponent() {
 			static_assert(std::is_base_of<Component, T>::value, "T must be a subclass of Component");
 			for (auto it = m_Components.begin(); it != m_Components.end(); ++it) {
 				if (std::shared_ptr<T> desiredComponent = std::dynamic_pointer_cast<T>(*it)) {
@@ -53,20 +62,11 @@ namespace dae
 		bool CheckIfComponentExists() const {
 			static_assert(std::is_base_of<Component, T>::value, "T must be a subclass of Component");
 			for (const auto& componentPtr : m_Components) {
-				if (std::dynamic_pointer_cast<T>(componentPtr) != nullptr) 
+				if (std::dynamic_pointer_cast<T>(componentPtr) != nullptr)
 					return true;
 			}
 			return false; // Component not found
 		}
 #pragma endregion
-
-		GameObject() = default;
-		~GameObject();
-		GameObject(const GameObject& other) = delete;
-		GameObject(GameObject&& other) = delete;
-		GameObject& operator=(const GameObject& other) = delete;
-		GameObject& operator=(GameObject&& other) = delete;
-
-
 	};
 }
