@@ -32,21 +32,10 @@ void Scene::RemoveAll()
 
 void Scene::Update()
 {
-	auto& time = Time::GetInstance();
-	m_FpsUpdateCounter += time.GetElapsed();
 	for(auto& object : m_objects)
 	{
-		if (object->GetName() == "FPSCounter" && m_FpsUpdateCounter >= m_FpsUpdateRate)
-		{
-			m_FpsUpdateCounter -= m_FpsUpdateRate;
-			const float fpsCounter{ 1.f / time.GetElapsed() };
-			std::stringstream stream{};
-			stream << std::fixed << std::setprecision(1) << fpsCounter; 
-			object->GetComponent<TextComponent>()->SetText(stream.str());
-		}
 		object->Update();
 	}
-	if(m_FpsUpdateCounter >= m_FpsUpdateRate) m_FpsUpdateCounter -= m_FpsUpdateRate;
 }
 
 void dae::Scene::FixedUpdate()

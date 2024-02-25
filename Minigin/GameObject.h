@@ -17,7 +17,6 @@ namespace dae
 		void Update();
 		void Render() const;
 
-		//void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
 		glm::vec3 GetPosition() const;
 		std::string GetName() const;
@@ -31,11 +30,14 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 #pragma region Component Handling
-		template<typename T, typename... Args>
-		void AddComponent(Args&&... args) {
+		template<typename T, typename... Types>
+		void AddComponents(const T& var1, const Types&... var2) {
+			(void)var1; //this is stupid
 			static_assert(std::is_base_of<Component, T>::value, "T must be a subclass of Component");
-			std::shared_ptr<T> component = std::make_shared<T>(std::forward<Args>(args)...);
+			std::shared_ptr<T> component = std::make_shared<T>();
 			m_Components.push_back(component);
+			if constexpr (sizeof...(var2) > 0)
+				AddComponents(var2...);
 		}
 		template<typename T>
 		std::shared_ptr<T> GetComponent() const {
@@ -68,5 +70,6 @@ namespace dae
 			return false; // Component not found
 		}
 #pragma endregion
+
 	};
 }

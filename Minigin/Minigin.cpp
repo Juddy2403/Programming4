@@ -14,7 +14,7 @@
 using namespace std::chrono;
 
 SDL_Window* g_window{};
-constexpr duration<float, std::milli> g_MsPerUpdate{ 1000 / 160.f };
+constexpr duration<float, std::milli> g_MsPerUpdate{ 100.f / 16.f };
 
 void PrintSDLVersion()
 {
@@ -85,14 +85,13 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 	auto& time = Time::GetInstance();
-	time.Update();
+
 	float lag = 0.f;
 	bool doContinue = true;
 	while (doContinue)
 	{
 		time.Update();
 		lag += time.GetElapsed();
-		
 		doContinue = input.ProcessInput();
 
 		while(lag >= g_MsPerUpdate.count())
