@@ -1,6 +1,7 @@
 #include "TextureComponent.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+#include "TransformComponent.h"
 
 void TextureComponent::Update(dae::GameObject& gameObj)
 {
@@ -15,7 +16,7 @@ void TextureComponent::Render(const dae::GameObject& gameObj) const
 {
 	if (m_Texture != nullptr)
 	{
-		const auto& pos = gameObj.GetPosition();
+		const auto& pos = gameObj.GetComponent<TransformComponent>()->GetPosition();
 		dae::Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
 	}
 }

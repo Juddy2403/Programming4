@@ -16,9 +16,6 @@ namespace dae
 	public:
 		void Update();
 		void Render() const;
-
-		void SetPosition(float x, float y);
-		glm::vec3 GetPosition() const;
 		std::string GetName() const;
 
 		GameObject() = default;
@@ -48,6 +45,7 @@ namespace dae
 					return desiredComponent;
 				}
 			}
+			assert(false);
 			return nullptr; // Component not found
 		}
 		template<typename T>
