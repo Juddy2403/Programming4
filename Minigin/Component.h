@@ -1,7 +1,6 @@
 #pragma once
 #include "GameObject.h"
 
-using namespace dae;
 class dae::GameObject;
 class Component
 {
@@ -9,8 +8,8 @@ protected:
 	friend class GameObject;
 	Component() = default;
 public:
-	virtual void Update(GameObject& gameObj) = 0;
-	virtual void Render(const GameObject& gameObj) const = 0;
+	virtual void Update(dae::GameObject& gameObj) = 0;
+	virtual void Render(const dae::GameObject& gameObj) const = 0;
 	virtual void Transform();
 	
 	virtual ~Component() = default;

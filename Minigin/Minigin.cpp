@@ -4,14 +4,14 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include <thread>
+//#include <thread>
 #include "Minigin.h"
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "Time.h"
-using namespace std::chrono;
+//using namespace std::chrono;
 
 SDL_Window* g_window{};
 constexpr duration<float, std::milli> g_MsPerUpdate{ 100.f / 16.f };
@@ -79,6 +79,8 @@ dae::Minigin::~Minigin()
 }
 void dae::Minigin::Run(const std::function<void()>& load)
 {
+	//SDL_GL_SetSwapInterval(-1); //for a steady framerate of 160
+
 	load();
 
 	auto& renderer = Renderer::GetInstance();
@@ -86,25 +88,26 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& input = InputManager::GetInstance();
 	auto& time = Time::GetInstance();
 
-	float lag = 0.f;
+	//float lag = 0.f;
 	bool doContinue = true;
 	while (doContinue)
 	{
 		time.Update();
-		lag += time.GetElapsed();
-		doContinue = input.ProcessInput();
+		//lag += time.GetElapsed();
+		//while(lag >= g_MsPerUpdate.count())
+		//{
+		//	//fixed update happens here (physics and networking)
+		//	lag -= g_MsPerUpdate.count();
+		//}
 
-		while(lag >= g_MsPerUpdate.count())
-		{
-			//fixed update happens here (physics and networking)
-			lag -= g_MsPerUpdate.count();
-		}
 		sceneManager.Update();
+		//LATE UPDATE HERE (for eg camera)
 		//should pass lag/msPerUpdate to Render
 		renderer.Render();
+		doContinue = input.ProcessInput();
 
-		const duration<float,std::milli> sleep_time = time.GetCurrent() + g_MsPerUpdate - high_resolution_clock::now();
-		if(sleep_time.count() > 0)
-		std::this_thread::sleep_for(sleep_time);
+		//const duration<float,std::milli> sleep_time = time.GetCurrent() + g_MsPerUpdate - high_resolution_clock::now();
+		//if(sleep_time.count() > 0)
+		//std::this_thread::sleep_for(sleep_time);
 	}
 }

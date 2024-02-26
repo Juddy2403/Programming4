@@ -10,7 +10,6 @@ namespace dae
 	class GameObject final
 	{
 	private:
-		Transform m_Transform{};
 		std::vector<std::shared_ptr<Component>> m_Components{};
 		std::string m_Name{};
 	public:

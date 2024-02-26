@@ -5,7 +5,7 @@ void TransformComponent::Update(dae::GameObject& gameObj)
 	(void)gameObj;
 }
 
-void TransformComponent::Render(const GameObject& gameObj) const
+void TransformComponent::Render(const dae::GameObject& gameObj) const
 {
 	(void)gameObj;
 }

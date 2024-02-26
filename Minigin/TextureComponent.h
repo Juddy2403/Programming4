@@ -7,8 +7,8 @@ class Texture2D;
 class TextureComponent : public Component
 {
 public:
-	virtual void Update(GameObject& gameObj) override;
-	virtual void Render(const GameObject& gameObj) const override;
+	virtual void Update(dae::GameObject& gameObj) override;
+	virtual void Render(const dae::GameObject& gameObj) const override;
 	void SetTexture(const std::string& filename);
 protected:
 	bool m_NeedsUpdate{true};

@@ -13,14 +13,14 @@ void FPSComponent::Update(dae::GameObject& gameObj)
 	{
 		const float fpsCounter{ m_FramesSinceUpdate / m_FpsUpdateCounter };
 		std::stringstream stream{};
-		stream << std::fixed << std::setprecision(1) << fpsCounter;
+		stream << std::fixed << std::setprecision(1) << fpsCounter <<" FPS";
 		gameObj.GetComponent<TextComponent>()->SetText(stream.str());
 		m_FramesSinceUpdate = 0;
 		m_FpsUpdateCounter -= m_FpsUpdateRate;
 	}
 }
 
-void FPSComponent::Render(const GameObject& gameObj) const
+void FPSComponent::Render(const dae::GameObject& gameObj) const
 {
 	(void)gameObj;
 }

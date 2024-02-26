@@ -8,7 +8,7 @@ private:
 	dae::Transform m_Transform{};
 public:
 	virtual void Update(dae::GameObject& gameObj) override;
-	virtual void Render(const GameObject& gameObj) const override;
+	virtual void Render(const dae::GameObject& gameObj) const override;
 
 	void SetPosition(float x, float y);
 	glm::vec3 GetPosition() const;
