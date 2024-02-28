@@ -10,6 +10,7 @@ namespace GameEngine {
 	public:
 		//virtual void Update() override;
 		explicit TransformComponent(GameObject* gameObj);
+		explicit TransformComponent(GameObject* gameObj, float x, float y);
 		void SetPosition(float x, float y);
 		glm::vec3 GetPosition() const;
 	};

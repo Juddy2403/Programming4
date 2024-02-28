@@ -11,6 +11,11 @@ GameEngine::TransformComponent::TransformComponent(GameObject* gameObj) :Compone
 {
 }
 
+GameEngine::TransformComponent::TransformComponent(GameObject* gameObj, float x, float y) :Component(gameObj)
+{
+	SetPosition(x, y);
+}
+
 void TransformComponent::SetPosition(float x, float y)
 {
 	m_Transform.SetPosition(x, y, 0.0f);

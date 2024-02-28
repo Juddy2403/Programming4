@@ -36,7 +36,7 @@ namespace GameEngine
 #pragma region Component Handling
 
 		template<ComponentType T, typename... Args>
-		std::shared_ptr<T> AddComponent(const Args&... args)
+		std::shared_ptr<T> AddComponent(Args&&... args)
 		{
 			std::shared_ptr<T> component = std::make_shared<T>(this, std::forward<Args>(args)...);
 			m_Components.push_back(component);
