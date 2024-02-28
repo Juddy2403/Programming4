@@ -15,6 +15,7 @@ namespace GameEngine
 		void Update();
 		//void FixedUpdate();
 		void Render() const;
+		void RemoveDestroyedObjects();
 
 		~Scene();
 		Scene(const Scene& other) = delete;
@@ -27,7 +28,7 @@ namespace GameEngine
 		float m_FpsUpdateCounter{};
 		const float m_FpsUpdateRate{ 0.5f };
 		std::string m_name;
-		std::vector < std::shared_ptr<GameObject>> m_objects{};
+		std::vector < std::shared_ptr<GameObject>> m_GameObjects{};
 
 		static unsigned int m_idCounter; 
 	};

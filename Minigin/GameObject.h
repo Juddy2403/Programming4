@@ -16,10 +16,15 @@ namespace GameEngine
 	private:
 		std::vector<std::shared_ptr<Component>> m_Components{};
 		std::string m_Name{};
+		bool m_IsDestroyed{ false };
 	public:
 		void Update();
 		void Render() const;
 		std::string GetName() const;
+		bool IsDestroyed() const;
+		void SetDestroyedFlag();
+		void RemoveDestroyedObjects();
+
 		GameObject() = default;
 		GameObject(std::string name);
 		~GameObject();
@@ -70,6 +75,7 @@ namespace GameEngine
 			) != m_Components.end();
 		}
 #pragma endregion
+
 
 	};
 }

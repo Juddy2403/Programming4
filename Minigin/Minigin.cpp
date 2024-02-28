@@ -14,7 +14,6 @@
 //using namespace std::chrono;
 
 SDL_Window* g_window{};
-constexpr duration<float, std::milli> g_MsPerUpdate{ 100.f / 16.f };
 
 void PrintSDLVersion()
 {
@@ -87,17 +86,17 @@ void GameEngine::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 	auto& time = Time::GetInstance();
-
+	
 	//float lag = 0.f;
 	bool doContinue = true;
 	while (doContinue)
 	{
 		time.Update();
 		//lag += time.GetElapsed();
-		//while(lag >= g_MsPerUpdate.count())
+		//while(lag >= time.GetFixedTimeStep().count())
 		//{
 		//	//fixed update happens here (physics and networking)
-		//	lag -= g_MsPerUpdate.count();
+		//	lag -= time.GetFixedTimeStep().count();
 		//}
 
 		sceneManager.Update();

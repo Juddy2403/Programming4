@@ -10,6 +10,11 @@ high_resolution_clock::time_point Time::GetCurrent() const
     return m_Current;
 }
 
+duration<float, std::milli> Time::GetFixedTimeStep() const
+{
+    return m_FixedTimeStep;
+}
+
 void Time::Update()
 {
     m_Current = high_resolution_clock::now();
