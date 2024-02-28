@@ -3,20 +3,23 @@
 #include <stdexcept>
 #include "Renderer.h"
 
+using namespace GameEngine;
+GameEngine::TextComponent::TextComponent(GameObject* gameObj): TextureComponent(gameObj)
+{
+}
 void TextComponent::SetText(const std::string& text)
 {
 	m_text = text;
 	m_NeedsUpdate = true;
 }
 
-void TextComponent::SetFont(std::shared_ptr<dae::Font> font)
+void TextComponent::SetFont(std::shared_ptr<GameEngine::Font> font)
 {
 	m_font = std::move(font);
 }
 
-void TextComponent::Update(dae::GameObject& gameObj)
+void TextComponent::Update()
 {
-	(void)gameObj; //TODO: remove this
 	if (m_NeedsUpdate)
 	{
 		const SDL_Color color = { 255,255,255,255 }; // only white text is supported now
@@ -25,13 +28,13 @@ void TextComponent::Update(dae::GameObject& gameObj)
 		{
 			throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
 		}
-		auto texture = SDL_CreateTextureFromSurface(dae::Renderer::GetInstance().GetSDLRenderer(), surf);
+		auto texture = SDL_CreateTextureFromSurface(GameEngine::Renderer::GetInstance().GetSDLRenderer(), surf);
 		if (texture == nullptr)
 		{
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		}
 		SDL_FreeSurface(surf);
-		m_Texture = std::make_shared<dae::Texture2D>(texture);
+		m_Texture = std::make_shared<GameEngine::Texture2D>(texture);
 		m_NeedsUpdate = false;
 	}
 }

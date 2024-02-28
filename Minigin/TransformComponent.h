@@ -2,15 +2,17 @@
 #include "Component.h"
 #include "Transform.h"
 
-class TransformComponent : public Component
-{
-private:
-	dae::Transform m_Transform{};
-public:
-	virtual void Update(dae::GameObject& gameObj) override;
-	virtual void Render(const dae::GameObject& gameObj) const override;
+namespace GameEngine {
+	class TransformComponent : public Component
+	{
+	private:
+		GameEngine::Transform m_Transform{};
+	public:
+		//virtual void Update() override;
+		explicit TransformComponent(GameObject* gameObj);
+		void SetPosition(float x, float y);
+		glm::vec3 GetPosition() const;
+	};
 
-	void SetPosition(float x, float y);
-	glm::vec3 GetPosition() const;
-};
+}
 

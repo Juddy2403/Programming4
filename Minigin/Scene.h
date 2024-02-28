@@ -1,7 +1,7 @@
 #pragma once
 #include "SceneManager.h"
 
-namespace dae
+namespace GameEngine
 {
 	class GameObject;
 	class Scene final
@@ -13,7 +13,7 @@ namespace dae
 		void RemoveAll();
 
 		void Update();
-		void FixedUpdate();
+		//void FixedUpdate();
 		void Render() const;
 
 		~Scene();

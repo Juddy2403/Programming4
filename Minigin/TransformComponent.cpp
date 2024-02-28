@@ -1,18 +1,14 @@
 #include "TransformComponent.h"
 
-void TransformComponent::Update(dae::GameObject& gameObj)
-{
-	(void)gameObj;
-}
-
-void TransformComponent::Render(const dae::GameObject& gameObj) const
-{
-	(void)gameObj;
-}
+using namespace GameEngine;
 
 glm::vec3 TransformComponent::GetPosition() const
 {
 	return m_Transform.GetPosition();
+}
+
+GameEngine::TransformComponent::TransformComponent(GameObject* gameObj) :Component(gameObj)
+{
 }
 
 void TransformComponent::SetPosition(float x, float y)

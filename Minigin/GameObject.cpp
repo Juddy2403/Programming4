@@ -1,30 +1,33 @@
 #include "GameObject.h"
 #include "Component.h"
 
-dae::GameObject::GameObject(std::string name):
+GameEngine::GameObject::GameObject(std::string name):
 	m_Name{name}
 {
 }
 
-dae::GameObject::~GameObject() = default;
+GameEngine::GameObject::~GameObject() = default;
 
-void dae::GameObject::Update()
+void GameEngine::GameObject::Update()
 {
-	for (auto component : m_Components)
+	for (auto& component : m_Components)
 	{
-		component.get()->Update(*this);
+		component.get()->Update();
+		
 	}
+	
 }
 
-void dae::GameObject::Render() const
+void GameEngine::GameObject::Render() const
 {
 	for (const auto& component : m_Components)
 	{
-		component->Render(*this);
+		component->Render();
 	}
 }
 
-std::string dae::GameObject::GetName() const
+std::string GameEngine::GameObject::GetName() const
 {
 	return m_Name;
+
 }

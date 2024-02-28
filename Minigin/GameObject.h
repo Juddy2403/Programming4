@@ -3,10 +3,14 @@
 #include "Transform.h"
 #include <vector>
 #include <string>
+#include <concepts>
+#include <algorithm>
 
-class Component;
-namespace dae
+namespace GameEngine
 {
+	class Component;
+	template<typename T>
+	concept ComponentType = std::is_base_of<Component, T>::value;
 	class GameObject final
 	{
 	private:
@@ -16,7 +20,6 @@ namespace dae
 		void Update();
 		void Render() const;
 		std::string GetName() const;
-
 		GameObject() = default;
 		GameObject(std::string name);
 		~GameObject();
@@ -26,45 +29,45 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 #pragma region Component Handling
-		template<typename T, typename... Types>
-		void AddComponents(const T& var1, const Types&... var2) {
-			(void)var1; //this is stupid
-			static_assert(std::is_base_of<Component, T>::value, "T must be a subclass of Component");
-			std::shared_ptr<T> component = std::make_shared<T>();
+
+		template<ComponentType T, typename... Args>
+		std::shared_ptr<T> AddComponent(const Args&... args)
+		{
+			std::shared_ptr<T> component = std::make_shared<T>(this, std::forward<Args>(args)...);
 			m_Components.push_back(component);
-			if constexpr (sizeof...(var2) > 0)
-				AddComponents(var2...);
+			return component;
 		}
-		template<typename T>
+		template<ComponentType T>
+		std::shared_ptr<T> AddComponent()
+		{
+			std::shared_ptr<T> component = std::make_shared<T>(this);
+			m_Components.push_back(component);
+			return component;
+		}
+
+		template<ComponentType T>
 		std::shared_ptr<T> GetComponent() const {
-			static_assert(std::is_base_of<Component, T>::value, "T must be a subclass of Component");
 			for (const auto& componentPtr : m_Components) {
 				if (std::shared_ptr<T> desiredComponent = std::dynamic_pointer_cast<T>(componentPtr))
 				{
 					return desiredComponent;
 				}
 			}
-			assert(false);
 			return nullptr; // Component not found
 		}
-		template<typename T>
+
+		template<ComponentType T>
 		void RemoveComponent() {
-			static_assert(std::is_base_of<Component, T>::value, "T must be a subclass of Component");
-			for (auto it = m_Components.begin(); it != m_Components.end(); ++it) {
-				if (std::shared_ptr<T> desiredComponent = std::dynamic_pointer_cast<T>(*it)) {
-					m_Components.erase(it);
-					return;
-				}
-			}
+			const auto ret = std::ranges::remove_if(m_Components, [](const auto& elem) {
+				return (std::dynamic_pointer_cast<T>(elem) != nullptr); });
+			m_Components.erase(ret.begin(), ret.end());
 		}
-		template<typename T>
+
+		template<ComponentType T>
 		bool CheckIfComponentExists() const {
-			static_assert(std::is_base_of<Component, T>::value, "T must be a subclass of Component");
-			for (const auto& componentPtr : m_Components) {
-				if (std::dynamic_pointer_cast<T>(componentPtr) != nullptr)
-					return true;
-			}
-			return false; // Component not found
+			return std::ranges::find_if(m_Components, [](const auto& elem) {
+				return (std::dynamic_pointer_cast<T>(elem) != nullptr); }
+			) != m_Components.end();
 		}
 #pragma endregion
 

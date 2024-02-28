@@ -44,7 +44,7 @@ void PrintSDLVersion()
 		version.major, version.minor, version.patch);
 }
 
-dae::Minigin::Minigin(const std::string &dataPath)
+GameEngine::Minigin::Minigin(const std::string &dataPath)
 {
 	PrintSDLVersion();
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
@@ -70,16 +70,16 @@ dae::Minigin::Minigin(const std::string &dataPath)
 	ResourceManager::GetInstance().Init(dataPath);
 }
 
-dae::Minigin::~Minigin()
+GameEngine::Minigin::~Minigin()
 {
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(g_window);
 	g_window = nullptr;
 	SDL_Quit();
 }
-void dae::Minigin::Run(const std::function<void()>& load)
+void GameEngine::Minigin::Run(const std::function<void()>& load)
 {
-	//SDL_GL_SetSwapInterval(-1); //for a steady framerate of 160
+	SDL_GL_SetSwapInterval(1); //for a steady framerate of 160 using Vsync
 
 	load();
 
@@ -102,6 +102,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 		sceneManager.Update();
 		//LATE UPDATE HERE (for eg camera)
+		// 
 		//should pass lag/msPerUpdate to Render
 		renderer.Render();
 		doContinue = input.ProcessInput();

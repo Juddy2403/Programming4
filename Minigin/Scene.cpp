@@ -7,7 +7,7 @@
 #include "TextComponent.h"
 #include "Time.h"
 
-using namespace dae;
+using namespace GameEngine;
 
 unsigned int Scene::m_idCounter = 0;
 
@@ -38,9 +38,9 @@ void Scene::Update()
 	}
 }
 
-void dae::Scene::FixedUpdate()
-{ 
-}
+//void GameEngine::Scene::FixedUpdate()
+//{ 
+//}
 
 void Scene::Render() const
 {

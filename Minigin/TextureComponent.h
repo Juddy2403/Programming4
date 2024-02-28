@@ -3,15 +3,19 @@
 #include "Texture2D.h"
 #include <string>
 
-class Texture2D;
-class TextureComponent : public Component
-{
-public:
-	virtual void Update(dae::GameObject& gameObj) override;
-	virtual void Render(const dae::GameObject& gameObj) const override;
-	void SetTexture(const std::string& filename);
-protected:
-	bool m_NeedsUpdate{true};
-	std::shared_ptr<dae::Texture2D> m_Texture{};
-	
-};
+namespace GameEngine {
+	class Texture2D;
+	class TextureComponent : public Component
+	{
+	public:
+		explicit TextureComponent(GameObject* gameObj);
+		virtual void Update() override;
+		virtual void Render() const override;
+		void SetTexture(const std::string& filename);
+	protected:
+		bool m_NeedsUpdate{ true };
+		std::shared_ptr<Texture2D> m_Texture{};
+
+	};
+}
+

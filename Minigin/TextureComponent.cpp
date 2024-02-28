@@ -3,25 +3,31 @@
 #include "Renderer.h"
 #include "TransformComponent.h"
 
-void TextureComponent::Update(dae::GameObject& gameObj)
+using namespace GameEngine;
+
+GameEngine::TextureComponent::TextureComponent(GameObject* gameObj): Component(gameObj)
 {
-	(void)gameObj; //TODO:remove this
+}
+
+void TextureComponent::Update()
+{
 	if (m_NeedsUpdate)
 	{
 		//Update the thing
 	}
 }
 
-void TextureComponent::Render(const dae::GameObject& gameObj) const
+void TextureComponent::Render() const
 {
 	if (m_Texture != nullptr)
 	{
-		const auto& pos = gameObj.GetComponent<TransformComponent>()->GetPosition();
-		dae::Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
+		const auto pos = GetParent().GetComponent<TransformComponent>()->GetPosition();
+
+		GameEngine::Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
 	}
 }
 
 void TextureComponent::SetTexture(const std::string& filename)
 {
-	m_Texture = dae::ResourceManager::GetInstance().LoadTexture(filename);
+	m_Texture = GameEngine::ResourceManager::GetInstance().LoadTexture(filename);
 }

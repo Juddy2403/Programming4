@@ -4,7 +4,7 @@
 #include <memory>
 #include "Singleton.h"
 
-namespace dae
+namespace GameEngine
 {
 	class Scene;
 	class SceneManager final : public Singleton<SceneManager>
@@ -13,7 +13,7 @@ namespace dae
 		Scene& CreateScene(const std::string& name);
 
 		void Update();
-		void FixedUpdate();
+		//void FixedUpdate();
 		void Render();
 	private:
 		friend class Singleton<SceneManager>;

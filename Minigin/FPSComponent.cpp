@@ -2,9 +2,11 @@
 #include "Time.h"
 #include "TextComponent.h"
 
+using namespace GameEngine;
+
 const float FPSComponent::m_FpsUpdateRate = 1.f;
 
-void FPSComponent::Update(dae::GameObject& gameObj)
+void FPSComponent::Update()
 {
 	auto& time = Time::GetInstance();
 	m_FpsUpdateCounter += time.GetElapsed();
@@ -14,13 +16,12 @@ void FPSComponent::Update(dae::GameObject& gameObj)
 		const float fpsCounter{ m_FramesSinceUpdate / m_FpsUpdateCounter };
 		std::stringstream stream{};
 		stream << std::fixed << std::setprecision(1) << fpsCounter <<" FPS";
-		gameObj.GetComponent<TextComponent>()->SetText(stream.str());
+		GetParent().GetComponent<TextComponent>()->SetText(stream.str());
 		m_FramesSinceUpdate = 0;
 		m_FpsUpdateCounter -= m_FpsUpdateRate;
 	}
 }
 
-void FPSComponent::Render(const dae::GameObject& gameObj) const
+GameEngine::FPSComponent::FPSComponent(GameObject* gameObj): Component(gameObj)
 {
-	(void)gameObj;
 }
