@@ -7,13 +7,13 @@ namespace GameEngine
 	class Component
 	{
 	private:
-		const GameObject* m_pParent;
+		GameObject* m_pParent;
 		bool m_IsDestroyed{ false };
 	public:
 		virtual void Update() {};
 		virtual void Render() const {};
 
-		const GameObject& GetParent() const;
+		GameObject* GetParent() const;
 		bool IsDestroyed() const;
 		void SetDestroyedFlag();
 		//virtual void Transform();

@@ -3,16 +3,17 @@
 #include "Font.h"
 
 namespace GameEngine {
-	class TextComponent : public TextureComponent
+	class TextComponent : public Component
 	{
 	public:
 		explicit TextComponent(GameObject* gameObj);
 		void SetText(const std::string& text);
 		void SetFont(std::shared_ptr<Font> font);
 		virtual void Update() override;
-	protected:
+	private:
 		std::string m_text{};
 		std::shared_ptr<Font> m_font{};
+		bool m_NeedsUpdate{ true };
 	};
 
 }

@@ -16,7 +16,7 @@ void FPSComponent::Update()
 		const float fpsCounter{ m_FramesSinceUpdate / m_FpsUpdateCounter };
 		std::stringstream stream{};
 		stream << std::fixed << std::setprecision(1) << fpsCounter <<" FPS";
-		GetParent().GetComponent<TextComponent>()->SetText(stream.str());
+		GetParent()->GetComponent<TextComponent>()->SetText(stream.str());
 		m_FramesSinceUpdate = 0;
 		m_FpsUpdateCounter -= m_FpsUpdateRate;
 	}

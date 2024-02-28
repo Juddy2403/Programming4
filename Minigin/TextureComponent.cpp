@@ -9,19 +9,19 @@ GameEngine::TextureComponent::TextureComponent(GameObject* gameObj): Component(g
 {
 }
 
-void TextureComponent::Update()
-{
-	if (m_NeedsUpdate)
-	{
-		//Update the thing
-	}
-}
+//void TextureComponent::Update()
+//{
+//	if (m_NeedsUpdate)
+//	{
+//		//Update the thing
+//	}
+//}
 
 void TextureComponent::Render() const
 {
 	if (m_Texture != nullptr)
 	{
-		const auto pos = GetParent().GetComponent<TransformComponent>()->GetPosition();
+		const auto pos = GetParent()->GetComponent<TransformComponent>()->GetPosition();
 
 		GameEngine::Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
 	}
@@ -30,4 +30,9 @@ void TextureComponent::Render() const
 void TextureComponent::SetTexture(const std::string& filename)
 {
 	m_Texture = GameEngine::ResourceManager::GetInstance().LoadTexture(filename);
+}
+
+void GameEngine::TextureComponent::SetTexture(const std::shared_ptr<Texture2D>& texture)
+{
+	m_Texture = texture;
 }

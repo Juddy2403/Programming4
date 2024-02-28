@@ -4,7 +4,7 @@
 #include "Renderer.h"
 
 using namespace GameEngine;
-GameEngine::TextComponent::TextComponent(GameObject* gameObj): TextureComponent(gameObj)
+GameEngine::TextComponent::TextComponent(GameObject* gameObj): Component(gameObj)
 {
 }
 void TextComponent::SetText(const std::string& text)
@@ -20,7 +20,7 @@ void TextComponent::SetFont(std::shared_ptr<GameEngine::Font> font)
 
 void TextComponent::Update()
 {
-	if (m_NeedsUpdate)
+	if (m_NeedsUpdate && GetParent()->CheckIfComponentExists<TextureComponent>())
 	{
 		const SDL_Color color = { 255,255,255,255 }; // only white text is supported now
 		const auto surf = TTF_RenderText_Blended(m_font->GetFont(), m_text.c_str(), color);
@@ -34,7 +34,7 @@ void TextComponent::Update()
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		}
 		SDL_FreeSurface(surf);
-		m_Texture = std::make_shared<GameEngine::Texture2D>(texture);
+		GetParent()->GetComponent<TextureComponent>()->SetTexture(std::make_shared<GameEngine::Texture2D>(texture));
 		m_NeedsUpdate = false;
 	}
 }

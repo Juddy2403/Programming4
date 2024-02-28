@@ -2,9 +2,9 @@
 
 using namespace GameEngine;
 
-const GameObject& Component::GetParent() const
+GameObject* Component::GetParent() const
 {
-	return *m_pParent;
+	return m_pParent;
 }
 
 bool GameEngine::Component::IsDestroyed() const

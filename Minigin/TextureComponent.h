@@ -9,11 +9,12 @@ namespace GameEngine {
 	{
 	public:
 		explicit TextureComponent(GameObject* gameObj);
-		virtual void Update() override;
+		//virtual void Update() override;
 		virtual void Render() const override;
 		void SetTexture(const std::string& filename);
-	protected:
-		bool m_NeedsUpdate{ true };
+		void SetTexture(const std::shared_ptr<Texture2D>& texture);
+	private:
+		//bool m_NeedsUpdate{ true };
 		std::shared_ptr<Texture2D> m_Texture{};
 
 	};
