@@ -1,12 +1,29 @@
 #include "GameObject.h"
 #include "Component.h"
 
+using namespace GameEngine;
+
 GameEngine::GameObject::GameObject(std::string name):
 	m_Name{name}
 {
 }
 
 GameEngine::GameObject::~GameObject() = default;
+
+void GameEngine::GameObject::AddChild(GameObject* child)
+{
+	m_pChildren.emplace_back(child);
+}
+
+void GameEngine::GameObject::RemoveChild(GameObject* child)
+{
+	m_pChildren.erase(std::ranges::remove(m_pChildren, child).begin());
+}
+
+bool GameEngine::GameObject::IsChild(GameObject* child)
+{
+	return std::ranges::find(m_pChildren, child) != m_pChildren.end();
+}
 
 void GameEngine::GameObject::Update()
 {
@@ -29,6 +46,29 @@ void GameEngine::GameObject::RemoveDestroyedObjects()
 
 	// Erase the destroyed objects from the vector
 	m_Components.erase(range.begin(), range.end());
+}
+
+GameObject* GameEngine::GameObject::GetParent() const
+{
+	return m_pParent;
+}
+
+void GameEngine::GameObject::SetParent(GameObject* parent)
+{
+	if (IsChild(parent) || parent == this || m_pParent == parent) return;
+	if (m_pParent) m_pParent->RemoveChild(this);
+	m_pParent = parent;
+	if (m_pParent) m_pParent->AddChild(this);
+}
+
+int GameEngine::GameObject::GetChildCount() const
+{
+	return static_cast<int>(m_pChildren.size());
+}
+
+GameObject* GameEngine::GameObject::GetChildAt(int index)
+{
+	return m_pChildren[index];
 }
 
 void GameEngine::GameObject::Render() const

@@ -13,17 +13,20 @@ namespace GameEngine
 		virtual void Update() {};
 		virtual void Render() const {};
 
-		GameObject* GetParent() const;
 		bool IsDestroyed() const;
 		void SetDestroyedFlag();
 		//virtual void Transform();
 
-		explicit Component(GameObject* gameObj);
 		virtual ~Component() = default;
 		Component(const Component& other) = delete;
 		Component(Component&& other) = delete;
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
+	protected:
+		GameObject* GetParent() const;
+		explicit Component(GameObject* gameObj);
+
+
 	};
 }
 

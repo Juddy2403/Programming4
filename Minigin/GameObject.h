@@ -17,6 +17,12 @@ namespace GameEngine
 		std::vector<std::shared_ptr<Component>> m_Components{};
 		std::string m_Name{};
 		bool m_IsDestroyed{ false };
+		GameObject* m_pParent{};
+		std::vector<GameObject*> m_pChildren{};
+
+		void AddChild(GameObject* child);
+		void RemoveChild(GameObject* child);
+		bool IsChild(GameObject* child);
 	public:
 		void Update();
 		void Render() const;
@@ -24,6 +30,11 @@ namespace GameEngine
 		bool IsDestroyed() const;
 		void SetDestroyedFlag();
 		void RemoveDestroyedObjects();
+
+		GameObject* GetParent() const;
+		void SetParent(GameObject* parent);
+		int GetChildCount() const;
+		GameObject* GetChildAt(int index);
 
 		GameObject() = default;
 		GameObject(std::string name);

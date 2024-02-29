@@ -4,21 +4,11 @@
 #include "Renderer.h"
 
 using namespace GameEngine;
-GameEngine::TextComponent::TextComponent(GameObject* gameObj): Component(gameObj)
+
+GameEngine::TextComponent::TextComponent(GameObject* gameObj, std::shared_ptr<Font> font, const std::string& text) : Component(gameObj)
 {
-}
-GameEngine::TextComponent::TextComponent(GameObject* gameObj, const std::string& text) : Component(gameObj)
-{
+	if(font) SetFont(font);
 	SetText(text);
-}
-GameEngine::TextComponent::TextComponent(GameObject* gameObj, std::shared_ptr<Font> font) : Component(gameObj)
-{
-	SetFont(font);
-}
-GameEngine::TextComponent::TextComponent(GameObject* gameObj, const std::string& text, std::shared_ptr<Font> font) : Component(gameObj)
-{
-	SetText(text);
-	SetFont(font);
 }
 void TextComponent::SetText(const std::string& text)
 {
@@ -29,9 +19,10 @@ void TextComponent::SetText(const std::string& text)
 	}
 }
 
-void TextComponent::SetFont(std::shared_ptr<GameEngine::Font> font)
+void TextComponent::SetFont(std::shared_ptr<Font> font)
 {
-	m_Font = std::move(font);
+	assert(font);
+	if (font) m_Font = font;
 }
 
 void TextComponent::Update()
@@ -42,7 +33,7 @@ void TextComponent::Update()
 		const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), color);
 		if (surf == nullptr)
 		{
-			throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
+			throw std::runtime_error(std::string("Render  text failed: ") + SDL_GetError());
 		}
 		auto texture = SDL_CreateTextureFromSurface(GameEngine::Renderer::GetInstance().GetSDLRenderer(), surf);
 		if (texture == nullptr)

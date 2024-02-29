@@ -7,8 +7,7 @@ namespace GameEngine {
 	{
 	public:
 		virtual void Update() override;
-		explicit FPSComponent(GameObject* gameObj);
-		explicit FPSComponent(GameObject* gameObj, TextComponent* textComponent);
+		explicit FPSComponent(GameObject* gameObj, TextComponent* textComponent = nullptr);
 	private:
 		float m_FpsUpdateCounter{};
 		int m_FramesSinceUpdate{};

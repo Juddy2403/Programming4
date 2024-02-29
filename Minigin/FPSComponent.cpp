@@ -5,10 +5,6 @@ using namespace GameEngine;
 
 const float FPSComponent::m_FpsUpdateRate = 1.f;
 
-GameEngine::FPSComponent::FPSComponent(GameObject* gameObj) : Component(gameObj)
-{
-}
-
 GameEngine::FPSComponent::FPSComponent(GameObject* gameObj, TextComponent* textComponent) :Component(gameObj),
 m_TextComponent{ textComponent }
 {
