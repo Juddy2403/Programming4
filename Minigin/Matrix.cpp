@@ -6,7 +6,12 @@
 #include <cmath>
 
 namespace dae {
-
+	Matrix::Matrix():
+		Matrix(Vector3{1,0,0},
+			Vector3{0,1,0},
+			Vector3{0,0,1})
+	{
+	}
 	Matrix::Matrix(const Vector3& xAxis, const Vector3& yAxis, const Vector3& zAxis)
 	{
 		data[0] = xAxis;
@@ -59,7 +64,7 @@ namespace dae {
 		return data[1];
 	}
 
-	Vector3 Matrix::GetAxisZ() const
+	Vector3 Matrix::GetTranslation() const
 	{
 		return data[2];
 	}
@@ -101,7 +106,7 @@ namespace dae {
 		{
 			for (int c{ 0 }; c < 3; ++c)
 			{
-				result.data[r] = m.data[c];
+				result.data[r][c] = m.data[c][r];
 			}
 		}
 

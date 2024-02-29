@@ -41,16 +41,17 @@ namespace GameEngine
 
 		//Scene graph functions
 		GameObject* GetParent() const;
-		void SetParent(GameObject* parent);
+		void SetParent(GameObject* parent, bool keepWorldPosition = true);
 		int GetChildCount() const;
 		GameObject* GetChildAt(int index);
 
 		//Transform functions
+		void SetLocalTransform(const Transform& transform);
 		Transform GetWorldTransform();
 		void UpdateWorldTransform();
 
 		void SetPosition(float x, float y);
-		glm::vec3 GetPosition() const;
+		dae::Vector3 GetPosition() const;
 
 		GameObject() = default;
 		GameObject(std::string name);

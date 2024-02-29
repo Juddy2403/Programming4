@@ -4,7 +4,7 @@
 namespace dae {
 	struct Matrix
 	{
-		Matrix() = default;
+		Matrix();
 		Matrix(
 			const Vector3& xAxis,
 			const Vector3& yAxis,
@@ -20,7 +20,7 @@ namespace dae {
 
 		Vector3 GetAxisX() const;
 		Vector3 GetAxisY() const;
-		Vector3 GetAxisZ() const;
+		Vector3 GetTranslation() const;
 
 		static Matrix CreateTranslation(float x, float y);
 		static Matrix CreateTranslation(const Vector3& t);
