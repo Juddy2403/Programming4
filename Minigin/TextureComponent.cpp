@@ -4,22 +4,19 @@
 
 using namespace GameEngine;
 
-GameEngine::TextureComponent::TextureComponent(GameObject* gameObj, const TransformComponent* transformComp): 
-	Component(gameObj),
-	m_TransformComp{transformComp}
+GameEngine::TextureComponent::TextureComponent(GameObject* gameObj): 
+	Component(gameObj)
 {
 }
 
-GameEngine::TextureComponent::TextureComponent(GameObject* gameObj, const TransformComponent* transformComp, const std::string& filename) :
-	Component(gameObj),
-	m_TransformComp{ transformComp }
+GameEngine::TextureComponent::TextureComponent(GameObject* gameObj, const std::string& filename) :
+	Component(gameObj)
 {
 	SetTexture(filename);
 }
 
-GameEngine::TextureComponent::TextureComponent(GameObject* gameObj, const TransformComponent* transformComp, std::shared_ptr<Texture2D>& texture) : 
-	Component(gameObj),
-	m_TransformComp{ transformComp }
+GameEngine::TextureComponent::TextureComponent(GameObject* gameObj, std::shared_ptr<Texture2D>& texture) : 
+	Component(gameObj)
 {
 	SetTexture(texture);
 }
@@ -36,7 +33,7 @@ void TextureComponent::Render() const
 {
 	if (m_Texture != nullptr)
 	{
-		const auto pos = m_TransformComp->GetPosition();
+		const auto pos = GetGameObjParent()->GetPosition();
 
 		GameEngine::Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
 	}

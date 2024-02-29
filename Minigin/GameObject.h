@@ -17,24 +17,40 @@ namespace GameEngine
 		std::vector<std::shared_ptr<Component>> m_Components{};
 		std::string m_Name{};
 		bool m_IsDestroyed{ false };
+
 		GameObject* m_pParent{};
 		std::vector<GameObject*> m_pChildren{};
 
+		//Scene graph functions
 		void AddChild(GameObject* child);
 		void RemoveChild(GameObject* child);
 		bool IsChild(GameObject* child);
+
+		//Transform members
+		Transform m_WorldTransform{};
+		Transform m_LocalTransform{};
+		bool m_IsPositionDirty{ true };
 	public:
 		void Update();
 		void Render() const;
 		std::string GetName() const;
+
 		bool IsDestroyed() const;
 		void SetDestroyedFlag();
 		void RemoveDestroyedObjects();
 
+		//Scene graph functions
 		GameObject* GetParent() const;
 		void SetParent(GameObject* parent);
 		int GetChildCount() const;
 		GameObject* GetChildAt(int index);
+
+		//Transform functions
+		Transform GetWorldTransform();
+		void UpdateWorldTransform();
+
+		void SetPosition(float x, float y);
+		glm::vec3 GetPosition() const;
 
 		GameObject() = default;
 		GameObject(std::string name);

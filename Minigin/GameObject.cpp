@@ -34,6 +34,7 @@ void GameEngine::GameObject::Update()
 		else areElemsToErase = true;
 	}
 
+	UpdateWorldTransform();
 	if(areElemsToErase) RemoveDestroyedObjects();
 }
 
@@ -93,4 +94,32 @@ bool GameEngine::GameObject::IsDestroyed() const
 void GameEngine::GameObject::SetDestroyedFlag()
 {
 	m_IsDestroyed = true;
+}
+
+void GameObject::SetPosition(float x, float y)
+{
+	m_LocalTransform.SetPosition(x, y, 0.0f);
+	m_IsPositionDirty = true;
+}
+
+glm::vec3 GameObject::GetPosition() const
+{
+	return m_WorldTransform.GetPosition();
+}
+
+Transform GameEngine::GameObject::GetWorldTransform()
+{
+	if (m_IsPositionDirty) UpdateWorldTransform();
+	return m_WorldTransform;
+
+}
+
+void GameEngine::GameObject::UpdateWorldTransform()
+{
+	if (m_IsPositionDirty)
+	{
+		if (m_pParent == nullptr) m_WorldTransform = m_LocalTransform;
+		else m_WorldTransform = m_pParent->GetWorldTransform() + m_LocalTransform;
+	}
+	m_IsPositionDirty = false;
 }

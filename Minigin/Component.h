@@ -23,7 +23,7 @@ namespace GameEngine
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
 	protected:
-		GameObject* GetParent() const;
+		GameObject* GetGameObjParent() const;
 		explicit Component(GameObject* gameObj);
 
 

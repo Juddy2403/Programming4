@@ -2,7 +2,7 @@
 
 using namespace GameEngine;
 
-GameObject* Component::GetParent() const
+GameObject* Component::GetGameObjParent() const
 {
 	return m_pParent;
 }
