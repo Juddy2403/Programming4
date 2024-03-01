@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Component.h"
+#include "Time.h"
 
 using namespace GameEngine;
 
@@ -20,8 +21,12 @@ void GameEngine::GameObject::Update()
 		if (!component->IsDestroyed()) component->Update();
 		else areElemsToErase = true;
 	}
-
-	UpdateWorldTransform();
+	if (m_Name == "Pacman") {
+		dae::Vector3 pos = GetPosition();
+		pos += (dae::Vector3{ 1,0,0 } * (20.f * Time::GetElapsed()));
+		SetPosition(pos);
+	}
+	//UpdateWorldTransform();
 	if (areElemsToErase) RemoveDestroyedObjects();
 }
 
@@ -34,18 +39,6 @@ void GameEngine::GameObject::RemoveDestroyedObjects()
 
 	// Erase the destroyed objects from the vector
 	m_Components.erase(range.begin(), range.end());
-}
-
-
-void GameEngine::GameObject::UpdateWorldTransform()
-{
-	if (m_IsPositionDirty)
-	{
-		m_LocalTransform.Update();
-		if (m_pParent == nullptr) m_WorldTransform = m_LocalTransform;
-		else m_WorldTransform = m_pParent->GetWorldTransform() + m_LocalTransform;
-	}
-	m_IsPositionDirty = false;
 }
 
 void GameEngine::GameObject::Render() const
@@ -73,6 +66,12 @@ bool GameEngine::GameObject::IsChild(GameObject* child)
 	return std::ranges::find(m_pChildren, child) != m_pChildren.end();
 }
 
+void GameEngine::GameObject::SetPositionIsDirty()
+{
+	m_IsPositionDirty = true;
+	for (auto& child : m_pChildren) child->SetPositionIsDirty();
+}
+
 GameObject* GameEngine::GameObject::GetParent() const
 {
 	return m_pParent;
@@ -85,7 +84,7 @@ void GameEngine::GameObject::SetParent(GameObject* parent, bool keepWorldPositio
 	else {
 		if (keepWorldPosition)
 			SetLocalTransform(GetWorldTransform() - parent->GetWorldTransform());
-		m_IsPositionDirty = true;
+		SetPositionIsDirty();
 	}
 	if (m_pParent) m_pParent->RemoveChild(this);
 	m_pParent = parent;
@@ -121,20 +120,36 @@ void GameEngine::GameObject::SetDestroyedFlag()
 	m_IsDestroyed = true;
 }
 
-void GameObject::SetPosition(float x, float y)
+void GameObject::SetPosition(float x, float y, float z)
 {
-	m_LocalTransform.SetPosition(x, y, 0.0f);
-	m_IsPositionDirty = true;
+	m_LocalTransform.SetPosition(x, y, z);
+	SetPositionIsDirty();
 }
 
-dae::Vector3 GameObject::GetPosition() const
+void GameEngine::GameObject::SetPosition(const dae::Vector3& pos)
 {
-	return m_WorldTransform.GetPosition();
+	SetPosition(pos.x, pos.y, pos.z);
+}
+
+dae::Vector3 GameObject::GetPosition() 
+{
+	return GetWorldTransform().GetPosition();
 }
 
 void GameEngine::GameObject::SetLocalTransform(const Transform& transform)
 {
 	m_LocalTransform = transform;
+}
+
+void GameEngine::GameObject::UpdateWorldTransform()
+{
+	if (m_IsPositionDirty)
+	{
+		m_LocalTransform.Update();
+		if (m_pParent == nullptr) m_WorldTransform = m_LocalTransform;
+		else m_WorldTransform = m_pParent->GetWorldTransform() + m_LocalTransform;
+	}
+	m_IsPositionDirty = false;
 }
 
 Transform GameEngine::GameObject::GetWorldTransform()

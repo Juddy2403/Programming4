@@ -1,6 +1,7 @@
 #include "Time.h"
+duration<float> Time::m_ElapsedTime = duration<float>{};
 
-float Time::GetElapsed() const
+float Time::GetElapsed() 
 {
     return m_ElapsedTime.count();
 }

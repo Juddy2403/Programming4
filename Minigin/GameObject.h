@@ -25,6 +25,7 @@ namespace GameEngine
 		void AddChild(GameObject* child);
 		void RemoveChild(GameObject* child);
 		bool IsChild(GameObject* child);
+		void SetPositionIsDirty();
 
 		//Transform members
 		Transform m_WorldTransform{};
@@ -50,8 +51,9 @@ namespace GameEngine
 		Transform GetWorldTransform();
 		void UpdateWorldTransform();
 
-		void SetPosition(float x, float y);
-		dae::Vector3 GetPosition() const;
+		void SetPosition(float x, float y, float z = 0);
+		void SetPosition(const dae::Vector3& pos);
+		dae::Vector3 GetPosition() ;
 
 		GameObject() = default;
 		GameObject(std::string name);

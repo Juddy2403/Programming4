@@ -11,7 +11,7 @@ void GameEngine::Transform::SetPosition(const float x, const float y, const floa
 
 void GameEngine::Transform::Translate(float x, float y)
 {
-	m_TranslateMatrix = dae::Matrix::CreateTranslation(x,y);
+	m_TranslateMatrix = dae::Matrix::CreateTranslation(x, y);
 }
 
 void GameEngine::Transform::SetRotation(float angle)
@@ -36,6 +36,7 @@ Transform GameEngine::Transform::operator+(const Transform& other)
 	result.m_Position.x = other.m_Position.x + m_Position.x;
 	result.m_Position.y = other.m_Position.y + m_Position.y;
 	result.m_Position.z = other.m_Position.z + m_Position.z;
+	result.m_TranslateMatrix = dae::Matrix::CreateTranslation(result.m_Position);
 
 	return result;
 }
@@ -43,9 +44,10 @@ Transform GameEngine::Transform::operator+(const Transform& other)
 Transform GameEngine::Transform::operator-(const Transform& other)
 {
 	Transform result{};
-	result.m_Position.x = other.m_Position.x - m_Position.x;
-	result.m_Position.y = other.m_Position.y - m_Position.y;
-	result.m_Position.z = other.m_Position.z - m_Position.z;
+	result.m_Position.x = m_Position.x - other.m_Position.x;
+	result.m_Position.y = m_Position.y - other.m_Position.y;
+	result.m_Position.z = m_Position.z - other.m_Position.z;
+	result.m_TranslateMatrix = dae::Matrix::CreateTranslation(result.m_Position);
 
 	return result;
 }
