@@ -8,7 +8,7 @@ namespace GameEngine
 	class Transform final
 	{
 	public:
-		const dae::Vector3 GetPosition() const { return m_Position; }
+		const MathHelper::Vector3 GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);
 		void Translate(float x, float y);
 		void SetRotation(float angle);
@@ -22,9 +22,9 @@ namespace GameEngine
 		Transform operator+(const Transform& other);
 		Transform operator-(const Transform& other);
 	private:
-		dae::Vector3 m_Position{};
-		dae::Matrix m_TranslateMatrix{};
-		dae::Matrix m_RotateMatrix{};
-		dae::Matrix m_ScaleMatrix{};
+		MathHelper::Vector3 m_Position{};
+		MathHelper::Matrix m_TranslateMatrix{};
+		MathHelper::Matrix m_RotateMatrix{};
+		MathHelper::Matrix m_ScaleMatrix{};
 	};
 }

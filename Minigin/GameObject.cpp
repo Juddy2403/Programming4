@@ -21,11 +21,11 @@ void GameEngine::GameObject::Update()
 		if (!component->IsDestroyed()) component->Update();
 		else areElemsToErase = true;
 	}
-	if (m_Name == "Pacman") {
-		dae::Vector3 pos = GetPosition();
-		pos += (dae::Vector3{ 1,0,0 } * (20.f * Time::GetElapsed()));
+	/*if (m_Name == "Pacman") {
+		MathHelper::Vector3 pos = GetPosition();
+		pos += (MathHelper::Vector3{ 1,0,0 } * (20.f * Time::GetElapsed()));
 		SetPosition(pos);
-	}
+	}*/
 	//UpdateWorldTransform();
 	if (areElemsToErase) RemoveDestroyedObjects();
 }
@@ -126,12 +126,12 @@ void GameObject::SetPosition(float x, float y, float z)
 	SetPositionIsDirty();
 }
 
-void GameEngine::GameObject::SetPosition(const dae::Vector3& pos)
+void GameEngine::GameObject::SetPosition(const MathHelper::Vector3& pos)
 {
 	SetPosition(pos.x, pos.y, pos.z);
 }
 
-dae::Vector3 GameObject::GetPosition() 
+MathHelper::Vector3 GameObject::GetPosition() 
 {
 	return GetWorldTransform().GetPosition();
 }
@@ -139,6 +139,11 @@ dae::Vector3 GameObject::GetPosition()
 void GameEngine::GameObject::SetLocalTransform(const Transform& transform)
 {
 	m_LocalTransform = transform;
+}
+
+Transform& GameEngine::GameObject::GetLocalTransform()
+{
+	return m_LocalTransform;
 }
 
 void GameEngine::GameObject::UpdateWorldTransform()

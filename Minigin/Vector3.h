@@ -1,6 +1,6 @@
 #pragma once
 
-namespace dae
+namespace MathHelper
 {
 	struct Vector3
 	{
