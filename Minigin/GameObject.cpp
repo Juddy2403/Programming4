@@ -9,6 +9,8 @@ GameEngine::GameObject::GameObject(std::string name) :
 {
 }
 
+GameEngine::GameObject::~GameObject() = default;
+
 #pragma region Update stuff
 
 void GameEngine::GameObject::Update()
