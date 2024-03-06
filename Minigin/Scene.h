@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneManager.h"
+#include "GameObject.h"
 
 namespace GameEngine
 {
@@ -8,8 +9,8 @@ namespace GameEngine
 	{
 		friend Scene& SceneManager::CreateScene(const std::string& name);
 	public:
-		void Add(std::shared_ptr<GameObject> object);
-		void Remove(std::shared_ptr<GameObject> object);
+		void Add(GameObject* object);
+		void Remove(GameObject* object);
 		void RemoveAll();
 
 		void Update();
@@ -28,7 +29,7 @@ namespace GameEngine
 		float m_FpsUpdateCounter{};
 		const float m_FpsUpdateRate{ 0.5f };
 		std::string m_name;
-		std::vector < std::shared_ptr<GameObject>> m_GameObjects{};
+		std::vector < std::unique_ptr<GameObject>> m_GameObjects{};
 
 		static unsigned int m_idCounter; 
 	};

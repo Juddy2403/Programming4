@@ -58,7 +58,7 @@ namespace GameEngine
 
 		GameObject() = default;
 		GameObject(std::string name);
-		~GameObject();
+		~GameObject() = default;
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
