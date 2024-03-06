@@ -14,7 +14,7 @@ namespace GameEngine
 	class GameObject final
 	{
 	private:
-		std::vector<std::shared_ptr<Component>> m_Components{};
+		std::vector<std::unique_ptr<Component>> m_Components{};
 		std::string m_Name{};
 		bool m_IsDestroyed{ false };
 
@@ -67,27 +67,23 @@ namespace GameEngine
 #pragma region Component Handling
 
 		template<ComponentType T, typename... Args>
-		std::shared_ptr<T> AddComponent(Args&&... args)
+		T* AddComponent(Args&&... args)
 		{
-			std::shared_ptr<T> component = std::make_shared<T>(this, std::forward<Args>(args)...);
-			m_Components.push_back(component);
-			return component;
+			m_Components.push_back(std::make_unique<T>(this, std::forward<Args>(args)...));
+			return dynamic_cast<T*>(m_Components.back().get());
 		}
 		template<ComponentType T>
-		std::shared_ptr<T> AddComponent()
+		T* AddComponent()
 		{
-			std::shared_ptr<T> component = std::make_shared<T>(this);
-			m_Components.push_back(component);
-			return component;
+			m_Components.push_back(std::make_unique<T>(this));
+			return dynamic_cast<T*>(m_Components.back().get());
 		}
 
 		template<ComponentType T>
-		std::shared_ptr<T> GetComponent() const {
+		T* GetComponent() const {
 			for (const auto& componentPtr : m_Components) {
-				if (std::shared_ptr<T> desiredComponent = std::dynamic_pointer_cast<T>(componentPtr))
-				{
-					return desiredComponent;
-				}
+				auto ptr = dynamic_cast<T*>(componentPtr.get());
+				if (ptr) return ptr;
 			}
 			return nullptr; // Component not found
 		}
@@ -95,14 +91,16 @@ namespace GameEngine
 		template<ComponentType T>
 		void RemoveComponent() {
 			const auto ret = std::ranges::remove_if(m_Components, [](const auto& elem) {
-				return (std::dynamic_pointer_cast<T>(elem) != nullptr); });
+				return (dynamic_cast<T*>(elem.get()));
+				});
 			m_Components.erase(ret.begin(), ret.end());
 		}
 
 		template<ComponentType T>
 		bool CheckIfComponentExists() const {
 			return std::ranges::find_if(m_Components, [](const auto& elem) {
-				return (std::dynamic_pointer_cast<T>(elem) != nullptr); }
+				return (dynamic_cast<T*>(elem.get()));
+				}
 			) != m_Components.end();
 		}
 #pragma endregion

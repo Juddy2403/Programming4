@@ -84,7 +84,7 @@ void GameEngine::GameObject::SetParent(GameObject* parent, bool keepWorldPositio
 	else {
 		if (keepWorldPosition)
 			SetLocalTransform(GetWorldTransform() - parent->GetWorldTransform());
-		SetPositionIsDirty();
+		//SetPositionIsDirty();
 	}
 	if (m_pParent) m_pParent->RemoveChild(this);
 	m_pParent = parent;
@@ -139,6 +139,7 @@ MathHelper::Vector3 GameObject::GetPosition()
 void GameEngine::GameObject::SetLocalTransform(const Transform& transform)
 {
 	m_LocalTransform = transform;
+	SetPositionIsDirty();
 }
 
 Transform& GameEngine::GameObject::GetLocalTransform()

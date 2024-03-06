@@ -1,5 +1,6 @@
 #include "RotationComponent.h"
 #include "Time.h"
+#include <numbers>
 
 using namespace GameEngine;
 
@@ -15,7 +16,18 @@ void GameEngine::RotationComponent::Update()
 {
 	if (GetGameObjParent()->GetParent() != nullptr)
 	{
-		m_Angle += Time::GetElapsed() * m_Velocity * (m_IsRotatingClockwise ? 1 : -1);
+		const float fullRotation{ 2 * static_cast<float>(std::numbers::pi) };
+
+		if(m_IsRotatingClockwise)
+		{
+			m_Angle += Time::GetElapsed() * m_Velocity;
+			if (m_Angle >= fullRotation) m_Angle -= fullRotation;
+		}
+		else
+		{
+			m_Angle -= Time::GetElapsed() * m_Velocity;
+			if (m_Angle <= fullRotation) m_Angle += fullRotation;
+		}
 		GetGameObjParent()->GetLocalTransform().SetRotation(m_Angle);
 		GetGameObjParent()->SetPositionIsDirty();
 	}
