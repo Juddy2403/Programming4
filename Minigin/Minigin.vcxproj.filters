@@ -22,6 +22,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{874e513f-93ba-463e-a340-c8acc3569259}</UniqueIdentifier>
     </Filter>
+    <Filter Include="IMGUI">
+      <UniqueIdentifier>{21a8ac20-09c3-4ab4-83a3-34d5a81184ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -84,6 +87,36 @@
     <ClInclude Include="Transform.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.5\imconfig.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.5\imgui.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.5\imgui_internal.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_rectpack.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_textedit.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_truetype.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.5\backends\imgui_impl_opengl3.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.5\backends\imgui_impl_sdl2.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.5\imgui_plot.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="IMGUIComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -142,6 +175,33 @@
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui.cpp">
+      <Filter>IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_demo.cpp">
+      <Filter>IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_draw.cpp">
+      <Filter>IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_tables.cpp">
+      <Filter>IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_widgets.cpp">
+      <Filter>IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.5\backends\imgui_impl_opengl3.cpp">
+      <Filter>IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.5\backends\imgui_impl_sdl2.cpp">
+      <Filter>IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_plot.cpp">
+      <Filter>IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="IMGUIComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
