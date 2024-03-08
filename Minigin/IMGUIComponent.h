@@ -8,15 +8,23 @@
 #include <SDL_stdinc.h>
 #include <vector>
 
+class vector;
 namespace GameEngine {
-
+	
 	class IMGUIComponent : public Component
 	{
 	private:
-		void CalculateArrayEx1();
-		ImGui::PlotConfig conf{};
-		std::unique_ptr<std::vector<float>> m_AvgTimes;
-
+		void CalculateArrayEx1(int nrOfSamples = 10);
+		ImGui::PlotConfig m_PlotConf{};
+		std::vector<float> m_AvgTimes{};
+		enum class PlotUpdateStage {
+			noUpdate,
+			clearButton,
+			showTextMsg,
+			updatePlot
+		};
+		PlotUpdateStage m_PlotUpdateStage{ PlotUpdateStage::noUpdate };
+		void UpdatePlot1(int nrOfSamples);
 	public:
 		explicit IMGUIComponent(GameObject* gameObj);
 
