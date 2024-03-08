@@ -29,7 +29,7 @@ GameEngine::TextureComponent::TextureComponent(GameObject* gameObj, std::shared_
 //	}
 //}
 
-void TextureComponent::Render() const
+void TextureComponent::Render() 
 {
 	if (m_Texture != nullptr)
 	{

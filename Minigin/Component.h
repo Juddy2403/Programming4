@@ -11,7 +11,7 @@ namespace GameEngine
 		bool m_IsDestroyed{ false };
 	public:
 		virtual void Update() {};
-		virtual void Render() const {};
+		virtual void Render() {};
 
 		bool IsDestroyed() const;
 		void SetDestroyedFlag();

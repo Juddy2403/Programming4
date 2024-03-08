@@ -45,8 +45,8 @@ void GameEngine::Renderer::Render() const
 
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame(m_window);
-	SceneManager::GetInstance().Render();
 
+	SceneManager::GetInstance().Render();
 	SDL_RenderPresent(m_renderer);
 }
 
