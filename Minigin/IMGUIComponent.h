@@ -35,37 +35,35 @@ public:
 
 	~GameObject3DAlt() { delete transform; }
 };
+enum class PlotUpdateStage {
+	noUpdate,
+	clearButton,
+	showTextMsg,
+	updatePlot
+};
+struct PlotUpdateInfo{
+	//PlotUpdateInfo() = default;
+	PlotUpdateStage plotStage{ PlotUpdateStage::noUpdate };
+	std::string buttonMsg{};
+	std::unique_ptr<ImGui::PlotConfig> plotConfig{ std::make_unique< ImGui::PlotConfig>() };
+	std::vector<float> avgTime{};
+	ImU32 color{};
+};
 
 namespace GameEngine {
 
 	class IMGUIComponent : public Component
 	{
 	private:
-
-		std::unique_ptr<ImGui::PlotConfig> m_IntPlotConf{ std::make_unique< ImGui::PlotConfig>() };
-		std::unique_ptr<ImGui::PlotConfig> m_GameObjPlotConf{ std::make_unique< ImGui::PlotConfig>() };
-		std::unique_ptr<ImGui::PlotConfig> m_AltGameObjPlotConf{ std::make_unique< ImGui::PlotConfig>() };
+		std::unique_ptr<PlotUpdateInfo> m_IntPlotUpdateInfo{std::make_unique<PlotUpdateInfo>()};
+		std::unique_ptr<PlotUpdateInfo> m_GameObjPlotUpdateInfo{ std::make_unique<PlotUpdateInfo>() };
+		std::unique_ptr<PlotUpdateInfo> m_AltGameObjPlotUpdateInfo{ std::make_unique<PlotUpdateInfo>() };
 		std::unique_ptr<ImGui::PlotConfig> m_CombinedPlotConf{ std::make_unique< ImGui::PlotConfig>() };
 
-		std::vector<float> m_IntAvgTime;
-		std::vector<float> m_GameObjAvgTime;
-		std::vector<float> m_AltGameObjAvgTime;
-
-		enum class PlotUpdateStage {
-			noUpdate,
-			clearButton,
-			showTextMsg,
-			updatePlot
-		};
-		PlotUpdateStage m_IntPlotUpdateStage{ PlotUpdateStage::noUpdate };
-		PlotUpdateStage m_GameObjPlotUpdateStage{ PlotUpdateStage::noUpdate };
-		PlotUpdateStage m_AltGameObjPlotUpdateStage{ PlotUpdateStage::noUpdate };
-
-		void ManageIntPlotUpdateStages(int nrOfSamples);
-		void ManageAltGameObjPlotUpdateStages(int nrOfSamples);
 		void RenderExercise1();
+		void RenderExercise2();
 
-		void ManageGameObjPlotUpdateStages(int nrOfSamples);
+		void UpdateCombinedConf();
 
 		template<typename T>
 		void CalculateTimeAvg(int nrOfSamples, std::vector<float>& avgTimes)
@@ -108,34 +106,56 @@ namespace GameEngine {
 		}
 
 		template<typename T>
-		void UpdatePlot(ImGui::PlotConfig& plotConf, std::vector<float>& avgTime, const ImU32& color, int nrOfSamples)
+		void UpdatePlot(PlotUpdateInfo* plotUpdateInfo, int nrOfSamples)
 		{
 			static constexpr size_t buf_size = 11;
 			static float x_data[buf_size] = { 1,2,4,8,16,32,64,128,256,512,1024 };
 
 			//ImU32 color = ImColor(0, 255, 0);
 			static uint32_t selection_start = 0, selection_length = 0;
-			CalculateTimeAvg<T>(nrOfSamples, avgTime);
-			plotConf.values.xs = x_data;
-			plotConf.values.ys = avgTime.data();
-			plotConf.values.count = buf_size;
-			plotConf.values.color = color;
-			plotConf.scale.min = 0;
-			plotConf.scale.max = *std::max_element(avgTime.begin(), avgTime.end()) + 1; // for y axis
-			plotConf.tooltip.show = true;
-			plotConf.grid_x.show = false;
-			plotConf.grid_y.show = true;
-			plotConf.selection.show = true;
-			plotConf.selection.start = &selection_start;
-			plotConf.selection.length = &selection_length;
-			plotConf.frame_size = ImVec2(250, 150);
-			plotConf.line_thickness = 2.f;
+			CalculateTimeAvg<T>(nrOfSamples, plotUpdateInfo->avgTime);
+			plotUpdateInfo->plotConfig->values.xs = x_data;
+			plotUpdateInfo->plotConfig->values.ys = plotUpdateInfo->avgTime.data();
+			plotUpdateInfo->plotConfig->values.count = buf_size;
+			plotUpdateInfo->plotConfig->values.color = plotUpdateInfo->color;
+			plotUpdateInfo->plotConfig->scale.min = 0;
+			plotUpdateInfo->plotConfig->scale.max = *std::max_element(plotUpdateInfo->avgTime.begin(), plotUpdateInfo->avgTime.end()) + 1; // for y axis
+			plotUpdateInfo->plotConfig->tooltip.show = true;
+			plotUpdateInfo->plotConfig->grid_x.show = false;
+			plotUpdateInfo->plotConfig->grid_y.show = true;
+			plotUpdateInfo->plotConfig->selection.show = true;
+			plotUpdateInfo->plotConfig->selection.start = &selection_start;
+			plotUpdateInfo->plotConfig->selection.length = &selection_length;
+			plotUpdateInfo->plotConfig->frame_size = ImVec2(250, 150);
+			plotUpdateInfo->plotConfig->line_thickness = 2.f;
+		}
+
+		template<typename T>
+		void ManagePlotUpdateStages(PlotUpdateInfo* plotUpdateInfo,int nrOfSamples)
+		{
+			switch (plotUpdateInfo->plotStage)
+			{
+			case PlotUpdateStage::noUpdate:
+				if (ImGui::Button(plotUpdateInfo->buttonMsg.c_str()))
+					plotUpdateInfo->plotStage = PlotUpdateStage::clearButton;
+				break;
+			case PlotUpdateStage::clearButton:
+				plotUpdateInfo->plotStage = PlotUpdateStage::showTextMsg;
+				break;
+			case PlotUpdateStage::showTextMsg:
+				ImGui::Text("Wait for it..");
+				plotUpdateInfo->plotStage = PlotUpdateStage::updatePlot;
+				break;
+			case PlotUpdateStage::updatePlot:
+				UpdatePlot<T>(plotUpdateInfo, nrOfSamples);
+				plotUpdateInfo->plotStage = PlotUpdateStage::noUpdate;
+				break;
+			}
 		}
 
 	public:
 		explicit IMGUIComponent(GameObject* gameObj);
 		//void CalculateArray(int nrOfSamples, auto* arr, std::vector<float>& avgTimes);
 		virtual void Render() override;
-		void RenderExercise2();
 	};
 }
