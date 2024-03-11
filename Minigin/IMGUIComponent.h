@@ -75,7 +75,7 @@ namespace GameEngine {
 			T* arr = new T[arrSize]{};
 			std::vector<std::set<long>> timesRecorded(11);
 
-			for (size_t j = 0; j < nrOfSamples; j++)
+			for (int j = 0; j < nrOfSamples; j++)
 			{
 				int index{ -1 };
 				for (int stepsize = 1; stepsize <= 1024; stepsize *= 2)

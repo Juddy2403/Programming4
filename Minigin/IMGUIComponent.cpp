@@ -17,7 +17,6 @@ void GameEngine::IMGUIComponent::Render()
 void GameEngine::IMGUIComponent::RenderExercise1()
 {
 	ImGui::Begin("Exercise 1", nullptr, ImGuiWindowFlags_None);
-	static int nrOfSamples{ 10 };
 	ImGui::InputInt("# samples:", &m_IntNrOfSamples);
 	m_IntPlotUpdateInfo->buttonMsg = "Trash the cache";
 	m_IntPlotUpdateInfo->color = ImColor(0, 255, 0);
@@ -30,17 +29,16 @@ void GameEngine::IMGUIComponent::RenderExercise2()
 {
 	ImGui::Begin("Exercise 2", nullptr, ImGuiWindowFlags_None);
 
-	static int nrOfSamples{ 100 };
-	ImGui::InputInt("# samples:", &nrOfSamples);
+	ImGui::InputInt("# samples:", &m_GameObjNrOfSamples);
 
 	m_GameObjPlotUpdateInfo->buttonMsg = "Trash the cache with GameObject3D";
 	m_GameObjPlotUpdateInfo->color = ImColor(0, 0, 255);
-	ManagePlotUpdateStages<GameObject3D>(m_GameObjPlotUpdateInfo.get(), nrOfSamples);
+	ManagePlotUpdateStages<GameObject3D>(m_GameObjPlotUpdateInfo.get(), m_GameObjNrOfSamples);
 	ImGui::Plot("GameObj plot", *m_GameObjPlotUpdateInfo->plotConfig);
 
 	m_AltGameObjPlotUpdateInfo->buttonMsg = "Trash the cache with GameObject3DAlt";
 	m_AltGameObjPlotUpdateInfo->color = ImColor(255, 0, 0);
-	ManagePlotUpdateStages<GameObject3DAlt>(m_AltGameObjPlotUpdateInfo.get(), nrOfSamples);
+	ManagePlotUpdateStages<GameObject3DAlt>(m_AltGameObjPlotUpdateInfo.get(), m_GameObjNrOfSamples);
 	ImGui::Plot("AltGameObj plot", *m_AltGameObjPlotUpdateInfo->plotConfig);
 
 	if (!m_GameObjPlotUpdateInfo->avgTime.empty() && !m_AltGameObjPlotUpdateInfo->avgTime.empty())
