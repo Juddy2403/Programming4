@@ -2,7 +2,7 @@
 #include "Component.h"
 
 namespace GameEngine {
-	class RotationComponent : public Component
+	class RotationComponent final : public Component
 	{
 	private:
 		bool m_IsRotatingClockwise{};

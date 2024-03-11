@@ -3,7 +3,7 @@
 #include "TextComponent.h"
 
 namespace GameEngine {
-	class FPSComponent : public Component
+	class FPSComponent final: public Component
 	{
 	public:
 		virtual void Update() override;

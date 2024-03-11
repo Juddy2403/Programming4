@@ -3,7 +3,16 @@
 #pragma warning( disable : 4244 )
 
 GameEngine::IMGUIComponent::IMGUIComponent(GameObject* gameObj) : Component(gameObj)
-{}
+{
+	m_IntPlotUpdateInfo->buttonMsg = "Trash the cache";
+	m_IntPlotUpdateInfo->color = ImColor(0, 255, 0);
+
+	m_GameObjPlotUpdateInfo->buttonMsg = "Trash the cache with GameObject3D";
+	m_GameObjPlotUpdateInfo->color = ImColor(0, 0, 255);
+
+	m_AltGameObjPlotUpdateInfo->buttonMsg = "Trash the cache with GameObject3DAlt";
+	m_AltGameObjPlotUpdateInfo->color = ImColor(255, 0, 0);
+}
 
 void GameEngine::IMGUIComponent::Render() 
 {
@@ -19,8 +28,7 @@ void GameEngine::IMGUIComponent::RenderExercise1()
 	ImGui::Begin("Exercise 1", nullptr, ImGuiWindowFlags_None);
 	static int nrOfSamples{ 10 };
 	ImGui::InputInt("# samples:", &nrOfSamples);
-	m_IntPlotUpdateInfo->buttonMsg = "Trash the cache";
-	m_IntPlotUpdateInfo->color = ImColor(0, 255, 0);
+
 	ManagePlotUpdateStages<int>(m_IntPlotUpdateInfo.get(), nrOfSamples);
 	ImGui::Plot("Int plot", *m_IntPlotUpdateInfo->plotConfig);
 	ImGui::End();
@@ -33,26 +41,22 @@ void GameEngine::IMGUIComponent::RenderExercise2()
 	static int nrOfSamples{ 100 };
 	ImGui::InputInt("# samples:", &nrOfSamples);
 
-	m_GameObjPlotUpdateInfo->buttonMsg = "Trash the cache with GameObject3D";
-	m_GameObjPlotUpdateInfo->color = ImColor(0, 0, 255);
 	ManagePlotUpdateStages<GameObject3D>(m_GameObjPlotUpdateInfo.get(), nrOfSamples);
 	ImGui::Plot("GameObj plot", *m_GameObjPlotUpdateInfo->plotConfig);
 
-	m_AltGameObjPlotUpdateInfo->buttonMsg = "Trash the cache with GameObject3DAlt";
-	m_AltGameObjPlotUpdateInfo->color = ImColor(255, 0, 0);
 	ManagePlotUpdateStages<GameObject3DAlt>(m_AltGameObjPlotUpdateInfo.get(), nrOfSamples);
 	ImGui::Plot("AltGameObj plot", *m_AltGameObjPlotUpdateInfo->plotConfig);
 
 	if (!m_GameObjPlotUpdateInfo->avgTime.empty() && !m_AltGameObjPlotUpdateInfo->avgTime.empty())
 	{
-		UpdateCombinedConf();
+		RenderCombinedConf();
 		ImGui::Plot("Combined plot", *m_CombinedPlotConf);
 	}
 
 	ImGui::End();
 }
 
-void GameEngine::IMGUIComponent::UpdateCombinedConf()
+void GameEngine::IMGUIComponent::RenderCombinedConf()
 {
 	ImGui::Text("Combined:");
 

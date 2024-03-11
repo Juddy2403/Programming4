@@ -5,7 +5,7 @@
 
 namespace GameEngine {
 	class Texture2D;
-	class TextureComponent : public Component
+	class TextureComponent final : public Component
 	{
 	public:
 		explicit TextureComponent(GameObject* gameObj);

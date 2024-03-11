@@ -3,7 +3,7 @@
 #include "Font.h"
 
 namespace GameEngine {
-	class TextComponent : public Component
+	class TextComponent final : public Component
 	{
 	public:
 		explicit TextComponent(GameObject* gameObj, std::shared_ptr<Font> font = nullptr, const std::string& text = {});

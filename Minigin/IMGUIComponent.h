@@ -41,6 +41,7 @@ enum class PlotUpdateStage {
 	showTextMsg,
 	updatePlot
 };
+
 struct PlotUpdateInfo{
 	//PlotUpdateInfo() = default;
 	PlotUpdateStage plotStage{ PlotUpdateStage::noUpdate };
@@ -52,7 +53,7 @@ struct PlotUpdateInfo{
 
 namespace GameEngine {
 
-	class IMGUIComponent : public Component
+	class IMGUIComponent final : public Component
 	{
 	private:
 		std::unique_ptr<PlotUpdateInfo> m_IntPlotUpdateInfo{std::make_unique<PlotUpdateInfo>()};
@@ -63,7 +64,7 @@ namespace GameEngine {
 		void RenderExercise1();
 		void RenderExercise2();
 
-		void UpdateCombinedConf();
+		void RenderCombinedConf();
 
 		template<typename T>
 		void CalculateTimeAvg(int nrOfSamples, std::vector<float>& avgTimes)
