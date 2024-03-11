@@ -60,6 +60,9 @@ namespace GameEngine {
 		std::unique_ptr<PlotUpdateInfo> m_AltGameObjPlotUpdateInfo{ std::make_unique<PlotUpdateInfo>() };
 		std::unique_ptr<ImGui::PlotConfig> m_CombinedPlotConf{ std::make_unique< ImGui::PlotConfig>() };
 
+		int m_IntNrOfSamples{ 10 };
+		int m_GameObjNrOfSamples{ 100 };
+
 		void RenderExercise1();
 		void RenderExercise2();
 

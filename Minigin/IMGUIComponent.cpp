@@ -7,26 +7,21 @@ GameEngine::IMGUIComponent::IMGUIComponent(GameObject* gameObj) : Component(game
 
 void GameEngine::IMGUIComponent::Render() 
 {
-	ImGui::NewFrame();
-
 	//Manage exercise 1 graph
 	RenderExercise1();
 
 	//Manage exercise 2 graph
 	RenderExercise2();
-
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void GameEngine::IMGUIComponent::RenderExercise1()
 {
 	ImGui::Begin("Exercise 1", nullptr, ImGuiWindowFlags_None);
 	static int nrOfSamples{ 10 };
-	ImGui::InputInt("# samples:", &nrOfSamples);
+	ImGui::InputInt("# samples:", &m_IntNrOfSamples);
 	m_IntPlotUpdateInfo->buttonMsg = "Trash the cache";
 	m_IntPlotUpdateInfo->color = ImColor(0, 255, 0);
-	ManagePlotUpdateStages<int>(m_IntPlotUpdateInfo.get(), nrOfSamples);
+	ManagePlotUpdateStages<int>(m_IntPlotUpdateInfo.get(), m_IntNrOfSamples);
 	ImGui::Plot("Int plot", *m_IntPlotUpdateInfo->plotConfig);
 	ImGui::End();
 }

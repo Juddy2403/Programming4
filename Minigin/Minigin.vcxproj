@@ -99,7 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);&amp;(SolutionDir)\3rdParty\imgui-1.89.5;D:\Howest\Sem 4\Programming 4\Minigin\Programming4\3rdParty\imgui-1.89.5</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui-1.89.5;$(SolutionDir);%(AdditionalIncludeDirectories);D:\Howest\Sem 4\Programming 4\Minigin\Programming4\3rdParty\imgui-1.89.5</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -139,7 +139,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);&amp;(SolutionDir)\3rdParty\imgui-1.89.5;D:\Howest\Sem 4\Programming 4\Minigin\Programming4\3rdParty\imgui-1.89.5</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui-1.89.5;$(SolutionDir);%(AdditionalIncludeDirectories);D:\Howest\Sem 4\Programming 4\Minigin\Programming4\3rdParty\imgui-1.89.5</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -162,7 +162,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>&amp;(SolutionDir)\3rdParty\imgui-1.89.5;%(AdditionalIncludeDirectories);&amp;(SolutionDir)\3rdParty\imgui-1.89.5;D:\Howest\Sem 4\Programming 4\Minigin\Programming4\3rdParty\imgui-1.89.5</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui-1.89.5;$(SolutionDir);%(AdditionalIncludeDirectories);D:\Howest\Sem 4\Programming 4\Minigin\Programming4\3rdParty\imgui-1.89.5</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
