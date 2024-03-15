@@ -1,12 +1,8 @@
 #include "SceneManager.h"
-#include "Scene.h"
 
 void GameEngine::SceneManager::Update()
 {
-	for(auto& scene : m_scenes)
-	{
-		scene->Update();
-	}
+	m_Scene->Update();
 }
 
 //void GameEngine::SceneManager::FixedUpdate()
@@ -16,15 +12,13 @@ void GameEngine::SceneManager::Update()
 
 void GameEngine::SceneManager::Render()
 {
-	for (const auto& scene : m_scenes)
-	{
-		scene->Render();
-	}
+	m_Scene->Render();
+	
 }
 
 GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name)
 {
-	const auto& scene = std::shared_ptr<Scene>(new Scene(name));
-	m_scenes.push_back(scene);
-	return *scene;
+	//const auto& scene = std::make_unique<Scene>(name);
+	m_Scene.reset(new Scene(name));
+	return *m_Scene;
 }

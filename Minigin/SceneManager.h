@@ -1,12 +1,12 @@
 #pragma once
-#include <vector>
 #include <string>
 #include <memory>
 #include "Singleton.h"
+#include "Scene.h"
 
 namespace GameEngine
 {
-	class Scene;
+
 	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
@@ -18,6 +18,6 @@ namespace GameEngine
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
-		std::vector<std::shared_ptr<Scene>> m_scenes;
+		std::unique_ptr<Scene> m_Scene;
 	};
 }

@@ -3,7 +3,6 @@
 
 namespace GameEngine 
 {
-	class GameObject;
 	class Component
 	{
 	private:

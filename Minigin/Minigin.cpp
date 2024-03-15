@@ -98,13 +98,13 @@ void GameEngine::Minigin::Run(const std::function<void()>& load)
 		//	//fixed update happens here (physics and networking)
 		//	lag -= time.GetFixedTimeStep().count();
 		//}
+		doContinue = input.ProcessInput();
 
 		sceneManager.Update();
 		//LATE UPDATE HERE (for eg camera)
 		// 
 		//should pass lag/msPerUpdate to Render
 		renderer.Render();
-		doContinue = input.ProcessInput();
 
 		//const duration<float,std::milli> sleep_time = time.GetCurrent() + g_MsPerUpdate - high_resolution_clock::now();
 		//if(sleep_time.count() > 0)

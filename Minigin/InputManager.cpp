@@ -7,17 +7,18 @@ bool GameEngine::InputManager::ProcessInput()
 {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
-		if (e.type == SDL_QUIT) {
+		switch (e.type)
+		{
+		case SDL_QUIT:
 			return false;
+		case SDL_KEYUP:
+			if (e.key.keysym.scancode == SDL_SCANCODE_W)
+			break;
+		default:
+			break;
 		}
-		/*if (e.type == SDL_KEYDOWN) {
-			
-		}
-		if (e.type == SDL_MOUSEBUTTONDOWN) {
-			
-		}*/
+
 		ImGui_ImplSDL2_ProcessEvent(&e);
-		// etc...
 	}
 
 	return true;
