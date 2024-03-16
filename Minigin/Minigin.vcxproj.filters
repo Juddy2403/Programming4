@@ -50,15 +50,6 @@
     <ClInclude Include="Component.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="FPSComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Minigin.h">
       <Filter>Game Files</Filter>
     </ClInclude>
@@ -67,9 +58,6 @@
     </ClInclude>
     <ClInclude Include="MathHelpers.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RotationComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Math</Filter>
@@ -110,9 +98,6 @@
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imgui_plot.h">
       <Filter>IMGUI</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUIComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -145,15 +130,6 @@
     <ClCompile Include="Component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="FPSComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Minigin.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
@@ -162,9 +138,6 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Game Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RotationComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Matrix.cpp">
       <Filter>Math</Filter>
@@ -201,9 +174,6 @@
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_plot.cpp">
       <Filter>IMGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUIComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Input</Filter>

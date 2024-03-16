@@ -1,10 +1,6 @@
 #include "SceneManager.h"
 #include "GameObject.h"
-#include "TextureComponent.h"
-#include "TextComponent.h"
-#include "FPSComponent.h"
-#include "RotationComponent.h"
-#include "IMGUIComponent.h"
+#include "Component.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
 
