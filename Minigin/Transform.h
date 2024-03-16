@@ -1,14 +1,12 @@
 #pragma once
-#include "Vector3.h"
-#include "Matrix.h"
+#include <glm/glm.hpp>
 
 namespace GameEngine
 {
-	class Vector3;
 	class Transform final
 	{
 	public:
-		const MathHelper::Vector3 GetPosition() const { return m_Position; }
+		glm::vec2 GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);
 		void Translate(float x, float y);
 		void SetRotation(float angle);
@@ -22,9 +20,9 @@ namespace GameEngine
 		Transform operator+(const Transform& other);
 		Transform operator-(const Transform& other);
 	private:
-		MathHelper::Vector3 m_Position{};
-		MathHelper::Matrix m_TranslateMatrix{};
-		MathHelper::Matrix m_RotateMatrix{};
-		MathHelper::Matrix m_ScaleMatrix{};
+		glm::vec3 m_Position{};
+		glm::mat4 m_TranslateMatrix{glm::mat4(1)};
+		glm::mat4 m_RotateMatrix{ glm::mat4(1) };
+		glm::mat4 m_ScaleMatrix{ glm::mat4(1) };
 	};
 }

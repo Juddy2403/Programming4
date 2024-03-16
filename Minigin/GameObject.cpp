@@ -126,12 +126,12 @@ void GameObject::SetPosition(float x, float y, float z)
 	SetPositionIsDirty();
 }
 
-void GameEngine::GameObject::SetPosition(const MathHelper::Vector3& pos)
+void GameEngine::GameObject::SetPosition(const glm::vec3& pos)
 {
 	SetPosition(pos.x, pos.y, pos.z);
 }
 
-MathHelper::Vector3 GameObject::GetPosition() 
+glm::vec2 GameObject::GetPosition() 
 {
 	return GetWorldTransform().GetPosition();
 }

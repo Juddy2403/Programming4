@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
-#include "TextComponent.h"
 #include "InputManager.h"
 #include "Time.h"
 

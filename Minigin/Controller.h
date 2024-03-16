@@ -25,7 +25,8 @@ namespace GameEngine {
 		bool IsDpadRightKeyUp() const;
 	private:
 		class XInput;
-		std::unique_ptr<XInput> m_pXInput;
+		XInput* m_pXInput; //will resource leak if its a unique ptr
+		//should ask why it prob has smth to do with the unique_ptr<Controller> inside InputManager
 	};
 }
 

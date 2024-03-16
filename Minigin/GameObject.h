@@ -53,8 +53,8 @@ namespace GameEngine
 		void SetPositionIsDirty();
 
 		void SetPosition(float x, float y, float z = 0);
-		void SetPosition(const MathHelper::Vector3& pos);
-		MathHelper::Vector3 GetPosition() ;
+		void SetPosition(const glm::vec3& pos);
+		glm::vec2 GetPosition() ;
 
 		GameObject() = default;
 		GameObject(std::string name);

@@ -6,7 +6,7 @@ using namespace GameEngine;
 void GameEngine::Move::Execute()
 {
 	auto& time = Time::GetInstance();
-	MathHelper::Vector3 currentPos = m_Actor->GetLocalTransform().GetPosition();
+	glm::vec2 currentPos = m_Actor->GetLocalTransform().GetPosition();
 
 	glm::vec2 newPos = glm::vec2{ currentPos.x + time.GetElapsed() * m_Velocity.x,
 	currentPos.y + time.GetElapsed() * m_Velocity.y };

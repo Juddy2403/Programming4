@@ -62,12 +62,6 @@
     <ClInclude Include="Time.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Math</Filter>
     </ClInclude>
@@ -139,16 +133,10 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector3.cpp">
       <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui.cpp">

@@ -47,24 +47,26 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	gameObject->AddComponent<TextureComponent>();
 	m_Scene->Add(std::move(gameObject));
 
-	//auto gameObject2 = std::make_unique<GameObject>("CenterPoint");
-	//gameObject2->SetPosition(300.f, 300.f);
+	auto gameObject2 = std::make_unique<GameObject>("CenterPoint");
+	gameObject2->SetPosition(300.f, 300.f);
 
 	gameObject = std::make_unique<GameObject>("Pacman");
 	gameObject->SetPosition(250.f, 250.f);
-	//gameObject->SetParent(gameObject2.get());
+	gameObject->SetParent(gameObject2.get());
 	gameObject->AddComponent<TextureComponent>("pacman.png");
-	//gameObject->AddComponent<RotationComponent>(5.f);
+	gameObject->AddComponent<RotationComponent>(0.01f);
 	auto& input = InputManager::GetInstance();
 	input.BindKeyboardCommand(gameObject.get(), 200.f);
-	m_Scene->Add(std::move(gameObject));
+	m_Scene->Add(std::move(gameObject2));
 
-	auto gameObject2 = std::make_unique<GameObject>("PacmanFemale");
+	gameObject2 = std::make_unique<GameObject>("PacmanFemale");
 	gameObject2->SetPosition(200.f, 200.f);
 	gameObject2->AddComponent<TextureComponent>("PacmanFemale.png");
-	//gameObject2->SetParent(gameObject.get());
-	//gameObject2->AddComponent<RotationComponent>(7.f,false);
+	gameObject2->SetParent(gameObject.get());
+	gameObject2->AddComponent<RotationComponent>(0.03f,false);
 	input.BindControllerCommand(gameObject2.get(), 400.f);
+	m_Scene->Add(std::move(gameObject));
+
 	m_Scene->Add(std::move(gameObject2));
 
 	//scene.Add(std::move(gameObject2));

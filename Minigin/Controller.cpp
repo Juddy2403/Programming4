@@ -1,7 +1,8 @@
-#include "Controller.h"
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"
 #include <XInput.h>
+#include "Controller.h"
+#include <iostream>
 
 class GameEngine::Controller::XInput
 {
@@ -12,8 +13,13 @@ private:
 	unsigned int m_ButtonsPressedThisFrame{};
 	unsigned int m_ButtonsReleasedThisFrame{};
 public:
-	XInput(unsigned int controllerIdx): m_ControllerIdx{controllerIdx}{}
-	~XInput() = default;
+	XInput(unsigned int controllerIdx): m_ControllerIdx{controllerIdx}{
+	/*	DWORD result = XInputGetState(0, nullptr);
+		if (result != ERROR_SUCCESS) {
+			std::cout << "Cannot get XInput state! \n";
+		}*/
+	}
+
 	XInput(const XInput& other) = delete;
 	XInput(XInput&& other) = delete;
 	XInput& operator=(const XInput& other) = delete;
@@ -40,13 +46,13 @@ public:
 };
 
 GameEngine::Controller::Controller(unsigned int controllerIdx):
-	m_pXInput{std::make_unique<XInput>(controllerIdx)}
+	m_pXInput{new XInput(controllerIdx)}
 {
 }
 
 GameEngine::Controller::~Controller()
 {
-	m_pXInput.release();
+	delete m_pXInput;
 }
 
 void GameEngine::Controller::ProcessControllerInput()
