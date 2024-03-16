@@ -14,8 +14,9 @@ void GameEngine::Move::Execute()
 	m_Actor->SetPosition(newPos.x, newPos.y);
 }
 
-GameEngine::Move::Move(GameObject* actor):
-	m_Actor{actor}
+GameEngine::Move::Move(GameObject* actor, float speed):
+	m_Actor{actor},
+	m_Speed{speed}
 {
 }
 

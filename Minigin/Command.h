@@ -31,7 +31,7 @@ namespace GameEngine
 		glm::vec2 m_Velocity{};
 		GameObject* m_Actor;
 	public:
-		Move(GameObject* actor);
+		Move(GameObject* actor, float speed);
 
 		virtual void Execute() override;
 		virtual void KeyPressed(const Direction& dir);

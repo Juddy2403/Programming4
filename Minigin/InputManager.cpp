@@ -8,16 +8,16 @@ m_pController{ std::make_unique<Controller>(0) }
 {
 }
 
-void GameEngine::InputManager::BindKeyboardCommand(GameObject* actor)
+void GameEngine::InputManager::BindKeyboardCommand(GameObject* actor, float speed)
 {
-	m_pKeyboardCommand = std::make_unique<Move>(actor);
+	m_pKeyboardCommand = std::make_unique<Move>(actor,speed);
 }
 
 
 
-void GameEngine::InputManager::BindControllerCommand(GameObject* actor)
+void GameEngine::InputManager::BindControllerCommand(GameObject* actor, float speed)
 {
-	m_pControllerCommand = std::make_unique<Move>(actor);
+	m_pControllerCommand = std::make_unique<Move>(actor,speed);
 }
 
 bool GameEngine::InputManager::ProcessInput()
@@ -38,10 +38,10 @@ bool GameEngine::InputManager::ProcessInput()
 			}
 			break;
 		case SDL_KEYUP:
-			if (e.key.keysym.scancode == SDL_SCANCODE_W)  m_pKeyboardCommand->KeyReleased(Direction::up);
-			if (e.key.keysym.scancode == SDL_SCANCODE_A)  m_pKeyboardCommand->KeyReleased(Direction::left);
-			if (e.key.keysym.scancode == SDL_SCANCODE_S)  m_pKeyboardCommand->KeyReleased(Direction::down);
-			if (e.key.keysym.scancode == SDL_SCANCODE_D)  m_pKeyboardCommand->KeyReleased(Direction::right);
+			if (e.key.keysym.scancode == SDL_SCANCODE_W) m_pKeyboardCommand->KeyReleased(Direction::up);
+			if (e.key.keysym.scancode == SDL_SCANCODE_A) m_pKeyboardCommand->KeyReleased(Direction::left);
+			if (e.key.keysym.scancode == SDL_SCANCODE_S) m_pKeyboardCommand->KeyReleased(Direction::down);
+			if (e.key.keysym.scancode == SDL_SCANCODE_D) m_pKeyboardCommand->KeyReleased(Direction::right);
 			break;
 		}
 
@@ -62,10 +62,10 @@ void GameEngine::InputManager::ProcessControllerInput()
 	if (m_pController->IsDpadDownKeyDown())  m_pControllerCommand->KeyPressed(Direction::down);
 	if (m_pController->IsDpadRightKeyDown()) m_pControllerCommand->KeyPressed(Direction::right);
 
-	if (m_pController->IsDpadUpKeyUp()) m_pControllerCommand->KeyReleased(Direction::up);
-	if (m_pController->IsDpadLeftKeyUp()) m_pControllerCommand->KeyReleased(Direction::left);
-	if (m_pController->IsDpadDownKeyUp()) m_pControllerCommand->KeyReleased(Direction::down);
-	if (m_pController->IsDpadRightKeyUp()) m_pControllerCommand->KeyReleased(Direction::right);
+	if (m_pController->IsDpadUpKeyUp())      m_pControllerCommand->KeyReleased(Direction::up);
+	if (m_pController->IsDpadLeftKeyUp())    m_pControllerCommand->KeyReleased(Direction::left);
+	if (m_pController->IsDpadDownKeyUp())    m_pControllerCommand->KeyReleased(Direction::down);
+	if (m_pController->IsDpadRightKeyUp())   m_pControllerCommand->KeyReleased(Direction::right);
 }
 
 void GameEngine::InputManager::ExecuteCommand()

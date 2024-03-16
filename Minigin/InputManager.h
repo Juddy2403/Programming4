@@ -16,8 +16,8 @@ namespace GameEngine
 		std::unique_ptr<Controller> m_pController;
 	public:
 		InputManager();
-		void BindKeyboardCommand(GameObject* actor);
-		void BindControllerCommand(GameObject* actor);
+		void BindKeyboardCommand(GameObject* actor, float speed);
+		void BindControllerCommand(GameObject* actor, float speed);
 
 		bool ProcessInput();
 		void ProcessControllerInput();
