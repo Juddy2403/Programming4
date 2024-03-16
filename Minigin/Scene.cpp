@@ -34,15 +34,15 @@ void Scene::RemoveAll()
 void Scene::Update()
 {
 	//Processing input
-	//auto& input = InputManager::GetInstance();
+	auto& input = InputManager::GetInstance();
 
 	bool areElemsToErase = false;
 	for(auto& object : m_GameObjects)
 	{
 		if (!object->IsDestroyed()) object->Update();
 		else areElemsToErase = true;
-		//if(object.get()->GetName() == "Pacman")
-		//input.ExecuteCommand(object.get());
+		if(object->GetName() == "Pacman")
+		input.ExecuteCommand(object.get());
 	}
 	if(areElemsToErase) RemoveDestroyedObjects();
 }

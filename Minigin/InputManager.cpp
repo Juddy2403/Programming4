@@ -11,10 +11,17 @@ bool GameEngine::InputManager::ProcessInput()
 		{
 		case SDL_QUIT:
 			return false;
-		case SDL_KEYUP:
-			if (e.key.keysym.scancode == SDL_SCANCODE_W)
+		case SDL_KEYDOWN:
+			if (e.key.keysym.scancode == SDL_SCANCODE_W) m_pMoveUpCommand->KeyPressed();
+			if (e.key.keysym.scancode == SDL_SCANCODE_A) m_pMoveLeftCommand->KeyPressed();
+			if (e.key.keysym.scancode == SDL_SCANCODE_S) m_pMoveDownCommand->KeyPressed();
+			if (e.key.keysym.scancode == SDL_SCANCODE_D) m_pMoveRightCommand->KeyPressed();
 			break;
-		default:
+		case SDL_KEYUP:
+			if (e.key.keysym.scancode == SDL_SCANCODE_W) m_pMoveUpCommand->KeyReleased();
+			if (e.key.keysym.scancode == SDL_SCANCODE_A) m_pMoveLeftCommand->KeyReleased();
+			if (e.key.keysym.scancode == SDL_SCANCODE_S) m_pMoveDownCommand->KeyReleased();
+			if (e.key.keysym.scancode == SDL_SCANCODE_D) m_pMoveRightCommand->KeyReleased();
 			break;
 		}
 
@@ -22,4 +29,9 @@ bool GameEngine::InputManager::ProcessInput()
 	}
 
 	return true;
+}
+
+void GameEngine::InputManager::ExecuteCommand(GameObject* actor)
+{
+	m_pMoveCommand->Execute(actor);
 }

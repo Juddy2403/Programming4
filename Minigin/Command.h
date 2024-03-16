@@ -1,12 +1,14 @@
 #pragma once
 #include "Component.h"
+#include <glm/glm.hpp>
 
 namespace GameEngine
 {
+
 	class GameObject;
 	class Command
 	{
-	private:
+	protected:
 	public:
 		Command() = default;
 		Command(const Command& other) = delete;
@@ -18,10 +20,39 @@ namespace GameEngine
 		virtual void Execute(GameObject* actor) = 0;
 	};
 
-	class MoveRightCommand : public Command {
+	class Move : public Command {
+	protected:
+		float m_Speed{ 200.f };
+		static glm::vec2 m_Velocity;
+	public:
+		virtual void KeyPressed() {};
+		virtual void KeyReleased() {};
+		virtual void Execute(GameObject* actor) override;
+	};
+
+	class MoveUp final: public Move {
 	private:
 	public:
-		virtual void Execute(GameObject* actor) override;
+		virtual void KeyPressed() override;
+		virtual void KeyReleased() override;
+	};
+	class MoveDown final : public Move {
+	private:
+	public:
+		virtual void KeyPressed() override;
+		virtual void KeyReleased() override;
+	};
+	class MoveLeft final : public Move {
+	private:
+	public:
+		virtual void KeyPressed() override;
+		virtual void KeyReleased() override;
+	};
+	class MoveRight final : public Move {
+	private:
+	public:
+		virtual void KeyPressed() override;
+		virtual void KeyReleased() override;
 	};
 }
 

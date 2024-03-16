@@ -11,7 +11,7 @@ namespace GameEngine
 	class Component;
 	template<typename T>
 	concept ComponentType = std::is_base_of<Component, T>::value;
-	class GameObject final
+	class GameObject 
 	{
 	private:
 		std::vector<std::unique_ptr<Component>> m_Components{};
