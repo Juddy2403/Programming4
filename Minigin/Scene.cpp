@@ -35,16 +35,16 @@ void Scene::Update()
 {
 	//Processing input
 	auto& input = InputManager::GetInstance();
+	input.ExecuteCommand();
 
 	bool areElemsToErase = false;
 	for(auto& object : m_GameObjects)
 	{
 		if (!object->IsDestroyed()) object->Update();
 		else areElemsToErase = true;
-		if(object->GetName() == "Pacman")
-		input.ExecuteCommand(object.get());
 	}
 	if(areElemsToErase) RemoveDestroyedObjects();
+
 }
 
 //void GameEngine::Scene::FixedUpdate()

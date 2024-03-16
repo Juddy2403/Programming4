@@ -2,56 +2,57 @@
 #include "Time.h"
 
 using namespace GameEngine;
-glm::vec2 Move::m_Velocity = {};
 
-void GameEngine::Move::Execute(GameObject* actor)
+void GameEngine::Move::Execute()
 {
 	auto& time = Time::GetInstance();
-	MathHelper::Vector3 currentPos = actor->GetLocalTransform().GetPosition();
+	MathHelper::Vector3 currentPos = m_Actor->GetLocalTransform().GetPosition();
 
 	glm::vec2 newPos = glm::vec2{ currentPos.x + time.GetElapsed() * m_Velocity.x,
 	currentPos.y + time.GetElapsed() * m_Velocity.y };
 
-	actor->SetPosition(newPos.x, newPos.y);
+	m_Actor->SetPosition(newPos.x, newPos.y);
 }
 
-void GameEngine::MoveUp::KeyPressed()
+GameEngine::Move::Move(GameObject* actor):
+	m_Actor{actor}
 {
-	m_Velocity.y = -m_Speed;
 }
 
-void GameEngine::MoveUp::KeyReleased()
+void GameEngine::Move::KeyPressed(const Direction& dir)
 {
-	if (m_Velocity.y == -m_Speed) m_Velocity.y = 0;
+	switch (dir)
+	{
+	case Direction::up:
+		m_Velocity.y = -m_Speed;
+		break;
+	case Direction::down:
+		m_Velocity.y = m_Speed;
+		break;
+	case Direction::right:
+		m_Velocity.x = m_Speed;
+		break;
+	case Direction::left:
+		m_Velocity.x = -m_Speed;
+		break;
+	}
 }
 
-void GameEngine::MoveDown::KeyPressed()
+void GameEngine::Move::KeyReleased(const Direction& dir)
 {
-	m_Velocity.y = m_Speed;
+	switch (dir)
+	{
+	case Direction::up:
+		if (m_Velocity.y == -m_Speed) m_Velocity.y = 0;
+		break;
+	case Direction::down:
+		if (m_Velocity.y == m_Speed) m_Velocity.y = 0;
+		break;
+	case Direction::right:
+		if (m_Velocity.x == m_Speed) m_Velocity.x = 0;
+		break;
+	case Direction::left:
+		if (m_Velocity.x == -m_Speed) m_Velocity.x = 0;
+		break;
+	}
 }
-
-void GameEngine::MoveDown::KeyReleased()
-{
-	if (m_Velocity.y == m_Speed) m_Velocity.y = 0;
-}
-
-void GameEngine::MoveRight::KeyPressed()
-{
-	m_Velocity.x = m_Speed;
-}
-
-void GameEngine::MoveRight::KeyReleased()
-{
-	if (m_Velocity.x == m_Speed) m_Velocity.x = 0;
-}
-
-void GameEngine::MoveLeft::KeyPressed()
-{
-	m_Velocity.x = -m_Speed;
-}
-
-void GameEngine::MoveLeft::KeyReleased()
-{
-	if (m_Velocity.x == -m_Speed) m_Velocity.x = 0;
-}
-

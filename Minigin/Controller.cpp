@@ -1,5 +1,12 @@
 #include "Controller.h"
 
+using namespace GameEngine;
+
+Controller::Controller(unsigned int controllerIdx):
+	m_ControllerIdx{controllerIdx}
+{
+}
+
 void Controller::ProcessControllerInput()
 {
 	CopyMemory(&m_PreviousState, &m_CurrentState, sizeof(XINPUT_STATE));
