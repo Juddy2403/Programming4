@@ -22,7 +22,7 @@ void GameEngine::MoveUp::KeyPressed()
 
 void GameEngine::MoveUp::KeyReleased()
 {
-	m_Velocity.y = 0;
+	if (m_Velocity.y == -m_Speed) m_Velocity.y = 0;
 }
 
 void GameEngine::MoveDown::KeyPressed()
@@ -32,7 +32,7 @@ void GameEngine::MoveDown::KeyPressed()
 
 void GameEngine::MoveDown::KeyReleased()
 {
-	m_Velocity.y = 0;
+	if (m_Velocity.y == m_Speed) m_Velocity.y = 0;
 }
 
 void GameEngine::MoveRight::KeyPressed()
@@ -42,7 +42,7 @@ void GameEngine::MoveRight::KeyPressed()
 
 void GameEngine::MoveRight::KeyReleased()
 {
-	m_Velocity.x = 0;
+	if (m_Velocity.x == m_Speed) m_Velocity.x = 0;
 }
 
 void GameEngine::MoveLeft::KeyPressed()
@@ -52,6 +52,6 @@ void GameEngine::MoveLeft::KeyPressed()
 
 void GameEngine::MoveLeft::KeyReleased()
 {
-	m_Velocity.x = 0;
+	if (m_Velocity.x == -m_Speed) m_Velocity.x = 0;
 }
 
