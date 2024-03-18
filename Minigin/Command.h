@@ -1,16 +1,10 @@
 #pragma once
-#include "Component.h"
 #include <glm/glm.hpp>
 
 namespace GameEngine
 {
-	enum class Direction {
-		up,
-		down,
-		left,
-		right
-	};
 	class GameObject;
+
 	class Command
 	{
 	protected:
@@ -27,17 +21,16 @@ namespace GameEngine
 
 	class Move final : public Command {
 	private:
-		float m_Speed{ 200.f };
-		glm::vec2 m_Velocity{};
+		float m_Speed{};
+		glm::vec2 m_Direction{};
 		GameObject* m_Actor;
 	public:
 		Move(GameObject* actor, float speed);
-
+		~Move() override;
 		virtual void Execute() override;
-		virtual void KeyPressed(const Direction& dir);
-		virtual void KeyReleased(const Direction& dir);
+		virtual void KeyPressed(const glm::vec2& dir);
+		virtual void KeyReleased(const glm::vec2& dir);
 	};
-
 
 }
 

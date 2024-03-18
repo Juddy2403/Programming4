@@ -5,10 +5,10 @@
 #include <string>
 #include <concepts>
 #include <algorithm>
+#include "Component.h"
 
 namespace GameEngine
 {
-	class Component;
 	template<typename T>
 	concept ComponentType = std::is_base_of<Component, T>::value;
 	class GameObject 
@@ -48,6 +48,7 @@ namespace GameEngine
 		//Transform functions
 		void SetLocalTransform(const Transform& transform);
 		Transform& GetLocalTransform();
+		const Transform& GetLocalTransform() const;
 		Transform GetWorldTransform();
 		void UpdateWorldTransform();
 		void SetPositionIsDirty();

@@ -1,17 +1,19 @@
 #include "Command.h"
 #include "Time.h"
+#include "GameObject.h"
 
 using namespace GameEngine;
 
 void GameEngine::Move::Execute()
 {
 	auto& time = Time::GetInstance();
-	glm::vec2 currentPos = m_Actor->GetLocalTransform().GetPosition();
+	//glm::vec2 currentPos = m_Actor->GetLocalTransform().GetPosition();
 
-	glm::vec2 newPos = glm::vec2{ currentPos.x + time.GetElapsed() * m_Velocity.x,
-	currentPos.y + time.GetElapsed() * m_Velocity.y };
+	//glm::vec2 newPos = glm::vec2{ currentPos + time.GetElapsed() * m_Speed * m_Direction};
 
-	m_Actor->SetPosition(newPos.x, newPos.y);
+	//m_Actor->SetPosition(newPos.x, newPos.y);
+
+	m_Actor->GetLocalTransform().Translate(time.GetElapsed() * m_Speed * m_Direction);
 }
 
 GameEngine::Move::Move(GameObject* actor, float speed):
@@ -20,40 +22,19 @@ GameEngine::Move::Move(GameObject* actor, float speed):
 {
 }
 
-void GameEngine::Move::KeyPressed(const Direction& dir)
+GameEngine::Move::~Move()
 {
-	switch (dir)
-	{
-	case Direction::up:
-		m_Velocity.y = -m_Speed;
-		break;
-	case Direction::down:
-		m_Velocity.y = m_Speed;
-		break;
-	case Direction::right:
-		m_Velocity.x = m_Speed;
-		break;
-	case Direction::left:
-		m_Velocity.x = -m_Speed;
-		break;
-	}
+
 }
 
-void GameEngine::Move::KeyReleased(const Direction& dir)
+void GameEngine::Move::KeyPressed(const glm::vec2& dir)
 {
-	switch (dir)
-	{
-	case Direction::up:
-		if (m_Velocity.y == -m_Speed) m_Velocity.y = 0;
-		break;
-	case Direction::down:
-		if (m_Velocity.y == m_Speed) m_Velocity.y = 0;
-		break;
-	case Direction::right:
-		if (m_Velocity.x == m_Speed) m_Velocity.x = 0;
-		break;
-	case Direction::left:
-		if (m_Velocity.x == -m_Speed) m_Velocity.x = 0;
-		break;
-	}
+	if (dir.x != 0) m_Direction.x = dir.x;
+	if (dir.y != 0) m_Direction.y = dir.y;
+}
+
+void GameEngine::Move::KeyReleased(const glm::vec2& dir)
+{
+	if (dir.x == m_Direction.x) m_Direction.x = 0;
+	if (dir.y == m_Direction.y) m_Direction.y = 0;
 }

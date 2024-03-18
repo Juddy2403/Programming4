@@ -1,5 +1,4 @@
 #pragma once
-#include "GameObject.h"
 #include "Texture2D.h"
 #include "Font.h"
 #include <string>
@@ -17,6 +16,7 @@
 
 namespace GameEngine
 {
+	class GameObject;
 	class Component
 	{
 	private:

@@ -2,7 +2,7 @@
 #include <memory>
 
 namespace GameEngine {
-	class Controller
+	class Controller final
 	{
 	public:
 		explicit Controller(unsigned int controllerIdx);
@@ -25,8 +25,7 @@ namespace GameEngine {
 		bool IsDpadRightKeyUp() const;
 	private:
 		class XInput;
-		XInput* m_pXInput; //will resource leak if its a unique ptr
-		//should ask why it prob has smth to do with the unique_ptr<Controller> inside InputManager
+		std::unique_ptr<XInput> m_pXInput;
 	};
 }
 

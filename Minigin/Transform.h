@@ -9,6 +9,7 @@ namespace GameEngine
 		glm::vec2 GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);
 		void Translate(float x, float y);
+		void Translate(const glm::vec2& vec);
 		void SetRotation(float angle);
 		void SetScale(float xScale, float yScale);
 

@@ -46,14 +46,11 @@ public:
 };
 
 GameEngine::Controller::Controller(unsigned int controllerIdx):
-	m_pXInput{new XInput(controllerIdx)}
+	m_pXInput{std::make_unique<XInput>(controllerIdx)}
 {
 }
 
-GameEngine::Controller::~Controller()
-{
-	delete m_pXInput;
-}
+GameEngine::Controller::~Controller(){}
 
 void GameEngine::Controller::ProcessControllerInput()
 {

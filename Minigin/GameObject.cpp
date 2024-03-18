@@ -1,5 +1,4 @@
 #include "GameObject.h"
-#include "Component.h"
 #include "Time.h"
 
 using namespace GameEngine;
@@ -143,6 +142,12 @@ void GameEngine::GameObject::SetLocalTransform(const Transform& transform)
 }
 
 Transform& GameEngine::GameObject::GetLocalTransform()
+{
+	SetPositionIsDirty();
+	return m_LocalTransform;
+}
+
+const Transform& GameEngine::GameObject::GetLocalTransform() const
 {
 	return m_LocalTransform;
 }

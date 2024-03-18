@@ -1,4 +1,5 @@
 #include "Component.h"
+#include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include <SDL_ttf.h>
@@ -131,7 +132,7 @@ void RotationComponent::Update()
 		if (m_IsRotatingClockwise)
 		{
 			m_Angle += Time::GetElapsed() * m_Velocity;
-			if (m_Angle >= fullRotation) m_Angle -= fullRotation;
+			//if (m_Angle >= fullRotation) m_Angle -= fullRotation;
 		}
 		else
 		{
