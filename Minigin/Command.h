@@ -8,8 +8,9 @@ namespace GameEngine
 	class Command
 	{
 	protected:
+		GameObject* m_Actor;
 	public:
-		Command() = default;
+		Command(GameObject* actor);
 		Command(const Command& other) = delete;
 		Command(Command&& other) = delete;
 		Command& operator=(const Command& other) = delete;
@@ -23,13 +24,18 @@ namespace GameEngine
 	private:
 		float m_Speed{};
 		glm::vec2 m_Direction{};
-		GameObject* m_Actor;
 	public:
 		Move(GameObject* actor, float speed);
 		~Move() override;
 		virtual void Execute() override;
 		virtual void KeyPressed(const glm::vec2& dir);
 		virtual void KeyReleased(const glm::vec2& dir);
+	};
+
+	class TakeDamage final : public Command {
+	private:
+	public:
+		virtual void Execute() override;
 	};
 
 }

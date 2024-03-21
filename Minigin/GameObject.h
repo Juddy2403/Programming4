@@ -6,12 +6,13 @@
 #include <concepts>
 #include <algorithm>
 #include "Component.h"
+#include "ISubject.h"
 
 namespace GameEngine
 {
 	template<typename T>
 	concept ComponentType = std::is_base_of<Component, T>::value;
-	class GameObject 
+	class GameObject : public ISubject
 	{
 	private:
 		std::vector<std::unique_ptr<Component>> m_Components{};
