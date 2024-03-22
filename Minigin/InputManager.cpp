@@ -2,46 +2,68 @@
 #include "InputManager.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <backends/imgui_impl_sdl2.h>
+#include "GameActor.h"
 
 //GameEngine::InputManager::InputManager(): Singleton<InputManager>(),
 //m_pController{ std::make_unique<Controller>(0) }
 //{
 //}
 
-void GameEngine::InputManager::BindKeyboardCommand(GameObject* actor, float speed)
+void GameEngine::InputManager::BindCommand(InputKey inputKey, GameActor* actor, int controllerIdx)
 {
-	m_pKeyboardCommand = std::make_unique<Move>(actor,speed);
-}
+	if (controllerIdx >= 0 ) {
+		//adding a controller ptr if its needed
+		if(m_pControllers[controllerIdx] == nullptr)
+		m_pControllers[controllerIdx] = std::make_unique<Controller>(controllerIdx);
 
-
-
-void GameEngine::InputManager::BindControllerCommand(GameObject* actor, float speed)
-{
-	m_pControllerCommand = std::make_unique<Move>(actor,speed);
+		switch (inputKey)
+		{
+		case InputKey::DPAD:
+			m_pControllerCommands[controllerIdx][inputKey] = std::make_unique<Move>(actor);
+			break;
+		}
+	}
+	else
+	{
+		switch (inputKey)
+		{
+		case InputKey::WASD:
+			m_pKeyboardCommands[inputKey] = std::make_unique<Move>(actor);
+			break;
+		}
+	}
 }
 
 bool GameEngine::InputManager::ProcessInput()
 {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
+
 		switch (e.type)
 		{
 		case SDL_QUIT:
 			return false;
 		case SDL_KEYDOWN:
-			if (m_pKeyboardCommand != nullptr)
+
+			if (m_pKeyboardCommands[InputKey::WASD] != nullptr)
 			{
-				if (e.key.keysym.scancode == SDL_SCANCODE_W) m_pKeyboardCommand->KeyPressed({ 0,-1 });
-				if (e.key.keysym.scancode == SDL_SCANCODE_A) m_pKeyboardCommand->KeyPressed({ -1,0 });
-				if (e.key.keysym.scancode == SDL_SCANCODE_S) m_pKeyboardCommand->KeyPressed({ 0,1 } );
-				if (e.key.keysym.scancode == SDL_SCANCODE_D) m_pKeyboardCommand->KeyPressed({ 1,0 } );
+				auto* command = dynamic_cast<Move*>( m_pKeyboardCommands[InputKey::WASD].get() );
+				if (e.key.keysym.scancode == SDL_SCANCODE_W) command->KeyPressed({ 0,-1 });
+				if (e.key.keysym.scancode == SDL_SCANCODE_A) command->KeyPressed({ -1,0 });
+				if (e.key.keysym.scancode == SDL_SCANCODE_S) command->KeyPressed({ 0,1 } );
+				if (e.key.keysym.scancode == SDL_SCANCODE_D) command->KeyPressed({ 1,0 } );
 			}
 			break;
 		case SDL_KEYUP:
-			if (e.key.keysym.scancode == SDL_SCANCODE_W) m_pKeyboardCommand->KeyReleased({ 0,-1 });
-			if (e.key.keysym.scancode == SDL_SCANCODE_A) m_pKeyboardCommand->KeyReleased({ -1,0 });
-			if (e.key.keysym.scancode == SDL_SCANCODE_S) m_pKeyboardCommand->KeyReleased({ 0,1 } );
-			if (e.key.keysym.scancode == SDL_SCANCODE_D) m_pKeyboardCommand->KeyReleased({ 1,0 } );
+			if (m_pKeyboardCommands[InputKey::WASD] != nullptr)
+			{
+				auto* command = dynamic_cast<Move*>(m_pKeyboardCommands[InputKey::WASD].get());
+				if (e.key.keysym.scancode == SDL_SCANCODE_W) command->KeyReleased({ 0,-1 });
+				if (e.key.keysym.scancode == SDL_SCANCODE_A) command->KeyReleased({ -1,0 });
+				if (e.key.keysym.scancode == SDL_SCANCODE_S) command->KeyReleased({ 0,1 });
+				if (e.key.keysym.scancode == SDL_SCANCODE_D) command->KeyReleased({ 1,0 });
+			}
+
 			break;
 		}
 
@@ -55,21 +77,39 @@ bool GameEngine::InputManager::ProcessInput()
 
 void GameEngine::InputManager::ProcessControllerInput()
 {
-	m_pController->ProcessControllerInput();
 
-	if (m_pController->IsDpadUpKeyDown())    m_pControllerCommand->KeyPressed({ 0,-1 });
-	if (m_pController->IsDpadLeftKeyDown())  m_pControllerCommand->KeyPressed({ -1,0 });
-	if (m_pController->IsDpadDownKeyDown())  m_pControllerCommand->KeyPressed({ 0,1 } );
-	if (m_pController->IsDpadRightKeyDown()) m_pControllerCommand->KeyPressed({ 1,0 } );
+	for (size_t i = 0; i < maxControllerCount; i++)
+	{
+		if (m_pControllers[i] != nullptr) {
+			m_pControllers[i]->ProcessControllerInput();
+			if (m_pControllerCommands[i][InputKey::DPAD] != nullptr)
+			{
+				auto* command = dynamic_cast<Move*>(m_pControllerCommands[i][InputKey::DPAD].get());
 
-	if (m_pController->IsDpadUpKeyUp())      m_pControllerCommand->KeyReleased({ 0,-1 });
-	if (m_pController->IsDpadLeftKeyUp())    m_pControllerCommand->KeyReleased({ -1,0 });
-	if (m_pController->IsDpadDownKeyUp())    m_pControllerCommand->KeyReleased({ 0,1 } );
-	if (m_pController->IsDpadRightKeyUp())   m_pControllerCommand->KeyReleased({ 1,0 } );
+				if (m_pControllers[i]->IsDpadUpKeyDown())    command->KeyPressed({ 0,-1 });
+				if (m_pControllers[i]->IsDpadLeftKeyDown())  command->KeyPressed({ -1,0 });
+				if (m_pControllers[i]->IsDpadDownKeyDown())  command->KeyPressed({ 0,1 });
+				if (m_pControllers[i]->IsDpadRightKeyDown()) command->KeyPressed({ 1,0 });
+								 							 
+				if (m_pControllers[i]->IsDpadUpKeyUp())      command->KeyReleased({ 0,-1 });
+				if (m_pControllers[i]->IsDpadLeftKeyUp())    command->KeyReleased({ -1,0 });
+				if (m_pControllers[i]->IsDpadDownKeyUp())    command->KeyReleased({ 0,1 });
+				if (m_pControllers[i]->IsDpadRightKeyUp())   command->KeyReleased({ 1,0 });
+			}
+		}
+	}
+	
 }
 
 void GameEngine::InputManager::ExecuteCommand()
 {
-	m_pKeyboardCommand->Execute();
-	m_pControllerCommand->Execute();
+	for (auto it = m_pKeyboardCommands.begin(); it != m_pKeyboardCommands.end(); ++it)
+		it->second->Execute();
+	for (size_t i = 0; i < maxControllerCount; i++)
+	{
+		if (m_pControllers[i] != nullptr) {
+			for (auto it = m_pControllerCommands[i].begin(); it != m_pControllerCommands[i].end(); ++it)
+				it->second->Execute();
+		}
+	}
 }

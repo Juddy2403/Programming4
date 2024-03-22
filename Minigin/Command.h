@@ -3,14 +3,14 @@
 
 namespace GameEngine
 {
-	class GameObject;
+	class GameActor;
 
 	class Command
 	{
 	protected:
-		GameObject* m_Actor;
+		GameActor* m_Actor;
 	public:
-		Command(GameObject* actor);
+		Command(GameActor* actor);
 		Command(const Command& other) = delete;
 		Command(Command&& other) = delete;
 		Command& operator=(const Command& other) = delete;
@@ -22,10 +22,9 @@ namespace GameEngine
 
 	class Move final : public Command {
 	private:
-		float m_Speed{};
 		glm::vec2 m_Direction{};
 	public:
-		Move(GameObject* actor, float speed);
+		Move(GameActor* actor);
 		~Move() override;
 		virtual void Execute() override;
 		virtual void KeyPressed(const glm::vec2& dir);

@@ -8,12 +8,10 @@ void GameEngine::Move::Execute()
 {
 	auto& time = Time::GetInstance();
 
-	m_Actor->GetLocalTransform().Translate(time.GetElapsed() * m_Speed * m_Direction);
+	m_Actor->GetLocalTransform().Translate(time.GetElapsed() * m_Actor->GetSpeed() * m_Direction);
 }
 
-GameEngine::Move::Move(GameObject* actor, float speed):
-	Command(actor),
-	m_Speed{speed}
+GameEngine::Move::Move(GameActor* actor): Command(actor)
 {
 }
 
@@ -34,7 +32,7 @@ void GameEngine::Move::KeyReleased(const glm::vec2& dir)
 	if (dir.y == m_Direction.y) m_Direction.y = 0;
 }
 
-GameEngine::Command::Command(GameObject* actor):
+GameEngine::Command::Command(GameActor* actor):
 	m_Actor{actor}
 {
 }

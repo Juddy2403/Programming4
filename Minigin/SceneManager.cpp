@@ -1,5 +1,5 @@
 #include "SceneManager.h"
-#include "GameObject.h"
+#include "GameActor.h"
 #include "Component.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
@@ -50,24 +50,25 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	//auto gameObject2 = std::make_unique<GameObject>("CenterPoint");
 	//gameObject2->SetPosition(300.f, 300.f);
 
-	gameObject = std::make_unique<GameObject>("Pacman");
-	gameObject->SetPosition(250.f, 250.f);
+	auto gameActor = std::make_unique<GameActor>("Pacman",3,200.f);
+	gameActor->SetPosition(250.f, 250.f);
 	//gameObject->SetParent(gameObject2.get());
-	gameObject->AddComponent<TextureComponent>("pacman.png");
+	gameActor->AddComponent<TextureComponent>("pacman.png");
 	//gameObject->AddComponent<RotationComponent>(0.01f);
 	auto& input = InputManager::GetInstance();
-	input.BindKeyboardCommand(gameObject.get(), 200.f);
+	input.BindCommand(GameEngine::InputManager::InputKey::WASD, gameActor.get());
+	m_Scene->Add(std::move(gameActor));
+
 	//m_Scene->Add(std::move(gameObject2));
 
-	auto gameObject2 = std::make_unique<GameObject>("PacmanFemale");
-	gameObject2->SetPosition(200.f, 200.f);
-	gameObject2->AddComponent<TextureComponent>("PacmanFemale.png");
+	gameActor = std::make_unique<GameActor>("PacmanFemale",3,400.f);
+	gameActor->SetPosition(200.f, 200.f);
+	gameActor->AddComponent<TextureComponent>("PacmanFemale.png");
 	//gameObject2->SetParent(gameObject.get());
 	//gameObject2->AddComponent<RotationComponent>(0.03f,false);
-	input.BindControllerCommand(gameObject2.get(), 400.f);
-	m_Scene->Add(std::move(gameObject));
+	input.BindCommand(GameEngine::InputManager::InputKey::DPAD, gameActor.get(),0);
 
-	m_Scene->Add(std::move(gameObject2));
+	m_Scene->Add(std::move(gameActor));
 
 	//scene.Add(std::move(gameObject2));
 
