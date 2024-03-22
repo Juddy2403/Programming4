@@ -18,23 +18,63 @@ namespace GameEngine
 		virtual ~Command() = default;
 
 		virtual void Execute() = 0;
+		virtual void KeyPressed() {};
+		virtual void KeyReleased() {};
 	};
 
-	class Move final : public Command {
-	private:
-		glm::vec2 m_Direction{};
+#pragma region Move Commands
+	class Move : public Command {
+	protected:
+		bool m_IsActive;
 	public:
 		Move(GameActor* actor);
 		~Move() override;
-		virtual void Execute() override;
-		virtual void KeyPressed(const glm::vec2& dir);
-		virtual void KeyReleased(const glm::vec2& dir);
+		virtual void Execute() = 0;
+		virtual void MoveActor(glm::vec2 direction);
+		virtual void KeyPressed() override;
+		virtual void KeyReleased() override;
 	};
+
+	class MoveUp final : public Move {
+	private:
+	public:
+		MoveUp(GameActor* actor);
+		~MoveUp() override;
+		virtual void Execute() override;
+	};
+
+	class MoveDown final : public Move {
+	private:
+	public:
+		MoveDown(GameActor* actor);
+		~MoveDown() override;
+		virtual void Execute() override;
+	};
+
+	class MoveRight final : public Move {
+	private:
+	public:
+		MoveRight(GameActor* actor);
+		~MoveRight() override;
+		virtual void Execute() override;
+	};
+
+	class MoveLeft final : public Move {
+	private:
+	public:
+		MoveLeft(GameActor* actor);
+		~MoveLeft() override;
+		virtual void Execute() override;
+	};
+#pragma endregion
 
 	class TakeDamage final : public Command {
 	private:
 	public:
-		virtual void Execute() override;
+		TakeDamage(GameActor* actor);
+
+		virtual void Execute() {};
+		virtual void KeyPressed() override;
 	};
 
 }

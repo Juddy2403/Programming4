@@ -4,41 +4,72 @@
 
 using namespace GameEngine;
 
-void GameEngine::Move::Execute()
+GameEngine::Command::Command(GameActor* actor) : m_Actor{ actor } {}
+
+#pragma region Move Commands
+void GameEngine::Move::MoveActor(glm::vec2 direction)
 {
 	auto& time = Time::GetInstance();
 
-	m_Actor->GetLocalTransform().Translate(time.GetElapsed() * m_Actor->GetSpeed() * m_Direction);
+	m_Actor->GetLocalTransform().Translate(time.GetElapsed() * m_Actor->GetSpeed() * direction);
 }
 
-GameEngine::Move::Move(GameActor* actor): Command(actor)
+GameEngine::Move::Move(GameActor* actor): Command(actor){}
+
+GameEngine::Move::~Move(){}
+
+void GameEngine::Move::KeyPressed()
+{
+	m_IsActive = true;
+}
+
+void GameEngine::Move::KeyReleased()
+{
+	m_IsActive = false;
+}
+
+GameEngine::MoveUp::MoveUp(GameActor* actor): Move(actor){}
+
+GameEngine::MoveUp::~MoveUp() {}
+
+void GameEngine::MoveUp::Execute()
+{
+	if (m_IsActive) MoveActor({0,-1});
+}
+
+GameEngine::MoveDown::MoveDown(GameActor* actor) : Move(actor) {}
+
+GameEngine::MoveDown::~MoveDown() {}
+
+void GameEngine::MoveDown::Execute()
+{
+	if (m_IsActive) MoveActor({ 0,1 });
+}
+
+GameEngine::MoveRight::MoveRight(GameActor* actor) : Move(actor) {}
+
+GameEngine::MoveRight::~MoveRight() {}
+
+void GameEngine::MoveRight::Execute()
+{
+	if (m_IsActive) MoveActor({ 1,0 });
+}
+
+GameEngine::MoveLeft::MoveLeft(GameActor* actor) : Move(actor) {}
+
+GameEngine::MoveLeft::~MoveLeft() {}
+
+void GameEngine::MoveLeft::Execute()
+{
+	if (m_IsActive) MoveActor({ -1,0 });
+}
+#pragma endregion
+
+GameEngine::TakeDamage::TakeDamage(GameActor* actor): Command(actor)
 {
 }
 
-GameEngine::Move::~Move()
+void GameEngine::TakeDamage::KeyPressed()
 {
-
-}
-
-void GameEngine::Move::KeyPressed(const glm::vec2& dir)
-{
-	if (dir.x != 0) m_Direction.x = dir.x;
-	if (dir.y != 0) m_Direction.y = dir.y;
-}
-
-void GameEngine::Move::KeyReleased(const glm::vec2& dir)
-{
-	if (dir.x == m_Direction.x) m_Direction.x = 0;
-	if (dir.y == m_Direction.y) m_Direction.y = 0;
-}
-
-GameEngine::Command::Command(GameActor* actor):
-	m_Actor{actor}
-{
-}
-
-void GameEngine::TakeDamage::Execute()
-{
-	auto actor = static_cast<GameActor*>(m_Actor);
-	actor->Hit();
+	m_Actor->Hit();
 }

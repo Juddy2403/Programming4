@@ -5,6 +5,13 @@ namespace GameEngine {
 	class Controller final
 	{
 	public:
+		enum class InputKey {
+			DPAD_UP   = 513,
+			DPAD_LEFT = 514,
+			DPAD_DOWN = 515,
+			DPAD_RIGHT= 516
+		};
+
 		explicit Controller(unsigned int controllerIdx);
 		~Controller();
 		Controller(const Controller& other) = delete;
@@ -14,15 +21,10 @@ namespace GameEngine {
 
 		void ProcessControllerInput();
 
-		bool IsDpadUpKeyDown() const;
-		bool IsDpadDownKeyDown() const;
-		bool IsDpadLeftKeyDown() const;
-		bool IsDpadRightKeyDown() const;
+		bool IsKeyDown(int inputKey);
 
-		bool IsDpadUpKeyUp() const;
-		bool IsDpadDownKeyUp() const;
-		bool IsDpadLeftKeyUp() const;
-		bool IsDpadRightKeyUp() const;
+		bool IsKeyUp(int inputKey);
+
 	private:
 		class XInput;
 		std::unique_ptr<XInput> m_pXInput;

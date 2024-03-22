@@ -57,43 +57,44 @@ void GameEngine::Controller::ProcessControllerInput()
 	m_pXInput->ProcessControllerInput();
 }
 
-bool GameEngine::Controller::IsDpadUpKeyDown() const
+bool GameEngine::Controller::IsKeyDown(int inputKey)
 {
-	return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_UP);
+	InputKey inputEnum = static_cast<InputKey>(inputKey);
+	switch (inputEnum)
+	{
+	case InputKey::DPAD_UP:
+		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_UP);
+		break;
+	case InputKey::DPAD_DOWN:
+		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_DOWN);
+		break;
+	case InputKey::DPAD_RIGHT:
+		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_RIGHT);
+		break;
+	case InputKey::DPAD_LEFT:
+		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_LEFT);
+		break;
+	}
+	return false;
 }
 
-bool GameEngine::Controller::IsDpadDownKeyDown() const
+bool GameEngine::Controller::IsKeyUp(int inputKey)
 {
-	return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_DOWN);
+	InputKey inputEnum = static_cast<InputKey>(inputKey);
+	switch (inputEnum)
+	{
+	case InputKey::DPAD_UP:
+		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_UP);
+		break;
+	case InputKey::DPAD_DOWN:
+		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_DOWN);
+		break;
+	case InputKey::DPAD_RIGHT:
+		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_RIGHT);
+		break;
+	case InputKey::DPAD_LEFT:
+		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_LEFT);
+		break;
+	}
+	return false;
 }
-
-bool GameEngine::Controller::IsDpadLeftKeyDown() const
-{
-	return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_LEFT);
-}
-
-bool GameEngine::Controller::IsDpadRightKeyDown() const
-{
-	return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_RIGHT);
-}
-
-bool GameEngine::Controller::IsDpadUpKeyUp() const
-{
-	return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_UP);
-}
-
-bool GameEngine::Controller::IsDpadDownKeyUp() const
-{
-	return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_DOWN);
-}
-
-bool GameEngine::Controller::IsDpadLeftKeyUp() const
-{
-	return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_LEFT);
-}
-
-bool GameEngine::Controller::IsDpadRightKeyUp() const
-{
-	return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_RIGHT);
-}
-

@@ -33,8 +33,6 @@ void Scene::RemoveAll()
 void Scene::Update()
 {
 	//Processing input
-	auto& input = InputManager::GetInstance();
-	input.ExecuteCommand();
 
 	bool areElemsToErase = false;
 	for(auto& object : m_GameObjects)

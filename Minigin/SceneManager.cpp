@@ -56,7 +56,12 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	gameActor->AddComponent<TextureComponent>("pacman.png");
 	//gameObject->AddComponent<RotationComponent>(0.01f);
 	auto& input = InputManager::GetInstance();
-	input.BindCommand(GameEngine::InputManager::InputKey::WASD, gameActor.get());
+	input.BindCommand<MoveUp>(GameEngine::InputManager::InputKey::W, gameActor.get());
+	input.BindCommand<MoveDown>(GameEngine::InputManager::InputKey::S, gameActor.get());
+	input.BindCommand<MoveLeft>(GameEngine::InputManager::InputKey::A, gameActor.get());
+	input.BindCommand<MoveRight>(GameEngine::InputManager::InputKey::D, gameActor.get());
+
+	input.BindCommand<TakeDamage>(GameEngine::InputManager::InputKey::Z, gameActor.get());
 	m_Scene->Add(std::move(gameActor));
 
 	//m_Scene->Add(std::move(gameObject2));
@@ -66,7 +71,10 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	gameActor->AddComponent<TextureComponent>("PacmanFemale.png");
 	//gameObject2->SetParent(gameObject.get());
 	//gameObject2->AddComponent<RotationComponent>(0.03f,false);
-	input.BindCommand(GameEngine::InputManager::InputKey::DPAD, gameActor.get(),0);
+	input.BindCommand<MoveUp>(GameEngine::InputManager::InputKey::DPAD_UP, gameActor.get(),0);
+	input.BindCommand<MoveDown>(GameEngine::InputManager::InputKey::DPAD_DOWN, gameActor.get(),0);
+	input.BindCommand<MoveLeft>(GameEngine::InputManager::InputKey::DPAD_LEFT, gameActor.get(),0);
+	input.BindCommand<MoveRight>(GameEngine::InputManager::InputKey::DPAD_RIGHT, gameActor.get(),0);
 
 	m_Scene->Add(std::move(gameActor));
 
