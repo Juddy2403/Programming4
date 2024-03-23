@@ -71,3 +71,17 @@ void GameEngine::TakeDamage::KeyPressed()
 {
 	m_Actor->Hit();
 }
+
+GameEngine::SmallScoreIncrease::SmallScoreIncrease(GameActor* actor) : Command(actor) {}
+
+void GameEngine::SmallScoreIncrease::KeyPressed()
+{
+	m_Actor->IncreaseScore(10);
+}
+
+GameEngine::BigScoreIncrease::BigScoreIncrease(GameActor* actor) : Command(actor) {}
+
+void GameEngine::BigScoreIncrease::KeyPressed()
+{
+	m_Actor->IncreaseScore(50);
+}

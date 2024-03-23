@@ -67,7 +67,7 @@ void Scene::Render() const
 	//derive a base observer-game obj class
 	for (const auto& observer : m_Observers)
 	{
-		auto castedObserver = dynamic_cast<HealthObserver*>(observer.get());
+		auto castedObserver = dynamic_cast<RenderableObserver*>(observer.get());
 		if (castedObserver) castedObserver->Render();
 	}
 

@@ -19,14 +19,26 @@ namespace GameEngine {
 		IObserver& operator=(IObserver&& other) = delete;
 	};
 
-	class HealthObserver : public IObserver, public GameObject
+	class RenderableObserver : public IObserver, public GameObject
+	{
+	public:
+		RenderableObserver(const std::string& name) : IObserver(name) {}
+	};
+
+	class HealthObserver : public RenderableObserver
 	{
 	private:
-		bool m_HasDied{ false };
 	public:
-		HealthObserver(const std::string& name);
-		virtual void Update(ISubject* subject) override; // subject -> getState
+		HealthObserver(const std::string& name) : RenderableObserver(name) {}
+		virtual void Update(ISubject* subject) override; 
+	};
 
+	class ScoreObserver : public RenderableObserver
+	{
+	private:
+	public:
+		ScoreObserver(const std::string& name) : RenderableObserver(name) {}
+		virtual void Update(ISubject* subject) override; 
 	};
 }
 

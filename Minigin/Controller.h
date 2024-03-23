@@ -9,7 +9,11 @@ namespace GameEngine {
 			DPAD_UP   = 513,
 			DPAD_LEFT = 514,
 			DPAD_DOWN = 515,
-			DPAD_RIGHT= 516
+			DPAD_RIGHT= 516,
+			X = 517,
+			Y = 518,
+			A = 519,
+			B = 520
 		};
 
 		explicit Controller(unsigned int controllerIdx);

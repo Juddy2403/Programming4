@@ -74,6 +74,21 @@ bool GameEngine::Controller::IsKeyDown(int inputKey)
 	case InputKey::DPAD_LEFT:
 		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_LEFT);
 		break;
+	case InputKey::X:
+		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_X);
+		break;
+	case InputKey::Y:
+		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_Y);
+		break;
+	case InputKey::A:
+		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_A);
+		break;
+	case InputKey::B:
+		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_B);
+		break;
+	default:
+		std::cout << "Unknown key down! Controller.cpp \n";
+		break;
 	}
 	return false;
 }
@@ -94,6 +109,21 @@ bool GameEngine::Controller::IsKeyUp(int inputKey)
 		break;
 	case InputKey::DPAD_LEFT:
 		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_LEFT);
+		break;
+	case InputKey::X:
+		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_X);
+		break;
+	case InputKey::Y:
+		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_Y);
+		break;
+	case InputKey::A:
+		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_A);
+		break;
+	case InputKey::B:
+		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_B);
+		break;
+	default:
+		std::cout << "Unknown key Up! Controller.cpp \n";
 		break;
 	}
 	return false;

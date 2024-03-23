@@ -47,10 +47,11 @@ void GameEngine::InputManager::ProcessControllerInput()
 		if (m_pControllers[i] != nullptr) {
 			m_pControllers[i]->ProcessControllerInput();
 			//TODO: perhaps create an event queue with the inputs received
-			ProcessControllerKey(i, InputKey::DPAD_UP);
-			ProcessControllerKey(i, InputKey::DPAD_DOWN);
-			ProcessControllerKey(i, InputKey::DPAD_LEFT);
-			ProcessControllerKey(i, InputKey::DPAD_RIGHT);
+
+			for (size_t inputKey = static_cast<int>(InputKey::DPAD_UP); inputKey <= static_cast<int>(InputKey::CONTROLLER_B); ++inputKey)
+			{
+				ProcessControllerKey(i, static_cast<InputKey> (inputKey));
+			}
 		}
 	}
 	
@@ -63,7 +64,10 @@ void GameEngine::InputManager::ProcessControllerKey(const size_t& i,const GameEn
 		auto* command = m_pControllerCommands[i][inputKey].get();
 		if(command)
 		{
-			if (m_pControllers[i]->IsKeyDown(static_cast<int>(inputKey))) command->KeyPressed();
+			if (m_pControllers[i]->IsKeyDown(static_cast<int>(inputKey))) 
+			{
+				command->KeyPressed();
+			}
 			if (m_pControllers[i]->IsKeyUp(static_cast<int>(inputKey))) command->KeyReleased();
 		}
 	}
@@ -73,13 +77,13 @@ void GameEngine::InputManager::ExecuteCommands()
 {
 	for (auto& command : m_pKeyboardCommands)
 	{
-		command.second->Execute();
+		if (command.second) command.second->Execute();
 	}
 	for (size_t i = 0; i < maxControllerCount; i++)
 	{
 		if (m_pControllers[i] != nullptr) {
 			for (auto& command : m_pControllerCommands[i])
-				command.second->Execute();
+				if(command.second) command.second->Execute();
 		}
 	}
 }

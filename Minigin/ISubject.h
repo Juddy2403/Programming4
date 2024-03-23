@@ -13,7 +13,8 @@ namespace GameEngine {
 		ObserversMap m_Observers;
 	public:
 		enum class ObserverMessages {
-			health
+			health,
+			score
 		};
 
 		virtual void AddObserver(int message, IObserver* observer);

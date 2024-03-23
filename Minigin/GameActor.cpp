@@ -16,3 +16,9 @@ void GameEngine::GameActor::Hit()
 	--m_Lives;
 	Notify(static_cast<int>(ObserverMessages::health));
 }
+
+void GameEngine::GameActor::IncreaseScore(int value)
+{
+	m_Score += value;
+	Notify(static_cast<int>(ObserverMessages::score));
+}

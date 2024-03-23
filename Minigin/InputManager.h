@@ -21,14 +21,42 @@ namespace GameEngine
 	{
 	public:
 		enum class InputKey {
-			DPAD_UP    = static_cast<int>(Controller::InputKey::DPAD_UP),
-			DPAD_LEFT  = static_cast<int>(Controller::InputKey::DPAD_LEFT),
-			DPAD_DOWN  = static_cast<int>(Controller::InputKey::DPAD_DOWN),
-			DPAD_RIGHT = static_cast<int>(Controller::InputKey::DPAD_RIGHT),
-			W = SDL_SCANCODE_W,
+			//Controller
+			DPAD_UP      = Controller::InputKey::DPAD_UP,
+			DPAD_LEFT    = Controller::InputKey::DPAD_LEFT,
+			DPAD_DOWN    = Controller::InputKey::DPAD_DOWN,
+			DPAD_RIGHT   = Controller::InputKey::DPAD_RIGHT,
+			CONTROLLER_X = Controller::InputKey::X,
+			CONTROLLER_Y = Controller::InputKey::Y,
+			CONTROLLER_A = Controller::InputKey::A,
+			CONTROLLER_B = Controller::InputKey::B,
+
+			//Keyboard
 			A = SDL_SCANCODE_A,
-			S = SDL_SCANCODE_S,
+			B = SDL_SCANCODE_B,
+			C = SDL_SCANCODE_C,
 			D = SDL_SCANCODE_D,
+			E = SDL_SCANCODE_E,
+			F = SDL_SCANCODE_F,
+			G = SDL_SCANCODE_G,
+			H = SDL_SCANCODE_H,
+			I = SDL_SCANCODE_I,
+			J = SDL_SCANCODE_J,
+			K = SDL_SCANCODE_K,
+			L = SDL_SCANCODE_L,
+			M = SDL_SCANCODE_M,
+			N = SDL_SCANCODE_N,
+			O = SDL_SCANCODE_O,
+			P = SDL_SCANCODE_P,
+			Q = SDL_SCANCODE_Q,
+			R = SDL_SCANCODE_R,
+			S = SDL_SCANCODE_S,
+			T = SDL_SCANCODE_T,
+			U = SDL_SCANCODE_U,
+			V = SDL_SCANCODE_V,
+			W = SDL_SCANCODE_W,
+			X = SDL_SCANCODE_X,
+			Y = SDL_SCANCODE_Y,
 			Z = SDL_SCANCODE_Z
 		};
 

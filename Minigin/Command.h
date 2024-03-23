@@ -25,7 +25,7 @@ namespace GameEngine
 #pragma region Move Commands
 	class Move : public Command {
 	protected:
-		bool m_IsActive;
+		bool m_IsActive{ false };
 	public:
 		Move(GameActor* actor);
 		~Move() override;
@@ -72,6 +72,24 @@ namespace GameEngine
 	private:
 	public:
 		TakeDamage(GameActor* actor);
+
+		virtual void Execute() {};
+		virtual void KeyPressed() override;
+	};
+
+	class SmallScoreIncrease final : public Command {
+
+	public:
+		SmallScoreIncrease(GameActor* actor);
+
+		virtual void Execute() {};
+		virtual void KeyPressed() override;
+	};
+
+	class BigScoreIncrease final : public Command {
+
+	public:
+		BigScoreIncrease(GameActor* actor);
 
 		virtual void Execute() {};
 		virtual void KeyPressed() override;
