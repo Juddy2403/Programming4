@@ -47,16 +47,16 @@ void GameEngine::InputManager::ProcessControllerInput()
 		if (m_pControllers[i] != nullptr) {
 			m_pControllers[i]->ProcessControllerInput();
 			//TODO: perhaps create an event queue with the inputs received
-			CheckDPADMovement(i, InputKey::DPAD_UP);
-			CheckDPADMovement(i, InputKey::DPAD_DOWN);
-			CheckDPADMovement(i, InputKey::DPAD_LEFT);
-			CheckDPADMovement(i, InputKey::DPAD_RIGHT);
+			ProcessControllerKey(i, InputKey::DPAD_UP);
+			ProcessControllerKey(i, InputKey::DPAD_DOWN);
+			ProcessControllerKey(i, InputKey::DPAD_LEFT);
+			ProcessControllerKey(i, InputKey::DPAD_RIGHT);
 		}
 	}
 	
 }
 
-void GameEngine::InputManager::CheckDPADMovement(const size_t& i,const GameEngine::InputManager::InputKey& inputKey)
+void GameEngine::InputManager::ProcessControllerKey(const size_t& i,const GameEngine::InputManager::InputKey& inputKey)
 {
 	if (m_pControllerCommands[i][inputKey] != nullptr)
 	{

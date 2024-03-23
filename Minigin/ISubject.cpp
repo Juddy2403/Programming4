@@ -1,10 +1,12 @@
 #include "ISubject.h"
+#include "IObserver.h"
 
 void GameEngine::ISubject::AddObserver(int message,IObserver* observer)
 {
 	auto it = m_Observers.find(message);
 	if (it == m_Observers.end()) m_Observers[message] = ObserverList();
 	m_Observers[message].push_front(observer);
+	m_Observers[message].front()->Update(this);
 }
 
 void GameEngine::ISubject::RemoveObserver(int message, IObserver* observer)

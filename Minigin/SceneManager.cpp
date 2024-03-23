@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
+#include "IObserver.h"
 
 void GameEngine::SceneManager::Update()
 {
@@ -17,7 +18,6 @@ void GameEngine::SceneManager::Update()
 void GameEngine::SceneManager::Render()
 {
 	m_Scene->Render();
-	
 }
 
 GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name)
@@ -26,12 +26,12 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	m_Scene.reset(new Scene(name));
 	auto gameObject = std::make_unique<GameObject>("Background");
 	gameObject->AddComponent<TextureComponent>("background.tga");
-	m_Scene->Add(std::move(gameObject));
+	m_Scene->AddObject(std::move(gameObject));
 
 	gameObject = std::make_unique<GameObject>("Logo");
 	gameObject->SetPosition(216.f, 180.f);
 	gameObject->AddComponent<TextureComponent>("logo.tga");
-	m_Scene->Add(std::move(gameObject));
+	m_Scene->AddObject(std::move(gameObject));
 
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 
@@ -39,16 +39,17 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	gameObject->SetPosition(80.f, 20.f);
 	gameObject->AddComponent<TextComponent>(font, "Programming 4 Assignment");
 	gameObject->AddComponent<TextureComponent>();
-	m_Scene->Add(std::move(gameObject));
+	m_Scene->AddObject(std::move(gameObject));
 
 	gameObject = std::make_unique<GameObject>("FPSCounter");
 	gameObject->SetPosition(20.f, 80.f);
 	gameObject->AddComponent<FPSComponent>(gameObject->AddComponent<TextComponent>(font, "160 FPS"));
 	gameObject->AddComponent<TextureComponent>();
-	m_Scene->Add(std::move(gameObject));
+	m_Scene->AddObject(std::move(gameObject));
 
 	//auto gameObject2 = std::make_unique<GameObject>("CenterPoint");
 	//gameObject2->SetPosition(300.f, 300.f);
+
 
 	auto gameActor = std::make_unique<GameActor>("Pacman",3,200.f);
 	gameActor->SetPosition(250.f, 250.f);
@@ -62,7 +63,12 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	input.BindCommand<MoveRight>(GameEngine::InputManager::InputKey::D, gameActor.get());
 
 	input.BindCommand<TakeDamage>(GameEngine::InputManager::InputKey::Z, gameActor.get());
-	m_Scene->Add(std::move(gameActor));
+	auto observer = std::make_unique<GameEngine::HealthObserver>("Pacman health observer");
+	observer->AddComponent<TextComponent>(font, "");
+	observer->AddComponent<TextureComponent>();
+	observer->SetPosition(100.f, 100.f);
+	m_Scene->AddObserver(static_cast<int>(ISubject::ObserverMessages::health), std::move(observer), gameActor.get());
+	m_Scene->AddObject(std::move(gameActor));
 
 	//m_Scene->Add(std::move(gameObject2));
 
@@ -76,7 +82,7 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	input.BindCommand<MoveLeft>(GameEngine::InputManager::InputKey::DPAD_LEFT, gameActor.get(),0);
 	input.BindCommand<MoveRight>(GameEngine::InputManager::InputKey::DPAD_RIGHT, gameActor.get(),0);
 
-	m_Scene->Add(std::move(gameActor));
+	m_Scene->AddObject(std::move(gameActor));
 
 	//scene.Add(std::move(gameObject2));
 

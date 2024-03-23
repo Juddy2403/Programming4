@@ -10,3 +10,9 @@ GameEngine::GameActor::GameActor(std::string name,int lives, float speed):
 	m_Speed{speed}
 {
 }
+
+void GameEngine::GameActor::Hit()
+{
+	--m_Lives;
+	Notify(static_cast<int>(ObserverMessages::health));
+}

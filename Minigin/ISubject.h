@@ -1,9 +1,9 @@
 #pragma once
-#include "IObserver.h"
 #include <forward_list>
 #include <map>
 
 namespace GameEngine {
+	class IObserver;
 	class ISubject
 	{
 	private:
@@ -12,6 +12,10 @@ namespace GameEngine {
 
 		ObserversMap m_Observers;
 	public:
+		enum class ObserverMessages {
+			health
+		};
+
 		virtual void AddObserver(int message, IObserver* observer);
 		virtual void RemoveObserver(int message, IObserver* observer);
 		virtual void NotifyAll();

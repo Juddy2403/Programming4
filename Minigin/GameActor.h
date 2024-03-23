@@ -8,7 +8,7 @@ namespace GameEngine {
 		GameActor(std::string name);
 		explicit GameActor(std::string name,int lives, float speed);
 
-		void Hit() { --m_Lives; };
+		void Hit();
 		float GetSpeed() const { return m_Speed; }
 		int GetRemainingLives() const { return m_Lives; }
 

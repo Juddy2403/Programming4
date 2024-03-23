@@ -76,7 +76,7 @@ namespace GameEngine
 
 		std::array<std::unique_ptr<Controller>, maxControllerCount> m_pControllers;
 
-		void CheckDPADMovement(const size_t& i, const InputKey& inputKey);
+		void ProcessControllerKey(const size_t& i, const InputKey& inputKey);
 
 		void ExecuteCommands();
 

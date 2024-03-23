@@ -65,9 +65,7 @@ void GameEngine::MoveLeft::Execute()
 }
 #pragma endregion
 
-GameEngine::TakeDamage::TakeDamage(GameActor* actor): Command(actor)
-{
-}
+GameEngine::TakeDamage::TakeDamage(GameActor* actor): Command(actor) {}
 
 void GameEngine::TakeDamage::KeyPressed()
 {
