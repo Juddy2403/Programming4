@@ -28,7 +28,20 @@ public:
 	void ProcessControllerInput() {
 		CopyMemory(&m_PreviousState, &m_CurrentState, sizeof(XINPUT_STATE));
 		ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-		XInputGetState(m_ControllerIdx, &m_CurrentState);
+		auto result = XInputGetState(m_ControllerIdx, &m_CurrentState);
+		if (result != ERROR_SUCCESS) {
+			switch (result) {
+			case ERROR_DEVICE_NOT_CONNECTED:
+				std::cout << "Controller error! Device not connected! \n";
+				break;
+			case ERROR_NOT_SUPPORTED:
+				std::cout << "Controller error! Not supported! \n";
+				break;
+			default:
+				std::cout << "Controller error! \n";
+				break;
+			}
+		}
 
 		auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ m_PreviousState.Gamepad.wButtons;
 		m_ButtonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
