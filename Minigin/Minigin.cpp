@@ -1,3 +1,4 @@
+#include <steam_api.h>
 #include <stdexcept>
 #define WIN32_LEAN_AND_MEAN 
 #include <windows.h>
@@ -11,6 +12,7 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "Time.h"
+
 //using namespace std::chrono;
 
 SDL_Window* g_window{};
@@ -91,6 +93,8 @@ void GameEngine::Minigin::Run(const std::function<void()>& load)
 	bool doContinue = true;
 	while (doContinue)
 	{
+		SteamAPI_RunCallbacks();
+
 		time.Update();
 		//lag += time.GetElapsed();
 		//while(lag >= time.GetFixedTimeStep().count())
