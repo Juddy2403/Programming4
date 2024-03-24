@@ -113,6 +113,12 @@
     <ClInclude Include="IObserver.h">
       <Filter>Files\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SteamAchievements.h">
+      <Filter>Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AchievementsManager.h">
+      <Filter>Files\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Texture2D.cpp">
@@ -191,6 +197,12 @@
       <Filter>Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IObserver.cpp">
+      <Filter>Files\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SteamAchievements.cpp">
+      <Filter>Files\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AchievementsManager.cpp">
       <Filter>Files\Source Files</Filter>
     </ClCompile>
   </ItemGroup>

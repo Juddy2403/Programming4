@@ -2,6 +2,7 @@
 #include "ISubject.h"
 #include "GameActor.h"
 #include <iostream>
+#include "AchievementsManager.h"
 
 GameEngine::IObserver::IObserver(const std::string& name) : m_Name{ name } {}
 
@@ -56,6 +57,9 @@ void GameEngine::ScoreObserver::Notify(ISubject* subject)
 		auto gameActor = dynamic_cast<GameActor*>(subject);
 		assert(gameActor);
 		int score = gameActor->GetScore();
+		if (score >= 500) {
+			AchievementsManager::GetInstance().SetAchievement("ACH_WIN_ONE_GAME");
+		}
 		textComp->SetText("Score: " + std::to_string(score));
 		textComp->Update();
 	}

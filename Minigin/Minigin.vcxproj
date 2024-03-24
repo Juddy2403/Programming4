@@ -214,6 +214,8 @@ xcopy "$(SolutionDir)\3rdParty\steamworks\redistributable_bin\steam_appid.txt" "
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_rectpack.h" />
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_textedit.h" />
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_truetype.h" />
+    <ClInclude Include="AchievementsManager.h" />
+    <ClInclude Include="SteamAchievements.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Controller.h" />
@@ -242,6 +244,8 @@ xcopy "$(SolutionDir)\3rdParty\steamworks\redistributable_bin\steam_appid.txt" "
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_plot.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_widgets.cpp" />
+    <ClCompile Include="AchievementsManager.cpp" />
+    <ClCompile Include="SteamAchievements.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controller.cpp" />
