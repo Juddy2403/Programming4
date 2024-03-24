@@ -14,11 +14,11 @@ GameEngine::GameActor::GameActor(std::string name,int lives, float speed):
 void GameEngine::GameActor::Hit()
 {
 	--m_Lives;
-	Notify(static_cast<int>(ObserverMessages::health));
+	Notify(GameEvent::playerDied,static_cast<int>(ObserverIdentifier::health));
 }
 
 void GameEngine::GameActor::IncreaseScore(int value)
 {
 	m_Score += value;
-	Notify(static_cast<int>(ObserverMessages::score));
+	Notify(GameEvent::scoreIncreased,static_cast<int>(ObserverIdentifier::score));
 }

@@ -8,7 +8,9 @@ namespace GameEngine {
 	private:
 		std::string m_Name{};
 	public:
-		virtual void Update(ISubject* subject) = 0;
+		virtual void Notify(ISubject::GameEvent event,ISubject* subject) = 0;
+		//mainly to give the observer an initial state. Should prob rework this
+		virtual void Notify(ISubject* subject) = 0;
 
 		IObserver() = default;
 		IObserver(const std::string& name);
@@ -30,7 +32,8 @@ namespace GameEngine {
 	private:
 	public:
 		HealthObserver(const std::string& name) : RenderableObserver(name) {}
-		virtual void Update(ISubject* subject) override; 
+		virtual void Notify(ISubject::GameEvent event, ISubject* subject) override;
+		virtual void Notify(ISubject* subject) override;
 	};
 
 	class ScoreObserver : public RenderableObserver
@@ -38,7 +41,8 @@ namespace GameEngine {
 	private:
 	public:
 		ScoreObserver(const std::string& name) : RenderableObserver(name) {}
-		virtual void Update(ISubject* subject) override; 
+		virtual void Notify(ISubject::GameEvent event, ISubject* subject) override;
+		virtual void Notify(ISubject* subject) override;
 	};
 }
 

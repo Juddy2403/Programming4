@@ -83,13 +83,13 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	observer->AddComponent<TextComponent>(smallerFont, "");
 	observer->AddComponent<TextureComponent>();
 	observer->SetPosition(20.f, 160.f);
-	m_Scene->AddObserver(static_cast<int>(ISubject::ObserverMessages::health), std::move(observer), gameActor.get());
+	m_Scene->AddObserver(static_cast<int>(ISubject::ObserverIdentifier::health), std::move(observer), gameActor.get());
 
 	observer = std::make_unique<GameEngine::ScoreObserver>("Pacman score observer");
 	observer->AddComponent<TextComponent>(smallerFont, "");
 	observer->AddComponent<TextureComponent>();
 	observer->SetPosition(20.f, 180.f);
-	m_Scene->AddObserver(static_cast<int>(ISubject::ObserverMessages::score), std::move(observer), gameActor.get());
+	m_Scene->AddObserver(static_cast<int>(ISubject::ObserverIdentifier::score), std::move(observer), gameActor.get());
 
 	m_Scene->AddObject(std::move(gameActor));
 
@@ -109,13 +109,13 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
 	observer->AddComponent<TextComponent>(smallerFont, "");
 	observer->AddComponent<TextureComponent>();
 	observer->SetPosition(20.f, 200.f);
-	m_Scene->AddObserver(static_cast<int>(ISubject::ObserverMessages::health), std::move(observer), gameActor.get());
+	m_Scene->AddObserver(static_cast<int>(ISubject::ObserverIdentifier::health), std::move(observer), gameActor.get());
 
 	observer = std::make_unique<GameEngine::ScoreObserver>("Ms Pacman score observer");
 	observer->AddComponent<TextComponent>(smallerFont, "");
 	observer->AddComponent<TextureComponent>();
 	observer->SetPosition(20.f, 220.f);
-	m_Scene->AddObserver(static_cast<int>(ISubject::ObserverMessages::score), std::move(observer), gameActor.get());
+	m_Scene->AddObserver(static_cast<int>(ISubject::ObserverIdentifier::score), std::move(observer), gameActor.get());
 
 	m_Scene->AddObject(std::move(gameActor));
 

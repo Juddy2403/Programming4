@@ -5,7 +5,21 @@
 
 GameEngine::IObserver::IObserver(const std::string& name) : m_Name{ name } {}
 
-void GameEngine::HealthObserver::Update(ISubject* subject)
+void GameEngine::HealthObserver::Notify(ISubject::GameEvent event, ISubject* subject)
+{
+	switch (event)
+	{
+	case GameEngine::ISubject::GameEvent::playerDied:
+		Notify(subject);
+		break;
+	case GameEngine::ISubject::GameEvent::scoreIncreased:
+		break;
+	default:
+		break;
+	}
+}
+
+void GameEngine::HealthObserver::Notify(ISubject* subject)
 {
 	auto* textComp = GetComponent<TextComponent>();
 	if (textComp)
@@ -19,7 +33,22 @@ void GameEngine::HealthObserver::Update(ISubject* subject)
 	else std::cout << "No text component found! /health observer \n";
 }
 
-void GameEngine::ScoreObserver::Update(ISubject* subject)
+void GameEngine::ScoreObserver::Notify(ISubject::GameEvent event, ISubject* subject)
+{
+	switch (event)
+	{
+	case GameEngine::ISubject::GameEvent::playerDied:
+		break;
+	case GameEngine::ISubject::GameEvent::scoreIncreased:
+		Notify(subject);
+		break;
+	default:
+		break;
+	}
+
+}
+
+void GameEngine::ScoreObserver::Notify(ISubject* subject)
 {
 	auto* textComp = GetComponent<TextComponent>();
 	if (textComp)
@@ -31,5 +60,4 @@ void GameEngine::ScoreObserver::Update(ISubject* subject)
 		textComp->Update();
 	}
 	else std::cout << "No text component found! /score observer \n";
-
 }

@@ -12,15 +12,19 @@ namespace GameEngine {
 
 		ObserversMap m_Observers;
 	public:
-		enum class ObserverMessages {
+		enum class ObserverIdentifier {
 			health,
 			score
+		};
+		enum class GameEvent {
+			playerDied,
+			scoreIncreased
 		};
 
 		virtual void AddObserver(int message, IObserver* observer);
 		virtual void RemoveObserver(int message, IObserver* observer);
-		virtual void NotifyAll();
-		virtual void Notify(int message);
+		virtual void NotifyAll(GameEvent event);
+		virtual void Notify(GameEvent event,int message);
 
 		ISubject() = default;
 		virtual ~ISubject() = default;
