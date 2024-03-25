@@ -1,26 +1,26 @@
 #include "IObserver.h"
-#include "ISubject.h"
+#include "Subject.h"
 #include "GameActor.h"
 #include <iostream>
 #include "AchievementsManager.h"
 
 GameEngine::IObserver::IObserver(const std::string& name) : m_Name{ name } {}
 
-void GameEngine::HealthObserver::Notify(ISubject::GameEvent event, ISubject* subject)
+void GameEngine::HealthObserver::Notify(Subject::GameEvent event, Subject* subject)
 {
 	switch (event)
 	{
-	case GameEngine::ISubject::GameEvent::playerDied:
+	case GameEngine::Subject::GameEvent::playerDied:
 		Notify(subject);
 		break;
-	case GameEngine::ISubject::GameEvent::scoreIncreased:
+	case GameEngine::Subject::GameEvent::scoreIncreased:
 		break;
 	default:
 		break;
 	}
 }
 
-void GameEngine::HealthObserver::Notify(ISubject* subject)
+void GameEngine::HealthObserver::Notify(Subject* subject)
 {
 	auto* textComp = GetComponent<TextComponent>();
 	if (textComp)
@@ -34,13 +34,13 @@ void GameEngine::HealthObserver::Notify(ISubject* subject)
 	else std::cout << "No text component found! /health observer \n";
 }
 
-void GameEngine::ScoreObserver::Notify(ISubject::GameEvent event, ISubject* subject)
+void GameEngine::ScoreObserver::Notify(Subject::GameEvent event, Subject* subject)
 {
 	switch (event)
 	{
-	case GameEngine::ISubject::GameEvent::playerDied:
+	case GameEngine::Subject::GameEvent::playerDied:
 		break;
-	case GameEngine::ISubject::GameEvent::scoreIncreased:
+	case GameEngine::Subject::GameEvent::scoreIncreased:
 		Notify(subject);
 		break;
 	default:
@@ -49,7 +49,7 @@ void GameEngine::ScoreObserver::Notify(ISubject::GameEvent event, ISubject* subj
 
 }
 
-void GameEngine::ScoreObserver::Notify(ISubject* subject)
+void GameEngine::ScoreObserver::Notify(Subject* subject)
 {
 	auto* textComp = GetComponent<TextComponent>();
 	if (textComp)

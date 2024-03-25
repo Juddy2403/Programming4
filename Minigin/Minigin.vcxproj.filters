@@ -92,7 +92,7 @@
     <ClInclude Include="GameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="ISubject.h">
+    <ClInclude Include="Subject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
@@ -181,7 +181,7 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="ISubject.cpp">
+    <ClCompile Include="Subject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
