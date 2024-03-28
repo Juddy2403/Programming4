@@ -2,20 +2,22 @@
 #include <memory>
 
 namespace GameEngine {
+	constexpr size_t g_maxControllerCount{4};
+
+	enum class ControllerInputKey {
+		dpadUp,
+		dpadLeft,
+		dpadDown,
+		dpadRight,
+		X,
+		Y,
+		A,
+		B
+	};
+	
 	class Controller final
 	{
 	public:
-		enum class InputKey {
-			DPAD_UP   = 513,
-			DPAD_LEFT = 514,
-			DPAD_DOWN = 515,
-			DPAD_RIGHT= 516,
-			X = 517,
-			Y = 518,
-			A = 519,
-			B = 520
-		};
-
 		explicit Controller(unsigned int controllerIdx);
 		~Controller();
 		Controller(const Controller& other) = delete;
@@ -23,11 +25,11 @@ namespace GameEngine {
 		Controller& operator=(const Controller& other) = delete;
 		Controller& operator=(Controller&& other) = delete;
 
-		void ProcessControllerInput();
+		void ProcessControllerInput() const;
 
-		bool IsKeyDown(int inputKey);
-
-		bool IsKeyUp(int inputKey);
+		[[nodiscard]] bool IsKeyDown(ControllerInputKey inputKey) const;
+		[[nodiscard]] bool IsKeyPressed(ControllerInputKey inputKey) const;
+		[[nodiscard]] bool IsKeyUp(ControllerInputKey inputKey) const;
 
 	private:
 		class XInput;

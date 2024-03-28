@@ -1,90 +1,98 @@
 #include "InputManager.h"
-#define IMGUI_DEFINE_MATH_OPERATORS
-#include <backends/imgui_impl_sdl2.h>
-#include "GameActor.h"
+#include <ranges>
 
 bool GameEngine::InputManager::ProcessInput()
 {
-	SDL_Event e;
-	while (SDL_PollEvent(&e)) {
-		InputKey sdlScanCode = static_cast<InputKey>(e.key.keysym.scancode);
+    // SDL_Event e;
+    // while (SDL_PollEvent(&e)) {
+    // 	InputKey sdlScanCode = static_cast<InputKey>(e.key.keysym.scancode);
+    //
+    // 	switch (e.type)
+    // 	{
+    // 	case SDL_QUIT:
+    // 		return false;
+    // 	case SDL_KEYDOWN:
+    // 		if (m_pKeyboardCommands.contains(sdlScanCode))
+    // 		{
+    // 			auto* command = m_pKeyboardCommands[sdlScanCode].get();
+    // 			command->KeyPressed();
+    // 		}
+    // 		break;
+    // 	case SDL_KEYUP:
+    // 		if (m_pKeyboardCommands.contains(sdlScanCode))
+    // 		{
+    // 			auto* command = m_pKeyboardCommands[sdlScanCode].get();
+    // 			command->KeyReleased();
+    // 		}
+    // 		break;
+    // 	}
+    //
+    // }
+    if(!ProcessKeyboardInput()) return false;
+    ProcessControllerInput();
 
-		switch (e.type)
-		{
-		case SDL_QUIT:
-			return false;
-		case SDL_KEYDOWN:
-			if (m_pKeyboardCommands.find(sdlScanCode) != m_pKeyboardCommands.end())
-			{
-				auto* command = m_pKeyboardCommands[sdlScanCode].get();
-				command->KeyPressed();
-			}
-			break;
-		case SDL_KEYUP:
-			if (m_pKeyboardCommands.find(sdlScanCode) != m_pKeyboardCommands.end())
-			{
-				auto* command = m_pKeyboardCommands[sdlScanCode].get();
-				command->KeyReleased();
-			}
-			break;
-		}
-
-		ImGui_ImplSDL2_ProcessEvent(&e);
-	}
-
-	ProcessControllerInput();
-	ExecuteCommands();
-
-	return true;
+    return true;
 }
 
 
 void GameEngine::InputManager::ProcessControllerInput()
 {
-
-	for (size_t i = 0; i < maxControllerCount; i++)
-	{
-		if (m_pControllers[i] != nullptr) {
-			m_pControllers[i]->ProcessControllerInput();
-			//TODO: perhaps create an event queue with the inputs received
-
-			for (size_t inputKey = static_cast<int>(InputKey::DPAD_UP); inputKey <= static_cast<int>(InputKey::CONTROLLER_B); ++inputKey)
-			{
-				ProcessControllerKey(i, static_cast<InputKey> (inputKey));
-			}
-		}
-	}
-	
+    for (size_t i = 0; i < g_maxControllerCount; i++)
+    {
+        if (m_pControllers[i] == nullptr) continue;
+        m_pControllers[i]->ProcessControllerInput();
+        
+        //TODO: perhaps create an event queue with the inputs received
+        for (const auto& [inputKey, command] : m_pControllerCommands[i])
+        {
+            switch (command->ExecuteOnKeyState())
+            {
+            case ICommand::ExecuteOn::keyPressed:
+                if (m_pControllers[i]->IsKeyPressed(inputKey))
+                    command->Execute();
+                break;
+            case ICommand::ExecuteOn::keyUp:
+                if (m_pControllers[i]->IsKeyUp(inputKey)) command->Execute();
+                break;
+            case ICommand::ExecuteOn::keyDown:
+                if (m_pControllers[i]->IsKeyDown(inputKey)) command->Execute();
+                break;
+            }
+        }
+    }
+}
+bool GameEngine::InputManager::ProcessKeyboardInput()
+{
+    if(!m_pKeyboard->ProcessKeyboardInput()) return false;
+        
+    //TODO: perhaps create an event queue with the inputs received
+    for (const auto& [inputKey, command] : m_pKeyboardCommands)
+    {
+        switch (command->ExecuteOnKeyState())
+        {
+        case ICommand::ExecuteOn::keyPressed:
+            if (m_pKeyboard->IsKeyPressed(inputKey)) command->Execute();
+            break;
+        case ICommand::ExecuteOn::keyUp:
+            if (m_pKeyboard->IsKeyUp(inputKey)) command->Execute();
+            break;
+        case ICommand::ExecuteOn::keyDown:
+            if (m_pKeyboard->IsKeyDown(inputKey)) command->Execute();
+            break;
+        }
+    }
+    return true;
 }
 
-void GameEngine::InputManager::ProcessControllerKey(const size_t& i,const GameEngine::InputManager::InputKey& inputKey)
+void GameEngine::InputManager::BindCommand(KeyboardInputKey inputKey, std::unique_ptr<ICommand>&& command)
 {
-	if (m_pControllerCommands[i][inputKey] != nullptr)
-	{
-		auto* command = m_pControllerCommands[i][inputKey].get();
-		if(command)
-		{
-			if (m_pControllers[i]->IsKeyDown(static_cast<int>(inputKey))) 
-			{
-				command->KeyPressed();
-			}
-			if (m_pControllers[i]->IsKeyUp(static_cast<int>(inputKey))) command->KeyReleased();
-		}
-	}
+    m_pKeyboardCommands[inputKey] = std::move(command);
 }
-
-void GameEngine::InputManager::ExecuteCommands()
+void GameEngine::InputManager::BindCommand(ControllerInputKey inputKey, std::unique_ptr<ICommand>&& command, int controllerIdx)
 {
-	for (auto& command : m_pKeyboardCommands)
-	{
-		if (command.second) command.second->Execute();
-	}
-	for (size_t i = 0; i < maxControllerCount; i++)
-	{
-		if (m_pControllers[i] != nullptr) {
-			for (auto& command : m_pControllerCommands[i])
-				if(command.second) command.second->Execute();
-		}
-	}
+    if (m_pControllers[controllerIdx] == nullptr)
+        m_pControllers[controllerIdx] = std::make_unique<Controller>(controllerIdx);
+
+    m_pControllerCommands[controllerIdx][inputKey] = std::move(command);
 }
 

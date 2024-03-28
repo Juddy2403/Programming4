@@ -1,4 +1,6 @@
 #include "Time.h"
+using namespace std::chrono;
+
 duration<float> Time::m_ElapsedTime = duration<float>{};
 
 float Time::GetElapsed() 

@@ -20,7 +20,7 @@ namespace GameEngine {
 		IObserver& operator=(const IObserver& other) = delete;
 		IObserver& operator=(IObserver&& other) = delete;
 	};
-
+	//TODO: just inherit from component
 	class RenderableObserver : public IObserver, public GameObject
 	{
 	public:

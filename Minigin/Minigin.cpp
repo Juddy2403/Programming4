@@ -93,7 +93,7 @@ void GameEngine::Minigin::Run(const std::function<void()>& load)
 	bool doContinue = true;
 	while (doContinue)
 	{
-		SteamAPI_RunCallbacks();
+		//SteamAPI_RunCallbacks();
 
 		time.Update();
 		//lag += time.GetElapsed();

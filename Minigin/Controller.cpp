@@ -3,141 +3,117 @@
 #include <XInput.h>
 #include "Controller.h"
 #include <iostream>
+#include <unordered_map>
 
 class GameEngine::Controller::XInput
 {
-private:
-	unsigned int m_ControllerIdx{ 0 };
-	XINPUT_STATE m_PreviousState{};
-	XINPUT_STATE m_CurrentState{};
-	unsigned int m_ButtonsPressedThisFrame{};
-	unsigned int m_ButtonsReleasedThisFrame{};
+    const std::unordered_map<ControllerInputKey, std::uint32_t> keyMappings = {
+        { ControllerInputKey::dpadUp, XINPUT_GAMEPAD_DPAD_UP },
+        { ControllerInputKey::dpadLeft,XINPUT_GAMEPAD_DPAD_LEFT },
+        { ControllerInputKey::dpadDown,XINPUT_GAMEPAD_DPAD_DOWN },
+        { ControllerInputKey::dpadRight,XINPUT_GAMEPAD_DPAD_RIGHT },
+        { ControllerInputKey::X,XINPUT_GAMEPAD_X },
+        { ControllerInputKey::Y,XINPUT_GAMEPAD_Y },
+        { ControllerInputKey::A,XINPUT_GAMEPAD_A },
+        { ControllerInputKey::B, XINPUT_GAMEPAD_B } };
+    
+    unsigned int m_ControllerIdx{ 0 };
+    XINPUT_STATE m_PreviousState{};
+    XINPUT_STATE m_CurrentState{};
+    unsigned int m_ButtonsPressedThisFrame{};
+    unsigned int m_ButtonsReleasedThisFrame{};
 public:
-	XInput(unsigned int controllerIdx): m_ControllerIdx{controllerIdx}{
-	/*	DWORD result = XInputGetState(0, nullptr);
-		if (result != ERROR_SUCCESS) {
-			std::cout << "Cannot get XInput state! \n";
-		}*/
-	}
+    explicit XInput(unsigned int controllerIdx): m_ControllerIdx{ controllerIdx } {}
+    XInput(const XInput& other) = delete; 
+    XInput(XInput&& other) = delete;
+    XInput& operator=(const XInput& other) = delete;
+    XInput& operator=(XInput&& other) = delete;
+    ~XInput() = default;
 
-	XInput(const XInput& other) = delete;
-	XInput(XInput&& other) = delete;
-	XInput& operator=(const XInput& other) = delete;
-	XInput& operator=(XInput&& other) = delete;
+    void ProcessControllerInput()
+    {
+        CopyMemory(&m_PreviousState, &m_CurrentState, sizeof(XINPUT_STATE));
+        ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
+        const auto result = XInputGetState(m_ControllerIdx, &m_CurrentState); 
+        if (result != ERROR_SUCCESS)
+        {
+            switch (result)
+            {
+            case ERROR_DEVICE_NOT_CONNECTED:
+                std::cerr << "Controller error! Device not connected! \n";
+                break;
+            case ERROR_NOT_SUPPORTED:
+                std::cerr << "Controller error! Not supported! \n";
+                break;
+            default:
+                std::cerr << "Controller error! \n";
+                break;
+            }
+        }
 
-	void ProcessControllerInput() {
-		CopyMemory(&m_PreviousState, &m_CurrentState, sizeof(XINPUT_STATE));
-		ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-		auto result = XInputGetState(m_ControllerIdx, &m_CurrentState);
-		if (result != ERROR_SUCCESS) {
-			switch (result) {
-			case ERROR_DEVICE_NOT_CONNECTED:
-				std::cout << "Controller error! Device not connected! \n";
-				break;
-			case ERROR_NOT_SUPPORTED:
-				std::cout << "Controller error! Not supported! \n";
-				break;
-			default:
-				std::cout << "Controller error! \n";
-				break;
-			}
-		}
-
-		auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ m_PreviousState.Gamepad.wButtons;
-		m_ButtonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
-		m_ButtonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
-	}
-	bool IsDownThisFrame(unsigned int button) const {
-		return m_ButtonsPressedThisFrame & button;
-	}
-	bool IsUpThisFrame(unsigned int button) const {
-		return m_ButtonsReleasedThisFrame & button;
-	}
-	bool IsPressed(unsigned int button) const {
-		return m_CurrentState.Gamepad.wButtons & button;
-	}
+        const int buttonChanges = m_CurrentState.Gamepad.wButtons ^ m_PreviousState.Gamepad.wButtons;
+        m_ButtonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
+        m_ButtonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
+    }
+    [[nodiscard]] bool IsKeyDown(ControllerInputKey button) const
+    {
+        try
+        {
+            return m_ButtonsPressedThisFrame & keyMappings.at(button);
+        }
+        catch (const std::out_of_range& e)
+        {
+            std::cerr <<"Out of range error: "<<e.what()<<" Controller.cpp\n";
+        }
+        return false;
+    }
+    [[nodiscard]] bool IsKeyUp(ControllerInputKey button) const
+    {
+        try
+        {
+            return m_ButtonsReleasedThisFrame & keyMappings.at(button);
+        }
+        catch (const std::out_of_range& e)
+        {
+            std::cerr <<"Out of range error: "<<e.what()<<" Controller.cpp\n";
+        }
+        return false;
+    }
+    [[nodiscard]] bool IsKeyPressed(ControllerInputKey button) const
+    {
+        try
+        {
+            return m_CurrentState.Gamepad.wButtons & keyMappings.at(button);
+        }
+        catch (const std::out_of_range& e)
+        {
+            std::cerr <<"Out of range error: "<<e.what()<<" Controller.cpp\n";
+        }
+        return false;
+    }
 };
 
 GameEngine::Controller::Controller(unsigned int controllerIdx):
-	m_pXInput{std::make_unique<XInput>(controllerIdx)}
+    m_pXInput{ std::make_unique<XInput>(controllerIdx) }
+{}
+
+GameEngine::Controller::~Controller() {}
+
+void GameEngine::Controller::ProcessControllerInput() const
 {
+    m_pXInput->ProcessControllerInput();
 }
 
-GameEngine::Controller::~Controller(){}
-
-void GameEngine::Controller::ProcessControllerInput()
+bool GameEngine::Controller::IsKeyDown(ControllerInputKey inputKey) const
 {
-	m_pXInput->ProcessControllerInput();
+   return m_pXInput->IsKeyDown(inputKey);
+}
+bool GameEngine::Controller::IsKeyPressed(ControllerInputKey inputKey) const
+{
+    return m_pXInput->IsKeyPressed(inputKey);
 }
 
-bool GameEngine::Controller::IsKeyDown(int inputKey)
+bool GameEngine::Controller::IsKeyUp(ControllerInputKey inputKey) const
 {
-	InputKey inputEnum = static_cast<InputKey>(inputKey);
-	switch (inputEnum)
-	{
-	case InputKey::DPAD_UP:
-		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_UP);
-		break;
-	case InputKey::DPAD_DOWN:
-		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_DOWN);
-		break;
-	case InputKey::DPAD_RIGHT:
-		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_RIGHT);
-		break;
-	case InputKey::DPAD_LEFT:
-		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_DPAD_LEFT);
-		break;
-	case InputKey::X:
-		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_X);
-		break;
-	case InputKey::Y:
-		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_Y);
-		break;
-	case InputKey::A:
-		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_A);
-		break;
-	case InputKey::B:
-		return m_pXInput->IsDownThisFrame(XINPUT_GAMEPAD_B);
-		break;
-	default:
-		std::cout << "Unknown key down! Controller.cpp \n";
-		break;
-	}
-	return false;
-}
-
-bool GameEngine::Controller::IsKeyUp(int inputKey)
-{
-	InputKey inputEnum = static_cast<InputKey>(inputKey);
-	switch (inputEnum)
-	{
-	case InputKey::DPAD_UP:
-		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_UP);
-		break;
-	case InputKey::DPAD_DOWN:
-		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_DOWN);
-		break;
-	case InputKey::DPAD_RIGHT:
-		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_RIGHT);
-		break;
-	case InputKey::DPAD_LEFT:
-		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_DPAD_LEFT);
-		break;
-	case InputKey::X:
-		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_X);
-		break;
-	case InputKey::Y:
-		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_Y);
-		break;
-	case InputKey::A:
-		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_A);
-		break;
-	case InputKey::B:
-		return m_pXInput->IsUpThisFrame(XINPUT_GAMEPAD_B);
-		break;
-	default:
-		std::cout << "Unknown key Up! Controller.cpp \n";
-		break;
-	}
-	return false;
+    return m_pXInput->IsKeyUp(inputKey);
 }

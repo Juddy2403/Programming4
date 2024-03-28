@@ -12,6 +12,7 @@ namespace GameEngine
 {
 	template<typename T>
 	concept ComponentType = std::is_base_of<Component, T>::value;
+	//TODO: this should be final- add player as a component
 	class GameObject : public Subject
 	{
 	private:
@@ -19,7 +20,7 @@ namespace GameEngine
 		std::string m_Name{};
 		bool m_IsDestroyed{ false };
 
-		GameObject* m_pParent{};
+		GameObject* m_pParent{ };
 		std::vector<GameObject*> m_pChildren{};
 
 		//Scene graph functions
@@ -44,7 +45,7 @@ namespace GameEngine
 		GameObject* GetParent() const;
 		void SetParent(GameObject* parent, bool keepWorldPosition = true);
 		int GetChildCount() const;
-		GameObject* GetChildAt(int index);
+		GameObject* GetChildAt(int index) const;
 
 		//Transform functions
 		void SetLocalTransform(const Transform& transform);
@@ -56,10 +57,10 @@ namespace GameEngine
 
 		void SetPosition(float x, float y, float z = 0);
 		void SetPosition(const glm::vec3& pos);
-		glm::vec2 GetPosition() ;
+		glm::vec2 GetPosition();
 
 		GameObject() = default;
-		GameObject(std::string name);
+		GameObject(const std::string& name);
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
