@@ -3,6 +3,14 @@
 #include <map>
 
 namespace GameEngine {
+	enum class ObserverIdentifier {
+		health,
+		score
+	};
+	enum class GameEvent {
+		playerDied,
+		scoreIncreased
+	};
 	class IObserver;
 	class Subject
 	{
@@ -12,14 +20,7 @@ namespace GameEngine {
 
 		ObserversMap m_Observers;
 	public:
-		enum class ObserverIdentifier {
-			health,
-			score
-		};
-		enum class GameEvent {
-			playerDied,
-			scoreIncreased
-		};
+		
 
 		void AddObserver(int message, IObserver* observer);
 		void RemoveObserver(int message, IObserver* observer);

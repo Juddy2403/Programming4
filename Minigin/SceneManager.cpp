@@ -1,4 +1,6 @@
 #include "SceneManager.h"
+
+#include "ActorComponent.h"
 #include "GameActor.h"
 #include "Component.h"
 #include "InputManager.h"
@@ -66,72 +68,74 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
     m_Scene->AddObject(std::move(gameObject));
 
     //------PACMAN--------
-    auto gameActor = std::make_unique<GameActor>("Pacman", 3, 200.f);
-    gameActor->SetPosition(250.f, 250.f);
-    gameActor->AddComponent<TextureComponent>("pacman.png");
+    gameObject = std::make_unique<GameObject>("Pacman");
+    gameObject->SetPosition(250.f, 250.f);
+    gameObject->AddComponent<TextureComponent>("pacman.png");
+    gameObject->AddComponent<ActorComponent>(3);
     auto& input = InputManager::GetInstance();
     input.BindCommand(ControllerInputKey::dpadUp,
-        std::make_unique<Move>(gameActor.get(), glm::vec2{ 0.f,-1.f }), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f },200.f), 0);
     input.BindCommand(ControllerInputKey::dpadDown,
-        std::make_unique<Move>(gameActor.get(), glm::vec2{ 0.f,1.f }), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f },200.f), 0);
     input.BindCommand(ControllerInputKey::dpadLeft,
-        std::make_unique<Move>(gameActor.get(), glm::vec2{ -1.f,0.f }), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f },200.f), 0);
     input.BindCommand(ControllerInputKey::dpadRight,
-        std::make_unique<Move>(gameActor.get(), glm::vec2{ 1.f,0.f }), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f },200.f), 0);
     input.BindCommand(ControllerInputKey::X,
-        std::make_unique<TakeDamage>(gameActor.get()), 0);
+        std::make_unique<TakeDamage>(gameObject.get()), 0);
     input.BindCommand(ControllerInputKey::A,
-        std::make_unique<BigScoreIncrease>(gameActor.get()), 0);
+        std::make_unique<BigScoreIncrease>(gameObject.get()), 0);
     input.BindCommand(ControllerInputKey::B,
-        std::make_unique<SmallScoreIncrease>(gameActor.get()), 0);
+        std::make_unique<SmallScoreIncrease>(gameObject.get()), 0);
 
 
     std::unique_ptr<RenderableObserver> observer = std::make_unique<GameEngine::HealthObserver>("Pacman health observer");
     observer->AddComponent<TextComponent>(smallerFont, "");
     observer->AddComponent<TextureComponent>();
     observer->SetPosition(20.f, 160.f);
-    m_Scene->AddObserver(static_cast<int>(Subject::ObserverIdentifier::health), std::move(observer), gameActor.get());
+    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(observer), gameObject.get());
 
     observer = std::make_unique<GameEngine::ScoreObserver>("Pacman score observer");
     observer->AddComponent<TextComponent>(smallerFont, "");
     observer->AddComponent<TextureComponent>();
     observer->SetPosition(20.f, 180.f);
-    m_Scene->AddObserver(static_cast<int>(Subject::ObserverIdentifier::score), std::move(observer), gameActor.get());
+    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(observer), gameObject.get());
 
-    m_Scene->AddObject(std::move(gameActor));
+    m_Scene->AddObject(std::move(gameObject));
 
     //------MSPACMAN--------
-    gameActor = std::make_unique<GameActor>("Ms Pacman", 3, 400.f);
-    gameActor->SetPosition(200.f, 160.f);
-    gameActor->AddComponent<TextureComponent>("PacmanFemale.png");
+    gameObject = std::make_unique<GameObject>("Ms Pacman");
+    gameObject->SetPosition(200.f, 160.f);
+    gameObject->AddComponent<TextureComponent>("PacmanFemale.png");
+    gameObject->AddComponent<ActorComponent>(3);
     input.BindCommand(KeyboardInputKey::W,
-       std::make_unique<Move>(gameActor.get(), glm::vec2{ 0.f,-1.f }));
+       std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }, 400.f));
     input.BindCommand(KeyboardInputKey::S,
-        std::make_unique<Move>(gameActor.get(), glm::vec2{ 0.f,1.f }));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f }, 400.f));
     input.BindCommand(KeyboardInputKey::A,
-        std::make_unique<Move>(gameActor.get(), glm::vec2{ -1.f,0.f }));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f }, 400.f));
     input.BindCommand(KeyboardInputKey::D,
-        std::make_unique<Move>(gameActor.get(), glm::vec2{ 1.f,0.f }));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f }, 400.f));
     input.BindCommand(KeyboardInputKey::C,
-        std::make_unique<TakeDamage>(gameActor.get()));
+        std::make_unique<TakeDamage>(gameObject.get()));
     input.BindCommand(KeyboardInputKey::Z,
-      std::make_unique<BigScoreIncrease>(gameActor.get()));
+      std::make_unique<BigScoreIncrease>(gameObject.get()));
     input.BindCommand(KeyboardInputKey::X,
-      std::make_unique<SmallScoreIncrease>(gameActor.get()));
+      std::make_unique<SmallScoreIncrease>(gameObject.get()));
 
     observer = std::make_unique<GameEngine::HealthObserver>("Ms Pacman health observer");
     observer->AddComponent<TextComponent>(smallerFont, "");
     observer->AddComponent<TextureComponent>();
     observer->SetPosition(20.f, 200.f);
-    m_Scene->AddObserver(static_cast<int>(Subject::ObserverIdentifier::health), std::move(observer), gameActor.get());
+    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(observer), gameObject.get());
 
     observer = std::make_unique<GameEngine::ScoreObserver>("Ms Pacman score observer");
     observer->AddComponent<TextComponent>(smallerFont, "");
     observer->AddComponent<TextureComponent>();
     observer->SetPosition(20.f, 220.f);
-    m_Scene->AddObserver(static_cast<int>(Subject::ObserverIdentifier::score), std::move(observer), gameActor.get());
+    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(observer), gameObject.get());
 
-    m_Scene->AddObject(std::move(gameActor));
+    m_Scene->AddObject(std::move(gameObject));
 
     //scene.Add(std::move(gameObject2));
 

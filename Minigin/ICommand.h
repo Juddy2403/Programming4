@@ -3,12 +3,12 @@
 
 namespace GameEngine
 {
-	class GameActor;
+	class GameObject;
 
 	class ICommand
 	{
 	protected:
-		GameActor* m_Actor;
+		GameObject* m_Actor;
 	public:
 		enum class ExecuteOn
 		{
@@ -17,7 +17,7 @@ namespace GameEngine
 			keyDown
 		};
 		
-		explicit ICommand(GameActor* actor);
+		explicit ICommand(GameObject* actor);
 		ICommand(const ICommand& other) = delete;
 		ICommand(ICommand&& other) = delete;
 		ICommand& operator=(const ICommand& other) = delete;
@@ -34,11 +34,13 @@ namespace GameEngine
 		Move(Move&& other) noexcept = delete;
 		Move& operator=(const Move& other) = delete;
 		Move& operator=(Move&& other) noexcept = delete;
-		Move(GameActor* actor,const glm::vec2& direction);
+		
+		explicit Move(GameObject* actor,const glm::vec2& direction, const float speed);
 		~Move() override;
 		void Execute() override;
 		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
 	protected:
+		float m_Speed;
 		glm::vec2 m_Direction{};
 
 	};
@@ -46,7 +48,7 @@ namespace GameEngine
 	class TakeDamage final : public ICommand {
 	private:
 	public:
-		explicit TakeDamage(GameActor* actor);
+		explicit TakeDamage(GameObject* actor);
 
 		void Execute() override;
 		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
@@ -55,7 +57,7 @@ namespace GameEngine
 	class SmallScoreIncrease final : public ICommand {
 
 	public:
-		SmallScoreIncrease(GameActor* actor);
+		SmallScoreIncrease(GameObject* actor);
 
 		void Execute() override;
 		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
@@ -65,7 +67,7 @@ namespace GameEngine
 	class BigScoreIncrease final : public ICommand {
 
 	public:
-		BigScoreIncrease(GameActor* actor);
+		BigScoreIncrease(GameObject* actor);
 
 		void Execute() override ;
 		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;

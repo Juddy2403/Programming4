@@ -7,8 +7,6 @@ GameObject::GameObject(const std::string& name) :
     m_Name{ name }
 {}
 
-GameObject::~GameObject() = default;
-
 #pragma region Update stuff
 
 void GameObject::Update()

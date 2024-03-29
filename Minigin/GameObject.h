@@ -3,111 +3,111 @@
 #include "Transform.h"
 #include <vector>
 #include <string>
-#include <concepts>
 #include <algorithm>
 #include "Component.h"
 #include "Subject.h"
 
 namespace GameEngine
 {
-	template<typename T>
-	concept ComponentType = std::is_base_of<Component, T>::value;
-	//TODO: this should be final- add player as a component
-	class GameObject : public Subject
-	{
-	private:
-		std::vector<std::unique_ptr<Component>> m_Components{};
-		std::string m_Name{};
-		bool m_IsDestroyed{ false };
+    template<typename T>
+    concept ComponentType = std::is_base_of_v<Component, T>;
+    //TODO: this should be final- add player as a component
+    class GameObject : public Subject
+    {
+    private:
+        std::vector<std::unique_ptr<Component>> m_Components{};
+        std::string m_Name{};
+        bool m_IsDestroyed{ false };
 
-		GameObject* m_pParent{ };
-		std::vector<GameObject*> m_pChildren{};
+        GameObject* m_pParent{};
+        std::vector<GameObject*> m_pChildren{};
 
-		//Scene graph functions
-		void AddChild(GameObject* child);
-		void RemoveChild(GameObject* child);
-		bool IsChild(GameObject* child);
+        //Scene graph functions
+        void AddChild(GameObject* child);
+        void RemoveChild(GameObject* child);
+        bool IsChild(GameObject* child);
 
-		//Transform members
-		Transform m_WorldTransform{};
-		Transform m_LocalTransform{};
-		bool m_IsPositionDirty{ true };
-	public:
-		void Update();
-		void Render() const;
-		std::string GetName() const;
+        //Transform members
+        Transform m_WorldTransform{};
+        Transform m_LocalTransform{};
+        bool m_IsPositionDirty{ true };
+    public:
+        void Update();
+        void Render() const;
+        std::string GetName() const;
 
-		bool IsDestroyed() const;
-		void SetDestroyedFlag();
-		void RemoveDestroyedObjects();
+        bool IsDestroyed() const;
+        void SetDestroyedFlag();
+        void RemoveDestroyedObjects();
 
-		//Scene graph functions
-		GameObject* GetParent() const;
-		void SetParent(GameObject* parent, bool keepWorldPosition = true);
-		int GetChildCount() const;
-		GameObject* GetChildAt(int index) const;
+        //Scene graph functions
+        [[nodiscard]] GameObject* GetParent() const;
+        void SetParent(GameObject* parent, bool keepWorldPosition = true);
+        int GetChildCount() const;
+        GameObject* GetChildAt(int index) const;
 
-		//Transform functions
-		void SetLocalTransform(const Transform& transform);
-		Transform& GetLocalTransform();
-		const Transform& GetLocalTransform() const;
-		Transform GetWorldTransform();
-		void UpdateWorldTransform();
-		void SetPositionIsDirty();
+        //Transform functions
+        void SetLocalTransform(const Transform& transform);
+        Transform& GetLocalTransform();
+        const Transform& GetLocalTransform() const;
+        Transform GetWorldTransform();
+        void UpdateWorldTransform();
+        void SetPositionIsDirty();
 
-		void SetPosition(float x, float y, float z = 0);
-		void SetPosition(const glm::vec3& pos);
-		glm::vec2 GetPosition();
+        void SetPosition(float x, float y, float z = 0);
+        void SetPosition(const glm::vec3& pos);
+        glm::vec2 GetPosition();
 
-		GameObject() = default;
-		GameObject(const std::string& name);
-		~GameObject();
-		GameObject(const GameObject& other) = delete;
-		GameObject(GameObject&& other) = delete;
-		GameObject& operator=(const GameObject& other) = delete;
-		GameObject& operator=(GameObject&& other) = delete;
+        GameObject() = default;
+        explicit GameObject(const std::string& name);
+        ~GameObject() override = default;
+        GameObject(const GameObject& other) = delete;
+        GameObject(GameObject&& other) = delete;
+        GameObject& operator=(const GameObject& other) = delete;
+        GameObject& operator=(GameObject&& other) = delete;
 
 #pragma region Component Handling
 
-		template<ComponentType T, typename... Args>
-		T* AddComponent(Args&&... args)
-		{
-			m_Components.push_back(std::make_unique<T>(this, std::forward<Args>(args)...));
-			return dynamic_cast<T*>(m_Components.back().get());
-		}
-		template<ComponentType T>
-		T* AddComponent()
-		{
-			m_Components.push_back(std::make_unique<T>(this));
-			return dynamic_cast<T*>(m_Components.back().get());
-		}
+        template<ComponentType T, typename... Args>
+        T* AddComponent(Args&&... args)
+        {
+            m_Components.push_back(std::make_unique<T>(this, std::forward<Args>(args)...));
+            return dynamic_cast<T*>(m_Components.back().get());
+        }
+        template<ComponentType T>
+        T* AddComponent()
+        {
+            m_Components.push_back(std::make_unique<T>(this));
+            return dynamic_cast<T*>(m_Components.back().get());
+        }
 
-		template<ComponentType T>
-		T* GetComponent() const {
-			for (const auto& componentPtr : m_Components) {
-				auto ptr = dynamic_cast<T*>(componentPtr.get());
-				if (ptr) return ptr;
-			}
-			return nullptr; // Component not found
-		}
+        template<ComponentType T>
+        T* GetComponent() const
+        {
+            for (const auto& componentPtr : m_Components)
+            {
+                if (auto ptr = dynamic_cast<T*>(componentPtr.get())) return ptr;
+            }
+            return nullptr; // Component not found
+        }
 
-		template<ComponentType T>
-		void RemoveComponent() {
-			const auto ret = std::ranges::remove_if(m_Components, [](const auto& elem) {
-				return (dynamic_cast<T*>(elem.get()));
-				});
-			m_Components.erase(ret.begin(), ret.end());
-		}
+        template<ComponentType T>
+        void RemoveComponent()
+        {
+            const auto ret = std::ranges::remove_if(m_Components, [](const auto& elem) {
+                return (dynamic_cast<T*>(elem.get()));
+            });
+            m_Components.erase(ret.begin(), ret.end());
+        }
 
-		template<ComponentType T>
-		bool CheckIfComponentExists() const {
-			return std::ranges::find_if(m_Components, [](const auto& elem) {
-				return (dynamic_cast<T*>(elem.get()));
-				}
-			) != m_Components.end();
-		}
+        template<ComponentType T>
+        bool CheckIfComponentExists() const
+        {
+            return std::ranges::find_if(m_Components, [](const auto& elem) {
+                    return (dynamic_cast<T*>(elem.get()));
+                }
+            ) != m_Components.end();
+        }
 #pragma endregion
-
-
-	};
+    };
 }

@@ -5,8 +5,8 @@
 #include <imgui_plot.h>
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>
-#include <backends/imgui_impl_sdl2.h>
-#include <backends/imgui_impl_opengl3.h>
+//#include <backends/imgui_impl_sdl2.h>
+//#include <backends/imgui_impl_opengl3.h>
 #include <SDL_stdinc.h>
 #include <vector>
 #include <chrono>
@@ -23,8 +23,8 @@ namespace GameEngine
 		GameObject* m_pParent;
 		bool m_IsDestroyed{ false };
 	public:
-		virtual void Update() {};
-		virtual void Render() {};
+		virtual void Update() {}
+		virtual void Render() {}
 
 		bool IsDestroyed() const;
 		void SetDestroyedFlag();
@@ -36,7 +36,7 @@ namespace GameEngine
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
 	protected:
-		GameObject* GetGameObjParent() const;
+		[[nodiscard]] GameObject* GetGameObjParent() const;
 		explicit Component(GameObject* gameObj);
 
 
@@ -166,7 +166,7 @@ namespace GameEngine
 					auto end_time = std::chrono::high_resolution_clock::now();
 
 					const auto total = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
-					timesRecorded[++index].insert(total);
+					timesRecorded[++index].insert(static_cast<long>(total));
 				}
 
 			}
@@ -174,7 +174,7 @@ namespace GameEngine
 			avgTimes.clear();
 			for (auto& timesVec : timesRecorded)
 			{
-				float timeAverageVal = std::accumulate(++timesVec.begin(), --timesVec.end(), 0.f);
+				const float timeAverageVal = std::accumulate(++timesVec.begin(), --timesVec.end(), 0.f);
 				avgTimes.push_back(timeAverageVal / (nrOfSamples - 2) / 100.f);
 			}
 		}
@@ -193,7 +193,7 @@ namespace GameEngine
 			plotUpdateInfo->plotConfig->values.count = buf_size;
 			plotUpdateInfo->plotConfig->values.color = plotUpdateInfo->color;
 			plotUpdateInfo->plotConfig->scale.min = 0;
-			plotUpdateInfo->plotConfig->scale.max = *std::max_element(plotUpdateInfo->avgTime.begin(), plotUpdateInfo->avgTime.end()) + 1; // for y axis
+			plotUpdateInfo->plotConfig->scale.max = *std::ranges::max_element(plotUpdateInfo->avgTime) + 1; // for y axis
 			plotUpdateInfo->plotConfig->tooltip.show = true;
 			plotUpdateInfo->plotConfig->grid_x.show = false;
 			plotUpdateInfo->plotConfig->grid_y.show = true;

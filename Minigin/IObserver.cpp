@@ -3,18 +3,19 @@
 #include "GameActor.h"
 #include <iostream>
 #include "AchievementsManager.h"
+#include "ActorComponent.h"
 
-GameEngine::IObserver::IObserver(const std::string& name) : m_Name{ name } {}
+GameEngine::IObserver::IObserver(std::string name) : m_Name{ std::move(name) } {}
 
-void GameEngine::HealthObserver::Notify(Subject::GameEvent event, Subject* subject)
+void GameEngine::HealthObserver::Notify(GameEvent event, Subject* subject)
 {
 	switch (event)
 	{
-	case GameEngine::Subject::GameEvent::playerDied:
+	case GameEngine::GameEvent::playerDied:
 		Notify(subject);
 		break;
-	case GameEngine::Subject::GameEvent::scoreIncreased:
-		break;
+	// case GameEngine::GameEvent::scoreIncreased:
+	// 	break;
 	default:
 		break;
 	}
@@ -22,25 +23,24 @@ void GameEngine::HealthObserver::Notify(Subject::GameEvent event, Subject* subje
 
 void GameEngine::HealthObserver::Notify(Subject* subject)
 {
-	auto* textComp = GetComponent<TextComponent>();
-	if (textComp)
+	if (auto* textComp = GetComponent<TextComponent>())
 	{
-		auto gameActor = dynamic_cast<GameActor*>(subject);
-		assert(gameActor);
-		int lives = gameActor->GetRemainingLives();
+		const auto gameObject = dynamic_cast<GameObject*>(subject);
+		assert(gameObject);
+		const int lives = gameObject->GetComponent<ActorComponent>()->GetRemainingLives();
 		textComp->SetText("# lives: " + std::to_string(lives));
 		textComp->Update();
 	}
 	else std::cout << "No text component found! /health observer \n";
 }
 
-void GameEngine::ScoreObserver::Notify(Subject::GameEvent event, Subject* subject)
+void GameEngine::ScoreObserver::Notify(GameEvent event, Subject* subject)
 {
 	switch (event)
 	{
-	case GameEngine::Subject::GameEvent::playerDied:
+	case GameEngine::GameEvent::playerDied:
 		break;
-	case GameEngine::Subject::GameEvent::scoreIncreased:
+	case GameEngine::GameEvent::scoreIncreased:
 		Notify(subject);
 		break;
 	default:
@@ -51,12 +51,11 @@ void GameEngine::ScoreObserver::Notify(Subject::GameEvent event, Subject* subjec
 
 void GameEngine::ScoreObserver::Notify(Subject* subject)
 {
-	auto* textComp = GetComponent<TextComponent>();
-	if (textComp)
+	if (auto* textComp = GetComponent<TextComponent>())
 	{
-		auto gameActor = dynamic_cast<GameActor*>(subject);
-		assert(gameActor);
-		int score = gameActor->GetScore();
+		const auto gameObject = dynamic_cast<GameObject*>(subject);
+		assert(gameObject);
+		const int score = gameObject->GetComponent<ActorComponent>()->GetScore();
 		if (score >= 500) {
 			AchievementsManager::GetInstance().SetAchievement("ACH_WIN_ONE_GAME");
 		}

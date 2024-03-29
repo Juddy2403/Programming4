@@ -34,8 +34,7 @@ public:
     {
         CopyMemory(&m_PreviousState, &m_CurrentState, sizeof(XINPUT_STATE));
         ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-        const auto result = XInputGetState(m_ControllerIdx, &m_CurrentState); 
-        if (result != ERROR_SUCCESS)
+        if (const auto result = XInputGetState(m_ControllerIdx, &m_CurrentState); result != ERROR_SUCCESS)
         {
             switch (result)
             {
