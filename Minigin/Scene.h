@@ -13,7 +13,7 @@ namespace GameEngine
 	public:
 		GameObject* AddObject(std::unique_ptr<GameObject>&& object);
 		IObserver* AddObserver(int message,std::unique_ptr<IObserver>&& observer,GameObject* gameObj);
-		void Remove(std::unique_ptr<GameObject>&& object);
+		void Remove(const std::unique_ptr<GameObject>& object);
 		void RemoveAll();
 
 		void Update();
@@ -31,7 +31,7 @@ namespace GameEngine
 	private: 
 		float m_FpsUpdateCounter{};
 		const float m_FpsUpdateRate{ 0.5f };
-		std::string m_name;
+		std::string m_Name;
 		std::vector<std::unique_ptr<GameObject>> m_GameObjects;
 		std::vector<std::unique_ptr<IObserver>> m_Observers;
 

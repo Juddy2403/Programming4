@@ -26,7 +26,7 @@ namespace GameEngine
 		virtual void Update() {}
 		virtual void Render() {}
 
-		bool IsDestroyed() const;
+		[[nodiscard]] bool IsDestroyed() const;
 		void SetDestroyedFlag();
 		//virtual void Transform();
 
@@ -38,8 +38,6 @@ namespace GameEngine
 	protected:
 		[[nodiscard]] GameObject* GetGameObjParent() const;
 		explicit Component(GameObject* gameObj);
-
-
 	};
 
 	class Texture2D;
@@ -65,7 +63,7 @@ namespace GameEngine
 		explicit TextComponent(GameObject* gameObj, std::shared_ptr<Font> font = nullptr, const std::string& text = {});
 
 		void SetText(const std::string& text);
-		void SetFont(std::shared_ptr<Font> font);
+		void SetFont(const std::shared_ptr<Font>& font);
 		virtual void Update() override;
 	private:
 		std::string m_Text{};

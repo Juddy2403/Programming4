@@ -6,11 +6,11 @@
 using namespace GameEngine;
 
 	CSteamAchievements::CSteamAchievements(Achievement_t* Achievements, int NumAchievements) :
-		m_iAppID(0),
-		m_bInitialized(false),
 		m_CallbackUserStatsReceived(this, &CSteamAchievements::OnUserStatsReceived),
 		m_CallbackUserStatsStored(this, &CSteamAchievements::OnUserStatsStored),
-		m_CallbackAchievementStored(this, &CSteamAchievements::OnAchievementStored)
+		m_CallbackAchievementStored(this, &CSteamAchievements::OnAchievementStored),
+		m_iAppID(0),
+		m_bInitialized(false)
 	{
 		m_iAppID = SteamUtils()->GetAppID();
 		m_pAchievements = Achievements;

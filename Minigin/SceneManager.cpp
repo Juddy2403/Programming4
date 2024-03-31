@@ -88,18 +88,23 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
     input.BindCommand(ControllerInputKey::B,
         std::make_unique<SmallScoreIncrease>(gameObject.get()), 0);
 
-
-    std::unique_ptr<RenderableObserver> observer = std::make_unique<GameEngine::HealthObserver>("Pacman health observer");
-    observer->AddComponent<TextComponent>(smallerFont, "");
-    observer->AddComponent<TextureComponent>();
-    observer->SetPosition(20.f, 160.f);
-    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(observer), gameObject.get());
-
-    observer = std::make_unique<GameEngine::ScoreObserver>("Pacman score observer");
-    observer->AddComponent<TextComponent>(smallerFont, "");
-    observer->AddComponent<TextureComponent>();
-    observer->SetPosition(20.f, 180.f);
-    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(observer), gameObject.get());
+    //------HealthObserver--------
+    auto healthObject = std::make_unique<GameObject>("Lives Text");
+    healthObject->SetPosition(20.f, 160.f);
+    healthObject->AddComponent<TextureComponent>();
+    healthObject->AddComponent<TextComponent>(smallerFont, "");
+    auto healthObserver = std::make_unique<GameEngine::HealthObserver>("Pacman health observer",healthObject.get());
+    m_Scene->AddObject(std::move(healthObject));
+    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(healthObserver), gameObject.get());
+    
+    //------ScoreObserver--------
+    auto scoreObject = std::make_unique<GameObject>("Score Text");
+    scoreObject->SetPosition(20.f, 180.f);
+    scoreObject->AddComponent<TextureComponent>();
+    scoreObject->AddComponent<TextComponent>(smallerFont, "");
+    auto scoreObserver = std::make_unique<GameEngine::ScoreObserver>("Pacman score observer",scoreObject.get());
+    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserver), gameObject.get());
+    m_Scene->AddObject(std::move(scoreObject));
 
     m_Scene->AddObject(std::move(gameObject));
 
@@ -123,18 +128,24 @@ GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name
     input.BindCommand(KeyboardInputKey::X,
       std::make_unique<SmallScoreIncrease>(gameObject.get()));
 
-    observer = std::make_unique<GameEngine::HealthObserver>("Ms Pacman health observer");
-    observer->AddComponent<TextComponent>(smallerFont, "");
-    observer->AddComponent<TextureComponent>();
-    observer->SetPosition(20.f, 200.f);
-    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(observer), gameObject.get());
-
-    observer = std::make_unique<GameEngine::ScoreObserver>("Ms Pacman score observer");
-    observer->AddComponent<TextComponent>(smallerFont, "");
-    observer->AddComponent<TextureComponent>();
-    observer->SetPosition(20.f, 220.f);
-    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(observer), gameObject.get());
-
+    //------HealthObserver--------
+    healthObject = std::make_unique<GameObject>("Lives Text");
+    healthObject->SetPosition(20.f, 200.f);
+    healthObject->AddComponent<TextureComponent>();
+    healthObject->AddComponent<TextComponent>(smallerFont, "");
+    healthObserver = std::make_unique<GameEngine::HealthObserver>("Ms Pacman health observer",healthObject.get());
+    m_Scene->AddObject(std::move(healthObject));
+    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(healthObserver), gameObject.get());
+    
+    //------ScoreObserver--------
+    scoreObject = std::make_unique<GameObject>("Score Text");
+    scoreObject->SetPosition(20.f, 220.f);
+    scoreObject->AddComponent<TextureComponent>();
+    scoreObject->AddComponent<TextComponent>(smallerFont, "");
+    scoreObserver = std::make_unique<GameEngine::ScoreObserver>("Ms Pacman score observer",scoreObject.get());
+    m_Scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserver), gameObject.get());
+    m_Scene->AddObject(std::move(scoreObject));
+    
     m_Scene->AddObject(std::move(gameObject));
 
     //scene.Add(std::move(gameObject2));

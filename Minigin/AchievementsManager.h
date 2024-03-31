@@ -15,7 +15,7 @@ namespace GameEngine {
 		ACH_TRAVEL_FAR_SINGLE = 3,
 	};
 
-	class AchievementsManager : public Singleton<AchievementsManager>
+	class AchievementsManager final : public Singleton<AchievementsManager>
 	{
 	private:
 		Achievement_t m_Achievements[4] =

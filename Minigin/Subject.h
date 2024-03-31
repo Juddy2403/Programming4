@@ -9,7 +9,8 @@ namespace GameEngine {
 	};
 	enum class GameEvent {
 		playerDied,
-		scoreIncreased
+		scoreIncreased,
+		event //for when smth generic happens
 	};
 	class IObserver;
 	class Subject
@@ -20,8 +21,6 @@ namespace GameEngine {
 
 		ObserversMap m_Observers;
 	public:
-		
-
 		void AddObserver(int message, IObserver* observer);
 		void RemoveObserver(int message, IObserver* observer);
 		void NotifyAll(GameEvent event);

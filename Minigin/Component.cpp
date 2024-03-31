@@ -86,7 +86,7 @@ void TextComponent::SetText(const std::string& text)
 	}
 }
 
-void TextComponent::SetFont(std::shared_ptr<Font> font)
+void TextComponent::SetFont(const std::shared_ptr<Font>& font)
 {
 	assert(font);
 	if (font) m_Font = font;
@@ -96,7 +96,7 @@ void TextComponent::Update()
 {
 	if (m_NeedsUpdate && GetGameObjParent()->CheckIfComponentExists<TextureComponent>())
 	{
-		const SDL_Color color = { 255,255,255,255 }; // only white text is supported now
+		constexpr SDL_Color color = { 255,255,255,255 }; // only white text is supported now
 		const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), color);
 		if (surf == nullptr)
 		{
@@ -118,8 +118,8 @@ void TextComponent::Update()
 RotationComponent::RotationComponent(GameObject* gameObj, float velocity,
 	bool isRotatingClockwise) :
 	Component(gameObj),
-	m_Velocity{ velocity },
-	m_IsRotatingClockwise{ isRotatingClockwise }
+	m_IsRotatingClockwise{ isRotatingClockwise },
+	m_Velocity{ velocity }
 {
 }
 
@@ -127,12 +127,12 @@ void RotationComponent::Update()
 {
 	if (GetGameObjParent()->GetParent() != nullptr)
 	{
-		const float fullRotation{ 2 * static_cast<float>(std::numbers::pi) };
+		constexpr float fullRotation{ 2 * static_cast<float>(std::numbers::pi) };
 
 		if (m_IsRotatingClockwise)
 		{
 			m_Angle += Time::GetElapsed() * m_Velocity;
-			//if (m_Angle >= fullRotation) m_Angle -= fullRotation;
+			if (m_Angle >= fullRotation) m_Angle -= fullRotation;
 		}
 		else
 		{

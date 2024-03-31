@@ -3,34 +3,8 @@
 
 bool GameEngine::InputManager::ProcessInput()
 {
-    // SDL_Event e;
-    // while (SDL_PollEvent(&e)) {
-    // 	InputKey sdlScanCode = static_cast<InputKey>(e.key.keysym.scancode);
-    //
-    // 	switch (e.type)
-    // 	{
-    // 	case SDL_QUIT:
-    // 		return false;
-    // 	case SDL_KEYDOWN:
-    // 		if (m_pKeyboardCommands.contains(sdlScanCode))
-    // 		{
-    // 			auto* command = m_pKeyboardCommands[sdlScanCode].get();
-    // 			command->KeyPressed();
-    // 		}
-    // 		break;
-    // 	case SDL_KEYUP:
-    // 		if (m_pKeyboardCommands.contains(sdlScanCode))
-    // 		{
-    // 			auto* command = m_pKeyboardCommands[sdlScanCode].get();
-    // 			command->KeyReleased();
-    // 		}
-    // 		break;
-    // 	}
-    //
-    // }
     if(!ProcessKeyboardInput()) return false;
     ProcessControllerInput();
-
     return true;
 }
 

@@ -12,7 +12,7 @@ using namespace GameEngine;
 
 unsigned int Scene::m_idCounter = 0;
 
-Scene::Scene(const std::string& name) : m_name(name) {
+Scene::Scene(const std::string& name) : m_Name(name) {
 }
 
 Scene::~Scene() = default;
@@ -29,9 +29,9 @@ IObserver* GameEngine::Scene::AddObserver(int message,std::unique_ptr<IObserver>
 	return m_Observers.back().get();
 }
 
-void Scene::Remove(std::unique_ptr<GameObject>&& object)
+void Scene::Remove(const std::unique_ptr<GameObject>& object)
 {
-	m_GameObjects.erase(std::remove(m_GameObjects.begin(), m_GameObjects.end(), object), m_GameObjects.end());
+	std::erase(m_GameObjects, object);
 }
 
 void Scene::RemoveAll()
@@ -44,7 +44,7 @@ void Scene::Update()
 	//Processing input
 
 	bool areElemsToErase = false;
-	for(auto& object : m_GameObjects)
+	for(const auto& object : m_GameObjects)
 	{
 		if (!object->IsDestroyed()) object->Update();
 		else areElemsToErase = true;
@@ -62,13 +62,6 @@ void Scene::Render() const
 	for (const auto& object : m_GameObjects)
 	{
 		object->Render();
-	}
-	//TODO: make the observers a linked list, push back the renderable observers and front the non renderable ones. Add a counter to know how many are renderable also 
-	//derive a base observer-game obj class
-	for (const auto& observer : m_Observers)
-	{
-		auto castedObserver = dynamic_cast<RenderableObserver*>(observer.get());
-		if (castedObserver) castedObserver->Render();
 	}
 
 }

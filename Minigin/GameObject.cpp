@@ -1,4 +1,7 @@
 #include "GameObject.h"
+
+#include <iostream>
+
 #include "Time.h"
 
 using namespace GameEngine;
@@ -14,8 +17,12 @@ void GameObject::Update()
     bool areElemsToErase = false;
     for (const auto& component : m_Components)
     {
-        if (!component->IsDestroyed()) component->Update();
-        else areElemsToErase = true;
+        try {
+            if (!component->IsDestroyed()) component->Update();
+            else areElemsToErase = true;
+        } catch (const std::runtime_error& e) {
+            std::cerr << "Error updating component: " << e.what() << '\n';
+        }
     }
     /*if (m_Name == "Pacman") {
         MathHelper::Vector3 pos = GetPosition();

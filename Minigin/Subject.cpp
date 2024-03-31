@@ -3,7 +3,7 @@
 
 void GameEngine::Subject::AddObserver(int message,IObserver* observer)
 {
-	auto it = m_Observers.find(message);
+	const auto it = m_Observers.find(message);
 	if (it == m_Observers.end()) m_Observers[message] = ObserverList();
 	m_Observers[message].push_front(observer);
 	m_Observers[message].front()->Notify(this);
@@ -20,12 +20,12 @@ void GameEngine::Subject::NotifyAll(GameEvent event)
 	for (auto it = m_Observers.begin(); it != m_Observers.end(); ++it)
 	{
 		for (auto& observer : m_Observers[it->first])
-			observer->Notify(event,this);
+			observer->Notify(this,event);
 	}
 }
 
 void GameEngine::Subject::Notify(GameEvent event,int message)
 {
 	for (auto& observer : m_Observers[message])
-		observer->Notify(event,this);
+		observer->Notify(this,event);
 }
