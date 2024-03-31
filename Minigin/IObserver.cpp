@@ -1,6 +1,6 @@
 #include "IObserver.h"
 #include "Subject.h"
-#include "GameActor.h"
+#include "GameObject.h"
 #include <iostream>
 #include "AchievementsManager.h"
 #include "ActorComponent.h"

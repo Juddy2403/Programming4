@@ -1,7 +1,7 @@
 #include "SceneManager.h"
 
 #include "ActorComponent.h"
-#include "GameActor.h"
+#include "GameObject.h"
 #include "Component.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
