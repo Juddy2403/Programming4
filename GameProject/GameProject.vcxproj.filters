@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Minigin\Main.cpp">
+    <ClCompile Include="Galaga.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Galaga.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "Singleton.h"
-
+//remove singleton just init a galaga object inside main
 class Galaga final : public GameEngine::Singleton<Galaga>
 {
 public:
