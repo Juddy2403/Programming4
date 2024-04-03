@@ -11,7 +11,6 @@ namespace GameEngine
 {
     template<typename T>
     concept ComponentType = std::is_base_of_v<Component, T>;
-    //TODO: this should be final- add player as a component
     class GameObject final: public Subject
     {
     private:

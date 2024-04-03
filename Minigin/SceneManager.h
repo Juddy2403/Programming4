@@ -6,7 +6,6 @@
 
 namespace GameEngine
 {
-
 	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
