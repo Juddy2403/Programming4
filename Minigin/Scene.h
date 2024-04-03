@@ -9,8 +9,9 @@ namespace GameEngine
 	class GameObject;
 	class Scene final
 	{
-		//friend Scene& SceneManager::CreateScene(const std::string& name);
 	public:
+		
+		//friend Scene& SceneManager::CreateScene(const std::string& name);
 		GameObject* AddObject(std::unique_ptr<GameObject>&& object);
 		IObserver* AddObserver(int message,std::unique_ptr<IObserver>&& observer,GameObject* gameObj);
 		void Remove(const std::unique_ptr<GameObject>& object);
@@ -26,11 +27,11 @@ namespace GameEngine
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;
 		Scene& operator=(const Scene& other) = delete;
-		Scene& operator=(Scene&& other) = delete;
-
+		Scene& operator=(Scene&& other) noexcept = delete;
+		
 	private: 
 		float m_FpsUpdateCounter{};
-		const float m_FpsUpdateRate{ 0.5f };
+		float m_FpsUpdateRate{ 0.5f };
 		std::string m_Name;
 		std::vector<std::unique_ptr<GameObject>> m_GameObjects;
 		std::vector<std::unique_ptr<IObserver>> m_Observers;

@@ -1,7 +1,7 @@
 #include "ICommand.h"
 
 #include "ActorComponent.h"
-#include "Time.h"
+#include "TimeManager.h"
 #include "GameObject.h"
 
 using namespace GameEngine;
@@ -18,7 +18,7 @@ Move::~Move() {}
 
 void Move::Execute()
 {
-    const auto increase = Time::GetElapsed() * m_Speed * m_Direction;
+    const auto increase = TimeManager::GetElapsed() * m_Speed * m_Direction;
     m_Actor->GetLocalTransform().Translate(increase);
 }
 ICommand::ExecuteOn Move::ExecuteOnKeyState() const { return ExecuteOn::keyPressed; }

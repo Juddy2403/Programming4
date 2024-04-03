@@ -1,18 +1,14 @@
 #pragma once
-#include "Texture2D.h"
-#include "Font.h"
+#include <../../3rdParty/imgui-1.89.5/imgui_plot.h>
 #include <string>
-#include <imgui_plot.h>
+#include "Font.h"
+#include "Texture2D.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include <imgui.h>
-//#include <backends/imgui_impl_sdl2.h>
-//#include <backends/imgui_impl_opengl3.h>
-#include <SDL_stdinc.h>
-#include <vector>
 #include <chrono>
 #include <numeric>
-//#include <algorithm>
+#include <SDL_stdinc.h>
 #include <set>
+#include <vector>
 
 namespace GameEngine
 {

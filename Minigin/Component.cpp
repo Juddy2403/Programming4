@@ -4,7 +4,7 @@
 #include "Renderer.h"
 #include <SDL_ttf.h>
 #include <stdexcept>
-#include "Time.h"
+#include "TimeManager.h"
 #include <numbers>
 
 #pragma warning( disable : 4244 )
@@ -131,12 +131,12 @@ void RotationComponent::Update()
 
 		if (m_IsRotatingClockwise)
 		{
-			m_Angle += Time::GetElapsed() * m_Velocity;
+			m_Angle += TimeManager::GetElapsed() * m_Velocity;
 			if (m_Angle >= fullRotation) m_Angle -= fullRotation;
 		}
 		else
 		{
-			m_Angle -= Time::GetElapsed() * m_Velocity;
+			m_Angle -= TimeManager::GetElapsed() * m_Velocity;
 			if (m_Angle <= fullRotation) m_Angle += fullRotation;
 		}
 		GetGameObjParent()->GetLocalTransform().SetRotation(m_Angle);
@@ -228,7 +228,7 @@ m_TextComponent{ textComponent }
 
 void FPSComponent::Update()
 {
-	auto& time = Time::GetInstance();
+	auto& time = TimeManager::GetInstance();
 	m_FpsUpdateCounter += time.GetElapsed();
 	++m_FramesSinceUpdate;
 	if (m_FpsUpdateCounter >= m_FpsUpdateRate)

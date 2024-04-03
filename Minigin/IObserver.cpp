@@ -2,7 +2,7 @@
 #include "Subject.h"
 #include "GameObject.h"
 #include <iostream>
-#include "AchievementsManager.h"
+//#include "AchievementsManager.h"
 #include "ActorComponent.h"
 
 GameEngine::IObserver::IObserver(std::string name) : m_Name{ std::move(name) } {}
