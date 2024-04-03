@@ -80,8 +80,14 @@
     <ClInclude Include="InputManager.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Input</Filter>
+    </ClInclude>
     <ClInclude Include="Controller.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameActor.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObjects</Filter>
@@ -113,15 +119,6 @@
     <ClInclude Include="AchievementsManager.h">
       <Filter>Files\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ActorComponent.h">
-      <Filter>Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardInput.h">
-      <Filter>Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ICommand.h">
-      <Filter>Files\Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Texture2D.cpp">
@@ -134,6 +131,9 @@
       <Filter>Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Minigin.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
@@ -169,8 +169,14 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
     <ClCompile Include="Controller.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameActor.cpp">
+      <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObjects</Filter>
@@ -197,15 +203,6 @@
       <Filter>Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AchievementsManager.cpp">
-      <Filter>Files\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ActorComponent.cpp">
-      <Filter>Files\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardInput.cpp">
-      <Filter>Files\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ICommand.cpp">
       <Filter>Files\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
