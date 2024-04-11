@@ -114,37 +114,6 @@ void TextComponent::Update()
 }
 #pragma endregion
 
-#pragma region Rotation Component
-RotationComponent::RotationComponent(GameObject* gameObj, float velocity,
-	bool isRotatingClockwise) :
-	Component(gameObj),
-	m_IsRotatingClockwise{ isRotatingClockwise },
-	m_Velocity{ velocity }
-{
-}
-
-void RotationComponent::Update()
-{
-	if (GetGameObjParent()->GetParent() != nullptr)
-	{
-		constexpr float fullRotation{ 2 * static_cast<float>(std::numbers::pi) };
-
-		if (m_IsRotatingClockwise)
-		{
-			m_Angle += TimeManager::GetElapsed() * m_Velocity;
-			if (m_Angle >= fullRotation) m_Angle -= fullRotation;
-		}
-		else
-		{
-			m_Angle -= TimeManager::GetElapsed() * m_Velocity;
-			if (m_Angle <= fullRotation) m_Angle += fullRotation;
-		}
-		GetGameObjParent()->GetLocalTransform().SetRotation(m_Angle);
-		GetGameObjParent()->SetPositionIsDirty();
-	}
-}
-#pragma endregion
-
 #pragma region IMGUI Component
 IMGUIComponent::IMGUIComponent(GameObject* gameObj) : Component(gameObj)
 {
@@ -218,25 +187,56 @@ void IMGUIComponent::RenderCombinedConf()
 }
 #pragma endregion
 
-#pragma region FPS Component
-const float FPSComponent::m_FpsUpdateRate = 1.f;
-
-FPSComponent::FPSComponent(GameObject* gameObj, TextComponent* textComponent) :Component(gameObj),
-m_TextComponent{ textComponent }
-{
-}
-
-void FPSComponent::Update()
-{
-	auto& time = TimeManager::GetInstance();
-	m_FpsUpdateCounter += time.GetElapsed();
-	++m_FramesSinceUpdate;
-	if (m_FpsUpdateCounter >= m_FpsUpdateRate)
-	{
-		m_FPS = m_FramesSinceUpdate / m_FpsUpdateCounter;
-		if (m_TextComponent != nullptr) m_TextComponent->SetText(std::format("{:.1f} FPS", m_FPS));
-		m_FramesSinceUpdate = 0;
-		m_FpsUpdateCounter -= m_FpsUpdateRate;
-	}
-}
-#pragma endregion
+// #pragma region FPS Component
+// const float FPSComponent::m_FpsUpdateRate = 1.f;
+//
+// FPSComponent::FPSComponent(GameObject* gameObj, TextComponent* textComponent) :Component(gameObj),
+// m_TextComponent{ textComponent }
+// {
+// }
+//
+// void FPSComponent::Update()
+// {
+// 	auto& time = TimeManager::GetInstance();
+// 	m_FpsUpdateCounter += time.GetElapsed();
+// 	++m_FramesSinceUpdate;
+// 	if (m_FpsUpdateCounter >= m_FpsUpdateRate)
+// 	{
+// 		m_FPS = m_FramesSinceUpdate / m_FpsUpdateCounter;
+// 		if (m_TextComponent != nullptr) m_TextComponent->SetText(std::format("{:.1f} FPS", m_FPS));
+// 		m_FramesSinceUpdate = 0;
+// 		m_FpsUpdateCounter -= m_FpsUpdateRate;
+// 	}
+// }
+// #pragma endregion
+//
+// #pragma region Rotation Component
+// RotationComponent::RotationComponent(GameObject* gameObj, float velocity,
+// 	bool isRotatingClockwise) :
+// 	Component(gameObj),
+// 	m_IsRotatingClockwise{ isRotatingClockwise },
+// 	m_Velocity{ velocity }
+// {
+// }
+//
+// void RotationComponent::Update()
+// {
+// 	if (GetGameObjParent()->GetParent() != nullptr)
+// 	{
+// 		constexpr float fullRotation{ 2 * static_cast<float>(std::numbers::pi) };
+//
+// 		if (m_IsRotatingClockwise)
+// 		{
+// 			m_Angle += TimeManager::GetElapsed() * m_Velocity;
+// 			if (m_Angle >= fullRotation) m_Angle -= fullRotation;
+// 		}
+// 		else
+// 		{
+// 			m_Angle -= TimeManager::GetElapsed() * m_Velocity;
+// 			if (m_Angle <= fullRotation) m_Angle += fullRotation;
+// 		}
+// 		GetGameObjParent()->GetLocalTransform().SetRotation(m_Angle);
+// 		GetGameObjParent()->SetPositionIsDirty();
+// 	}
+// }
+// #pragma endregion

@@ -3,10 +3,10 @@
 
 namespace GameEngine
 {
-    class ActorComponent final : public GameEngine::Component
+    class ActorComponent final : public Component
     {
     public:
-        explicit ActorComponent(GameObject* gameObject,int lives);
+        explicit ActorComponent(GameObject* gameObject,int lives, int speed = 100);
         ActorComponent(const ActorComponent& other) = delete;
         ActorComponent(ActorComponent&& other) noexcept = delete;
         ActorComponent& operator=(const ActorComponent& other) = delete;
@@ -16,12 +16,28 @@ namespace GameEngine
         ~ActorComponent() override = default;
 
         void Hit();
+        [[nodiscard]] int GetRemainingLives() const { return m_Lives; }
+        [[nodiscard]] int GetSpeed() const { return m_Speed; }
+        void Move(const glm::vec2& direction);
+    private:
+        int m_Speed{};
+        int m_Lives{ 3 };
+    };
+
+    class ScoreComponent final : public Component
+    {
+    public:
+        explicit ScoreComponent(GameObject* gameObject);
+        ScoreComponent(const ScoreComponent& other) = delete;
+        ScoreComponent(ScoreComponent&& other) noexcept = delete;
+        ScoreComponent& operator=(const ScoreComponent& other) = delete;
+        ScoreComponent& operator=(ScoreComponent&& other) noexcept = delete;
+        ~ScoreComponent() override = default;
+
         void IncreaseScore(int value);
         [[nodiscard]] int GetScore() const { return m_Score; }
-        [[nodiscard]] int GetRemainingLives() const { return m_Lives; }
     private:
         int m_Score{};
-        int m_Lives{ 3 };
     };
 }
 

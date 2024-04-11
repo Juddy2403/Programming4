@@ -67,18 +67,6 @@ namespace GameEngine
 		bool m_NeedsUpdate{ true };
 	};
 
-	class RotationComponent final : public Component
-	{
-	private:
-		bool m_IsRotatingClockwise{};
-		float m_Angle{};
-		float m_Velocity{};
-	public:
-		RotationComponent(GameObject* gameObj, float velocity = 10.f, bool isRotatingClockwise = true);
-		virtual void Update() override;
-
-	};
-
 #pragma region IMGUI Component structs
 	struct TransformM
 	{
@@ -226,18 +214,31 @@ namespace GameEngine
 		virtual void Render() override;
 	};
 
-	class FPSComponent final : public Component
-	{
-	public:
-		virtual void Update() override;
-		explicit FPSComponent(GameObject* gameObj, TextComponent* textComponent = nullptr);
-	private:
-		float m_FpsUpdateCounter{};
-		int m_FramesSinceUpdate{};
-		float m_FPS{};
-		static const float m_FpsUpdateRate;
-		TextComponent* m_TextComponent{ nullptr };
-	};
+	// class FPSComponent final : public Component
+	// {
+	// public:
+	// 	virtual void Update() override;
+	// 	explicit FPSComponent(GameObject* gameObj, TextComponent* textComponent = nullptr);
+	// private:
+	// 	float m_FpsUpdateCounter{};
+	// 	int m_FramesSinceUpdate{};
+	// 	float m_FPS{};
+	// 	static const float m_FpsUpdateRate;
+	// 	TextComponent* m_TextComponent{ nullptr };
+	// };
+	//
+	// class RotationComponent final : public Component
+	// {
+	// private:
+	// 	bool m_IsRotatingClockwise{};
+	// 	float m_Angle{};
+	// 	float m_Velocity{};
+	// public:
+	// 	RotationComponent(GameObject* gameObj, float velocity = 10.f, bool isRotatingClockwise = true);
+	// 	virtual void Update() override;
+	//
+	// };
 }
+
 
 

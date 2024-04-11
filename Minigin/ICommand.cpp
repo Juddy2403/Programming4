@@ -8,9 +8,8 @@ using namespace GameEngine;
 
 ICommand::ICommand(GameObject* actor) : m_Actor{ actor } {}
 
-Move::Move(GameObject* actor, const glm::vec2& direction, const float speed):
+Move::Move(GameObject* actor, const glm::vec2& direction):
     ICommand(actor),
-    m_Speed(speed),
     m_Direction(direction)
 {}
 
@@ -18,8 +17,7 @@ Move::~Move() {}
 
 void Move::Execute()
 {
-    const auto increase = TimeManager::GetElapsed() * m_Speed * m_Direction;
-    m_Actor->GetLocalTransform().Translate(increase);
+    m_Actor->GetComponent<ActorComponent>()->Move(m_Direction);
 }
 ICommand::ExecuteOn Move::ExecuteOnKeyState() const { return ExecuteOn::keyPressed; }
 
@@ -28,19 +26,18 @@ void TakeDamage::Execute() { m_Actor->GetComponent<ActorComponent>()->Hit(); }
 
 ICommand::ExecuteOn TakeDamage::ExecuteOnKeyState() const { return ExecuteOn::keyDown; }
 
+
 SmallScoreIncrease::SmallScoreIncrease(GameObject* actor) : ICommand(actor) {}
 void SmallScoreIncrease::Execute()
 {
-    m_Actor->GetComponent<ActorComponent>()->IncreaseScore(10);
+    m_Actor->GetComponent<ScoreComponent>()->IncreaseScore(10);
 }
 ICommand::ExecuteOn SmallScoreIncrease::ExecuteOnKeyState() const { return ExecuteOn::keyDown; }
 
-BigScoreIncrease::BigScoreIncrease(GameObject* actor) : ICommand(actor)
-{
-    m_Actor->GetComponent<ActorComponent>()->IncreaseScore(50);
-}
+BigScoreIncrease::BigScoreIncrease(GameObject* actor) : ICommand(actor) {}
+
 void BigScoreIncrease::Execute()
 {
-    m_Actor->GetComponent<ActorComponent>()->IncreaseScore(50);
+    m_Actor->GetComponent<ScoreComponent>()->IncreaseScore(50);
 }
 ICommand::ExecuteOn BigScoreIncrease::ExecuteOnKeyState() const { return ExecuteOn::keyDown; }

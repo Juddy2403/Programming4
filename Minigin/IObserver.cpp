@@ -46,7 +46,7 @@ void GameEngine::ScoreObserver::Notify(Subject* subject, GameEvent event)
         {
             const auto gameObject = dynamic_cast<GameObject*>(subject);
             assert(gameObject);
-            const int score = gameObject->GetComponent<ActorComponent>()->GetScore();
+            const int score = gameObject->GetComponent<ScoreComponent>()->GetScore();
             // if (score >= 500)
             // {
             //     AchievementsManager::GetInstance().SetAchievement("ACH_WIN_ONE_GAME");

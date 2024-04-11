@@ -35,12 +35,11 @@ namespace GameEngine
 		Move& operator=(const Move& other) = delete;
 		Move& operator=(Move&& other) noexcept = delete;
 		
-		explicit Move(GameObject* actor,const glm::vec2& direction, const float speed);
+		explicit Move(GameObject* actor,const glm::vec2& direction);
 		~Move() override;
 		void Execute() override;
 		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
 	protected:
-		float m_Speed;
 		glm::vec2 m_Direction{};
 
 	};

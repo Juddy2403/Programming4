@@ -34,14 +34,6 @@ void Galaga::LoadLevel() const
     gameObject->AddComponent<TextureComponent>();
     scene->AddObject(std::move(gameObject));
 
-    //------FPSCOUNTER--------
-    gameObject = std::make_unique<GameObject>("FPSCounter");
-    gameObject->SetPosition(20.f, 80.f);
-    gameObject->AddComponent<FPSComponent>(gameObject->AddComponent<TextComponent>(font, "160 FPS"));
-    gameObject->AddComponent<TextureComponent>();
-    scene->AddObject(std::move(gameObject));
-
-
     //-------EXTRATEXT---------
     gameObject = std::make_unique<GameObject>();
     gameObject->SetPosition(20.f, 120.f);
@@ -59,16 +51,17 @@ void Galaga::LoadLevel() const
     gameObject = std::make_unique<GameObject>("Pacman");
     gameObject->SetPosition(250.f, 250.f);
     gameObject->AddComponent<TextureComponent>("pacman.png");
-    gameObject->AddComponent<ActorComponent>(3);
+    gameObject->AddComponent<ActorComponent>(3,200);
+    gameObject->AddComponent<ScoreComponent>();
     auto& input = InputManager::GetInstance();
     input.BindCommand(ControllerInputKey::dpadUp,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f },200.f), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }), 0);
     input.BindCommand(ControllerInputKey::dpadDown,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f },200.f), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f }), 0);
     input.BindCommand(ControllerInputKey::dpadLeft,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f },200.f), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f }), 0);
     input.BindCommand(ControllerInputKey::dpadRight,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f },200.f), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f }), 0);
     input.BindCommand(ControllerInputKey::X,
         std::make_unique<TakeDamage>(gameObject.get()), 0);
     input.BindCommand(ControllerInputKey::A,
@@ -100,15 +93,16 @@ void Galaga::LoadLevel() const
     gameObject = std::make_unique<GameObject>("Ms Pacman");
     gameObject->SetPosition(200.f, 160.f);
     gameObject->AddComponent<TextureComponent>("PacmanFemale.png");
-    gameObject->AddComponent<ActorComponent>(3);
+    gameObject->AddComponent<ActorComponent>(3,400.f);
+    gameObject->AddComponent<ScoreComponent>();
     input.BindCommand(KeyboardInputKey::W,
-       std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }, 400.f));
+       std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }));
     input.BindCommand(KeyboardInputKey::S,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f }, 400.f));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f }));
     input.BindCommand(KeyboardInputKey::A,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f }, 400.f));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f }));
     input.BindCommand(KeyboardInputKey::D,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f }, 400.f));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f }));
     input.BindCommand(KeyboardInputKey::C,
         std::make_unique<TakeDamage>(gameObject.get()));
     input.BindCommand(KeyboardInputKey::Z,

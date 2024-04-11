@@ -396,6 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.idea/
 
 !3rdParty/**/*
 
@@ -405,3 +406,4 @@ build_web
 
 # Dear Imgui settings file
 imgui.ini
+
