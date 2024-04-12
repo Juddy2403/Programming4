@@ -9,11 +9,11 @@ void GameEngine::SceneManager::Update()
 void GameEngine::SceneManager::Render()
 {
     m_Scene->Render();
-    
+
 }
 
 void GameEngine::SceneManager::SetScene(std::unique_ptr<Scene>&& scene)
 {
-   // m_Scene.reset(std::move(scene).get());
+    // m_Scene.reset(std::move(scene).get());
     m_Scene = std::move(scene);
 }

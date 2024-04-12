@@ -15,7 +15,7 @@ void Galaga::LoadLevel() const
     //------BACKGROUND--------
     auto scene = std::make_unique<Scene>("First level");
     auto gameObject = std::make_unique<GameObject>("Background");
-    gameObject->AddComponent<TextureComponent>("background.tga");
+    gameObject->AddComponent<TextureComponent>("Background.png");
     scene->AddObject(std::move(gameObject));
 
     //------LOGO--------
@@ -93,7 +93,7 @@ void Galaga::LoadLevel() const
     gameObject = std::make_unique<GameObject>("Ms Pacman");
     gameObject->SetPosition(200.f, 160.f);
     gameObject->AddComponent<TextureComponent>("PacmanFemale.png");
-    gameObject->AddComponent<ActorComponent>(3,400.f);
+    gameObject->AddComponent<ActorComponent>(3,400);
     gameObject->AddComponent<ScoreComponent>();
     input.BindCommand(KeyboardInputKey::W,
        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }));

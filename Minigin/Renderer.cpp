@@ -86,4 +86,9 @@ void GameEngine::Renderer::RenderTexture(const Texture2D& texture, const float x
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
 }
 
+void GameEngine::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& destRect) const
+{
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &destRect);
+}
+
 SDL_Renderer* GameEngine::Renderer::GetSDLRenderer() const { return m_renderer; }

@@ -7,18 +7,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="916c70e4-2e04-401c-872f-b4a3fee48c20" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="acbaf995-5df1-4418-9a58-04730c1e059e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/background.tga" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Galaga.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/ActorComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/ActorComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/ActorComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/ActorComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/GameProject.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameProject.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/Component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Component.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/Component.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Component.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/ICommand.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/ICommand.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/ICommand.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/ICommand.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/IObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/IObserver.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Renderer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/SceneManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/SceneManager.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +31,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/memory" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -35,7 +41,7 @@
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
 }</component>
-  <component name="ProjectId" id="2ebq4paRxKOPZgts4ZjuM7WGyxf" />
+  <component name="ProjectId" id="2eyRpXxPJ1d5zhD6UB2h9K0gKMX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -46,6 +52,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -117,14 +124,17 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="916c70e4-2e04-401c-872f-b4a3fee48c20" name="Changes" comment="" />
-      <created>1712183439006</created>
+      <changelist id="acbaf995-5df1-4418-9a58-04730c1e059e" name="Changes" comment="" />
+      <created>1712875015589</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1712183439006</updated>
-      <workItem from="1712183440610" duration="917000" />
-      <workItem from="1712742564424" duration="3445000" />
-      <workItem from="1712855503463" duration="3130000" />
+      <updated>1712875015589</updated>
+      <workItem from="1712875018305" duration="2363000" />
+      <workItem from="1712915841737" duration="2081000" />
+      <workItem from="1712932403656" duration="711000" />
+      <workItem from="1712933410251" duration="108000" />
+      <workItem from="1712933635930" duration="2239000" />
+      <workItem from="1712936294097" duration="1260000" />
     </task>
     <servers />
   </component>
@@ -133,5 +143,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -6,6 +6,7 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <chrono>
 #include <numeric>
+#include <SDL_rect.h>
 #include <SDL_stdinc.h>
 #include <set>
 #include <vector>
@@ -42,13 +43,20 @@ namespace GameEngine
 	public:
 		explicit TextureComponent(GameObject* gameObj);
 		explicit TextureComponent(GameObject* gameObj, const std::string& filename);
-		explicit TextureComponent(GameObject* gameObj, std::shared_ptr<Texture2D>& texture);
+		explicit TextureComponent(GameObject* gameObj, const std::string& filename, const SDL_Rect& destRect);
+		explicit TextureComponent(GameObject* gameObj, const std::string& filename, const SDL_Rect& destRect, const SDL_Rect& srcRect);
+		explicit TextureComponent(GameObject* gameObj, const std::shared_ptr<Texture2D>& texture);
 		//virtual void Update() override;
 		virtual void Render() override;
+		Texture2D* GetTexture() const;
 		void SetTexture(const std::string& filename);
 		void SetTexture(const std::shared_ptr<Texture2D>& texture);
+		void SetSourceRect(const SDL_Rect& srcRect);
 	private:
+		void InitRects();
 		//bool m_NeedsUpdate{ true };
+		SDL_Rect m_DestRect{};
+		SDL_Rect m_SrcRect{};
 		std::shared_ptr<Texture2D> m_Texture{};
 
 	};
