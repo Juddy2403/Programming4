@@ -36,7 +36,7 @@ Component::Component(GameObject* gameObj):
 
 TextureComponent::TextureComponent(GameObject* gameObj): Component(gameObj)
 {
-	InitRects();
+	//InitRects();
 }
 
 TextureComponent::TextureComponent(GameObject* gameObj, const std::string& filename) :
@@ -44,20 +44,6 @@ TextureComponent::TextureComponent(GameObject* gameObj, const std::string& filen
 {
 	SetTexture(filename);
 	InitRects();
-}
-TextureComponent::TextureComponent(GameObject* gameObj, const std::string& filename, const SDL_Rect& destRect):
-	Component(gameObj),
-	m_DestRect(destRect)
-{
-	SetTexture(filename);
-	InitRects();
-}
-TextureComponent::TextureComponent(GameObject* gameObj, const std::string& filename, const SDL_Rect& destRect, const SDL_Rect& srcRect):
-	Component(gameObj),
-	m_DestRect(destRect),
-	m_SrcRect(srcRect)
-{
-	SetTexture(filename);
 }
 
 void TextureComponent::InitRects() {
@@ -93,16 +79,24 @@ Texture2D* TextureComponent::GetTexture() const
 void TextureComponent::SetTexture(const std::string& filename)
 { //TODO: refactor the shared pointer into a unique ptr
 	m_Texture = ResourceManager::GetInstance().LoadTexture(filename);
+	InitRects();
 }
 
 void TextureComponent::SetTexture(const std::shared_ptr<Texture2D>& texture)
 {
 	m_Texture = texture;
+	InitRects();
 }
 void TextureComponent::SetSourceRect(const SDL_Rect& srcRect)
 {
 	m_SrcRect = srcRect;
 }
+void TextureComponent::SetDestRect(float width, float height)
+{
+	m_DestRect.w = width;
+	m_DestRect.h = height;
+}
+
 #pragma endregion
 
 #pragma region Text Component

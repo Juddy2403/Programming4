@@ -1,6 +1,7 @@
 ﻿#include "Galaga.h"
 
 #include "ActorComponent.h"
+#include "BackgroundComponent.h"
 #include "SceneManager.h"
 #include "Scene.h"
 #include "Component.h"
@@ -15,7 +16,8 @@ void Galaga::LoadLevel() const
     //------BACKGROUND--------
     auto scene = std::make_unique<Scene>("First level");
     auto gameObject = std::make_unique<GameObject>("Background");
-    gameObject->AddComponent<TextureComponent>("Background.png");
+    gameObject->AddComponent<TextureComponent>("Background.png")->SetDestRect(612,612);
+    gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<TextureComponent>(),700);
     scene->AddObject(std::move(gameObject));
 
     //------LOGO--------

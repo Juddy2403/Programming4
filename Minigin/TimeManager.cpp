@@ -1,5 +1,7 @@
 #include "TimeManager.h"
+    
 using namespace std::chrono;
+using namespace GameEngine;
 
 duration<float> TimeManager::m_ElapsedTime = duration<float>{};
 
