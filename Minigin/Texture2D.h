@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL_rect.h>
 #include <glm/vec2.hpp>
 
 struct SDL_Texture;
@@ -20,7 +21,8 @@ namespace GameEngine
 		Texture2D(Texture2D &&) = delete;
 		Texture2D & operator= (const Texture2D &) = delete;
 		Texture2D & operator= (const Texture2D &&) = delete;
+
 	private:
-		SDL_Texture* m_texture;
+		SDL_Texture* m_Texture;
 	};
 }

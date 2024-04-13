@@ -16,8 +16,9 @@ void Galaga::LoadLevel() const
     //------BACKGROUND--------
     auto scene = std::make_unique<Scene>("First level");
     auto gameObject = std::make_unique<GameObject>("Background");
-    gameObject->AddComponent<TextureComponent>("Background.png")->SetDestRect(612,612);
-    gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<TextureComponent>(),700);
+    SDL_Rect& destRect = gameObject->AddComponent<TextureComponent>("Background.png")->m_DestRect;
+    destRect.w = destRect.h = 612;
+    gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<TextureComponent>(), 700);
     scene->AddObject(std::move(gameObject));
 
     //------LOGO--------
@@ -52,8 +53,18 @@ void Galaga::LoadLevel() const
     //------PACMAN--------
     gameObject = std::make_unique<GameObject>("Pacman");
     gameObject->SetPosition(250.f, 250.f);
-    gameObject->AddComponent<TextureComponent>("pacman.png");
-    gameObject->AddComponent<ActorComponent>(3,200);
+    SpriteInfo& spriteInfo = gameObject->AddComponent<SpriteComponent>("Galaga2.png")->m_SpriteInfo;
+    spriteInfo.m_Height = 16;
+    spriteInfo.m_Width = 16;
+    spriteInfo.m_Spacing = 2;
+    spriteInfo.m_StartPos.x = 1;
+    spriteInfo.m_StartPos.y = 1;
+    spriteInfo.m_TimeInterval = 0.5f;
+    spriteInfo.m_NrOfCols = 7;
+    spriteInfo.m_NrOfRows = 2;
+    gameObject->GetComponent<SpriteComponent>()->SetScale(3);
+    gameObject->GetComponent<SpriteComponent>()->UpdateSrcRect();
+    gameObject->AddComponent<ActorComponent>(3, 200);
     gameObject->AddComponent<ScoreComponent>();
     auto& input = InputManager::GetInstance();
     input.BindCommand(ControllerInputKey::dpadUp,
@@ -76,16 +87,16 @@ void Galaga::LoadLevel() const
     healthObject->SetPosition(20.f, 160.f);
     healthObject->AddComponent<TextureComponent>();
     healthObject->AddComponent<TextComponent>(smallerFont, "");
-    auto healthObserver = std::make_unique<GameEngine::HealthObserver>("Pacman health observer",healthObject.get());
+    auto healthObserver = std::make_unique<GameEngine::HealthObserver>("Pacman health observer", healthObject.get());
     scene->AddObject(std::move(healthObject));
     scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(healthObserver), gameObject.get());
-    
+
     //------ScoreObserver--------
     auto scoreObject = std::make_unique<GameObject>("Score Text");
     scoreObject->SetPosition(20.f, 180.f);
     scoreObject->AddComponent<TextureComponent>();
     scoreObject->AddComponent<TextComponent>(smallerFont, "");
-    auto scoreObserver = std::make_unique<GameEngine::ScoreObserver>("Pacman score observer",scoreObject.get());
+    auto scoreObserver = std::make_unique<GameEngine::ScoreObserver>("Pacman score observer", scoreObject.get());
     scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserver), gameObject.get());
     scene->AddObject(std::move(scoreObject));
 
@@ -95,10 +106,10 @@ void Galaga::LoadLevel() const
     gameObject = std::make_unique<GameObject>("Ms Pacman");
     gameObject->SetPosition(200.f, 160.f);
     gameObject->AddComponent<TextureComponent>("PacmanFemale.png");
-    gameObject->AddComponent<ActorComponent>(3,400);
+    gameObject->AddComponent<ActorComponent>(3, 400);
     gameObject->AddComponent<ScoreComponent>();
     input.BindCommand(KeyboardInputKey::W,
-       std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }));
     input.BindCommand(KeyboardInputKey::S,
         std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f }));
     input.BindCommand(KeyboardInputKey::A,
@@ -108,30 +119,29 @@ void Galaga::LoadLevel() const
     input.BindCommand(KeyboardInputKey::C,
         std::make_unique<TakeDamage>(gameObject.get()));
     input.BindCommand(KeyboardInputKey::Z,
-      std::make_unique<BigScoreIncrease>(gameObject.get()));
+        std::make_unique<BigScoreIncrease>(gameObject.get()));
     input.BindCommand(KeyboardInputKey::X,
-      std::make_unique<SmallScoreIncrease>(gameObject.get()));
+        std::make_unique<SmallScoreIncrease>(gameObject.get()));
 
     //------HealthObserver--------
     healthObject = std::make_unique<GameObject>("Lives Text");
     healthObject->SetPosition(20.f, 200.f);
     healthObject->AddComponent<TextureComponent>();
     healthObject->AddComponent<TextComponent>(smallerFont, "");
-    healthObserver = std::make_unique<GameEngine::HealthObserver>("Ms Pacman health observer",healthObject.get());
+    healthObserver = std::make_unique<GameEngine::HealthObserver>("Ms Pacman health observer", healthObject.get());
     scene->AddObject(std::move(healthObject));
     scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(healthObserver), gameObject.get());
-    
+
     //------ScoreObserver--------
     scoreObject = std::make_unique<GameObject>("Score Text");
     scoreObject->SetPosition(20.f, 220.f);
     scoreObject->AddComponent<TextureComponent>();
     scoreObject->AddComponent<TextComponent>(smallerFont, "");
-    scoreObserver = std::make_unique<GameEngine::ScoreObserver>("Ms Pacman score observer",scoreObject.get());
+    scoreObserver = std::make_unique<GameEngine::ScoreObserver>("Ms Pacman score observer", scoreObject.get());
     scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserver), gameObject.get());
     scene->AddObject(std::move(scoreObject));
-    
+
     scene->AddObject(std::move(gameObject));
 
     SceneManager::GetInstance().SetScene(std::move(scene));
-
 }

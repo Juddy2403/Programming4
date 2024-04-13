@@ -14,16 +14,16 @@ BackgroundComponent::BackgroundComponent(GameEngine::GameObject* gameObject, Gam
 void BackgroundComponent::Update()
 {
     m_CurrentY += static_cast<int>(m_Speed * GameEngine::TimeManager::GetElapsed());
-    if (m_CurrentY >= m_TextureComponent->GetDestRect().h)
+    if (m_CurrentY >= m_TextureComponent->m_DestRect.h)
     {
-        m_CurrentY -= m_TextureComponent->GetDestRect().h;
+        m_CurrentY -= m_TextureComponent->m_DestRect.h;
     }
     GetGameObjParent()->SetPosition(0, static_cast<float>(m_CurrentY));
 }
 void BackgroundComponent::Render()
 {
-    SDL_Rect destRect = m_TextureComponent->GetDestRect();
+    SDL_Rect destRect = m_TextureComponent->m_DestRect;
     destRect.y = m_CurrentY - destRect.h;
     //Rebdering a second texture for the loop effect
-    GameEngine::Renderer::GetInstance().RenderTexture(*m_TextureComponent->GetTexture(), m_TextureComponent->GetSourceRect(), destRect);
+    GameEngine::Renderer::GetInstance().RenderTexture(*m_TextureComponent->GetTexture(), m_TextureComponent->m_SrcRect, destRect);
 }
