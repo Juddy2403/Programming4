@@ -65,7 +65,10 @@ void TextureComponent::Render()
         const auto pos = GetGameObjParent()->GetPosition();
         m_DestRect.x = static_cast<int>(pos.x);
         m_DestRect.y = static_cast<int>(pos.y);
-        Renderer::GetInstance().RenderTexture(*m_Texture, m_SrcRect, m_DestRect);
+        if(m_RotationAngle != 0 || m_FlipMode != SDL_FLIP_NONE)
+            Renderer::GetInstance().RenderTexture(*m_Texture, m_SrcRect, m_DestRect, m_RotationAngle, m_RotationCenter, m_FlipMode);
+        else
+            Renderer::GetInstance().RenderTexture(*m_Texture, m_SrcRect, m_DestRect);
     }
 }
 Texture2D* TextureComponent::GetTexture() const
@@ -128,6 +131,10 @@ void TextComponent::Update()
         m_NeedsUpdate = false;
     }
 }
+
+#pragma endregion
+
+#pragma region Sprite component
 SpriteComponent::SpriteComponent(GameObject* gameObj): TextureComponent(gameObj) {}
 SpriteComponent::SpriteComponent(GameObject* gameObj, const std::string& filename):
     TextureComponent(gameObj, filename) {}
@@ -137,7 +144,7 @@ SpriteComponent::SpriteComponent(GameObject* gameObj, const std::shared_ptr<Text
 void SpriteComponent::UpdateSrcRect()
 {
     m_SrcRect = m_SpriteInfo.GetSrcRect();
-    if(m_SrcRect.w == 0 || m_SrcRect.h == 0)
+    if (m_SrcRect.w == 0 || m_SrcRect.h == 0)
     {
         m_DestRect.w *= m_Scale;
         m_DestRect.h *= m_Scale;
@@ -159,11 +166,6 @@ void SpriteComponent::Update()
         m_CurrentTimeElapsed -= m_SpriteInfo.m_TimeInterval;
     }
 }
-
-#pragma endregion
-
-#pragma region Sprite component
-
 #pragma endregion
 
 // #pragma region IMGUI Component

@@ -1,6 +1,6 @@
 ﻿#include "Galaga.h"
 
-#include "ActorComponent.h"
+#include "PlayerComponent.h"
 #include "BackgroundComponent.h"
 #include "SceneManager.h"
 #include "Scene.h"
@@ -9,6 +9,7 @@
 #include "IObserver.h"
 #include "ResourceManager.h"
 #include "InputManager.h"
+#include "PlayerComponent.h"
 
 using namespace GameEngine;
 void Galaga::LoadLevel() const
@@ -64,17 +65,16 @@ void Galaga::LoadLevel() const
     spriteInfo.m_NrOfRows = 2;
     gameObject->GetComponent<SpriteComponent>()->SetScale(3);
     gameObject->GetComponent<SpriteComponent>()->UpdateSrcRect();
-    gameObject->AddComponent<ActorComponent>(3, 200);
-    gameObject->AddComponent<ScoreComponent>();
+    gameObject->AddComponent<ActorDataComponent>(3);
     auto& input = InputManager::GetInstance();
     input.BindCommand(ControllerInputKey::dpadUp,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f },200), 0);
     input.BindCommand(ControllerInputKey::dpadDown,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f }), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f },200), 0);
     input.BindCommand(ControllerInputKey::dpadLeft,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f }), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f },200), 0);
     input.BindCommand(ControllerInputKey::dpadRight,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f }), 0);
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f },200), 0);
     input.BindCommand(ControllerInputKey::X,
         std::make_unique<TakeDamage>(gameObject.get()), 0);
     input.BindCommand(ControllerInputKey::A,
@@ -106,16 +106,15 @@ void Galaga::LoadLevel() const
     gameObject = std::make_unique<GameObject>("Ms Pacman");
     gameObject->SetPosition(200.f, 160.f);
     gameObject->AddComponent<TextureComponent>("PacmanFemale.png");
-    gameObject->AddComponent<ActorComponent>(3, 400);
-    gameObject->AddComponent<ScoreComponent>();
+    gameObject->AddComponent<ActorDataComponent>(3);
     input.BindCommand(KeyboardInputKey::W,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,-1.f },400));
     input.BindCommand(KeyboardInputKey::S,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f }));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 0.f,1.f },400));
     input.BindCommand(KeyboardInputKey::A,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f }));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ -1.f,0.f },400));
     input.BindCommand(KeyboardInputKey::D,
-        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f }));
+        std::make_unique<Move>(gameObject.get(), glm::vec2{ 1.f,0.f },400));
     input.BindCommand(KeyboardInputKey::C,
         std::make_unique<TakeDamage>(gameObject.get()));
     input.BindCommand(KeyboardInputKey::Z,

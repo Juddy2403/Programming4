@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include <iostream>
 //#include "AchievementsManager.h"
-#include "ActorComponent.h"
+#include "GameProject/PlayerComponent.h"
 
 GameEngine::IObserver::IObserver(std::string name) : m_Name{ std::move(name) } {}
 
@@ -21,7 +21,7 @@ void GameEngine::HealthObserver::Notify(Subject* subject, GameEvent event)
         {
             const auto gameObject = dynamic_cast<GameObject*>(subject);
             assert(gameObject);
-            const int lives = gameObject->GetComponent<ActorComponent>()->GetRemainingLives();
+            const int lives = gameObject->GetComponent<ActorDataComponent>()->GetHealth();
             textComp->SetText("# lives: " + std::to_string(lives));
             textComp->Update();
         }
@@ -46,7 +46,7 @@ void GameEngine::ScoreObserver::Notify(Subject* subject, GameEvent event)
         {
             const auto gameObject = dynamic_cast<GameObject*>(subject);
             assert(gameObject);
-            const int score = gameObject->GetComponent<ScoreComponent>()->GetScore();
+            const int score = gameObject->GetComponent<ActorDataComponent>()->GetScore();
             // if (score >= 500)
             // {
             //     AchievementsManager::GetInstance().SetAchievement("ACH_WIN_ONE_GAME");

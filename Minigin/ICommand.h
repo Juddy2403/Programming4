@@ -35,13 +35,13 @@ namespace GameEngine
 		Move& operator=(const Move& other) = delete;
 		Move& operator=(Move&& other) noexcept = delete;
 		
-		explicit Move(GameObject* actor,const glm::vec2& direction);
+		explicit Move(GameObject* actor,const glm::vec2& direction, int speed = 100);
 		~Move() override;
 		void Execute() override;
 		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
 	protected:
 		glm::vec2 m_Direction{};
-
+		int m_Speed{};
 	};
 	
 	class TakeDamage final : public ICommand {

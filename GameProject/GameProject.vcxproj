@@ -166,10 +166,12 @@
     <ClCompile Include="BackgroundComponent.cpp" />
     <ClCompile Include="Galaga.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundComponent.h" />
     <ClInclude Include="Galaga.h" />
+    <ClInclude Include="PlayerComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

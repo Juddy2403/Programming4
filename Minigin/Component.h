@@ -10,6 +10,7 @@
 #include <SDL_stdinc.h>
 #include <set>
 #include <vector>
+#include <SDL.h>
 
 namespace GameEngine
 {
@@ -52,9 +53,15 @@ namespace GameEngine
 
         SDL_Rect m_DestRect{};
         SDL_Rect m_SrcRect{};
+
+        void SetFlipMode(const SDL_RendererFlip& flipMode) { m_FlipMode = flipMode; }
+        void SetRotationAngle(float angle) { m_RotationAngle = angle; }
+        void SetRotationCenter(const SDL_Point& center) { m_RotationCenter = center; }
     protected:
+        float m_RotationAngle{};
+        SDL_Point m_RotationCenter{};
+        SDL_RendererFlip m_FlipMode{ SDL_FLIP_NONE };
         void InitRects();
-        //bool m_NeedsUpdate{ true };
         std::shared_ptr<Texture2D> m_Texture{};
     };
 
