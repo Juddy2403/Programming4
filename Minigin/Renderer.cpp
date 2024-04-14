@@ -86,7 +86,7 @@ void GameEngine::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rec
 	const SDL_Rect& destRect,float angle,SDL_Point center, const SDL_RendererFlip& flipMode = SDL_FLIP_NONE) const
 {
 	SDL_RenderCopyEx(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &destRect,
-		0, nullptr, flipMode);
+		angle, &center, flipMode);
 }
 
 SDL_Renderer* GameEngine::Renderer::GetSDLRenderer() const { return m_renderer; }

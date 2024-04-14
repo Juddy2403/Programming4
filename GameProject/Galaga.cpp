@@ -54,17 +54,17 @@ void Galaga::LoadLevel() const
     //------PACMAN--------
     gameObject = std::make_unique<GameObject>("Pacman");
     gameObject->SetPosition(250.f, 250.f);
-    SpriteInfo& spriteInfo = gameObject->AddComponent<SpriteComponent>("Galaga2.png")->m_SpriteInfo;
+    SpriteInfo& spriteInfo = gameObject->AddComponent<RotatingSpriteComponent>("Galaga2.png")->m_SpriteInfo;
     spriteInfo.m_Height = 16;
     spriteInfo.m_Width = 16;
     spriteInfo.m_Spacing = 2;
     spriteInfo.m_StartPos.x = 1;
     spriteInfo.m_StartPos.y = 1;
-    spriteInfo.m_TimeInterval = 0.5f;
+    spriteInfo.m_TimeInterval = 0.05f;
     spriteInfo.m_NrOfCols = 7;
-    spriteInfo.m_NrOfRows = 2;
-    gameObject->GetComponent<SpriteComponent>()->SetScale(3);
-    gameObject->GetComponent<SpriteComponent>()->UpdateSrcRect();
+    spriteInfo.m_NrOfRows = 1;
+    gameObject->GetComponent<RotatingSpriteComponent>()->SetScale(3);
+    gameObject->GetComponent<RotatingSpriteComponent>()->UpdateSrcRect();
     gameObject->AddComponent<ActorDataComponent>(3);
     auto& input = InputManager::GetInstance();
     input.BindCommand(ControllerInputKey::dpadUp,

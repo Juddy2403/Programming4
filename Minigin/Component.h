@@ -102,7 +102,7 @@ namespace GameEngine
         }
     };
 
-    class SpriteComponent final : public TextureComponent
+    class SpriteComponent : public TextureComponent
     {
     public:
         explicit SpriteComponent(GameObject* gameObj);
@@ -112,7 +112,7 @@ namespace GameEngine
         virtual void Update() override;
         void SetScale(float scale) { m_Scale = scale; }
         SpriteInfo m_SpriteInfo{};
-    private:
+    protected:
         float m_CurrentTimeElapsed{};
         float m_Scale{};
     };
