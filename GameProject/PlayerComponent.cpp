@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "TimeManager.h"
 
+
 ActorDataComponent::ActorDataComponent(GameEngine::GameObject* gameObject, int health):
     Component(gameObject),
     m_Health(health)
@@ -33,6 +34,7 @@ RotatingSpriteComponent::RotatingSpriteComponent(GameEngine::GameObject* gameObj
 {}
 void RotatingSpriteComponent::Update()
 {
+    if(!m_IsActive) return;
     m_CurrentTimeElapsed += GameEngine::TimeManager::GetElapsed();
     if (m_CurrentTimeElapsed < m_SpriteInfo.m_TimeInterval) return;
 
@@ -53,3 +55,4 @@ void RotatingSpriteComponent::Update()
     UpdateSrcRect();
     m_CurrentTimeElapsed -= m_SpriteInfo.m_TimeInterval;
 }
+

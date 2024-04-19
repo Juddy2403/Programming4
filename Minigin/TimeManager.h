@@ -8,8 +8,8 @@ namespace GameEngine
 	{
 	public:
 		static float GetElapsed();
-		std::chrono::high_resolution_clock::time_point GetCurrent() const;
-		std::chrono::duration<float, std::milli> GetFixedTimeStep() const;
+		[[nodiscard]] std::chrono::high_resolution_clock::time_point GetCurrent() const;
+		[[nodiscard]] std::chrono::duration<float, std::milli> GetFixedTimeStep() const;
 		void Update();
 	private:
 		friend class GameEngine::Singleton<TimeManager>;

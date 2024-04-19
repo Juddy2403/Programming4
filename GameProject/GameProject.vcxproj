@@ -164,13 +164,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackgroundComponent.cpp" />
+    <ClCompile Include="BulletComponent.cpp" />
     <ClCompile Include="Galaga.cpp" />
+    <ClCompile Include="GameCommands.cpp" />
+    <ClCompile Include="GameObservers.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundComponent.h" />
+    <ClInclude Include="BulletComponent.h" />
+    <ClInclude Include="Fighter.h" />
     <ClInclude Include="Galaga.h" />
+    <ClInclude Include="GameCommands.h" />
+    <ClInclude Include="GameObservers.h" />
     <ClInclude Include="PlayerComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

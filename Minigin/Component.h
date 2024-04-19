@@ -47,7 +47,7 @@ namespace GameEngine
         explicit TextureComponent(GameObject* gameObj, const std::shared_ptr<Texture2D>& texture);
         //virtual void Update() override;
         virtual void Render() override;
-        Texture2D* GetTexture() const;
+        [[nodiscard]] Texture2D* GetTexture() const;
         void SetTexture(const std::string& filename);
         void SetTexture(const std::shared_ptr<Texture2D>& texture);
 
@@ -110,11 +110,11 @@ namespace GameEngine
         explicit SpriteComponent(GameObject* gameObj, const std::shared_ptr<Texture2D>& texture);
         void UpdateSrcRect();
         virtual void Update() override;
-        void SetScale(float scale) { m_Scale = scale; }
         SpriteInfo m_SpriteInfo{};
+        bool m_IsActive{true};
+        float m_Scale{};
     protected:
         float m_CurrentTimeElapsed{};
-        float m_Scale{};
     };
 // #pragma region IMGUI Component structs
 //     struct TransformM

@@ -5,10 +5,10 @@
 //#include "AchievementsManager.h"
 #include "GameProject/PlayerComponent.h"
 
-GameEngine::IObserver::IObserver(std::string name) : m_Name{ std::move(name) } {}
+GameEngine::IObserver::IObserver(std::string&& name) : m_Name{ std::move(name) } {}
 
-GameEngine::HealthObserver::HealthObserver(const std::string& name, GameObject* gameObject):
-    IObserver(name),
+GameEngine::HealthObserver::HealthObserver(std::string&& name, GameObject* gameObject):
+    IObserver(std::move(name)),
     Component(gameObject)
 {}
 void GameEngine::HealthObserver::Notify(Subject* subject, GameEvent event)
@@ -31,8 +31,8 @@ void GameEngine::HealthObserver::Notify(Subject* subject, GameEvent event)
     }
 }
 
-GameEngine::ScoreObserver::ScoreObserver(const std::string& name, GameObject* gameObject):
-    IObserver(name),
+GameEngine::ScoreObserver::ScoreObserver(std::string&& name, GameObject* gameObject):
+    IObserver(std::move(name)),
     Component(gameObject)
 {}
 
@@ -58,3 +58,4 @@ void GameEngine::ScoreObserver::Notify(Subject* subject, GameEvent event)
     default: break;
     }
 }
+

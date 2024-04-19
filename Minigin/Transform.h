@@ -6,7 +6,7 @@ namespace GameEngine
 	class Transform final
 	{
 	public:
-		glm::vec2 GetPosition() const { return m_Position; }
+		[[nodiscard]] glm::vec3 GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);
 		void Translate(float x, float y);
 		void Translate(const glm::vec2& vec);
@@ -18,6 +18,8 @@ namespace GameEngine
 		Transform() = default;
 		Transform(const Transform& other) = default;
 		Transform& operator=(const Transform& other) = default;
+		Transform(Transform&& other) noexcept = default;
+		Transform& operator=(Transform&& other) noexcept = default;
 		Transform operator+(const Transform& other);
 		Transform operator-(const Transform& other);
 	private:

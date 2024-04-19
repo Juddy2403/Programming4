@@ -34,29 +34,29 @@ namespace GameEngine
     public:
         void Update();
         void Render() const;
-        std::string GetName() const;
+        [[nodiscard]] std::string GetName() const;
 
-        bool IsDestroyed() const;
+        [[nodiscard]] bool IsDestroyed() const;
         void SetDestroyedFlag();
         void RemoveDestroyedObjects();
 
         //Scene graph functions
         [[nodiscard]] GameObject* GetParent() const;
         void SetParent(GameObject* parent, bool keepWorldPosition = true);
-        int GetChildCount() const;
-        GameObject* GetChildAt(int index) const;
+        [[nodiscard]] int GetChildCount() const;
+        [[nodiscard]] GameObject* GetChildAt(int index) const;
 
         //Transform functions
         void SetLocalTransform(const Transform& transform);
         Transform& GetLocalTransform();
-        const Transform& GetLocalTransform() const;
+        [[nodiscard]] const Transform& GetLocalTransform() const;
         Transform GetWorldTransform();
         void UpdateWorldTransform();
         void SetPositionIsDirty();
 
         void SetPosition(float x, float y, float z = 0);
         void SetPosition(const glm::vec3& pos);
-        glm::vec2 GetPosition();
+        glm::vec3 GetPosition();
 
         GameObject() = default;
         explicit GameObject(const std::string& name);
@@ -101,7 +101,7 @@ namespace GameEngine
         }
 
         template<ComponentType T>
-        bool CheckIfComponentExists() const
+        [[nodiscard]] bool CheckIfComponentExists() const
         {
             return std::ranges::find_if(m_Components, [](const auto& elem) {
                     return (dynamic_cast<T*>(elem.get()));

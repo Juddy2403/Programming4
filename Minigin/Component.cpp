@@ -157,6 +157,7 @@ void SpriteComponent::UpdateSrcRect()
 }
 void SpriteComponent::Update()
 {
+    if(!m_IsActive) return;
     m_CurrentTimeElapsed += TimeManager::GetElapsed();
     if (m_CurrentTimeElapsed >= m_SpriteInfo.m_TimeInterval)
     {

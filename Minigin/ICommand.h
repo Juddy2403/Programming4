@@ -39,7 +39,7 @@ namespace GameEngine
 		~Move() override;
 		void Execute() override;
 		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
-	protected:
+	private:
 		glm::vec2 m_Direction{};
 		int m_Speed{};
 	};

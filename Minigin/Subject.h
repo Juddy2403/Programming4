@@ -5,11 +5,14 @@
 namespace GameEngine {
 	enum class ObserverIdentifier {
 		health,
-		score
+		score,
+		bullet
 	};
 	enum class GameEvent {
 		playerDied,
 		scoreIncreased,
+		bulletShot,
+		bulletOutOfBounds,
 		event //for when smth generic happens
 	};
 	class IObserver;

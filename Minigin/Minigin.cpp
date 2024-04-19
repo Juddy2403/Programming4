@@ -55,10 +55,10 @@ GameEngine::Minigin::Minigin(const std::string &dataPath)
 
 	g_window = SDL_CreateWindow(
 		"Programming 4 assignment",
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		612,
-		612,
+		g_WindowRect.x,
+		g_WindowRect.y,
+		g_WindowRect.w,
+		g_WindowRect.h,
 		SDL_WINDOW_OPENGL
 	);
 	if (g_window == nullptr) 

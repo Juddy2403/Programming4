@@ -134,7 +134,7 @@ void GameEngine::GameObject::SetPosition(const glm::vec3& pos)
     SetPosition(pos.x, pos.y, pos.z);
 }
 
-glm::vec2 GameObject::GetPosition()
+glm::vec3 GameObject::GetPosition()
 {
     return GetWorldTransform().GetPosition();
 }

@@ -4,6 +4,8 @@
 
 namespace GameEngine
 {
+	constexpr SDL_Rect g_WindowRect{SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 612, 612};
+
 	class Minigin
 	{
 	public:

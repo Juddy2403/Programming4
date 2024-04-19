@@ -23,10 +23,10 @@ namespace GameEngine
 
         void RenderTexture(const Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& destRect,
             float angle, SDL_Point center, const SDL_RendererFlip& flipMode) const;
-        
-        SDL_Renderer* GetSDLRenderer() const;
 
-        const SDL_Color& GetBackgroundColor() const { return m_clearColor; }
+        [[nodiscard]] SDL_Renderer* GetSDLRenderer() const;
+
+        [[nodiscard]] const SDL_Color& GetBackgroundColor() const { return m_clearColor; }
         void SetBackgroundColor(const SDL_Color& color) { m_clearColor = color; }
     };
 }

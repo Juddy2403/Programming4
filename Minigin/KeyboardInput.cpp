@@ -118,6 +118,7 @@ private:
         { KeyboardInputKey::W,SDL_SCANCODE_W },
         { KeyboardInputKey::X,SDL_SCANCODE_X },
         { KeyboardInputKey::Y,SDL_SCANCODE_Y },
+        { KeyboardInputKey::SPACE,SDL_SCANCODE_SPACE },
         { KeyboardInputKey::Z,SDL_SCANCODE_Z } };
     
     std::array<Uint8, SDL_NUM_SCANCODES> m_PreviousState;

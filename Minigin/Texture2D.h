@@ -11,11 +11,11 @@ namespace GameEngine
 	class Texture2D final
 	{
 	public:
-		SDL_Texture* GetSDLTexture() const;
+		[[nodiscard]] SDL_Texture* GetSDLTexture() const;
 		explicit Texture2D(SDL_Texture* texture);
 		~Texture2D();
 
-		glm::ivec2 GetSize() const;
+		[[nodiscard]] glm::ivec2 GetSize() const;
 
 		Texture2D(const Texture2D &) = delete;
 		Texture2D(Texture2D &&) = delete;
