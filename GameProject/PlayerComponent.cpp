@@ -16,7 +16,7 @@ void ActorDataComponent::IncreaseScore(int value)
 void ActorDataComponent::Hit()
 {
     --m_Health;
-    GetGameObjParent()->Notify(GameEngine::GameEvent::playerDied, static_cast<int>(GameEngine::ObserverIdentifier::health));
+    GetGameObjParent()->Notify(GameEngine::GameEvent::hasBeenHit, static_cast<int>(GameEngine::ObserverIdentifier::health));
 }
 
 RotatingSpriteComponent::RotatingSpriteComponent(GameEngine::GameObject* gameObj):

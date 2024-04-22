@@ -15,9 +15,11 @@ public:
     void Execute() override;
     [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
 private:
-    const float m_ShootCooldown{ 1.f };
+    const float m_ShootCooldown{ .5f };
     std::chrono::high_resolution_clock::time_point m_Previous{ std::chrono::high_resolution_clock::now() };
     std::chrono::high_resolution_clock::time_point m_Current{};
     const int m_MaxShootCount{ 2 };
     int m_ShootsAvailable{ 2 };
 };
+
+

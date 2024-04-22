@@ -5,7 +5,8 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "Component.h"
-#include "Fighter.h"
+#include "DataStructs.h"
+#include "Initializers.h"
 #include "GameObject.h"
 #include "IObserver.h"
 #include "ResourceManager.h"
@@ -17,7 +18,7 @@ void Galaga::LoadLevel() const
 {
     //------BACKGROUND--------
     auto scene = std::make_unique<Scene>("First level");
-    auto gameObject = std::make_unique<GameObject>("Background");
+    auto gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::texture));
     SDL_Rect& destRect = gameObject->AddComponent<TextureComponent>("Background.png")->m_DestRect;
     destRect.w = destRect.h = 612;
     gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<TextureComponent>(), 700);
@@ -27,7 +28,7 @@ void Galaga::LoadLevel() const
     auto smallerFont = ResourceManager::GetInstance().LoadFont("Lingua.otf", 16);
 
     //------TITLE--------
-    gameObject = std::make_unique<GameObject>("Title");
+    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
     gameObject->SetPosition(80.f, 20.f);
     gameObject->AddComponent<TextComponent>(font, "Galaga");
     gameObject->AddComponent<TextureComponent>();
@@ -35,17 +36,19 @@ void Galaga::LoadLevel() const
 
     //-------EXTRATEXT---------
 
-    gameObject = std::make_unique<GameObject>();
+    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
     gameObject->SetPosition(20.f, 140.f);
     gameObject->AddComponent<TextComponent>(smallerFont, "Use WASD to move Ms Pacman, C to inflict damage, Z and X to pick up pellets");
     gameObject->AddComponent<TextureComponent>();
     scene->AddObject(std::move(gameObject));
 
     //------FIGHTER--------
-    gameObject = InitFighter(scene.get());
-
+    gameObject = InitFighter();
+    auto bulletObserver = std::make_unique<BulletObserver>("Fighter bullet observer", scene.get());
+    scene->AddObserver(static_cast<int>(GameEngine::ObserverIdentifier::bullet), std::move(bulletObserver), gameObject.get());
+    
     //------HealthObserver--------
-    auto healthObject = std::make_unique<GameObject>("Lives Text");
+    auto healthObject = std::make_unique<GameObject>(static_cast<int>(GameId::observer));
     healthObject->SetPosition(20.f, 160.f);
     healthObject->AddComponent<TextureComponent>();
     healthObject->AddComponent<TextComponent>(smallerFont, "");
@@ -54,7 +57,7 @@ void Galaga::LoadLevel() const
     scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(healthObserver), gameObject.get());
 
     //------ScoreObserver--------
-    auto scoreObject = std::make_unique<GameObject>("Score Text");
+    auto scoreObject = std::make_unique<GameObject>(static_cast<int>(GameId::observer));
     scoreObject->SetPosition(20.f, 180.f);
     scoreObject->AddComponent<TextureComponent>();
     scoreObject->AddComponent<TextComponent>(smallerFont, "");
@@ -62,6 +65,26 @@ void Galaga::LoadLevel() const
     scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserver), gameObject.get());
     scene->AddObject(std::move(scoreObject));
     
+    scene->AddObject(std::move(gameObject));
+    
+    //------ENEMIES--------
+    gameObject = InitBee();
+    gameObject->SetPosition(298,130);
+    auto enemyObserver = std::make_unique<EnemyObserver>("Bee observer");
+    scene->AddObserver(-1, std::move(enemyObserver), gameObject.get());
+    
+    scene->AddObject(std::move(gameObject));
+
+    gameObject = InitButterfly();
+    gameObject->SetPosition(298,70);
+    enemyObserver = std::make_unique<EnemyObserver>("Butterfly observer");
+    scene->AddObserver(-1, std::move(enemyObserver), gameObject.get());
+    scene->AddObject(std::move(gameObject));
+
+    gameObject = InitBossGalaga();
+    gameObject->SetPosition(298,38);
+    enemyObserver = std::make_unique<EnemyObserver>("Boss galaga observer");
+    scene->AddObserver(-1, std::move(enemyObserver), gameObject.get());
     scene->AddObject(std::move(gameObject));
 
     SceneManager::GetInstance().SetScene(std::move(scene));

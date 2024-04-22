@@ -1,40 +1,71 @@
 ﻿#include "GameObservers.h"
 
+#include <iostream>
+
 #include "BulletComponent.h"
+#include "Initializers.h"
 #include "PlayerComponent.h"
 
 BulletObserver::BulletObserver(std::string&& name, GameEngine::Scene* scene):
-IObserver(std::move(name)), m_Scene(scene){}
-void BulletObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent event)
+    IObserver(std::move(name)), m_Scene(scene) {}
+void BulletObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent event
+    , [[maybe_unused]] GameEngine::EventData* eventData)
 {
     // add the bullet game obj
     GameEngine::GameObject* actor = dynamic_cast<GameEngine::GameObject*>(subject);
     switch (event)
     {
-    case GameEngine::GameEvent::bulletShot:
+    case GameEngine::GameEvent::collision:
     {
-        auto bullet = std::make_unique<GameEngine::GameObject>();
-        glm::vec3 pos = actor->GetPosition();
-        auto* spriteComp = actor->GetComponent<RotatingSpriteComponent>();
-        pos.y -= static_cast<float>(spriteComp->m_DestRect.h);
-        bullet->SetPosition(pos);
-        auto* bulletSpriteComp = bullet->AddComponent<GameEngine::SpriteComponent>("Galaga2.png");
-        bulletSpriteComp->m_SpriteInfo = spriteComp->m_SpriteInfo;
-        bulletSpriteComp->m_SpriteInfo.m_StartPos = glm::vec2{307,118};
-        bulletSpriteComp->m_SpriteInfo.m_CurrentCol = bulletSpriteComp->m_SpriteInfo.m_CurrentRow = 0;
-        bulletSpriteComp->m_SpriteInfo.m_NrOfCols = 1;
-        bulletSpriteComp->m_SpriteInfo.m_NrOfRows = 1;
-        bulletSpriteComp->m_IsActive = false;
-        bulletSpriteComp->m_Scale = spriteComp->m_Scale;
-        bulletSpriteComp->UpdateSrcRect();
-        bullet->AddComponent<BulletComponent>(bulletSpriteComp);
-        bullet->AddObserver(static_cast<int>(GameEngine::ObserverIdentifier::bullet), this);
-        
-        m_Scene->AddObject(std::move(bullet));
+        const auto collisionData = static_cast<GameEngine::CollisionData*>(eventData);
+        if (collisionData->pOtherCollider->GetGameObjParent()->GetID() == static_cast<int>(GameId::enemy)&&
+            actor->GetID() == static_cast<int>(GameId::bullet))
+        {
+            actor->SetDestroyedFlag();
+        }
+        std::cout<<"Bullet collided with: "<<collisionData->pOtherCollider->GetGameObjParent()->GetID()<<std::endl;
     }
         break;
-    case GameEngine::GameEvent::bulletOutOfBounds: 
+    case GameEngine::GameEvent::bulletShot:
+    {
+        auto bullet = InitBullet();
+
+        glm::vec3 pos = actor->GetPosition();
+        pos.y -= static_cast<float>(bullet->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h);
+        bullet->SetPosition(pos);
+
+        bullet->AddObserver(static_cast<int>(GameEngine::ObserverIdentifier::bullet), this);
+
+        m_Scene->AddObject(std::move(bullet));
+    }
+    break;
+    case GameEngine::GameEvent::bulletOutOfBounds:
         actor->SetDestroyedFlag();
+        break;
+    default: break;
+    }
+}
+EnemyObserver::EnemyObserver(std::string&& name): IObserver(std::move(name)) {}
+void EnemyObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent event
+    , [[maybe_unused]] GameEngine::EventData* eventData)
+{
+    //GameEngine::GameObject* actor = dynamic_cast<GameEngine::GameObject*>(subject);
+    switch (event)
+    {
+    case GameEngine::GameEvent::collision:
+    {
+        subject;
+        const auto collisionData = static_cast<GameEngine::CollisionData*>(eventData);
+        if (collisionData->pOtherCollider->GetGameObjParent()->GetID() == static_cast<int>(GameId::bullet))
+        {
+            subject->NotifyAll(GameEngine::GameEvent::hasBeenHit);
+        }
+        std::cout<<"Enemy collided with: "<<collisionData->pOtherCollider->GetGameObjParent()->GetID()<<std::endl;
+    }
+    break;
+    case GameEngine::GameEvent::hasBeenHit:
+        break;
+    case GameEngine::GameEvent::died:
         break;
     default: break;
     }

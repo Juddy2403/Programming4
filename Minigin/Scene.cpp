@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "IObserver.h"
 #include <algorithm>
+
+#include "CollisionManager.h"
 #include "InputManager.h"
 #include "TimeManager.h"
 
@@ -40,6 +42,7 @@ void Scene::Update()
     //Processing input
 
     bool areElemsToErase = false;
+    CollisionManager::GetInstance().CheckCollisions();
     for (const auto& object : m_GameObjects)
     {
         if (!object->IsDestroyed()) object->Update();

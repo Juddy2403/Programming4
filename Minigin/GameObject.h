@@ -16,7 +16,7 @@ namespace GameEngine
     {
     private:
         std::vector<std::unique_ptr<Component>> m_Components{};
-        std::string m_Name{};
+        int m_ID{};
         bool m_IsDestroyed{ false };
 
         GameObject* m_pParent{};
@@ -34,7 +34,7 @@ namespace GameEngine
     public:
         void Update();
         void Render() const;
-        [[nodiscard]] std::string GetName() const;
+        [[nodiscard]] int GetID() const;
 
         [[nodiscard]] bool IsDestroyed() const;
         void SetDestroyedFlag();
@@ -58,8 +58,7 @@ namespace GameEngine
         void SetPosition(const glm::vec3& pos);
         glm::vec3 GetPosition();
 
-        GameObject() = default;
-        explicit GameObject(const std::string& name);
+        explicit GameObject(int id);
         ~GameObject() override = default;
         GameObject(const GameObject& other) = delete;
         GameObject(GameObject&& other) = delete;

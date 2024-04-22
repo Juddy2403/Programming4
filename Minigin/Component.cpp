@@ -7,6 +7,9 @@
 #include "TimeManager.h"
 #include <numbers>
 
+#include "CollisionManager.h"
+#include "IObserver.h"
+
 #pragma warning( disable : 4244 )
 
 using namespace GameEngine;
@@ -65,7 +68,7 @@ void TextureComponent::Render()
         const auto pos = GetGameObjParent()->GetPosition();
         m_DestRect.x = static_cast<int>(pos.x);
         m_DestRect.y = static_cast<int>(pos.y);
-        if(m_RotationAngle != 0 || m_FlipMode != SDL_FLIP_NONE)
+        if (m_RotationAngle != 0 || m_FlipMode != SDL_FLIP_NONE)
             Renderer::GetInstance().RenderTexture(*m_Texture, m_SrcRect, m_DestRect, m_RotationAngle, m_RotationCenter, m_FlipMode);
         else
             Renderer::GetInstance().RenderTexture(*m_Texture, m_SrcRect, m_DestRect);
@@ -157,7 +160,7 @@ void SpriteComponent::UpdateSrcRect()
 }
 void SpriteComponent::Update()
 {
-    if(!m_IsActive) return;
+    if (!m_IsActive) return;
     m_CurrentTimeElapsed += TimeManager::GetElapsed();
     if (m_CurrentTimeElapsed >= m_SpriteInfo.m_TimeInterval)
     {
@@ -169,129 +172,38 @@ void SpriteComponent::Update()
 }
 #pragma endregion
 
-// #pragma region IMGUI Component
-// IMGUIComponent::IMGUIComponent(GameObject* gameObj) : Component(gameObj)
-// {
-// 	m_IntPlotUpdateInfo->buttonMsg = "Trash the cache";
-// 	m_IntPlotUpdateInfo->color = ImColor(0, 255, 0);
-//
-// 	m_GameObjPlotUpdateInfo->buttonMsg = "Trash the cache with GameObject3D";
-// 	m_GameObjPlotUpdateInfo->color = ImColor(0, 0, 255);
-//
-// 	m_AltGameObjPlotUpdateInfo->buttonMsg = "Trash the cache with GameObject3DAlt";
-// 	m_AltGameObjPlotUpdateInfo->color = ImColor(255, 0, 0);
-// }
-//
-// void IMGUIComponent::Render()
-// {
-// 	//Manage exercise 1 graph
-// 	RenderExercise1();
-//
-// 	//Manage exercise 2 graph
-// 	RenderExercise2();
-// }
-//
-// void IMGUIComponent::RenderExercise1()
-// {
-// 	ImGui::Begin("Exercise 1", nullptr, ImGuiWindowFlags_None);
-// 	static int nrOfSamples{ 10 };
-// 	ImGui::InputInt("# samples:", &nrOfSamples);
-//
-// 	ManagePlotUpdateStages<int>(m_IntPlotUpdateInfo.get(), nrOfSamples);
-// 	ImGui::Plot("Int plot", *m_IntPlotUpdateInfo->plotConfig);
-// 	ImGui::End();
-// }
-//
-// void IMGUIComponent::RenderExercise2()
-// {
-// 	ImGui::Begin("Exercise 2", nullptr, ImGuiWindowFlags_None);
-//
-// 	static int nrOfSamples{ 100 };
-// 	ImGui::InputInt("# samples:", &nrOfSamples);
-//
-// 	ManagePlotUpdateStages<GameObject3D>(m_GameObjPlotUpdateInfo.get(), nrOfSamples);
-// 	ImGui::Plot("GameObj plot", *m_GameObjPlotUpdateInfo->plotConfig);
-//
-// 	ManagePlotUpdateStages<GameObject3DAlt>(m_AltGameObjPlotUpdateInfo.get(), nrOfSamples);
-// 	ImGui::Plot("AltGameObj plot", *m_AltGameObjPlotUpdateInfo->plotConfig);
-//
-// 	if (!m_GameObjPlotUpdateInfo->avgTime.empty() && !m_AltGameObjPlotUpdateInfo->avgTime.empty())
-// 	{
-// 		RenderCombinedConf();
-// 		ImGui::Plot("Combined plot", *m_CombinedPlotConf);
-// 	}
-//
-// 	ImGui::End();
-// }
-//
-// void IMGUIComponent::RenderCombinedConf()
-// {
-// 	ImGui::Text("Combined:");
-//
-// 	static const float* y_data[] = { m_AltGameObjPlotUpdateInfo->avgTime.data(), m_GameObjPlotUpdateInfo->avgTime.data() };
-// 	static ImU32 colors[2] = { ImColor(255, 0, 0), ImColor(0, 0, 255) };
-//
-// 	*m_CombinedPlotConf = *m_GameObjPlotUpdateInfo->plotConfig;
-// 	m_CombinedPlotConf->values.color = 0;
-// 	m_CombinedPlotConf->values.colors = colors;
-// 	m_CombinedPlotConf->values.ys = nullptr;
-// 	m_CombinedPlotConf->values.ys_list = y_data;
-// 	m_CombinedPlotConf->values.ys_count = 2;
-// 	m_CombinedPlotConf->scale.max = std::max(*std::max_element(m_GameObjPlotUpdateInfo->avgTime.begin(), m_GameObjPlotUpdateInfo->avgTime.end()),
-// 		*std::max_element(m_AltGameObjPlotUpdateInfo->avgTime.begin(), m_AltGameObjPlotUpdateInfo->avgTime.end())) + 1;
-// }
-// #pragma endregion
+#pragma region Collision component
 
-// #pragma region FPS Component
-// const float FPSComponent::m_FpsUpdateRate = 1.f;
-//
-// FPSComponent::FPSComponent(GameObject* gameObj, TextComponent* textComponent) :Component(gameObj),
-// m_TextComponent{ textComponent }
-// {
-// }
-//
-// void FPSComponent::Update()
-// {
-// 	auto& time = TimeManager::GetInstance();
-// 	m_FpsUpdateCounter += time.GetElapsed();
-// 	++m_FramesSinceUpdate;
-// 	if (m_FpsUpdateCounter >= m_FpsUpdateRate)
-// 	{
-// 		m_FPS = m_FramesSinceUpdate / m_FpsUpdateCounter;
-// 		if (m_TextComponent != nullptr) m_TextComponent->SetText(std::format("{:.1f} FPS", m_FPS));
-// 		m_FramesSinceUpdate = 0;
-// 		m_FpsUpdateCounter -= m_FpsUpdateRate;
-// 	}
-// }
-// #pragma endregion
-//
-// #pragma region Rotation Component
-// RotationComponent::RotationComponent(GameObject* gameObj, float velocity,
-// 	bool isRotatingClockwise) :
-// 	Component(gameObj),
-// 	m_IsRotatingClockwise{ isRotatingClockwise },
-// 	m_Velocity{ velocity }
-// {
-// }
-//
-// void RotationComponent::Update()
-// {
-// 	if (GetGameObjParent()->GetParent() != nullptr)
-// 	{
-// 		constexpr float fullRotation{ 2 * static_cast<float>(std::numbers::pi) };
-//
-// 		if (m_IsRotatingClockwise)
-// 		{
-// 			m_Angle += TimeManager::GetElapsed() * m_Velocity;
-// 			if (m_Angle >= fullRotation) m_Angle -= fullRotation;
-// 		}
-// 		else
-// 		{
-// 			m_Angle -= TimeManager::GetElapsed() * m_Velocity;
-// 			if (m_Angle <= fullRotation) m_Angle += fullRotation;
-// 		}
-// 		GetGameObjParent()->GetLocalTransform().SetRotation(m_Angle);
-// 		GetGameObjParent()->SetPositionIsDirty();
-// 	}
-// }
-// #pragma endregion
+CollisionComponent::CollisionComponent(GameObject* gameObj,SDL_Rect* collisionRect):
+    Component(gameObj),
+    m_CollisionRect(collisionRect)
+{
+    CollisionManager::GetInstance().AddCollisionComponent(this);
+}
+const SDL_Rect& CollisionComponent::GetCollisionRect() const
+{
+    return *m_CollisionRect;
+}
+bool CollisionComponent::IsColliding(CollisionComponent* other) const
+{
+    return SDL_HasIntersection(m_CollisionRect, other->m_CollisionRect);
+}
+void CollisionComponent::CollidedWith(CollisionComponent* other) 
+{
+    CollisionData data;
+    data.pOtherCollider = other;
+    GetGameObjParent()->NotifyAll(GameEvent::collision,&data);
+}
+
+void CollisionComponent::Update()
+{
+    m_CollisionRect->x = GetGameObjParent()->GetPosition().x;
+    m_CollisionRect->y = GetGameObjParent()->GetPosition().y;
+}
+CollisionComponent::~CollisionComponent()
+{
+    CollisionManager::GetInstance().RemoveCollisionComponent(this);
+}
+
+#pragma endregion
+

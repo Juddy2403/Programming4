@@ -14,6 +14,6 @@ public:
     
     void Update() override;
 private:
-    glm::vec2 m_Velocity{ 0.0f, -100.0f };
+    glm::vec2 m_Velocity{ 0.0f, -300.0f };
     GameEngine::SpriteComponent* m_SpriteComponent{};
 };

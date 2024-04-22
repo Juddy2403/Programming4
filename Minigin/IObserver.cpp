@@ -11,12 +11,12 @@ GameEngine::HealthObserver::HealthObserver(std::string&& name, GameObject* gameO
     IObserver(std::move(name)),
     Component(gameObject)
 {}
-void GameEngine::HealthObserver::Notify(Subject* subject, GameEvent event)
+void GameEngine::HealthObserver::Notify(Subject* subject, GameEvent event, [[maybe_unused]] EventData* eventData)
 {
     switch (event)
     {
     case GameEvent::event:
-    case GameEngine::GameEvent::playerDied:
+    case GameEngine::GameEvent::hasBeenHit:
         if (auto* textComp = GetGameObjParent()->GetComponent<TextComponent>())
         {
             const auto gameObject = dynamic_cast<GameObject*>(subject);
@@ -36,7 +36,7 @@ GameEngine::ScoreObserver::ScoreObserver(std::string&& name, GameObject* gameObj
     Component(gameObject)
 {}
 
-void GameEngine::ScoreObserver::Notify(Subject* subject, GameEvent event)
+void GameEngine::ScoreObserver::Notify(Subject* subject, GameEvent event, [[maybe_unused]] EventData* eventData)
 {
     switch (event)
     {
@@ -58,4 +58,3 @@ void GameEngine::ScoreObserver::Notify(Subject* subject, GameEvent event)
     default: break;
     }
 }
-

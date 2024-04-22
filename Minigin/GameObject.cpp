@@ -6,8 +6,8 @@
 
 using namespace GameEngine;
 
-GameObject::GameObject(const std::string& name) :
-    m_Name{ name }
+GameObject::GameObject(int id) :
+    m_ID{ id }
 {}
 
 #pragma region Update stuff
@@ -107,10 +107,9 @@ GameObject* GameObject::GetChildAt(int index) const
 #pragma endregion
 
 
-
-std::string GameEngine::GameObject::GetName() const
+int GameEngine::GameObject::GetID() const
 {
-    return m_Name;
+    return m_ID;
 }
 
 bool GameEngine::GameObject::IsDestroyed() const
