@@ -8,6 +8,7 @@
 #include <numbers>
 
 #include "CollisionManager.h"
+#include "EventData.h"
 #include "IObserver.h"
 
 #pragma warning( disable : 4244 )
@@ -72,6 +73,7 @@ void TextureComponent::Render()
             Renderer::GetInstance().RenderTexture(*m_Texture, m_SrcRect, m_DestRect, m_RotationAngle, m_RotationCenter, m_FlipMode);
         else
             Renderer::GetInstance().RenderTexture(*m_Texture, m_SrcRect, m_DestRect);
+
     }
 }
 Texture2D* TextureComponent::GetTexture() const
@@ -178,7 +180,7 @@ CollisionComponent::CollisionComponent(GameObject* gameObj,SDL_Rect* collisionRe
     Component(gameObj),
     m_CollisionRect(collisionRect)
 {
-    CollisionManager::GetInstance().AddCollisionComponent(this);
+    CollisionManager::AddCollisionComponent(this);
 }
 const SDL_Rect& CollisionComponent::GetCollisionRect() const
 {
@@ -202,7 +204,7 @@ void CollisionComponent::Update()
 }
 CollisionComponent::~CollisionComponent()
 {
-    CollisionManager::GetInstance().RemoveCollisionComponent(this);
+    CollisionManager::RemoveCollisionComponent(this);
 }
 
 #pragma endregion

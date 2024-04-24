@@ -5,10 +5,7 @@
 namespace GameEngine
 {
     class Subject;
-    struct CollisionData : EventData
-    {
-        CollisionComponent* pOtherCollider;
-    };
+
     class IObserver
     {
     public:

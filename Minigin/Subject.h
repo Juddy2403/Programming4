@@ -23,8 +23,6 @@ namespace GameEngine
         collision,
         event //for when smth generic happens
     };
-    struct EventData
-    {};
 
     class IObserver;
     class Subject

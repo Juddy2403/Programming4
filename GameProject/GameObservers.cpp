@@ -5,6 +5,7 @@
 #include "BulletComponent.h"
 #include "Initializers.h"
 #include "PlayerComponent.h"
+#include "SoundSystem.h"
 
 BulletObserver::BulletObserver(std::string&& name, GameEngine::Scene* scene):
     IObserver(std::move(name)), m_Scene(scene) {}
@@ -58,6 +59,7 @@ void EnemyObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent e
         const auto collisionData = static_cast<GameEngine::CollisionData*>(eventData);
         if (collisionData->pOtherCollider->GetGameObjParent()->GetID() == static_cast<int>(GameId::bullet))
         {
+            GameEngine::ServiceLocator::GetSoundSystem().Play(static_cast<GameEngine::SoundId>(SoundId::enemyDeath), 100);
             subject->NotifyAll(GameEngine::GameEvent::hasBeenHit);
         }
         std::cout<<"Enemy collided with: "<<collisionData->pOtherCollider->GetGameObjParent()->GetID()<<std::endl;

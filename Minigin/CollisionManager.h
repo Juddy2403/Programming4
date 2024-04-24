@@ -4,16 +4,21 @@
 
 namespace GameEngine
 {
-    class CollisionManager final : public Singleton<CollisionManager>
+    class CollisionManager final
     {
     public:
-        void AddCollisionComponent(GameEngine::CollisionComponent* collisionComponent);
-        void RemoveCollisionComponent(GameEngine::CollisionComponent* collisionComponent);
-        void CheckCollisions() const;
-    private:
-        friend class Singleton<CollisionManager>;
-        CollisionManager() = default;
+        CollisionManager(const CollisionManager& other) = delete;
+        CollisionManager(CollisionManager&& other) noexcept = delete;
+        CollisionManager& operator=(const CollisionManager& other) = delete;
+        CollisionManager& operator=(CollisionManager&& other) noexcept = delete;
         
-        std::vector<GameEngine::CollisionComponent*> m_CollisionComponents{};
+        static void AddCollisionComponent(GameEngine::CollisionComponent* collisionComponent);
+        static void RemoveCollisionComponent(GameEngine::CollisionComponent* collisionComponent);
+        static void CheckCollisions();
+        
+        CollisionManager() = delete;
+        ~CollisionManager() = delete;
+    private:
+        static std::vector<GameEngine::CollisionComponent*> m_CollisionComponents;
     };
 }

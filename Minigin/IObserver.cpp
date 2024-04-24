@@ -21,7 +21,7 @@ void GameEngine::HealthObserver::Notify(Subject* subject, GameEvent event, [[may
         {
             const auto gameObject = dynamic_cast<GameObject*>(subject);
             assert(gameObject);
-            const int lives = gameObject->GetComponent<ActorDataComponent>()->GetHealth();
+            const int lives = gameObject->GetComponent<HealthComponent>()->GetHealth();
             textComp->SetText("# lives: " + std::to_string(lives));
             textComp->Update();
         }
@@ -46,7 +46,7 @@ void GameEngine::ScoreObserver::Notify(Subject* subject, GameEvent event, [[mayb
         {
             const auto gameObject = dynamic_cast<GameObject*>(subject);
             assert(gameObject);
-            const int score = gameObject->GetComponent<ActorDataComponent>()->GetScore();
+            const int score = gameObject->GetComponent<ScoreComponent>()->GetScore();
             // if (score >= 500)
             // {
             //     AchievementsManager::GetInstance().SetAchievement("ACH_WIN_ONE_GAME");

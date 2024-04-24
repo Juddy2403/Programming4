@@ -3,21 +3,22 @@
 #include "TimeManager.h"
 
 
-ActorDataComponent::ActorDataComponent(GameEngine::GameObject* gameObject, int health):
+HealthComponent::HealthComponent(GameEngine::GameObject* gameObject, int health):
     Component(gameObject),
     m_Health(health)
 {}
-void ActorDataComponent::IncreaseScore(int value)
+void ScoreComponent::IncreaseScore(int value)
 {
     m_Score += value;
     GetGameObjParent()->Notify(GameEngine::GameEvent::scoreIncreased,
         static_cast<int>(GameEngine::ObserverIdentifier::score));
 }
-void ActorDataComponent::Hit()
+void HealthComponent::Hit()
 {
     --m_Health;
     GetGameObjParent()->Notify(GameEngine::GameEvent::hasBeenHit, static_cast<int>(GameEngine::ObserverIdentifier::health));
 }
+ScoreComponent::ScoreComponent(GameEngine::GameObject* gameObject): Component(gameObject) {}
 
 RotatingSpriteComponent::RotatingSpriteComponent(GameEngine::GameObject* gameObj):
     SpriteComponent(gameObj)

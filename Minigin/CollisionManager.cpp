@@ -1,6 +1,8 @@
 ﻿#include "CollisionManager.h"
 using namespace GameEngine;
 
+std::vector<GameEngine::CollisionComponent*> CollisionManager::m_CollisionComponents{};
+
 void CollisionManager::AddCollisionComponent(GameEngine::CollisionComponent* collisionComponent)
 {
     m_CollisionComponents.emplace_back(collisionComponent);
@@ -9,7 +11,7 @@ void CollisionManager::RemoveCollisionComponent(GameEngine::CollisionComponent* 
 {
     std::erase(m_CollisionComponents, collisionComponent);
 }
-void CollisionManager::CheckCollisions() const
+void CollisionManager::CheckCollisions() 
 {
     const size_t size = m_CollisionComponents.size();
     for (size_t first = 0; first < size - 1; ++first)

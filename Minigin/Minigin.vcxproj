@@ -228,8 +228,10 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_truetype.h" />
     <ClInclude Include="AchievementsManager.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="EventData.h" />
     <ClInclude Include="KeyboardInput.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="SteamAchievements.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="Component.h" />
@@ -261,6 +263,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="KeyboardInput.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="SteamAchievements.cpp" />
     <ClCompile Include="ICommand.cpp" />
     <ClCompile Include="Component.cpp" />

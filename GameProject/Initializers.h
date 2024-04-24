@@ -31,7 +31,8 @@ inline std::unique_ptr<GameEngine::GameObject> InitFighter()
     // auto fighterObserver = std::make_unique<FighterObserver>("Fighter observer");
     // scene->AddObserver(static_cast<int>(GameEngine::ObserverIdentifier::bullet), std::move(fighterObserver), gameObject.get());
     
-    gameObject->AddComponent<ActorDataComponent>(3);
+    gameObject->AddComponent<HealthComponent>(3);
+    gameObject->AddComponent<ScoreComponent>();
     auto& input = GameEngine::InputManager::GetInstance();
     input.BindCommand(GameEngine::KeyboardInputKey::W,
         std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }, 200));

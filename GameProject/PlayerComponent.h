@@ -19,22 +19,35 @@ private:
     bool m_IsColIncreasing{ true };
 };
 
-class ActorDataComponent final : public GameEngine::Component
+class HealthComponent final : public GameEngine::Component
 {
 public:
-    explicit ActorDataComponent(GameEngine::GameObject* gameObject, int health);
-    ActorDataComponent(const ActorDataComponent& other) = delete;
-    ActorDataComponent(ActorDataComponent&& other) noexcept = delete;
-    ActorDataComponent& operator=(const ActorDataComponent& other) = delete;
-    ActorDataComponent& operator=(ActorDataComponent&& other) noexcept = delete;
-    ~ActorDataComponent() override = default;
-
-    void IncreaseScore(int value);
-    [[nodiscard]] int GetScore() const { return m_Score; }
+    explicit HealthComponent(GameEngine::GameObject* gameObject, int health);
+    HealthComponent(const HealthComponent& other) = delete;
+    HealthComponent(HealthComponent&& other) noexcept = delete;
+    HealthComponent& operator=(const HealthComponent& other) = delete;
+    HealthComponent& operator=(HealthComponent&& other) noexcept = delete;
+    ~HealthComponent() override = default;
+    
     void Hit();
     [[nodiscard]] int GetHealth() const { return m_Health; }
 private:
     int m_Health{ 3 };
+};
+
+class ScoreComponent final : public GameEngine::Component
+{
+public:
+    explicit ScoreComponent(GameEngine::GameObject* gameObject);
+    ScoreComponent(const ScoreComponent& other) = delete;
+    ScoreComponent(ScoreComponent&& other) noexcept = delete;
+    ScoreComponent& operator=(const ScoreComponent& other) = delete;
+    ScoreComponent& operator=(ScoreComponent&& other) noexcept = delete;
+    ~ScoreComponent() override = default;
+
+    void IncreaseScore(int value);
+    [[nodiscard]] int GetScore() const { return m_Score; }
+private:
     int m_Score{};
 };
 

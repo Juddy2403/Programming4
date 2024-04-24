@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "IObserver.h"
 #include <algorithm>
+#include <future>
 
 #include "CollisionManager.h"
 #include "InputManager.h"
@@ -39,21 +40,16 @@ void Scene::RemoveAll()
 
 void Scene::Update()
 {
-    //Processing input
-
     bool areElemsToErase = false;
-    CollisionManager::GetInstance().CheckCollisions();
+    auto collisionFuture = std::async(&CollisionManager::CheckCollisions);
     for (const auto& object : m_GameObjects)
     {
         if (!object->IsDestroyed()) object->Update();
         else areElemsToErase = true;
     }
+    collisionFuture.get();
     if (areElemsToErase) RemoveDestroyedObjects();
 }
-
-//void GameEngine::Scene::FixedUpdate()
-//{ 
-//}
 
 void Scene::Render() const
 {
