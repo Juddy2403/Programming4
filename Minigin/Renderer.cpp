@@ -6,8 +6,10 @@
 #include <imgui.h>
 #include <backends/imgui_impl_sdl2.h>
 #include <backends/imgui_impl_opengl3.h>
-#include <imgui_plot.h>
+
 #pragma warning( disable : 4244 )
+
+//#define COLLISION_BOX_DEBUG
 
 int GetOpenGLDriverIndex()
 {
@@ -80,7 +82,7 @@ void GameEngine::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rec
     const SDL_Rect& destRect) const
 {
     SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &destRect);
-    #ifndef NDEBUG
+    #ifdef COLLISION_BOX_DEBUG
     SDL_SetRenderDrawColor(GetSDLRenderer(), 255, 0, 0, 255); // Set the color to red
     SDL_RenderDrawRect(GetSDLRenderer(), &destRect); // Draw the rectangle
     #endif

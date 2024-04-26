@@ -8,29 +8,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43cfb645-803b-40f9-a35f-cf674a51c400" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Minigin/EventData.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Minigin/SoundSystem.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Minigin/SoundSystem.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/DerivedSoundSystems.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/ISoundSystem.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/ISoundSystem.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/ServiceLocator.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/DataStructs.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/DataStructs.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/GameObservers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameObservers.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Initializers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/PlayerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/PlayerComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/PlayerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/PlayerComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/CollisionManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/CollisionManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/CollisionManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/CollisionManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Component.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/ICommand.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/ICommand.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/IObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/IObserver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/IObserver.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/IObserver.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/Minigin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Renderer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/Scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Subject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subject.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdl.props" beforeDir="false" afterPath="$PROJECT_DIR$/sdl.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/SoundSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/DerivedSoundSystems.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/SoundSystem.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,71 +59,13 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/__msvc_filebuf.hpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/fstream" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/map" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/memory" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/mutex" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/ostream" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/thread" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/type_traits" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/vector" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/xmemory" root0="SKIP_HIGHLIGHTING" />
@@ -255,7 +188,10 @@
       <workItem from="1713882639855" duration="10761000" />
       <workItem from="1713967218152" duration="1017000" />
       <workItem from="1713968262902" duration="9187000" />
-      <workItem from="1713994648384" duration="4093000" />
+      <workItem from="1713994648384" duration="4330000" />
+      <workItem from="1714049278909" duration="7854000" />
+      <workItem from="1714057650864" duration="14377000" />
+      <workItem from="1714128930996" duration="8732000" />
     </task>
     <servers />
   </component>

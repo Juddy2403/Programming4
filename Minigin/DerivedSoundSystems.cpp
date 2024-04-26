@@ -1,15 +1,16 @@
-﻿#include "SoundSystem.h"
-
-#include <fstream>
-
+﻿#include "DerivedSoundSystems.h"
 #include "SDL_mixer.h"
 #include <iostream>
-using namespace GameEngine;
-std::unique_ptr<SoundSystem> ServiceLocator::m_SsInstance{ std::make_unique<NullSoundSystem>() };
 
-class SdlSoundSystem::SDLAudioClip
+using namespace GameEngine;
+
+class SdlSoundSystem::SDLAudioClip final
 {
 public:
+    SDLAudioClip(const SDLAudioClip& other) = delete;
+    SDLAudioClip(SDLAudioClip&& other) noexcept = delete;
+    SDLAudioClip& operator=(const SDLAudioClip& other) = delete;
+    SDLAudioClip& operator=(SDLAudioClip&& other) noexcept = delete;
     explicit SDLAudioClip(const std::string& filePath) : m_FilePath(filePath) {}
     ~SDLAudioClip()
     {
@@ -59,25 +60,7 @@ private:
     Mix_Chunk* m_pSound{};
 };
 
-void SoundSystem::FillSoundPaths(const std::string& fileSource)
-{
-    std::ifstream file(fileSource);
-
-    if (!file.is_open())
-    {
-        std::cerr << "Error: Unable to open file " << fileSource << '\n';
-        return;
-    }
-
-    std::string line;
-    while (std::getline(file, line))
-    {
-        m_SoundFilePaths.emplace_back(line);
-    }
-
-    file.close();
-}
-SdlSoundSystem::SdlSoundSystem()
+SdlSoundSystem::SdlSoundSystem() : ISoundSystem()
 {
     SDLAudioClip::OpenAudio();
 }
@@ -85,7 +68,15 @@ SdlSoundSystem::~SdlSoundSystem()
 {
     SDLAudioClip::CloseAudio();
 }
-void SdlSoundSystem::Play(const SoundId id, const int volume)
+void SdlSoundSystem::FillSoundPaths(const std::string& fileSource)
+{
+    ISoundSystem::FillSoundPaths(fileSource);
+    for (const auto& path : m_SoundFilePaths)
+    {
+        m_AudioClips.emplace_back(std::make_unique<SDLAudioClip>(path));
+    }
+}
+void SdlSoundSystem::PlaySound(const SoundId id, const int volume)
 {
     auto audioClip = m_AudioClips[id].get();
     if (!audioClip->IsLoaded())
@@ -93,25 +84,15 @@ void SdlSoundSystem::Play(const SoundId id, const int volume)
     audioClip->SetVolume(volume);
     audioClip->Play();
 }
-void SdlSoundSystem::FillSoundPaths(const std::string& fileSource)
+
+void LoggingSoundSystem::AddSoundToQueue(const SoundId id, const int volume)
 {
-    SoundSystem::FillSoundPaths(fileSource);
-    for (const auto& path : m_SoundFilePaths)
-    {
-        m_AudioClips.emplace_back(std::make_unique<SDLAudioClip>(path));
-    }
-}
-void LoggingSoundSystem::Play(const SoundId id, const int volume)
-{
-    m_RealSs->Play(id, volume);
-    std::cout << "playing " << id << " at volume " << volume << '\n';
+    m_RealSs->AddSoundToQueue(id, volume);
+    std::cout << "Adding to the queue: " << id << " at volume " << volume << '\n';
 }
 void LoggingSoundSystem::FillSoundPaths(const std::string& fileSource)
 {
     m_RealSs->FillSoundPaths(fileSource);
-    std::cout << "Filling sound paths from" << fileSource << "\n";
+    std::cout << "Filling sound paths from " << fileSource << "\n";
 }
-void ServiceLocator::RegisterSoundSystem(std::unique_ptr<SoundSystem>&& ss)
-{
-    m_SsInstance = ss == nullptr ? std::make_unique<NullSoundSystem>() : std::move(ss);
-}
+

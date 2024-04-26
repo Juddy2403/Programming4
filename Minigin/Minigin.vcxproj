@@ -227,11 +227,13 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_textedit.h" />
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_truetype.h" />
     <ClInclude Include="AchievementsManager.h" />
+    <ClInclude Include="ISoundSystem.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="EventData.h" />
     <ClInclude Include="KeyboardInput.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SoundSystem.h" />
+    <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="DerivedSoundSystems.h" />
     <ClInclude Include="SteamAchievements.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="Component.h" />
@@ -260,10 +262,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_widgets.cpp" />
     <ClCompile Include="AchievementsManager.cpp" />
+    <ClCompile Include="ISoundSystem.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="KeyboardInput.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SoundSystem.cpp" />
+    <ClCompile Include="DerivedSoundSystems.cpp" />
     <ClCompile Include="SteamAchievements.cpp" />
     <ClCompile Include="ICommand.cpp" />
     <ClCompile Include="Component.cpp" />

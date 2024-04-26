@@ -12,6 +12,7 @@
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "PlayerComponent.h"
+#include "ServiceLocator.h"
 
 using namespace GameEngine;
 void Galaga::LoadLevel() const
@@ -22,6 +23,7 @@ void Galaga::LoadLevel() const
 #else
     ServiceLocator::RegisterSoundSystem(std::make_unique<LoggingSoundSystem>(std::make_unique<SdlSoundSystem>()));
 #endif
+    
     ServiceLocator::GetSoundSystem().FillSoundPaths("../Data/Audio/SoundPaths.txt");
 
     //------BACKGROUND--------
@@ -45,8 +47,8 @@ void Galaga::LoadLevel() const
     //-------EXTRATEXT---------
 
     gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
-    gameObject->SetPosition(20.f, 140.f);
-    gameObject->AddComponent<TextComponent>(smallerFont, "Use WASD to move Ms Pacman, C to inflict damage, Z and X to pick up pellets");
+    gameObject->SetPosition(20.f, 500.f);
+    gameObject->AddComponent<TextComponent>(smallerFont, "Use WASD to move, press space to shoot a bullet and shoot the enemies for sound");
     gameObject->AddComponent<TextureComponent>();
     scene->AddObject(std::move(gameObject));
 
