@@ -11,15 +11,15 @@ namespace GameEngine
         SoundId id;
         int volume;
     };
-    class ISoundSystem
+    class SoundSystem
     {
     public:
-        ISoundSystem();
-        ISoundSystem(const ISoundSystem& other) = delete;
-        ISoundSystem(ISoundSystem&& other) noexcept = delete;
-        ISoundSystem& operator=(const ISoundSystem& other) = delete;
-        ISoundSystem& operator=(ISoundSystem&& other) noexcept = delete;
-        virtual ~ISoundSystem();
+        SoundSystem();
+        SoundSystem(const SoundSystem& other) = delete;
+        SoundSystem(SoundSystem&& other) noexcept = delete;
+        SoundSystem& operator=(const SoundSystem& other) = delete;
+        SoundSystem& operator=(SoundSystem&& other) noexcept = delete;
+        virtual ~SoundSystem();
 
         virtual void AddSoundToQueue(const SoundId id, const int volume);
         virtual void Update();

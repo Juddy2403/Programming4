@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include <memory>
 #include <string>
-#include "ISoundSystem.h"
+#include "SoundSystem.h"
 
 namespace GameEngine
 {
-    class SdlSoundSystem final : public ISoundSystem
+    class SdlSoundSystem final : public SoundSystem
     {
     public:
         SdlSoundSystem();
@@ -21,11 +21,11 @@ namespace GameEngine
         class SDLAudioClip;
         std::vector<std::unique_ptr<SDLAudioClip>> m_AudioClips;
     };
-    class LoggingSoundSystem final : public ISoundSystem
+    class LoggingSoundSystem final : public SoundSystem
     {
-        std::unique_ptr<ISoundSystem> m_RealSs;
+        std::unique_ptr<SoundSystem> m_RealSs;
     public:
-        LoggingSoundSystem(std::unique_ptr<ISoundSystem>&& ss) : m_RealSs(std::move(ss)) {}
+        LoggingSoundSystem(std::unique_ptr<SoundSystem>&& ss) : m_RealSs(std::move(ss)) {}
         LoggingSoundSystem(const LoggingSoundSystem& other) = delete;
         LoggingSoundSystem(LoggingSoundSystem&& other) noexcept = delete;
         LoggingSoundSystem& operator=(const LoggingSoundSystem& other) = delete;
@@ -36,7 +36,7 @@ namespace GameEngine
         virtual void FillSoundPaths(const std::string& fileSource) override;
         void PlaySound(const SoundId id, const int volume) override{id;volume;} //
     };
-    class NullSoundSystem final : public ISoundSystem
+    class NullSoundSystem final : public SoundSystem
     {
     public:
         virtual void PlaySound(const SoundId id, const int volume) override {id;volume;}

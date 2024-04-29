@@ -1,17 +1,17 @@
-﻿#include "ISoundSystem.h"
+﻿#include "SoundSystem.h"
 #include <fstream>
 #include <iostream>
 #include "DerivedSoundSystems.h"
 #include "ServiceLocator.h"
 
 using namespace GameEngine;
-std::unique_ptr<ISoundSystem> ServiceLocator::m_SsInstance{ std::make_unique<NullSoundSystem>() };
+std::unique_ptr<SoundSystem> ServiceLocator::m_SsInstance{ std::make_unique<NullSoundSystem>() };
 
-ISoundSystem::ISoundSystem()
+SoundSystem::SoundSystem()
 {
-    m_WorkerThread = std::thread(&ISoundSystem::ProcessQueue, this);
+    m_WorkerThread = std::thread(&SoundSystem::ProcessQueue, this);
 }
-ISoundSystem::~ISoundSystem()
+SoundSystem::~SoundSystem()
 {
     // Signal the worker thread to stop and wait for it to finish.
     {
@@ -21,7 +21,7 @@ ISoundSystem::~ISoundSystem()
     m_ConditionVariable.notify_one();
     m_WorkerThread.join();
 }
-void ISoundSystem::AddSoundToQueue(const SoundId id, const int volume)
+void SoundSystem::AddSoundToQueue(const SoundId id, const int volume)
 {
     std::lock_guard<std::mutex> lock(m_Mutex);
     if ((m_QueueTail + 1) % maxPending == m_QueueHead)
@@ -44,13 +44,13 @@ void ISoundSystem::AddSoundToQueue(const SoundId id, const int volume)
     m_QueueTail = (m_QueueTail + 1) % maxPending;
     m_ConditionVariable.notify_one();
 }
-void ISoundSystem::Update()
+void SoundSystem::Update()
 {
     if (m_QueueHead == m_QueueTail) return;
     PlaySound(m_PendingSounds[m_QueueHead].id, m_PendingSounds[m_QueueHead].volume);
     m_QueueHead = (m_QueueHead + 1) % maxPending;
 }
-void ISoundSystem::FillSoundPaths(const std::string& fileSource)
+void SoundSystem::FillSoundPaths(const std::string& fileSource)
 {
     std::ifstream file(fileSource);
 
@@ -69,11 +69,11 @@ void ISoundSystem::FillSoundPaths(const std::string& fileSource)
     file.close();
 }
 
-int ISoundSystem::GetPending() const
+int SoundSystem::GetPending() const
 {
     return abs(m_QueueHead - m_QueueTail);
 }
-void ISoundSystem::ProcessQueue()
+void SoundSystem::ProcessQueue()
 {
     while (true)
     {
