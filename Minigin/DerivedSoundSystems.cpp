@@ -60,7 +60,7 @@ private:
     Mix_Chunk* m_pSound{};
 };
 
-SdlSoundSystem::SdlSoundSystem() : SoundSystem()
+SdlSoundSystem::SdlSoundSystem() : ISoundSystem()
 {
     SDLAudioClip::OpenAudio();
 }
@@ -70,7 +70,7 @@ SdlSoundSystem::~SdlSoundSystem()
 }
 void SdlSoundSystem::FillSoundPaths(const std::string& fileSource)
 {
-    SoundSystem::FillSoundPaths(fileSource);
+    ISoundSystem::FillSoundPaths(fileSource);
     for (const auto& path : m_SoundFilePaths)
     {
         m_AudioClips.emplace_back(std::make_unique<SDLAudioClip>(path));

@@ -1,17 +1,17 @@
-﻿#include "SoundSystem.h"
+﻿#include "ISoundSystem.h"
 #include <fstream>
 #include <iostream>
 #include "DerivedSoundSystems.h"
 #include "ServiceLocator.h"
 
 using namespace GameEngine;
-std::unique_ptr<SoundSystem> ServiceLocator::m_SsInstance{ std::make_unique<NullSoundSystem>() };
+std::unique_ptr<ISoundSystem> ServiceLocator::m_SsInstance{ std::make_unique<NullSoundSystem>() };
 
-SoundSystem::SoundSystem()
+ISoundSystem::ISoundSystem()
 {
-    m_WorkerThread = std::thread(&SoundSystem::ProcessQueue, this);
+    m_WorkerThread = std::thread(&ISoundSystem::ProcessQueue, this);
 }
-SoundSystem::~SoundSystem()
+ISoundSystem::~ISoundSystem()
 {
     // Signal the worker thread to stop and wait for it to finish.
     {
@@ -21,7 +21,7 @@ SoundSystem::~SoundSystem()
     m_ConditionVariable.notify_one();
     m_WorkerThread.join();
 }
-void SoundSystem::AddSoundToQueue(const SoundId id, const int volume)
+void ISoundSystem::AddSoundToQueue(const SoundId id, const int volume)
 {
     std::lock_guard<std::mutex> lock(m_Mutex);
     if ((m_QueueTail + 1) % maxPending == m_QueueHead)
@@ -44,13 +44,13 @@ void SoundSystem::AddSoundToQueue(const SoundId id, const int volume)
     m_QueueTail = (m_QueueTail + 1) % maxPending;
     m_ConditionVariable.notify_one();
 }
-void SoundSystem::Update()
+void ISoundSystem::Update()
 {
     if (m_QueueHead == m_QueueTail) return;
     PlaySound(m_PendingSounds[m_QueueHead].id, m_PendingSounds[m_QueueHead].volume);
     m_QueueHead = (m_QueueHead + 1) % maxPending;
 }
-void SoundSystem::FillSoundPaths(const std::string& fileSource)
+void ISoundSystem::FillSoundPaths(const std::string& fileSource)
 {
     std::ifstream file(fileSource);
 
@@ -69,11 +69,11 @@ void SoundSystem::FillSoundPaths(const std::string& fileSource)
     file.close();
 }
 
-int SoundSystem::GetPending() const
+int ISoundSystem::GetPending() const
 {
     return abs(m_QueueHead - m_QueueTail);
 }
-void SoundSystem::ProcessQueue()
+void ISoundSystem::ProcessQueue()
 {
     while (true)
     {

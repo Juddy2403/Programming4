@@ -4,13 +4,13 @@
 
 namespace GameEngine
 {
-    class SoundSystem;
+    class ISoundSystem;
     class ServiceLocator final
     {
-        static std::unique_ptr<SoundSystem> m_SsInstance;
+        static std::unique_ptr<ISoundSystem> m_SsInstance;
     public:
-        static SoundSystem& GetSoundSystem() { return *m_SsInstance; }
-        static void RegisterSoundSystem(std::unique_ptr<SoundSystem>&& ss)
+        static ISoundSystem& GetSoundSystem() { return *m_SsInstance; }
+        static void RegisterSoundSystem(std::unique_ptr<ISoundSystem>&& ss)
         {
             m_SsInstance = ss == nullptr ? std::make_unique<NullSoundSystem>() : std::move(ss);
         }
