@@ -59,7 +59,7 @@ void EnemyObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent e
         const auto collisionData = static_cast<GameEngine::CollisionData*>(eventData);
         if (collisionData->pOtherCollider->GetGameObjParent()->GetID() == static_cast<int>(GameId::bullet))
         {
-            GameEngine::ServiceLocator::GetSoundSystem().AddSoundToQueue(static_cast<GameEngine::SoundId>(SoundId::enemyDeath), 100);
+            GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::enemyDeath), 100);
             subject->NotifyAll(GameEngine::GameEvent::hasBeenHit);
         }
         std::cout<<"Enemy collided with: "<<collisionData->pOtherCollider->GetGameObjParent()->GetID()<< '\n';

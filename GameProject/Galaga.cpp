@@ -1,6 +1,5 @@
 ﻿#include "Galaga.h"
 
-#include "PlayerComponent.h"
 #include "BackgroundComponent.h"
 #include "SceneManager.h"
 #include "Scene.h"
@@ -10,9 +9,8 @@
 #include "GameObject.h"
 #include "IObserver.h"
 #include "ResourceManager.h"
-#include "InputManager.h"
-#include "PlayerComponent.h"
 #include "ServiceLocator.h"
+#include "DerivedSoundSystems.h"
 
 using namespace GameEngine;
 void Galaga::LoadLevel() const

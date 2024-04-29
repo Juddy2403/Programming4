@@ -1,4 +1,7 @@
 ﻿#include "DerivedSoundSystems.h"
+
+#include <fstream>
+
 #include "SDL_mixer.h"
 #include <iostream>
 
@@ -60,35 +63,96 @@ private:
     Mix_Chunk* m_pSound{};
 };
 
-SdlSoundSystem::SdlSoundSystem() : ISoundSystem()
+SdlSoundSystem::SdlSoundSystem() 
 {
     SDLAudioClip::OpenAudio();
+    m_WorkerThread = std::thread(&SdlSoundSystem::ProcessQueue, this);
 }
 SdlSoundSystem::~SdlSoundSystem()
 {
     SDLAudioClip::CloseAudio();
+    // Signal the worker thread to stop and wait for it to finish.
+    {
+        std::lock_guard<std::mutex> lock(m_Mutex);
+        m_IsRunning = false;
+    }
+    m_ConditionVariable.notify_one();
+    m_WorkerThread.join();
 }
 void SdlSoundSystem::FillSoundPaths(const std::string& fileSource)
 {
-    ISoundSystem::FillSoundPaths(fileSource);
+    std::ifstream file(fileSource);
+    if (!file.is_open())
+    {
+        std::cerr << "Error: Unable to open file " << fileSource << '\n';
+        return;
+    }
+    std::string line;
+    while (std::getline(file, line))
+    {
+        m_SoundFilePaths.emplace_back(line);
+    }
+    file.close();
     for (const auto& path : m_SoundFilePaths)
     {
         m_AudioClips.emplace_back(std::make_unique<SDLAudioClip>(path));
     }
 }
+
 void SdlSoundSystem::PlaySound(const SoundId id, const int volume)
 {
-    auto audioClip = m_AudioClips[id].get();
-    if (!audioClip->IsLoaded())
-        audioClip->Load();
-    audioClip->SetVolume(volume);
-    audioClip->Play();
+    if ((m_QueueTail + 1) % maxPending == m_QueueHead)
+    {
+        std::cerr << "Too many pending sounds\n";
+        return;
+    }
+    for (int i = m_QueueHead; i != m_QueueTail; i = (i + 1) % maxPending)
+    {
+        if (m_PendingSounds[i].id == id)
+        {
+            // Use the larger of the two volumes.
+            m_PendingSounds[i].volume = std::max(volume, m_PendingSounds[i].volume);
+
+            // Don't need to enqueue.
+            return;
+        }
+    }
+    std::lock_guard<std::mutex> lock(m_Mutex);
+    m_PendingSounds[m_QueueTail] = { id,volume };
+    m_QueueTail = (m_QueueTail + 1) % maxPending;
+    m_ConditionVariable.notify_one();
+}
+int SdlSoundSystem::GetPending() const
+{
+    return abs(m_QueueHead - m_QueueTail);
 }
 
-void LoggingSoundSystem::AddSoundToQueue(const SoundId id, const int volume)
+void SdlSoundSystem::ProcessQueue()
 {
-    m_RealSs->AddSoundToQueue(id, volume);
-    std::cout << "Adding to the queue: " << id << " at volume " << volume << '\n';
+    while (true)
+    {
+        std::unique_lock<std::mutex> lock(m_Mutex);
+        m_ConditionVariable.wait(lock, [this] { return !m_IsRunning || GetPending(); });
+
+        if (!m_IsRunning && GetPending() == 0)
+        {
+            break;
+        }
+
+        // Process queue
+        if (m_QueueHead == m_QueueTail) return;
+        auto audioClip = m_AudioClips[m_PendingSounds[m_QueueHead].id].get();
+        if (!audioClip->IsLoaded())
+            audioClip->Load();
+        audioClip->SetVolume(m_PendingSounds[m_QueueHead].volume);
+        audioClip->Play();
+        m_QueueHead = (m_QueueHead + 1) % maxPending;
+    }
+}
+void LoggingSoundSystem::PlaySound(const SoundId id, const int volume)
+{
+    m_RealSs->PlaySound(id, volume);
+    std::cout << "Playing sound with id: " << id << " at volume " << volume << '\n';
 }
 void LoggingSoundSystem::FillSoundPaths(const std::string& fileSource)
 {
