@@ -117,7 +117,7 @@ namespace GameEngine
         explicit CollisionComponent(GameObject* gameObj,SDL_Rect* collisionRect);
         [[nodiscard]] const SDL_Rect& GetCollisionRect() const;
         bool IsColliding(CollisionComponent* other) const;
-        void CollidedWith(CollisionComponent* other);
+        void CollidedWith(CollisionComponent* other) const;
         virtual void Update() override;
 
         virtual ~CollisionComponent() override;

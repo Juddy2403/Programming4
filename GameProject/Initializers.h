@@ -4,15 +4,14 @@
 #include "EnemyComponents.h"
 #include "GameCommands.h"
 #include "GameObject.h"
-#include "GameObservers.h"
 #include "InputManager.h"
 #include "PlayerComponent.h"
-#include "Scene.h"
 
 inline std::unique_ptr<GameEngine::GameObject> InitFighter()
 {
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::player));
     gameObject->SetPosition(150.f, 450.f);
+    gameObject->AddComponent<PlayerComponent>(0);
     auto* spriteComponent = gameObject->AddComponent<RotatingSpriteComponent>("Galaga2.png");
     spriteComponent->m_SpriteInfo.m_Height = 16;
     spriteComponent->m_SpriteInfo.m_Width = 16;
@@ -54,7 +53,7 @@ inline std::unique_ptr<GameEngine::GameObject> InitFighter()
     return gameObject;
 }
 
-inline std::unique_ptr<GameEngine::GameObject> InitBullet()
+inline std::unique_ptr<GameEngine::GameObject> InitBullet(int playerID)
 {
     auto bullet = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::bullet));
     
@@ -68,7 +67,7 @@ inline std::unique_ptr<GameEngine::GameObject> InitBullet()
     bulletSpriteComp->m_IsActive = false;
     bulletSpriteComp->m_Scale = 2;
     bulletSpriteComp->UpdateSrcRect();
-    bullet->AddComponent<BulletComponent>(bulletSpriteComp);
+    bullet->AddComponent<BulletComponent>(playerID,bulletSpriteComp);
 
     bullet->AddComponent<GameEngine::CollisionComponent>(&bulletSpriteComp->m_DestRect);
     return bullet;

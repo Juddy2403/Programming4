@@ -20,6 +20,8 @@ void HealthComponent::Hit()
 }
 ScoreComponent::ScoreComponent(GameEngine::GameObject* gameObject): Component(gameObject) {}
 
+PlayerComponent::PlayerComponent(GameEngine::GameObject* gameObject, int playerID):
+Component(gameObject), m_PlayerID(playerID){}
 RotatingSpriteComponent::RotatingSpriteComponent(GameEngine::GameObject* gameObj):
     SpriteComponent(gameObj)
 {}

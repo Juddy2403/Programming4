@@ -4,8 +4,10 @@
 #include "Minigin.h"
 #include "TimeManager.h"
 
-BulletComponent::BulletComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent):
+BulletComponent::BulletComponent(GameEngine::GameObject* gameObj, int playerID,
+    GameEngine::SpriteComponent* spriteComponent):
     Component(gameObj),
+    m_PlayerID(playerID),
     m_SpriteComponent(spriteComponent)
 {}
 

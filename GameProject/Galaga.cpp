@@ -7,13 +7,13 @@
 #include "DataStructs.h"
 #include "Initializers.h"
 #include "GameObject.h"
-#include "IObserver.h"
 #include "ResourceManager.h"
 #include "ServiceLocator.h"
 #include "DerivedSoundSystems.h"
+#include "GameObservers.h"
 
 using namespace GameEngine;
-void Galaga::LoadLevel() const
+void Galaga::LoadLevel()
 {
     //----------SOUND----------------
 #if NDEBUG
@@ -52,46 +52,46 @@ void Galaga::LoadLevel() const
 
     //------FIGHTER--------
     gameObject = InitFighter();
-    auto bulletObserver = std::make_unique<BulletObserver>("Fighter bullet observer", scene.get());
+    auto bulletObserver = std::make_unique<BulletObserver>(scene.get());
     scene->AddObserver(static_cast<int>(GameEngine::ObserverIdentifier::bullet), std::move(bulletObserver), gameObject.get());
 
-    //------HealthObserver--------
-    auto healthObject = std::make_unique<GameObject>(static_cast<int>(GameId::observer));
-    healthObject->SetPosition(20.f, 160.f);
-    healthObject->AddComponent<TextureComponent>();
-    healthObject->AddComponent<TextComponent>(smallerFont, "");
-    auto healthObserver = std::make_unique<GameEngine::HealthObserver>("Pacman health observer", healthObject.get());
-    scene->AddObject(std::move(healthObject));
-    scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(healthObserver), gameObject.get());
-
-    //------ScoreObserver--------
-    auto scoreObject = std::make_unique<GameObject>(static_cast<int>(GameId::observer));
-    scoreObject->SetPosition(20.f, 180.f);
-    scoreObject->AddComponent<TextureComponent>();
-    scoreObject->AddComponent<TextComponent>(smallerFont, "");
-    auto scoreObserver = std::make_unique<GameEngine::ScoreObserver>("Pacman score observer", scoreObject.get());
-    scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserver), gameObject.get());
-    scene->AddObject(std::move(scoreObject));
+    // //------HealthObserver--------
+    // auto healthObject = std::make_unique<GameObject>(static_cast<int>(GameId::observer));
+    // healthObject->SetPosition(20.f, 160.f);
+    // healthObject->AddComponent<TextureComponent>();
+    // healthObject->AddComponent<TextComponent>(smallerFont, "");
+    // auto healthObserver = std::make_unique<GameEngine::HealthObserver>("Pacman health observer", healthObject.get());
+    // scene->AddObject(std::move(healthObject));
+    // scene->AddObserver(static_cast<int>(ObserverIdentifier::health), std::move(healthObserver), gameObject.get());
+    //
+    // //------ScoreObserver--------
+    // auto scoreObject = std::make_unique<GameObject>(static_cast<int>(GameId::observer));
+    // scoreObject->SetPosition(20.f, 180.f);
+    // scoreObject->AddComponent<TextureComponent>();
+    // scoreObject->AddComponent<TextComponent>(smallerFont, "");
+    // auto scoreObserver = std::make_unique<GameEngine::ScoreObserver>("Score observer", scoreObject.get());
+    // scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserver), gameObject.get());
+    // scene->AddObject(std::move(scoreObject));
 
     scene->AddObject(std::move(gameObject));
 
     //------ENEMIES--------
     gameObject = InitBee();
     gameObject->SetPosition(298, 130);
-    auto enemyObserver = std::make_unique<EnemyObserver>("Bee observer");
+    auto enemyObserver = std::make_unique<EnemyObserver>();
     scene->AddObserver(-1, std::move(enemyObserver), gameObject.get());
 
     scene->AddObject(std::move(gameObject));
 
     gameObject = InitButterfly();
     gameObject->SetPosition(298, 70);
-    enemyObserver = std::make_unique<EnemyObserver>("Butterfly observer");
+    enemyObserver = std::make_unique<EnemyObserver>();
     scene->AddObserver(-1, std::move(enemyObserver), gameObject.get());
     scene->AddObject(std::move(gameObject));
 
     gameObject = InitBossGalaga();
     gameObject->SetPosition(298, 38);
-    enemyObserver = std::make_unique<EnemyObserver>("Boss galaga observer");
+    enemyObserver = std::make_unique<EnemyObserver>();
     scene->AddObserver(-1, std::move(enemyObserver), gameObject.get());
     scene->AddObject(std::move(gameObject));
 

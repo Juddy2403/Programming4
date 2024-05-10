@@ -132,6 +132,7 @@ void SdlSoundSystem::ProcessQueue()
     while (true)
     {
         std::unique_lock<std::mutex> lock(m_Mutex);
+        if(!GetPending())
         m_ConditionVariable.wait(lock, [this] { return !m_IsRunning || GetPending(); });
 
         if (!m_IsRunning && GetPending() == 0)

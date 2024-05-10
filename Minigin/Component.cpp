@@ -190,10 +190,10 @@ bool CollisionComponent::IsColliding(CollisionComponent* other) const
 {
     return SDL_HasIntersection(m_CollisionRect, other->m_CollisionRect);
 }
-void CollisionComponent::CollidedWith(CollisionComponent* other) 
+void CollisionComponent::CollidedWith(CollisionComponent* other) const
 {
     CollisionData data;
-    data.pOtherCollider = other;
+    data.pOtherCollider = other->GetGameObjParent();
     GetGameObjParent()->NotifyAll(GameEvent::collision,&data);
 }
 

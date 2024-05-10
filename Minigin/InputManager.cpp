@@ -21,14 +21,14 @@ void GameEngine::InputManager::ProcessControllerInput()
         {
             switch (command->ExecuteOnKeyState())
             {
-            case ICommand::ExecuteOn::keyPressed:
+            case Command::ExecuteOn::keyPressed:
                 if (m_pControllers[i]->IsKeyPressed(inputKey))
                     command->Execute();
                 break;
-            case ICommand::ExecuteOn::keyUp:
+            case Command::ExecuteOn::keyUp:
                 if (m_pControllers[i]->IsKeyUp(inputKey)) command->Execute();
                 break;
-            case ICommand::ExecuteOn::keyDown:
+            case Command::ExecuteOn::keyDown:
                 if (m_pControllers[i]->IsKeyDown(inputKey)) command->Execute();
                 break;
             }
@@ -44,13 +44,13 @@ bool GameEngine::InputManager::ProcessKeyboardInput()
     {
         switch (command->ExecuteOnKeyState())
         {
-        case ICommand::ExecuteOn::keyPressed:
+        case Command::ExecuteOn::keyPressed:
             if (m_pKeyboard->IsKeyPressed(inputKey)) command->Execute();
             break;
-        case ICommand::ExecuteOn::keyUp:
+        case Command::ExecuteOn::keyUp:
             if (m_pKeyboard->IsKeyUp(inputKey)) command->Execute();
             break;
-        case ICommand::ExecuteOn::keyDown:
+        case Command::ExecuteOn::keyDown:
             if (m_pKeyboard->IsKeyDown(inputKey)) command->Execute();
             break;
         }
@@ -58,11 +58,11 @@ bool GameEngine::InputManager::ProcessKeyboardInput()
     return true;
 }
 
-void GameEngine::InputManager::BindCommand(KeyboardInputKey inputKey, std::unique_ptr<ICommand>&& command)
+void GameEngine::InputManager::BindCommand(KeyboardInputKey inputKey, std::unique_ptr<Command>&& command)
 {
     m_pKeyboardCommands[inputKey] = std::move(command);
 }
-void GameEngine::InputManager::BindCommand(ControllerInputKey inputKey, std::unique_ptr<ICommand>&& command, int controllerIdx)
+void GameEngine::InputManager::BindCommand(ControllerInputKey inputKey, std::unique_ptr<Command>&& command, int controllerIdx)
 {
     if (m_pControllers[controllerIdx] == nullptr)
         m_pControllers[controllerIdx] = std::make_unique<Controller>(controllerIdx);

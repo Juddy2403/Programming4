@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "TimeManager.h"
-#include "ICommand.h"
+#include "Command.h"
 
-class ShootBulletCommand final : public GameEngine::ICommand
+class ShootBulletCommand final : public GameEngine::Command
 {
 public:
     ShootBulletCommand(const ShootBulletCommand& other) = delete;

@@ -1,7 +1,30 @@
 ﻿#pragma once
+#include "BossStage.h"
 #include "Component.h"
+#include "DataStructs.h"
 
-class BeeComponent final : public GameEngine::Component
+class EnemyComponent : public GameEngine::Component
+{
+public:
+    explicit EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent);
+
+    EnemyComponent(const EnemyComponent& other) = delete;
+    EnemyComponent(EnemyComponent&& other) noexcept = delete;
+    EnemyComponent& operator=(const EnemyComponent& other) = delete;
+    EnemyComponent& operator=(EnemyComponent&& other) noexcept = delete;
+    ~EnemyComponent() override = default;
+    
+    virtual void Update() override = 0;
+    virtual bool HasBeenHit() = 0;
+    bool IsDiving() const { return m_IsDiving; }
+    virtual EnemyId GetEnemyID() const = 0;
+protected:
+    bool m_IsDiving{false};
+    glm::vec2 m_Speed{ 0.0f, 100.0f };
+    GameEngine::SpriteComponent* m_SpriteComponent{};
+};
+
+class BeeComponent final : public EnemyComponent
 {
 public:
     explicit BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent);
@@ -13,12 +36,12 @@ public:
     ~BeeComponent() override = default;
     
     void Update() override;
+    virtual bool HasBeenHit() override;
+    virtual EnemyId GetEnemyID() const override;
 private:
-    glm::vec2 m_Speed{ 0.0f, 100.0f };
-    GameEngine::SpriteComponent* m_SpriteComponent{};
 };
 
-class ButterflyComponent final : public GameEngine::Component
+class ButterflyComponent final : public EnemyComponent
 {
 public:
     explicit ButterflyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent);
@@ -30,12 +53,12 @@ public:
     ~ButterflyComponent() override = default;
     
     void Update() override;
+    virtual bool HasBeenHit() override;
+    virtual EnemyId GetEnemyID() const override;
 private:
-    glm::vec2 m_Speed{ 0.0f, 100.0f };
-    GameEngine::SpriteComponent* m_SpriteComponent{};
 };
 
-class BossGalagaComponent final : public GameEngine::Component
+class BossGalagaComponent final : public EnemyComponent
 {
 public:
     explicit BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent);
@@ -47,7 +70,8 @@ public:
     ~BossGalagaComponent() override = default;
     
     void Update() override;
+    virtual bool HasBeenHit() override;
+    virtual EnemyId GetEnemyID() const override;
 private:
-    glm::vec2 m_Speed{ 0.0f, 100.0f };
-    GameEngine::SpriteComponent* m_SpriteComponent{};
+    std::unique_ptr<BossStage> m_BossStage;
 };

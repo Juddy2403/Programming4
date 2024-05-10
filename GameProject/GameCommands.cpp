@@ -1,7 +1,7 @@
 ﻿#include "GameCommands.h"
 #include "GameObject.h"
 
-ShootBulletCommand::ShootBulletCommand(GameEngine::GameObject* actor): ICommand(actor) {}
+ShootBulletCommand::ShootBulletCommand(GameEngine::GameObject* actor): Command(actor) {}
 
 void ShootBulletCommand::Execute()
 {
@@ -17,7 +17,7 @@ void ShootBulletCommand::Execute()
     m_Previous = m_Current;
 }
 
-GameEngine::ICommand::ExecuteOn ShootBulletCommand::ExecuteOnKeyState() const
+GameEngine::Command::ExecuteOn ShootBulletCommand::ExecuteOnKeyState() const
 {
     return ExecuteOn::keyDown;
 }

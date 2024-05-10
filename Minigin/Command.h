@@ -5,7 +5,7 @@ namespace GameEngine
 {
 	class GameObject;
 
-	class ICommand
+	class Command
 	{
 	protected:
 		GameObject* m_Actor;
@@ -17,18 +17,18 @@ namespace GameEngine
 			keyDown
 		};
 		
-		explicit ICommand(GameObject* actor);
-		ICommand(const ICommand& other) = delete;
-		ICommand(ICommand&& other) = delete;
-		ICommand& operator=(const ICommand& other) = delete;
-		ICommand& operator=(ICommand&& other) = delete;
-		virtual ~ICommand() = default;
+		explicit Command(GameObject* actor);
+		Command(const Command& other) = delete;
+		Command(Command&& other) = delete;
+		Command& operator=(const Command& other) = delete;
+		Command& operator=(Command&& other) = delete;
+		virtual ~Command() = default;
 
 		[[nodiscard]] virtual ExecuteOn ExecuteOnKeyState() const = 0;
 		virtual void Execute() = 0;
 	};
 
-	class Move final: public ICommand {
+	class Move final: public Command {
 	public:
 		Move(const Move& other) = delete;
 		Move(Move&& other) noexcept = delete;
@@ -44,7 +44,7 @@ namespace GameEngine
 		int m_Speed{};
 	};
 	
-	class TakeDamage final : public ICommand {
+	class TakeDamage final : public Command {
 	private:
 	public:
 		explicit TakeDamage(GameObject* actor);
@@ -53,7 +53,7 @@ namespace GameEngine
 		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
 	};
 
-	class SmallScoreIncrease final : public ICommand {
+	class SmallScoreIncrease final : public Command {
 
 	public:
 		SmallScoreIncrease(GameObject* actor);
@@ -63,7 +63,7 @@ namespace GameEngine
 
 	};
 
-	class BigScoreIncrease final : public ICommand {
+	class BigScoreIncrease final : public Command {
 
 	public:
 		BigScoreIncrease(GameObject* actor);

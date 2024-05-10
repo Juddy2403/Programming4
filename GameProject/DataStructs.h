@@ -1,15 +1,24 @@
 ﻿#pragma once
-#include "EventData.h"
 #include "DerivedSoundSystems.h"
 
 enum class GameId
 {
-    player,
     enemy,
+    player,
     bullet,
     observer,
     text,
     texture
+};
+
+enum class EnemyId
+{
+    bee,
+    beeDiving,
+    butterfly,
+    butterflyDiving,
+    bossGalaga,
+    bossGalagaDiving
 };
 
 enum class SoundId : GameEngine::SoundId
@@ -22,3 +31,4 @@ enum class SoundId : GameEngine::SoundId
     start,
     tractorBeam
 };
+

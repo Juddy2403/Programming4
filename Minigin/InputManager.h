@@ -1,6 +1,6 @@
 #pragma once
 #include "Singleton.h"
-#include "ICommand.h"
+#include "Command.h"
 #include "Controller.h"
 #include "KeyboardInput.h"
 #include <array>
@@ -24,12 +24,12 @@ namespace GameEngine
         void ProcessControllerInput();
         bool ProcessKeyboardInput();
 
-        void BindCommand(KeyboardInputKey inputKey, std::unique_ptr<ICommand>&& command);
-        void BindCommand(ControllerInputKey inputKey, std::unique_ptr<ICommand>&& command, int controllerIdx);
+        void BindCommand(KeyboardInputKey inputKey, std::unique_ptr<Command>&& command);
+        void BindCommand(ControllerInputKey inputKey, std::unique_ptr<Command>&& command, int controllerIdx);
 
     private:
         //Commands
-        typedef std::unique_ptr<ICommand> CommandUnique;
+        typedef std::unique_ptr<Command> CommandUnique;
         typedef std::unordered_map<KeyboardInputKey,CommandUnique> KeyboardCommandMap;
         typedef std::unordered_map<ControllerInputKey,CommandUnique> ControllerCommandMap;
         KeyboardCommandMap m_pKeyboardCommands;

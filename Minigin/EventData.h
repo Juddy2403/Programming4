@@ -5,6 +5,6 @@ namespace GameEngine
     struct EventData {};
     struct CollisionData : EventData
     {
-        CollisionComponent* pOtherCollider;
+        GameObject* pOtherCollider;
     };
 }

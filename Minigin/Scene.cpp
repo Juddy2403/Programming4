@@ -42,15 +42,12 @@ void Scene::RemoveAll()
 void Scene::Update()
 {
     bool areElemsToErase = false;
-    //auto collisionFuture = std::async(&CollisionManager::CheckCollisions);
     CollisionManager::CheckCollisions();
-    //ServiceLocator::GetSoundSystem().Update();
     for (const auto& object : m_GameObjects)
     {
         if (!object->IsDestroyed()) object->Update();
         else areElemsToErase = true;
     }
-    //collisionFuture.get();
     if (areElemsToErase) RemoveDestroyedObjects();
 }
 

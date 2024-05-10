@@ -14,7 +14,7 @@ using namespace GameEngine;
 
 void Load()
 {
-	Galaga::GetInstance().LoadLevel();
+	Galaga::LoadLevel();
 }
 
 int main(int, char* []) {

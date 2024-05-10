@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackgroundComponent.cpp" />
+    <ClCompile Include="BossStage.cpp" />
     <ClCompile Include="BulletComponent.cpp" />
     <ClCompile Include="EnemyComponents.cpp" />
     <ClCompile Include="Galaga.cpp" />
@@ -171,9 +172,11 @@
     <ClCompile Include="GameObservers.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundComponent.h" />
+    <ClInclude Include="BossStage.h" />
     <ClInclude Include="BulletComponent.h" />
     <ClInclude Include="DataStructs.h" />
     <ClInclude Include="EnemyComponents.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="GameCommands.h" />
     <ClInclude Include="GameObservers.h" />
     <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="ScoreManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
