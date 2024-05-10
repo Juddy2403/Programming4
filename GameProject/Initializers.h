@@ -31,7 +31,6 @@ inline std::unique_ptr<GameEngine::GameObject> InitFighter()
     // scene->AddObserver(static_cast<int>(GameEngine::ObserverIdentifier::bullet), std::move(fighterObserver), gameObject.get());
     
     gameObject->AddComponent<HealthComponent>(3);
-    gameObject->AddComponent<ScoreComponent>();
     auto& input = GameEngine::InputManager::GetInstance();
     input.BindCommand(GameEngine::KeyboardInputKey::W,
         std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }, 200));
@@ -41,12 +40,6 @@ inline std::unique_ptr<GameEngine::GameObject> InitFighter()
         std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ -1.f,0.f }, 200));
     input.BindCommand(GameEngine::KeyboardInputKey::D,
         std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 1.f,0.f }, 200));
-    input.BindCommand(GameEngine::KeyboardInputKey::C,
-        std::make_unique<GameEngine::TakeDamage>(gameObject.get()));
-    input.BindCommand(GameEngine::KeyboardInputKey::Z,
-        std::make_unique<GameEngine::BigScoreIncrease>(gameObject.get()));
-    input.BindCommand(GameEngine::KeyboardInputKey::X,
-        std::make_unique<GameEngine::SmallScoreIncrease>(gameObject.get()));
     input.BindCommand(GameEngine::KeyboardInputKey::SPACE,
         std::make_unique<ShootBulletCommand>(gameObject.get()));
 

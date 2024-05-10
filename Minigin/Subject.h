@@ -16,8 +16,6 @@ namespace GameEngine
     enum class GameEvent
     {
         hasBeenHit,
-        died,
-        scoreIncreased,
         bulletShot,
         bulletOutOfBounds,
         collision,

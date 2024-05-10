@@ -49,20 +49,5 @@ private:
     int m_Health{ 3 };
 };
 
-class ScoreComponent final : public GameEngine::Component
-{
-public:
-    explicit ScoreComponent(GameEngine::GameObject* gameObject);
-    ScoreComponent(const ScoreComponent& other) = delete;
-    ScoreComponent(ScoreComponent&& other) noexcept = delete;
-    ScoreComponent& operator=(const ScoreComponent& other) = delete;
-    ScoreComponent& operator=(ScoreComponent&& other) noexcept = delete;
-    ~ScoreComponent() override = default;
-
-    void IncreaseScore(int value);
-    [[nodiscard]] int GetScore() const { return m_Score; }
-private:
-    int m_Score{};
-};
 
 

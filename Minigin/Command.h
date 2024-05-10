@@ -44,34 +44,6 @@ namespace GameEngine
 		int m_Speed{};
 	};
 	
-	class TakeDamage final : public Command {
-	private:
-	public:
-		explicit TakeDamage(GameObject* actor);
-
-		void Execute() override;
-		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
-	};
-
-	class SmallScoreIncrease final : public Command {
-
-	public:
-		SmallScoreIncrease(GameObject* actor);
-
-		void Execute() override;
-		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
-
-	};
-
-	class BigScoreIncrease final : public Command {
-
-	public:
-		BigScoreIncrease(GameObject* actor);
-
-		void Execute() override ;
-		[[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
-	};
-
 }
 
 

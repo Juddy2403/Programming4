@@ -25,7 +25,9 @@ GameObject* Scene::AddObject(std::unique_ptr<GameObject>&& object)
 
 IObserver* GameEngine::Scene::AddObserver(int message, std::unique_ptr<IObserver>&& observer, GameObject* gameObj)
 {
+    if(gameObj != nullptr)
     gameObj->AddObserver(message, m_Observers.emplace_back(std::move(observer)).get());
+    else m_Observers.emplace_back(std::move(observer));
     return m_Observers.back().get();
 }
 

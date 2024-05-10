@@ -17,11 +17,6 @@ void FighterObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent
     switch(event) {
     case GameEngine::GameEvent::hasBeenHit:
         break;
-    case GameEngine::GameEvent::died:
-        break;
-    case GameEngine::GameEvent::scoreIncreased:
-        
-        break;
     case GameEngine::GameEvent::bulletShot:
         break;
     case GameEngine::GameEvent::bulletOutOfBounds:
@@ -92,7 +87,7 @@ void EnemyObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent e
                 ScoreManager::AddScore(playerId,enemyComp->GetEnemyID());
             }
         }
-        std::cout<<"Enemy collided with: "<<collisionData->pOtherCollider->GetID()<< '\n';
+        //std::cout<<"Enemy collided with: "<<collisionData->pOtherCollider->GetID()<< '\n';
     }
     break;
     default: break;

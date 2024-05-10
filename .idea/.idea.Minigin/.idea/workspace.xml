@@ -8,42 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43cfb645-803b-40f9-a35f-cf674a51c400" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GameProject/BossStage.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameProject/BossStage.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameProject/ScoreManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameProject/ScoreManager.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Minigin/Command.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/BulletComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BulletComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/BulletComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BulletComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/DataStructs.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/DataStructs.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/EnemyComponents.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyComponents.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/EnemyComponents.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyComponents.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/PacmanFemale.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/logo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/pacman.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Galaga.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/GameCommands.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameCommands.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/GameCommands.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameCommands.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/GameObservers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameObservers.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/GameObservers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameObservers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Initializers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/PlayerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/PlayerComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/PlayerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/PlayerComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/CollisionManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/CollisionManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Component.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Component.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Component.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/DerivedSoundSystems.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/DerivedSoundSystems.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/EventData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/EventData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/ICommand.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/ICommand.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Command.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/IObserver.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/IObserver.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/IObserver.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/InputManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/InputManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/InputManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/InputManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Command.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Command.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Command.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Command.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/GameObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/GameObject.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/Scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Scene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Subject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subject.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +33,22 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://3" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/__msvc_filebuf.hpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/fstream" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/map" root0="SKIP_HIGHLIGHTING" />
@@ -219,7 +214,7 @@
       <workItem from="1715179720429" duration="6531000" />
       <workItem from="1715245426387" duration="1968000" />
       <workItem from="1715343639455" duration="3363000" />
-      <workItem from="1715369787109" duration="4987000" />
+      <workItem from="1715369787109" duration="9844000" />
     </task>
     <servers />
   </component>

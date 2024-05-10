@@ -1,5 +1,7 @@
 ﻿#include "Galaga.h"
-
+#include <fstream>
+#include <iostream>
+#include <sstream>
 #include "BackgroundComponent.h"
 #include "SceneManager.h"
 #include "Scene.h"
@@ -21,7 +23,7 @@ void Galaga::LoadLevel()
 #else
     ServiceLocator::RegisterSoundSystem(std::make_unique<LoggingSoundSystem>(std::make_unique<SdlSoundSystem>()));
 #endif
-    
+
     ServiceLocator::GetSoundSystem().FillSoundPaths("../Data/Audio/SoundPaths.txt");
 
     //------BACKGROUND--------
@@ -75,25 +77,73 @@ void Galaga::LoadLevel()
 
     scene->AddObject(std::move(gameObject));
 
-    //------ENEMIES--------
-    gameObject = InitBee();
-    gameObject->SetPosition(298, 130);
-    auto enemyObserver = std::make_unique<EnemyObserver>();
-    scene->AddObserver(-1, std::move(enemyObserver), gameObject.get());
+    //----------------ENEMIES--------------------
+    auto enemyObserverUnique = std::make_unique<EnemyObserver>();
+    auto enemyObserver = scene->AddObserver(-1, std::move(enemyObserverUnique), nullptr);
 
-    scene->AddObject(std::move(gameObject));
+    //------BEE--------
+    std::ifstream fileBee("../Data/Formations/Formation1Bees.txt");
+    std::string line;
+    while (std::getline(fileBee, line))
+    {
+        if(line.empty()) continue;
+        line = line.substr(1, line.size() - 2);  // Remove the brackets
+        std::stringstream ss(line);
+        std::string xStr, yStr;
 
-    gameObject = InitButterfly();
-    gameObject->SetPosition(298, 70);
-    enemyObserver = std::make_unique<EnemyObserver>();
-    scene->AddObserver(-1, std::move(enemyObserver), gameObject.get());
-    scene->AddObject(std::move(gameObject));
+        std::getline(ss, xStr, ',');
+        std::getline(ss, yStr);
 
-    gameObject = InitBossGalaga();
-    gameObject->SetPosition(298, 38);
-    enemyObserver = std::make_unique<EnemyObserver>();
-    scene->AddObserver(-1, std::move(enemyObserver), gameObject.get());
-    scene->AddObject(std::move(gameObject));
+        float x = std::stof(xStr);
+        float y = std::stof(yStr);
 
+        gameObject = InitBee();
+        gameObject->SetPosition(x, y);
+        gameObject->AddObserver(-1,enemyObserver);
+        scene->AddObject(std::move(gameObject));
+    }
+
+    //------BUTTERFLY--------
+    std::ifstream fileButterfly("../Data/Formations/Formation1Butterflies.txt");
+    while (std::getline(fileButterfly, line))
+    {
+        if(line.empty()) continue;
+        line = line.substr(1, line.size() - 2);  // Remove the brackets
+        std::stringstream ss(line);
+        std::string xStr, yStr;
+
+        std::getline(ss, xStr, ',');
+        std::getline(ss, yStr);
+
+        float x = std::stof(xStr);
+        float y = std::stof(yStr);
+
+        gameObject = InitButterfly();
+        gameObject->SetPosition(x, y);
+        gameObject->AddObserver(-1,enemyObserver);
+        scene->AddObject(std::move(gameObject));
+    }
+
+    //------BOSS GALAGA--------
+    std::ifstream fileBoss("../Data/Formations/Formation1Boss.txt");
+    while (std::getline(fileBoss, line))
+    {
+        if(line.empty()) continue;
+        line = line.substr(1, line.size() - 2);  // Remove the brackets
+        std::stringstream ss(line);
+        std::string xStr, yStr;
+
+        std::getline(ss, xStr, ',');
+        std::getline(ss, yStr);
+
+        float x = std::stof(xStr);
+        float y = std::stof(yStr);
+
+        gameObject = InitBossGalaga();
+        gameObject->SetPosition(x, y);
+        gameObject->AddObserver(-1,enemyObserver);
+        scene->AddObject(std::move(gameObject));
+    }
     SceneManager::GetInstance().SetScene(std::move(scene));
 }
+
