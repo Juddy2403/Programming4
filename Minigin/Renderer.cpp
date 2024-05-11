@@ -92,10 +92,6 @@ void GameEngine::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rec
 {
     SDL_RenderCopyEx(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &destRect,
         angle, &center, flipMode);
-    #ifndef NDEBUG
-    SDL_SetRenderDrawColor(GetSDLRenderer(), 255, 0, 0, 255); // Set the color to red
-    SDL_RenderDrawRect(GetSDLRenderer(), &destRect); // Draw the rectangle
-    #endif
 }
 
 SDL_Renderer* GameEngine::Renderer::GetSDLRenderer() const { return m_renderer; }

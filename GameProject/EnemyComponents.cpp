@@ -1,17 +1,42 @@
 ﻿#include "EnemyComponents.h"
 
+#include <iostream>
+
 #include "GameObject.h"
+#include "TimeManager.h"
 
-EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent):
-    Component(gameObj), m_SpriteComponent(spriteComponent)
-{}
+EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
+    RotatingSpriteComponent* rotatingComponent):
+    Component(gameObj), m_SpriteComponent(spriteComponent), m_RotatingComponent(rotatingComponent),
+m_NrOfStages((m_SpriteComponent->m_SpriteInfo.m_NrOfCols - 1) * 4)
+{
+    m_InitXPos = spriteComponent->m_SpriteInfo.m_StartPos.x;
+    spriteComponent->m_SpriteInfo.m_NrOfCols = 1;
+}
+void EnemyComponent::Update()
+{
+    m_CurrentTime += GameEngine::TimeManager::GetElapsed();
+    if (m_CurrentTime < .5f) return;
+    const auto rotationInfo = m_RotatingComponent->GetColFlipPair(m_CurrentRotationStage);
+    
+    m_SpriteComponent->m_SpriteInfo.m_StartPos.x = rotationInfo.first * (m_SpriteComponent->m_SpriteInfo.m_Width
+        + m_SpriteComponent->m_SpriteInfo.m_Spacing) + m_InitXPos;
+    
+    m_SpriteComponent->SetFlipMode(rotationInfo.second);
+    ++m_CurrentRotationStage %= m_NrOfStages;
+    m_SpriteComponent->UpdateSrcRect();
+    m_CurrentTime = 0;
+}
 
-BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent):
-    EnemyComponent(gameObj, spriteComponent)
+BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
+    RotatingSpriteComponent* rotatingComponent):
+    EnemyComponent(gameObj, spriteComponent, rotatingComponent)
 {}
 
 void BeeComponent::Update()
-{}
+{
+    EnemyComponent::Update();
+}
 bool BeeComponent::HasBeenHit()
 {
     GetGameObjParent()->SetDestroyedFlag();
@@ -22,12 +47,16 @@ EnemyId BeeComponent::GetEnemyID() const
     if (m_IsDiving) return EnemyId::beeDiving;
     return EnemyId::bee;
 }
-ButterflyComponent::ButterflyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent):
-    EnemyComponent(gameObj, spriteComponent)
+ButterflyComponent::ButterflyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
+    RotatingSpriteComponent* rotatingComponent):
+    EnemyComponent(gameObj, spriteComponent, rotatingComponent)
 {}
 
 void ButterflyComponent::Update()
-{}
+{
+    EnemyComponent::Update();
+
+}
 bool ButterflyComponent::HasBeenHit()
 {
     GetGameObjParent()->SetDestroyedFlag();
@@ -38,12 +67,16 @@ EnemyId ButterflyComponent::GetEnemyID() const
     if (m_IsDiving) return EnemyId::butterflyDiving;
     return EnemyId::butterfly;
 }
-BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent):
-    EnemyComponent(gameObj, spriteComponent),
+BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
+    RotatingSpriteComponent* rotatingComponent):
+    EnemyComponent(gameObj, spriteComponent, rotatingComponent),
     m_BossStage(std::make_unique<BossStageOne>())
 {}
 void BossGalagaComponent::Update()
-{}
+{
+    EnemyComponent::Update();
+
+}
 bool BossGalagaComponent::HasBeenHit()
 {
     BossStage* bossStage = m_BossStage->HasBeenHit(*GetGameObjParent());

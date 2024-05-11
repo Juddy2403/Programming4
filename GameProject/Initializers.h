@@ -79,11 +79,13 @@ inline std::unique_ptr<GameEngine::GameObject> InitBee()
     spriteComponent->m_SpriteInfo.m_NrOfCols = 5;
     spriteComponent->m_SpriteInfo.m_NrOfRows = 2;
     spriteComponent->m_SpriteInfo.m_CurrentCol = 0;
+    spriteComponent->m_SpriteInfo.m_TimeInterval = 0.8f;
     spriteComponent->m_Scale = 2;
     spriteComponent->UpdateSrcRect();
-    spriteComponent->m_IsActive = false;
+    spriteComponent->m_IsActive = true;
     
-    gameObject->AddComponent<BeeComponent>(spriteComponent);
+    gameObject->AddComponent<BeeComponent>(spriteComponent,
+            gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols));
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
    
     return gameObject;
@@ -101,11 +103,13 @@ inline std::unique_ptr<GameEngine::GameObject> InitButterfly()
     spriteComponent->m_SpriteInfo.m_NrOfCols = 5;
     spriteComponent->m_SpriteInfo.m_NrOfRows = 2;
     spriteComponent->m_SpriteInfo.m_CurrentCol = 0;
+    spriteComponent->m_SpriteInfo.m_TimeInterval = 0.8f;
     spriteComponent->m_Scale = 2;
     spriteComponent->UpdateSrcRect();
-    spriteComponent->m_IsActive = false;
+    spriteComponent->m_IsActive = true;
     
-    gameObject->AddComponent<ButterflyComponent>(spriteComponent);
+    gameObject->AddComponent<ButterflyComponent>(spriteComponent,
+            gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols));
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
 
     return gameObject;
@@ -123,11 +127,13 @@ inline std::unique_ptr<GameEngine::GameObject> InitBossGalaga()
     spriteComponent->m_SpriteInfo.m_NrOfCols = 5;
     spriteComponent->m_SpriteInfo.m_NrOfRows = 2;
     spriteComponent->m_SpriteInfo.m_CurrentCol = 0;
+    spriteComponent->m_SpriteInfo.m_TimeInterval = 0.8f;
     spriteComponent->m_Scale = 2;
     spriteComponent->UpdateSrcRect();
-    spriteComponent->m_IsActive = false;
+    spriteComponent->m_IsActive = true;
     
-    gameObject->AddComponent<BossGalagaComponent>(spriteComponent);
+    gameObject->AddComponent<BossGalagaComponent>(spriteComponent,
+            gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols));
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
 
     return gameObject;
