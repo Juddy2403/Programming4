@@ -172,6 +172,7 @@
     <ClCompile Include="GameObservers.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="RotatingSpriteComponent.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +186,7 @@
     <ClInclude Include="GameCommands.h" />
     <ClInclude Include="GameObservers.h" />
     <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="RotatingSpriteComponent.h" />
     <ClInclude Include="ScoreManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

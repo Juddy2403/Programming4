@@ -24,6 +24,6 @@ void BackgroundComponent::Render()
 {
     SDL_Rect destRect = m_TextureComponent->m_DestRect;
     destRect.y = m_CurrentY - destRect.h;
-    //Rebdering a second texture for the loop effect
+    //Rendering a second texture for the loop effect
     GameEngine::Renderer::GetInstance().RenderTexture(*m_TextureComponent->GetTexture(), m_TextureComponent->m_SrcRect, destRect);
 }

@@ -9,8 +9,6 @@
 
 #pragma warning( disable : 4244 )
 
-//#define COLLISION_BOX_DEBUG
-
 int GetOpenGLDriverIndex()
 {
     auto openglIndex = -1;
@@ -82,10 +80,11 @@ void GameEngine::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rec
     const SDL_Rect& destRect) const
 {
     SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &destRect);
-    #ifdef COLLISION_BOX_DEBUG
-    SDL_SetRenderDrawColor(GetSDLRenderer(), 255, 0, 0, 255); // Set the color to red
-    SDL_RenderDrawRect(GetSDLRenderer(), &destRect); // Draw the rectangle
-    #endif
+}
+void GameEngine::Renderer::RenderRect(const SDL_Rect& rect, const SDL_Color& color) const
+{
+    SDL_SetRenderDrawColor(GetSDLRenderer(), color.r, color.g, color.b, color.a); // Set the color to red
+    SDL_RenderDrawRect(GetSDLRenderer(), &rect); // Draw the rectangle
 }
 
 void GameEngine::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rect& srcRect,

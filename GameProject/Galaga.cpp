@@ -13,6 +13,7 @@
 #include "ServiceLocator.h"
 #include "DerivedSoundSystems.h"
 #include "GameObservers.h"
+#include "Minigin.h"
 
 using namespace GameEngine;
 void Galaga::LoadLevel()
@@ -30,7 +31,8 @@ void Galaga::LoadLevel()
     auto scene = std::make_unique<Scene>("First level");
     auto gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::texture));
     SDL_Rect& destRect = gameObject->AddComponent<TextureComponent>("Background.png")->m_DestRect;
-    destRect.w = destRect.h = 612;
+    destRect.w = GameEngine::g_WindowRect.w;
+    destRect.h = GameEngine::g_WindowRect.h;
     gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<TextureComponent>(), 700);
     scene->AddObject(std::move(gameObject));
 

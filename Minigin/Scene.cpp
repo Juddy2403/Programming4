@@ -2,8 +2,6 @@
 #include "GameObject.h"
 #include "IObserver.h"
 #include <algorithm>
-#include <future>
-
 #include "CollisionManager.h"
 #include "InputManager.h"
 #include "DerivedSoundSystems.h"
@@ -12,6 +10,8 @@
 using namespace GameEngine;
 
 unsigned int Scene::m_idCounter = 0;
+
+#define CHECK_COLLISION_RECTS
 
 Scene::Scene(const std::string& name) : m_Name(name) {}
 
@@ -25,8 +25,8 @@ GameObject* Scene::AddObject(std::unique_ptr<GameObject>&& object)
 
 IObserver* GameEngine::Scene::AddObserver(int message, std::unique_ptr<IObserver>&& observer, GameObject* gameObj)
 {
-    if(gameObj != nullptr)
-    gameObj->AddObserver(message, m_Observers.emplace_back(std::move(observer)).get());
+    if (gameObj != nullptr)
+        gameObj->AddObserver(message, m_Observers.emplace_back(std::move(observer)).get());
     else m_Observers.emplace_back(std::move(observer));
     return m_Observers.back().get();
 }
@@ -59,6 +59,9 @@ void Scene::Render() const
     {
         object->Render();
     }
+    #ifdef CHECK_COLLISION_RECTS
+    CollisionManager::RenderCollisionRects();
+    #endif
 }
 
 void Scene::RemoveDestroyedObjects()

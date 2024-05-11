@@ -1,4 +1,6 @@
 ﻿#include "CollisionManager.h"
+
+#include "Renderer.h"
 using namespace GameEngine;
 
 std::vector<GameEngine::CollisionComponent*> CollisionManager::m_CollisionComponents{};
@@ -24,5 +26,12 @@ void CollisionManager::CheckCollisions()
                 m_CollisionComponents[second]->CollidedWith(m_CollisionComponents[first]);
             }
         }
+    }
+}
+void CollisionManager::RenderCollisionRects()
+{
+    for (auto pComponent : m_CollisionComponents)
+    {
+        Renderer::GetInstance().RenderRect(pComponent->GetCollisionRect(), { 255, 0, 0, 255});
     }
 }

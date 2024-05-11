@@ -14,6 +14,7 @@ namespace GameEngine
         static void AddCollisionComponent(GameEngine::CollisionComponent* collisionComponent);
         static void RemoveCollisionComponent(GameEngine::CollisionComponent* collisionComponent);
         static void CheckCollisions();
+        static void RenderCollisionRects();
         
         CollisionManager() = delete;
         ~CollisionManager() = delete;

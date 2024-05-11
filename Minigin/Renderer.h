@@ -20,6 +20,7 @@ namespace GameEngine
 
         void RenderTexture(const Texture2D& texture, float x, float y) const;
         void RenderTexture(const Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& destRect) const;
+        void RenderRect(const SDL_Rect& rect, const SDL_Color& color) const;
 
         void RenderTexture(const Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& destRect,
             float angle, SDL_Point center, const SDL_RendererFlip& flipMode) const;

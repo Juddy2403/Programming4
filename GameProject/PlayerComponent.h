@@ -15,23 +15,7 @@ public:
 private:
     int m_PlayerID{ -1 };
 };
-class RotatingSpriteComponent final : public GameEngine::SpriteComponent
-{
-public:
-    explicit RotatingSpriteComponent(GameEngine::GameObject* gameObj);
-    explicit RotatingSpriteComponent(GameEngine::GameObject* gameObj, const std::string& filename);
-    explicit RotatingSpriteComponent(GameEngine::GameObject* gameObj, const std::shared_ptr<GameEngine::Texture2D>& texture);
 
-    RotatingSpriteComponent(const RotatingSpriteComponent& other) = delete;
-    RotatingSpriteComponent(RotatingSpriteComponent&& other) noexcept = delete;
-    RotatingSpriteComponent& operator=(const RotatingSpriteComponent& other) = delete;
-    RotatingSpriteComponent& operator=(RotatingSpriteComponent&& other) noexcept = delete;
-    ~RotatingSpriteComponent() override = default;
-
-    virtual void Update() override;
-private:
-    bool m_IsColIncreasing{ true };
-};
 
 class HealthComponent final : public GameEngine::Component
 {
