@@ -4,12 +4,9 @@
 #include <algorithm>
 #include "CollisionManager.h"
 #include "InputManager.h"
-#include "DerivedSoundSystems.h"
 #include "TimeManager.h"
 
 using namespace GameEngine;
-
-unsigned int Scene::m_idCounter = 0;
 
 //#define CHECK_COLLISION_RECTS
 

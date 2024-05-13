@@ -30,13 +30,10 @@ namespace GameEngine
 		Scene& operator=(Scene&& other) noexcept = delete;
 		
 	private: 
-		float m_FpsUpdateCounter{};
-		float m_FpsUpdateRate{ 0.5f };
 		std::string m_Name;
 		std::vector<std::unique_ptr<GameObject>> m_GameObjects;
 		std::vector<std::unique_ptr<IObserver>> m_Observers;
 
-		static unsigned int m_idCounter; 
 	};
 
 }

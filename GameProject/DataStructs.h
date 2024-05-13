@@ -8,7 +8,8 @@ enum class GameId
     bullet,
     observer,
     text,
-    texture
+    texture,
+    misc
 };
 
 enum class EnemyId

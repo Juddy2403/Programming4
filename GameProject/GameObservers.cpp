@@ -76,13 +76,14 @@ void EnemyObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent e
     case GameEngine::GameEvent::collision:
     {
         const auto collisionData = reinterpret_cast<GameEngine::CollisionData*>(eventData);
+        //TODO: only broadcast event when necessary (use ids)
         if (collisionData->pOtherCollider->GetID() == static_cast<int>(GameId::bullet))
         {
-            GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::enemyDeath), 100);
             GameEngine::GameObject* actor = dynamic_cast<GameEngine::GameObject*>(subject);
             auto enemyComp = actor->GetComponent<EnemyComponent>();
             if(bool hasDied = enemyComp->HasBeenHit())
             {
+                GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::enemyDeath), 100);
                 int playerId = collisionData->pOtherCollider->GetComponent<BulletComponent>()->GetPlayerID();
                 ScoreManager::AddScore(playerId,enemyComp->GetEnemyID());
             }

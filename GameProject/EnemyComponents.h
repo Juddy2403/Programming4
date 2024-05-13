@@ -2,6 +2,7 @@
 #include "BossStage.h"
 #include "Component.h"
 #include "DataStructs.h"
+#include "EnemyState.h"
 #include "RotatingSpriteComponent.h"
 
 class EnemyComponent : public GameEngine::Component
@@ -16,15 +17,19 @@ public:
     EnemyComponent& operator=(EnemyComponent&& other) noexcept = delete;
     ~EnemyComponent() override = default;
 
+    void SetFormationPosition(const glm::ivec2& formationPos) { m_FormationPosition = formationPos; }
+    glm::ivec2 GetFormationPosition() const { return m_FormationPosition; }
     virtual void Update() override;
     virtual bool HasBeenHit() = 0;
     bool IsDiving() const { return m_IsDiving; }
     virtual EnemyId GetEnemyID() const = 0;
 protected:
+    std::unique_ptr<EnemyState> m_CurrentState;
     bool m_IsDiving{ false };
     glm::vec2 m_Speed{ 0.0f,100.0f };
     GameEngine::SpriteComponent* m_SpriteComponent{};
     RotatingSpriteComponent* m_RotatingComponent{};
+    glm::ivec2 m_FormationPosition{};
     const int m_NrOfStages{};
     int m_InitXPos{};
     float m_CurrentTime{};
@@ -81,6 +86,7 @@ public:
     ~BossGalagaComponent() override = default;
 
     void Update() override;
+    //returns true if boss is destroyed
     virtual bool HasBeenHit() override;
     virtual EnemyId GetEnemyID() const override;
 private:
