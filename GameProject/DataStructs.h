@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "DerivedSoundSystems.h"
+#include "EventData.h"
 
 enum class GameId
 {
@@ -31,5 +32,11 @@ enum class SoundId : GameEngine::SoundId
     playerShoot,
     start,
     tractorBeam
+};
+
+struct ScoreData : GameEngine::EventData
+{
+    int playerId;
+    int enemyId;
 };
 

@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "DataStructs.h"
+
 std::unordered_map<int, int> ScoreManager::m_PlayerScores{};
 const std::unordered_map<EnemyId, int> ScoreManager::m_EnemyScores{
     { EnemyId::bee,50 },
@@ -18,6 +20,15 @@ void ScoreManager::AddScore(int playerId, EnemyId enemyId)
 #ifndef NDEBUG
     std::cout << "Player " << playerId << " has score: " << m_PlayerScores[playerId] << '\n';
 #endif
+}
+void ScoreManager::Notify([[maybe_unused]] GameEngine::Subject* subject, GameEngine::GameEvent event,[[maybe_unused]] GameEngine::EventData* eventData)
+{
+    if(event != GameEngine::GameEvent::scoreIncrease) return;
+    if(const auto scoreData = reinterpret_cast<ScoreData*>(eventData))
+    {
+        AddScore(scoreData->playerId, static_cast<EnemyId>(scoreData->enemyId));
+    }
+    else std::cerr << "ScoreManager::Notify: Invalid ScoreData\n";
 }
 
 int ScoreManager::GetPlayerScore(int playerId)

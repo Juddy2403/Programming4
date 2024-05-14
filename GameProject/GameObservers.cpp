@@ -85,7 +85,10 @@ void EnemyObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent e
             {
                 GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::enemyDeath), 100);
                 int playerId = collisionData->pOtherCollider->GetComponent<BulletComponent>()->GetPlayerID();
-                ScoreManager::AddScore(playerId,enemyComp->GetEnemyID());
+                ScoreData scoreData;
+                scoreData.enemyId = static_cast<int>(enemyComp->GetEnemyID());
+                scoreData.playerId = playerId;
+                subject->Notify(GameEngine::GameEvent::scoreIncrease,static_cast<int>(GameEngine::ObserverIdentifier::score),&scoreData);
             }
         }
         //std::cout<<"Enemy collided with: "<<collisionData->pOtherCollider->GetID()<< '\n';

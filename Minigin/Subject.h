@@ -19,6 +19,7 @@ namespace GameEngine
         bulletShot,
         bulletOutOfBounds,
         collision,
+        scoreIncrease,
         event //for when smth generic happens
     };
 

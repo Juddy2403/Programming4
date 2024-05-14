@@ -15,6 +15,7 @@
 #include "FormationComponent.h"
 #include "GameObservers.h"
 #include "Minigin.h"
+#include "ScoreManager.h"
 
 using namespace GameEngine;
 void Galaga::LoadLevel()
@@ -64,6 +65,8 @@ void Galaga::LoadLevel()
     //----------------ENEMIES--------------------
     auto enemyObserverUnique = std::make_unique<EnemyObserver>();
     auto enemyObserver = scene->AddObserver(-1, std::move(enemyObserverUnique), nullptr);
+    auto scoreObserverUnique = std::make_unique<ScoreManager>();
+    auto scoreObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserverUnique), nullptr);
 
     auto InitEnemyFromFile = [&](const std::string& filePath, std::function<std::unique_ptr<GameEngine::GameObject>()> initFunc) {
         std::ifstream file(filePath);
@@ -85,6 +88,7 @@ void Galaga::LoadLevel()
             gameObject->SetPosition(x, y);
             gameObject->GetComponent<EnemyComponent>()->SetFormationPosition({x,y});
             gameObject->AddObserver(-1, enemyObserver);
+            gameObject->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
             scene->AddObject(std::move(gameObject));
         }
     };
