@@ -1,8 +1,7 @@
 ﻿#include "BulletComponent.h"
 
-#include "GameObject.h"
-#include "Minigin.h"
-#include "TimeManager.h"
+#include "Subjects/GameObject.h"
+#include "Managers/TimeManager.h"
 
 BulletComponent::BulletComponent(GameEngine::GameObject* gameObj, int playerID,
     GameEngine::SpriteComponent* spriteComponent):

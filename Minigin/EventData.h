@@ -2,6 +2,7 @@
 
 namespace GameEngine
 {
+    class GameObject;
     struct EventData {};
     struct CollisionData : EventData
     {

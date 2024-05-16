@@ -1,10 +1,9 @@
 #pragma once
 #include <memory>
-#include "Transform.h"
+#include "../Transform.h"
 #include <vector>
-#include <string>
 #include <algorithm>
-#include "Component.h"
+#include "../Components/Component.h"
 #include "Subject.h"
 
 namespace GameEngine

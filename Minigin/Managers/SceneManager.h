@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include "Singleton.h"
-#include "Scene.h"
+#include "../Scene.h"
 
 namespace GameEngine
 {

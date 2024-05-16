@@ -1,6 +1,6 @@
 ﻿#include "CollisionManager.h"
 
-#include "Renderer.h"
+#include "Minigin/Renderable/Renderer.h"
 using namespace GameEngine;
 
 std::vector<GameEngine::CollisionComponent*> CollisionManager::m_CollisionComponents{};

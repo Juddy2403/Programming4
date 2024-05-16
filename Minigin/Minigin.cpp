@@ -8,12 +8,12 @@
 //#include <thread>
 #include "Minigin.h"
 
-#include "InputManager.h"
-#include "SceneManager.h"
-#include "Renderer.h"
-#include "ResourceManager.h"
-#include "DerivedSoundSystems.h"
-#include "TimeManager.h"
+#include "Managers/InputManager.h"
+#include "Managers/SceneManager.h"
+#include "Renderable/Renderer.h"
+#include "Managers/ResourceManager.h"
+#include "Sound/DerivedSoundSystems.h"
+#include "Managers/TimeManager.h"
 
 //using namespace std::chrono;
 

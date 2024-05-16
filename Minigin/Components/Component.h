@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include "Font.h"
-#include "Texture2D.h"
+#include "../Renderable/Font.h"
+#include "../Renderable/Texture2D.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <chrono>
 #include <SDL_rect.h>

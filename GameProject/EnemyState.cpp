@@ -1,7 +1,7 @@
 ﻿#include "EnemyState.h"
 #include "EnemyComponents.h"
 #include "FormationComponent.h"
-#include "GameObject.h"
+#include "Subjects/GameObject.h"
 
 EnemyState* IdleState::Update(EnemyComponent* enemyComponent)
 {

@@ -1,15 +1,12 @@
 #include "Component.h"
-#include "GameObject.h"
-#include "ResourceManager.h"
-#include "Renderer.h"
+#include "Minigin/Subjects/GameObject.h"
+#include "Minigin/Managers/ResourceManager.h"
+#include "Minigin/Renderable/Renderer.h"
 #include <SDL_ttf.h>
 #include <stdexcept>
-#include "TimeManager.h"
-#include <numbers>
-
-#include "CollisionManager.h"
-#include "EventData.h"
-#include "IObserver.h"
+#include "Minigin/Managers/TimeManager.h"
+#include "Minigin/Managers/CollisionManager.h"
+#include "Minigin/EventData.h"
 
 #pragma warning( disable : 4244 )
 

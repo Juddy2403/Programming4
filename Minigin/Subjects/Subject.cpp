@@ -1,5 +1,5 @@
 #include "Subject.h"
-#include "IObserver.h"
+#include "Minigin/IObserver.h"
 
 void GameEngine::Subject::AddObserver(int message, IObserver* observer)
 {

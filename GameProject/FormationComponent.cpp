@@ -1,7 +1,7 @@
 ﻿#include "FormationComponent.h"
 #include <iostream>
-#include "GameObject.h"
-#include "TimeManager.h"
+#include "Subjects/GameObject.h"
+#include "Managers/TimeManager.h"
 
 float FormationComponent::m_Offset = 0;
 int FormationComponent::m_Direction = 1;

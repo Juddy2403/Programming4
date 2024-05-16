@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "TimeManager.h"
-#include "Command.h"
+#include "Input/Command.h"
+#include "Managers/TimeManager.h"
 
 class ShootBulletCommand final : public GameEngine::Command
 {

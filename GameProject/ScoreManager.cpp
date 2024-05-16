@@ -1,7 +1,5 @@
 ﻿#include "ScoreManager.h"
-
 #include <iostream>
-
 #include "DataStructs.h"
 
 std::unordered_map<int, int> ScoreManager::m_PlayerScores{};

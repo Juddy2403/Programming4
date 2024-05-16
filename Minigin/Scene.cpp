@@ -1,10 +1,10 @@
 #include "Scene.h"
-#include "GameObject.h"
+#include "Subjects/GameObject.h"
 #include "IObserver.h"
 #include <algorithm>
-#include "CollisionManager.h"
-#include "InputManager.h"
-#include "TimeManager.h"
+#include "Managers/CollisionManager.h"
+#include "Managers/InputManager.h"
+#include "Managers/TimeManager.h"
 
 using namespace GameEngine;
 

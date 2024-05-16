@@ -1,10 +1,7 @@
 ﻿#include "BackgroundComponent.h"
-
-#include <iostream>
-
-#include "GameObject.h"
-#include "Renderer.h"
-#include "TimeManager.h"
+#include "Renderable/Renderer.h"
+#include "Managers/TimeManager.h"
+#include "Subjects/GameObject.h"
 
 BackgroundComponent::BackgroundComponent(GameEngine::GameObject* gameObject, GameEngine::TextureComponent* textureComponent, int speed):
     Component(gameObject),

@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "DerivedSoundSystems.h"
 #include "EventData.h"
+#include "Sound/DerivedSoundSystems.h"
 
 enum class GameId
 {

@@ -3,8 +3,8 @@
 #include "DataStructs.h"
 #include "EnemyComponents.h"
 #include "GameCommands.h"
-#include "GameObject.h"
-#include "InputManager.h"
+#include "Subjects/GameObject.h"
+#include "Managers/InputManager.h"
 #include "PlayerComponent.h"
 #include "RotatingSpriteComponent.h"
 

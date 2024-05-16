@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Component.h"
+#include "Components/Component.h"
 
 class RotatingSpriteComponent final : public GameEngine::Component
 {

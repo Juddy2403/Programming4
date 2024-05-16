@@ -1,6 +1,6 @@
 ﻿#include "RotatingSpriteComponent.h"
 
-#include "TimeManager.h"
+#include "Managers/TimeManager.h"
 
 RotatingSpriteComponent::RotatingSpriteComponent(GameEngine::GameObject* gameObj, int nrOfCols):
     Component(gameObj)

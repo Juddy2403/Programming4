@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "BossStage.h"
-#include "Component.h"
+#include "Components/Component.h"
 #include "DataStructs.h"
 #include "EnemyState.h"
 #include "RotatingSpriteComponent.h"

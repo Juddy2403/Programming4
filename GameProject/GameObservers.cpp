@@ -5,10 +5,10 @@
 #include "BulletComponent.h"
 #include "Initializers.h"
 #include "PlayerComponent.h"
-#include "DerivedSoundSystems.h"
+#include "Sound/DerivedSoundSystems.h"
 #include "EventData.h"
 #include "ScoreManager.h"
-#include "ServiceLocator.h"
+#include "Sound/ServiceLocator.h"
 
 void FighterObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent event,
     [[maybe_unused]] GameEngine::EventData* eventData)

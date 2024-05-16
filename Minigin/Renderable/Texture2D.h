@@ -1,5 +1,4 @@
 #pragma once
-#include <SDL_rect.h>
 #include <glm/vec2.hpp>
 
 struct SDL_Texture;

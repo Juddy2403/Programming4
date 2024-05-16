@@ -1,8 +1,6 @@
 #include "Command.h"
-
-#include "GameObject.h"
-#include "TimeManager.h"
-#include "GameProject/PlayerComponent.h"
+#include "Minigin/Subjects/GameObject.h"
+#include "Minigin/Managers/TimeManager.h"
 
 using namespace GameEngine;
 

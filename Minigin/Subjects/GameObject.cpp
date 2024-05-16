@@ -1,8 +1,5 @@
 #include "GameObject.h"
-
 #include <iostream>
-
-#include "Time.h"
 
 using namespace GameEngine;
 

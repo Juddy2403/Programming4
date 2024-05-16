@@ -2,9 +2,9 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "ResourceManager.h"
-#include "Renderer.h"
-#include "Texture2D.h"
-#include "Font.h"
+#include "Minigin/Renderable/Renderer.h"
+#include "Minigin/Renderable/Texture2D.h"
+#include "Minigin/Renderable/Font.h"
 
 void GameEngine::ResourceManager::Init(const std::string& dataPath)
 {

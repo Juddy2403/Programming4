@@ -1,5 +1,5 @@
 ﻿#include "PlayerComponent.h"
-#include "GameObject.h"
+#include "Subjects/GameObject.h"
 
 HealthComponent::HealthComponent(GameEngine::GameObject* gameObject, int health):
     Component(gameObject),

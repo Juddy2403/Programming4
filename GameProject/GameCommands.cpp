@@ -1,5 +1,5 @@
 ﻿#include "GameCommands.h"
-#include "GameObject.h"
+#include "Subjects/GameObject.h"
 
 ShootBulletCommand::ShootBulletCommand(GameEngine::GameObject* actor): Command(actor) {}
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "Singleton.h"
-#include "Command.h"
-#include "Controller.h"
-#include "KeyboardInput.h"
+#include "../Input/Command.h"
+#include "../Input/Controller.h"
+#include "../Input/KeyboardInput.h"
 #include <array>
 #include <unordered_map>
 

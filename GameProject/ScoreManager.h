@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include <unordered_map>
 #include "IObserver.h"
-#include "DataStructs.h"
 
+enum class EnemyId;
 class ScoreManager : public GameEngine::IObserver
 {
 public:

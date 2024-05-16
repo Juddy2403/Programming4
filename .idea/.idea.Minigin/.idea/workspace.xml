@@ -8,14 +8,73 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43cfb645-803b-40f9-a35f-cf674a51c400" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BackgroundComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BackgroundComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BackgroundComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BackgroundComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BossStage.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BossStage.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BulletComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BulletComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BulletComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BulletComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/DataStructs.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/DataStructs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/EnemyComponents.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyComponents.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/EnemyComponents.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyComponents.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/EnemyState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyState.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/FormationComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/FormationComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/FormationComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/FormationComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/GameCommands.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameCommands.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/GameCommands.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameCommands.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/GameObservers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameObservers.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Initializers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/PlayerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/PlayerComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/PlayerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/PlayerComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/RotatingSpriteComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/RotatingSpriteComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/RotatingSpriteComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/RotatingSpriteComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/ScoreManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/ScoreManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/ScoreManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/ScoreManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/AchievementsManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/AchievementsManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/CollisionManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/CollisionManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/CollisionManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/CollisionManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Command.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Input/Command.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Command.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Input/Command.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Components/Component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Component.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Components/Component.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Input/Controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Controller.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Input/Controller.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/DerivedSoundSystems.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Sound/DerivedSoundSystems.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/DerivedSoundSystems.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Sound/DerivedSoundSystems.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/EventData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/EventData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Subject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subject.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Font.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Renderable/Font.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Font.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Renderable/Font.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/GameObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subjects/GameObject.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/GameObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subjects/GameObject.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/IObserver.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/IObserver.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/ISoundSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Sound/ISoundSystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/ISoundSystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Sound/ISoundSystem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/InputManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/InputManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/InputManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/InputManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/KeyboardInput.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Input/KeyboardInput.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/KeyboardInput.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Input/KeyboardInput.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Renderable/Renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Renderable/Renderer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/ResourceManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/ResourceManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/ResourceManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/ResourceManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Scene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/SceneManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/SceneManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/SceneManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/SceneManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/ServiceLocator.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Sound/ServiceLocator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Singleton.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/Singleton.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/SteamAchievements.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/SteamAchievements.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Subject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subjects/Subject.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Subject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subjects/Subject.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Texture2D.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Renderable/Texture2D.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Texture2D.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Renderable/Texture2D.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/TimeManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/TimeManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/TimeManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/TimeManager.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +223,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;C++ Project.CleanEngine.executor&quot;: &quot;Debug&quot;,
+    &quot;C++ Project.CleanEngine.executor&quot;: &quot;Run&quot;,
     &quot;C++ Project.GameProject.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -320,6 +379,8 @@
       <workItem from="1715544321854" duration="294000" />
       <workItem from="1715583514146" duration="11240000" />
       <workItem from="1715619987140" duration="7685000" />
+      <workItem from="1715804880409" duration="3651000" />
+      <workItem from="1715851111456" duration="1423000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include "Renderer.h"
-#include "SceneManager.h"
+#include "Minigin/Managers/SceneManager.h"
 #include "Texture2D.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>

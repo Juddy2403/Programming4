@@ -1,5 +1,5 @@
 #include "SceneManager.h"
-#include "GameObject.h"
+#include "Minigin/Subjects/GameObject.h"
 
 void GameEngine::SceneManager::Update()
 {

@@ -1,6 +1,5 @@
 #pragma once
-#include "Component.h"
-#include "Subject.h"
+#include "Subjects/Subject.h"
 
 namespace GameEngine
 {
