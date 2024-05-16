@@ -119,18 +119,18 @@ void GameEngine::GameObject::SetDestroyedFlag()
     m_IsDestroyed = true;
 }
 
-void GameObject::SetPosition(float x, float y, float z)
+void GameObject::SetPosition(int x, int y, int z)
 {
     m_LocalTransform.SetPosition(x, y, z);
     SetPositionIsDirty();
 }
 
-void GameEngine::GameObject::SetPosition(const glm::vec3& pos)
+void GameEngine::GameObject::SetPosition(const glm::ivec3& pos)
 {
     SetPosition(pos.x, pos.y, pos.z);
 }
 
-glm::vec3 GameObject::GetPosition()
+glm::ivec3 GameObject::GetPosition()
 {
     return GetWorldTransform().GetPosition();
 }

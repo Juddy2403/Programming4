@@ -51,8 +51,8 @@ void BulletObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent 
     {
         auto bullet = InitBullet(actor->GetComponent<PlayerComponent>()->GetPlayerID());
 
-        glm::vec3 pos = actor->GetPosition();
-        pos.y -= static_cast<float>(bullet->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h);
+        glm::ivec3 pos = actor->GetPosition();
+        pos.y -= bullet->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h;
         bullet->SetPosition(pos);
 
         bullet->AddObserver(static_cast<int>(GameEngine::ObserverIdentifier::bullet), this);

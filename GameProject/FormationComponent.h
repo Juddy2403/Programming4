@@ -7,7 +7,7 @@ public:
     explicit FormationComponent(GameEngine::GameObject* gameObj);
     void Update() override;
     ~FormationComponent() override = default;
-    static float GetOffset();
+    static int GetOffset();
 private:
     static bool m_DoesExist;
     static float m_Offset;

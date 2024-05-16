@@ -4,8 +4,6 @@
 #include "../Subjects/GameObject.h"
 #include "../Subjects/Subject.h"
 
-#pragma warning(disable : 4244)
-
 using namespace GameEngine;
 CollisionComponent::CollisionComponent(GameObject* gameObj,SDL_Rect collisionRect):
     Component(gameObj),

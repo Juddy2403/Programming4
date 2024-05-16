@@ -5,7 +5,7 @@
 
 EnemyState* IdleState::Update(EnemyComponent* enemyComponent)
 {
-    glm::vec2 formationPos = enemyComponent->GetFormationPosition();
+    glm::ivec2 formationPos = enemyComponent->GetFormationPosition();
     formationPos.x += FormationComponent::GetOffset();
     enemyComponent->GetGameObjParent()->SetPosition({formationPos,1});
     return nullptr;

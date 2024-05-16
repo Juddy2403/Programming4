@@ -37,7 +37,7 @@ void TextureComponent::Render()
         const auto pos = GetGameObjParent()->GetPosition();
         m_DestRect.x = static_cast<int>(pos.x);
         m_DestRect.y = static_cast<int>(pos.y);
-        if (m_RotationAngle != 0 || m_FlipMode != SDL_FLIP_NONE)
+        if (m_RotationAngle >= 0  || m_RotationAngle <= 0 || m_FlipMode != SDL_FLIP_NONE)
             Renderer::GetInstance().RenderTexture(*m_Texture, m_SrcRect, m_DestRect, m_RotationAngle, m_RotationCenter, m_FlipMode);
         else
             Renderer::GetInstance().RenderTexture(*m_Texture, m_SrcRect, m_DestRect);

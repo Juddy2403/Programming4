@@ -43,14 +43,14 @@ void Galaga::LoadLevel()
 
     //------TITLE--------
     gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
-    gameObject->SetPosition(80.f, 20.f);
+    gameObject->SetPosition(80, 20);
     gameObject->AddComponent<TextComponent>(font, "Galaga");
     gameObject->AddComponent<TextureComponent>();
     scene->AddObject(std::move(gameObject));
 
     //-------EXTRATEXT---------
     gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
-    gameObject->SetPosition(20.f, 500.f);
+    gameObject->SetPosition(20, 500);
     gameObject->AddComponent<TextComponent>(smallerFont, "Use WASD to move, press space to shoot a bullet and shoot the enemies for sound");
     gameObject->AddComponent<TextureComponent>();
     scene->AddObject(std::move(gameObject));
@@ -81,15 +81,15 @@ void Galaga::LoadLevel()
             std::getline(ss, xStr, ',');
             std::getline(ss, yStr);
 
-            float x = std::stof(xStr);
-            float y = std::stof(yStr);
+            int x = std::stoi(xStr);
+            int y = std::stoi(yStr);
 
-            auto gameObject = initFunc();
-            gameObject->SetPosition(x, y);
-            gameObject->GetComponent<EnemyComponent>()->SetFormationPosition({x,y});
-            gameObject->AddObserver(-1, enemyObserver);
-            gameObject->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
-            scene->AddObject(std::move(gameObject));
+            auto enemy = initFunc();
+            enemy->SetPosition(x, y);
+            enemy->GetComponent<EnemyComponent>()->SetFormationPosition({x,y});
+            enemy->AddObserver(-1, enemyObserver);
+            enemy->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
+            scene->AddObject(std::move(enemy));
         }
     };
 

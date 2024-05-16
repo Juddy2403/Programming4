@@ -29,7 +29,7 @@ inline std::unique_ptr<GameEngine::GameObject> InitFighter()
     spriteComponent->m_IsActive = false;
 
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
-    gameObject->SetPosition(150.f, 450.f);
+    gameObject->SetPosition(150, 450);
     
     gameObject->AddComponent<HealthComponent>(3);
     auto& input = GameEngine::InputManager::GetInstance();

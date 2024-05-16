@@ -17,7 +17,7 @@ void BackgroundComponent::Update()
     {
         m_CurrentY -= m_TextureComponent->m_DestRect.h;
     }
-    GetGameObjParent()->SetPosition(0, static_cast<float>(m_CurrentY));
+    GetGameObjParent()->SetPosition(0, m_CurrentY);
 }
 void BackgroundComponent::Render()
 {

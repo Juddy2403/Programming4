@@ -24,8 +24,8 @@ void FormationComponent::Update()
         m_Direction *= -1;
     }
 }
-float FormationComponent::GetOffset() 
+int FormationComponent::GetOffset() 
 {
-    if(m_DoesExist) return m_Offset;
+    if(m_DoesExist) return static_cast<int>(m_Offset);
     throw std::runtime_error("FormationComponent does not exist in the scene");
 }
