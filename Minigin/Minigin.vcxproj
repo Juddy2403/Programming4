@@ -226,7 +226,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_rectpack.h" />
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_textedit.h" />
     <ClInclude Include="..\3rdParty\imgui-1.89.5\imstb_truetype.h" />
+    <ClInclude Include="Components\CollisionComponent.h" />
     <ClInclude Include="Components\Component.h" />
+    <ClInclude Include="Components\SpriteComponent.h" />
+    <ClInclude Include="Components\TextComponent.h" />
+    <ClInclude Include="Components\TextureComponent.h" />
     <ClInclude Include="EventData.h" />
     <ClInclude Include="Input\Command.h" />
     <ClInclude Include="Input\Controller.h" />
@@ -259,7 +263,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_plot.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_widgets.cpp" />
+    <ClCompile Include="Components\CollisionComponent.cpp" />
     <ClCompile Include="Components\Component.cpp" />
+    <ClCompile Include="Components\SpriteComponent.cpp" />
+    <ClCompile Include="Components\TextComponent.cpp" />
+    <ClCompile Include="Components\TextureComponent.cpp" />
     <ClCompile Include="Input\Command.cpp" />
     <ClCompile Include="Input\Controller.cpp" />
     <ClCompile Include="Input\KeyboardInput.cpp" />

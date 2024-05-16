@@ -1,5 +1,6 @@
 ﻿#include "BulletComponent.h"
 
+#include "Components/SpriteComponent.h"
 #include "Subjects/GameObject.h"
 #include "Managers/TimeManager.h"
 

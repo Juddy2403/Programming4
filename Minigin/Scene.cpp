@@ -8,7 +8,7 @@
 
 using namespace GameEngine;
 
-//#define CHECK_COLLISION_RECTS
+#define CHECK_COLLISION_RECTS
 
 Scene::Scene(const std::string& name) : m_Name(name) {}
 

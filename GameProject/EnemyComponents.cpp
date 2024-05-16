@@ -1,5 +1,6 @@
 ﻿#include "EnemyComponents.h"
 #include "Subjects/GameObject.h"
+#include "Components/SpriteComponent.h"
 #include "Managers/TimeManager.h"
 
 EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,

@@ -8,8 +8,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43cfb645-803b-40f9-a35f-cf674a51c400" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Minigin/Components/CollisionComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/Components/CollisionComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/Components/SpriteComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/Components/SpriteComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/Components/TextComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/Components/TextComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/Components/TextureComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Minigin/Components/TextureComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BackgroundComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BackgroundComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BackgroundComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BackgroundComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BossStage.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BossStage.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BulletComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BulletComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BulletComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BulletComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/EnemyComponents.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyComponents.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/EnemyComponents.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyComponents.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Initializers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/RotatingSpriteComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/RotatingSpriteComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Components/Component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Components/Component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Components/Component.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Components/Component.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Managers/CollisionManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/CollisionManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Managers/CollisionManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/CollisionManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Scene.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,7 +338,7 @@
       <workItem from="1715583514146" duration="11240000" />
       <workItem from="1715619987140" duration="7685000" />
       <workItem from="1715804880409" duration="3651000" />
-      <workItem from="1715851111456" duration="5427000" />
+      <workItem from="1715851111456" duration="9911000" />
     </task>
     <servers />
   </component>

@@ -7,6 +7,8 @@
 #include "Managers/InputManager.h"
 #include "PlayerComponent.h"
 #include "RotatingSpriteComponent.h"
+#include "Components/CollisionComponent.h"
+#include "Components/SpriteComponent.h"
 
 inline std::unique_ptr<GameEngine::GameObject> InitFighter()
 {

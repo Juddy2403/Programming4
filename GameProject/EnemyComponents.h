@@ -1,10 +1,16 @@
 ﻿#pragma once
+#include <glm/vec2.hpp>
+
 #include "BossStage.h"
 #include "Components/Component.h"
 #include "DataStructs.h"
 #include "EnemyState.h"
 #include "RotatingSpriteComponent.h"
 
+namespace GameEngine
+{
+    class SpriteComponent;
+}
 class EnemyComponent : public GameEngine::Component
 {
 public:

@@ -1,8 +1,9 @@
 ﻿#pragma once
-#include "Minigin/Components/Component.h"
+#include <vector>
 
 namespace GameEngine
 {
+    class CollisionComponent;
     class CollisionManager final
     {
     public:

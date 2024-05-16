@@ -1,5 +1,5 @@
 ﻿#include "CollisionManager.h"
-
+#include "Minigin/Components/CollisionComponent.h"
 #include "Minigin/Renderable/Renderer.h"
 using namespace GameEngine;
 

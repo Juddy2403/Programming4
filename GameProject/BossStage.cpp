@@ -1,6 +1,7 @@
 ﻿#include "BossStage.h"
 
 #include "EnemyComponents.h"
+#include "Components/SpriteComponent.h"
 #include "Subjects/GameObject.h"
 
 BossStage* BossStageOne::HasBeenHit(GameEngine::GameObject& bossObj)

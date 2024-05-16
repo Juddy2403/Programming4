@@ -5,7 +5,6 @@
 #include "BackgroundComponent.h"
 #include "Managers/SceneManager.h"
 #include "Scene.h"
-#include "Components/Component.h"
 #include "DataStructs.h"
 #include "Initializers.h"
 #include "Subjects/GameObject.h"
@@ -16,6 +15,7 @@
 #include "GameObservers.h"
 #include "Minigin.h"
 #include "ScoreManager.h"
+#include "Components/TextComponent.h"
 
 using namespace GameEngine;
 void Galaga::LoadLevel()

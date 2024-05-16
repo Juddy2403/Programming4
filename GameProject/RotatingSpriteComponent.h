@@ -1,4 +1,8 @@
 ﻿#pragma once
+#include <SDL_render.h>
+#include <utility>
+#include <vector>
+
 #include "Components/Component.h"
 
 class RotatingSpriteComponent final : public GameEngine::Component

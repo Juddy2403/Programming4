@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include "Components/Component.h"
 
+namespace GameEngine
+{
+    class TextureComponent;
+}
 class BackgroundComponent final : public GameEngine::Component
 {
 public:

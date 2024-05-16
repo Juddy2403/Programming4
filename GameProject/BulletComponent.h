@@ -1,6 +1,12 @@
 ﻿#pragma once
+#include <glm/vec2.hpp>
+
 #include "Components/Component.h"
 
+namespace GameEngine
+{
+    class SpriteComponent;
+}
 class BulletComponent final : public GameEngine::Component
 {
 public:

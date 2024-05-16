@@ -1,4 +1,6 @@
 ﻿#include "BackgroundComponent.h"
+
+#include "Components/TextureComponent.h"
 #include "Renderable/Renderer.h"
 #include "Managers/TimeManager.h"
 #include "Subjects/GameObject.h"
