@@ -1,21 +1,25 @@
 ﻿#include "Galaga.h"
+
 #include <fstream>
-#include <iostream>
+#include <SDL_rect.h>
 #include <sstream>
-#include "BackgroundComponent.h"
-#include "Managers/SceneManager.h"
-#include "Scene.h"
 #include "DataStructs.h"
 #include "Initializers.h"
-#include "Subjects/GameObject.h"
-#include "Managers/ResourceManager.h"
-#include "Sound/ServiceLocator.h"
-#include "Sound/DerivedSoundSystems.h"
-#include "FormationComponent.h"
-#include "GameObservers.h"
 #include "Minigin.h"
-#include "ScoreManager.h"
+#include "Scene.h"
 #include "Components/TextComponent.h"
+#include "Components/TextureComponent.h"
+#include "Game components/BackgroundComponent.h"
+#include "Game components/FormationComponent.h"
+#include "Game components/Enemy components/EnemyComponent.h"
+#include "Game observers/BulletObserver.h"
+#include "Game observers/EnemyObserver.h"
+#include "Game observers/ScoreManager.h"
+#include "Managers/ResourceManager.h"
+#include "Managers/SceneManager.h"
+#include "Sound/DerivedSoundSystems.h"
+#include "Sound/ServiceLocator.h"
+#include "Subjects/GameObject.h"
 
 using namespace GameEngine;
 void Galaga::LoadLevel()

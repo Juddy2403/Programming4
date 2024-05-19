@@ -8,19 +8,228 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43cfb645-803b-40f9-a35f-cf674a51c400" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BeeComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BeeComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/ButterflyComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/ButterflyComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/HealthComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/HealthComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game observers/BulletObserver.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game observers/BulletObserver.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyObserver.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyObserver.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game observers/FighterObserver.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game observers/FighterObserver.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Initializers.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/BackgroundComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BackgroundComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/.github/issue_template.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/.github/pull_request_template.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/.github/workflows/build.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/.github/workflows/scheduled.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/.github/workflows/static-analysis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_allegro5/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_allegro5/example_allegro5.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_allegro5/example_allegro5.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_allegro5/imconfig_allegro5.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_allegro5/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_android_opengl3/android/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_android_opengl3/android/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_android_opengl3/android/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_android_opengl3/android/app/src/main/java/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_android_opengl3/android/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_android_opengl3/android/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_android_opengl3/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_apple_metal/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_apple_metal/example_apple_metal.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_apple_metal/iOS/Info-iOS.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_apple_metal/iOS/LaunchScreen.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_apple_metal/macOS/Info-macOS.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_apple_metal/macOS/MainMenu.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_apple_metal/main.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_apple_opengl2/example_apple_opengl2.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_apple_opengl2/main.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_emscripten_wgpu/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_emscripten_wgpu/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_emscripten_wgpu/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_metal/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_metal/main.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl2/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl2/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl2/example_glfw_opengl2.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl2/example_glfw_opengl2.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl2/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl3/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl3/Makefile.emscripten" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl3/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl3/example_glfw_opengl3.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl3/example_glfw_opengl3.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_opengl3/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_vulkan/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_vulkan/build_win64.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_vulkan/example_glfw_vulkan.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_vulkan/example_glfw_vulkan.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glfw_vulkan/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glut_opengl2/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glut_opengl2/example_glut_opengl2.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glut_opengl2/example_glut_opengl2.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_glut_opengl2/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_null/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_null/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_null/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_directx11/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_directx11/example_sdl2_directx11.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_directx11/example_sdl2_directx11.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_directx11/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_metal/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_metal/main.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl2/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl2/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl2/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl2/example_sdl2_opengl2.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl2/example_sdl2_opengl2.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl2/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl3/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl3/Makefile.emscripten" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl3/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl3/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl3/example_sdl2_opengl3.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl3/example_sdl2_opengl3.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_opengl3/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_sdlrenderer/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_sdlrenderer/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_sdlrenderer/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_sdlrenderer/example_sdl2_sdlrenderer.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_sdlrenderer/example_sdl2_sdlrenderer.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_sdlrenderer/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_vulkan/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_vulkan/example_sdl2_vulkan.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_vulkan/example_sdl2_vulkan.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl2_vulkan/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl3_opengl3/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl3_opengl3/Makefile.emscripten" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl3_opengl3/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl3_opengl3/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl3_opengl3/example_sdl3_opengl3.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl3_opengl3/example_sdl3_opengl3.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_sdl3_opengl3/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx10/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx10/example_win32_directx10.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx10/example_win32_directx10.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx10/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx11/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx11/example_win32_directx11.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx11/example_win32_directx11.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx11/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx12/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx12/example_win32_directx12.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx12/example_win32_directx12.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx12/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx9/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx9/example_win32_directx9.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx9/example_win32_directx9.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/example_win32_directx9/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/emscripten/emscripten_mainloop_stub.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/emscripten/shell_minimal.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/glfw/COPYING.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/glfw/include/GLFW/glfw3.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/glfw/include/GLFW/glfw3native.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/glfw/lib-vc2010-32/glfw3.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/glfw/lib-vc2010-64/glfw3.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/usynergy/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/usynergy/uSynergy.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/examples/libs/usynergy/uSynergy.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/imgui-1.89.5/imgui_demo.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamapplist.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamapps.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamappticket.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamclient.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamcontroller.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamdualsense.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamfriends.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamgamecoordinator.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamgameserver.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamgameserverstats.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamhtmlsurface.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamhttp.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteaminput.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteaminventory.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteammatchmaking.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteammusic.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteammusicremote.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamnetworking.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamnetworkingmessages.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamnetworkingsockets.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamnetworkingutils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamparentalsettings.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamps3overlayrenderer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamremoteplay.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamremotestorage.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamscreenshots.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamugc.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamuser.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamuserstats.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamutils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/isteamvideo.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/lib/linux32/libsdkencryptedappticket.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/lib/linux64/libsdkencryptedappticket.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/lib/osx/libsdkencryptedappticket.dylib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/lib/win32/sdkencryptedappticket.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/lib/win32/sdkencryptedappticket.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/lib/win64/sdkencryptedappticket64.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/lib/win64/sdkencryptedappticket64.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/matchmakingtypes.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steam_api.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steam_api.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steam_api_common.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steam_api_flat.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steam_api_internal.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steam_gameserver.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steamclientpublic.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steamencryptedappticket.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steamhttpenums.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steamnetworkingfakeip.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steamnetworkingtypes.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steamps3params.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steamtypes.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/public/steam/steamuniverse.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/redistributable_bin/linux32/libsteam_api.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/redistributable_bin/linux64/libsteam_api.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/redistributable_bin/osx/libsteam_api.dylib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/redistributable_bin/steam_api.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/redistributable_bin/steam_api.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/redistributable_bin/steam_appid.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/redistributable_bin/win64/steam_api64.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3rdParty/steamworks/redistributable_bin/win64/steam_api64.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BackgroundComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/BackgroundComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BackgroundComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/BackgroundComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BossStage.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/BossStage.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BulletComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/BulletComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/BulletComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/BulletComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/EnemyComponents.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/EnemyComponents.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/EnemyState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyState.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/FormationComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/FormationComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/FormationComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/FormationComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/FormationComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/FormationComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/GameObservers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameObservers.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/GameObservers.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/GameObservers.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Initializers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Components/TextureComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Components/TextureComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Subjects/GameObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subjects/GameObject.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Subjects/GameObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subjects/GameObject.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Transform.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Transform.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Transform.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Transform.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/PlayerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/PlayerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/RotatingSpriteComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/RotatingSpriteComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/RotatingSpriteComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/RotatingSpriteComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/ScoreManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/ScoreManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/ScoreManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/ScoreManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,30 +267,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C++ Project.CleanEngine.executor&quot;: &quot;Run&quot;,
-    &quot;C++ Project.GameProject.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C++ Project.CleanEngine.executor": "Run",
+    "C++ Project.GameProject.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Ioana\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Ioana\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Ioana\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\Ioana\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Ioana\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\Ioana\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
-  <component name="RunManager" selected="C++ Project.CleanEngine">
+}]]></component>
+  <component name="RunManager" selected="C++ Project.GameProject">
     <configuration name="CleanEngine" type="CppProject" factoryName="C++ Project">
       <configuration_1>
         <option name="CONFIGURATION" value="Release" />
@@ -217,7 +426,8 @@
       <workItem from="1715583514146" duration="11240000" />
       <workItem from="1715619987140" duration="7685000" />
       <workItem from="1715804880409" duration="3651000" />
-      <workItem from="1715851111456" duration="11668000" />
+      <workItem from="1715851111456" duration="13593000" />
+      <workItem from="1716066469762" duration="8526000" />
     </task>
     <servers />
   </component>

@@ -258,7 +258,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="..\3rdParty\imgui-1.89.5\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\backends\imgui_impl_sdl2.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui.cpp" />
-    <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_demo.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_draw.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_plot.cpp" />
     <ClCompile Include="..\3rdParty\imgui-1.89.5\imgui_tables.cpp" />

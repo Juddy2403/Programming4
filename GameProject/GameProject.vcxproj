@@ -163,35 +163,48 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BackgroundComponent.cpp" />
     <ClCompile Include="BossStage.cpp" />
-    <ClCompile Include="BulletComponent.cpp" />
-    <ClCompile Include="EnemyComponents.cpp" />
     <ClCompile Include="EnemyState.cpp" />
-    <ClCompile Include="FormationComponent.cpp" />
     <ClCompile Include="Galaga.cpp" />
+    <ClCompile Include="Game components\BackgroundComponent.cpp" />
+    <ClCompile Include="Game components\BulletComponent.cpp" />
+    <ClCompile Include="Game components\Enemy components\BeeComponent.cpp" />
+    <ClCompile Include="Game components\Enemy components\BossGalagaComponent.cpp" />
+    <ClCompile Include="Game components\Enemy components\ButterflyComponent.cpp" />
+    <ClCompile Include="Game components\Enemy components\EnemyComponent.cpp" />
+    <ClCompile Include="Game components\FormationComponent.cpp" />
+    <ClCompile Include="Game components\HealthComponent.cpp" />
+    <ClCompile Include="Game components\PlayerComponent.cpp" />
+    <ClCompile Include="Game components\RotatingSpriteComponent.cpp" />
+    <ClCompile Include="Game observers\BulletObserver.cpp" />
+    <ClCompile Include="Game observers\EnemyObserver.cpp" />
+    <ClCompile Include="Game observers\FighterObserver.cpp" />
+    <ClCompile Include="Game observers\ScoreManager.cpp" />
     <ClCompile Include="GameCommands.cpp" />
-    <ClCompile Include="GameObservers.cpp" />
+    <ClCompile Include="Initializers.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PlayerComponent.cpp" />
-    <ClCompile Include="RotatingSpriteComponent.cpp" />
-    <ClCompile Include="ScoreManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BackgroundComponent.h" />
     <ClInclude Include="BossStage.h" />
-    <ClInclude Include="BulletComponent.h" />
     <ClInclude Include="DataStructs.h" />
-    <ClInclude Include="EnemyComponents.h" />
     <ClInclude Include="EnemyState.h" />
-    <ClInclude Include="FormationComponent.h" />
-    <ClInclude Include="Initializers.h" />
+    <ClInclude Include="Game components\BackgroundComponent.h" />
+    <ClInclude Include="Game components\BulletComponent.h" />
+    <ClInclude Include="Game components\Enemy components\BeeComponent.h" />
+    <ClInclude Include="Game components\Enemy components\BossGalagaComponent.h" />
     <ClInclude Include="Galaga.h" />
+    <ClInclude Include="Game components\Enemy components\ButterflyComponent.h" />
+    <ClInclude Include="Game components\Enemy components\EnemyComponent.h" />
+    <ClInclude Include="Game components\FormationComponent.h" />
+    <ClInclude Include="Game components\HealthComponent.h" />
+    <ClInclude Include="Game components\PlayerComponent.h" />
+    <ClInclude Include="Game components\RotatingSpriteComponent.h" />
+    <ClInclude Include="Game observers\BulletObserver.h" />
+    <ClInclude Include="Game observers\EnemyObserver.h" />
+    <ClInclude Include="Game observers\FighterObserver.h" />
+    <ClInclude Include="Game observers\ScoreManager.h" />
     <ClInclude Include="GameCommands.h" />
-    <ClInclude Include="GameObservers.h" />
-    <ClInclude Include="PlayerComponent.h" />
-    <ClInclude Include="RotatingSpriteComponent.h" />
-    <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="Initializers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,12 +5,8 @@
 #endif
 #endif
 
-#include <SDL.h>
 #include "Minigin.h"
-#include <iostream>
 #include "Galaga.h"
-
-using namespace GameEngine;
 
 void Load()
 {
@@ -18,8 +14,7 @@ void Load()
 }
 
 int main(int, char* []) {
-
-	Minigin engine("../Data/");
+	GameEngine::Minigin engine("../Data/");
 	engine.Run(Load);
 
 	return 0;
