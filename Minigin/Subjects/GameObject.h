@@ -52,9 +52,10 @@ namespace GameEngine
         void UpdateWorldTransform();
         void SetPositionIsDirty();
 
-        void SetPosition(int x, int y, int z = 0);
-        void SetPosition(const glm::ivec3& pos);
-        glm::ivec3 GetPosition();
+        void SetPosition(float x, float y, float z = 0);
+        void SetPosition(const glm::vec3& pos);
+        glm::ivec3 GetIntPosition();
+        glm::vec3 GetPosition();
 
         explicit GameObject(int id);
         ~GameObject() override = default;

@@ -14,11 +14,11 @@ public:
     BackgroundComponent& operator=(const BackgroundComponent& other) = delete;
     BackgroundComponent& operator=(BackgroundComponent&& other) noexcept = delete;
     ~BackgroundComponent() override = default;
-    
+
     void Update() override;
     void Render() override;
 private:
     GameEngine::TextureComponent* m_TextureComponent;
-    int m_CurrentY{ 0 };
+    float m_CurrentY{ 0 };
     const int m_Speed{ 100 };
 };

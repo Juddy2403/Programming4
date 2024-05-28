@@ -10,8 +10,6 @@ namespace GameEngine
 	class Scene final
 	{
 	public:
-		
-		//friend Scene& SceneManager::CreateScene(const std::string& name);
 		GameObject* AddObject(std::unique_ptr<GameObject>&& object);
 		IObserver* AddObserver(int message,std::unique_ptr<IObserver>&& observer,GameObject* gameObj);
 		void Remove(const std::unique_ptr<GameObject>& object);

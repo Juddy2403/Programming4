@@ -1,4 +1,6 @@
 ﻿#include "RotatingSpriteComponent.h"
+
+#include "Components/SpriteComponent.h"
 #include "Managers/TimeManager.h"
 
 RotatingSpriteComponent::RotatingSpriteComponent(GameEngine::GameObject* gameObj, int nrOfCols):
@@ -6,7 +8,6 @@ RotatingSpriteComponent::RotatingSpriteComponent(GameEngine::GameObject* gameObj
 {
     InitColFlipPairs(nrOfCols);
 }
-
 void RotatingSpriteComponent::InitColFlipPairs(int nrOfCols)
 {
     bool isColIncreasing = true;

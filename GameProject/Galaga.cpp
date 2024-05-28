@@ -89,7 +89,7 @@ void Galaga::LoadLevel()
             int y = std::stoi(yStr);
 
             auto enemy = initFunc();
-            enemy->SetPosition(x, y);
+            enemy->SetPosition(0, 0);
             enemy->GetComponent<EnemyComponent>()->SetFormationPosition({x,y});
             enemy->AddObserver(-1, enemyObserver);
             enemy->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);

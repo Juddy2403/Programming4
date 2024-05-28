@@ -12,7 +12,9 @@ void GameEngine::Subject::AddObserver(int message, IObserver* observer)
 void GameEngine::Subject::RemoveObserver(int message, IObserver* observer)
 {
     if (m_Observers.find(message) != m_Observers.end())
+    {
         m_Observers[message].remove(observer);
+    }
 }
 
 void GameEngine::Subject::NotifyAll(GameEvent event, EventData* eventData)

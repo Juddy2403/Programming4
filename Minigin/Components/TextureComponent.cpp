@@ -34,7 +34,7 @@ void TextureComponent::Render()
 {
     if (m_Texture != nullptr)
     {
-        const auto pos = GetGameObjParent()->GetPosition();
+        const auto pos = GetGameObjParent()->GetIntPosition();
         m_DestRect.x = static_cast<int>(pos.x);
         m_DestRect.y = static_cast<int>(pos.y);
         if (m_RotationAngle >= 0  || m_RotationAngle <= 0 || m_FlipMode != SDL_FLIP_NONE)

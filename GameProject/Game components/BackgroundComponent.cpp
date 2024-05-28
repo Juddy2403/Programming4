@@ -12,7 +12,7 @@ BackgroundComponent::BackgroundComponent(GameEngine::GameObject* gameObject, Gam
 {}
 void BackgroundComponent::Update()
 {
-    m_CurrentY += static_cast<int>(m_Speed * GameEngine::TimeManager::GetElapsed());
+    m_CurrentY += m_Speed * GameEngine::TimeManager::GetElapsed();
     if (m_CurrentY >= m_TextureComponent->m_DestRect.h)
     {
         m_CurrentY -= m_TextureComponent->m_DestRect.h;
@@ -22,7 +22,7 @@ void BackgroundComponent::Update()
 void BackgroundComponent::Render()
 {
     SDL_Rect destRect = m_TextureComponent->m_DestRect;
-    destRect.y = m_CurrentY - destRect.h;
+    destRect.y = static_cast<int>(m_CurrentY) - destRect.h;
     //Rendering a second texture for the loop effect
     GameEngine::Renderer::GetInstance().RenderTexture(*m_TextureComponent->GetTexture(), m_TextureComponent->m_SrcRect, destRect);
 }

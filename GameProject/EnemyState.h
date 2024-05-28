@@ -1,14 +1,46 @@
 ﻿#pragma once
+#include <queue>
+#include <glm/vec2.hpp>
 
+class RotatingSpriteComponent;
+namespace GameEngine
+{
+    class SpriteComponent;
+}
 class EnemyComponent;
+struct EnemyPathData
+{
+    bool isRotating{false};
+    bool isRotatingClockwise{true};
+    glm::vec2 centerOfRotation{};
+    glm::vec2 destination{};
+};
 class EnemyState
 {
 public:
-    virtual EnemyState* Update(EnemyComponent* enemyComponent) = 0;
+    virtual void Enter([[maybe_unused]] EnemyComponent* enemyComponent) {}
+    virtual void Exit([[maybe_unused]] EnemyComponent* enemyComponent) {}
+    virtual EnemyState* Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
+        RotatingSpriteComponent* rotatingSpriteComponent) = 0;
     virtual ~EnemyState() = default;
 };
 
 class IdleState final : public EnemyState
 {
-    virtual EnemyState* Update(EnemyComponent* enemyComponent) override;
+public:
+    virtual EnemyState* Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
+        RotatingSpriteComponent* rotatingSpriteComponent) override;
+};
+
+class GetInFormationState final : public EnemyState
+{
+public:
+    virtual void Enter([[maybe_unused]] EnemyComponent* enemyComponent) override;
+    virtual EnemyState* Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
+        RotatingSpriteComponent* rotatingSpriteComponent) override;
+private:
+    int GetRotationStage(EnemyComponent* enemyComponent);
+    bool m_IsFollowingPath{false};
+    glm::vec2 m_Direction{ 0,0 };
+    std::queue<EnemyPathData> m_PathData;
 };

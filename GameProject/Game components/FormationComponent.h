@@ -7,8 +7,10 @@ public:
     explicit FormationComponent(GameEngine::GameObject* gameObj);
     void Update() override;
     ~FormationComponent() override = default;
-    static int GetOffset();
+    static float GetOffset();
+    static void ToggleUpdate() { m_IsUpdating = !m_IsUpdating; }
 private:
+    static bool m_IsUpdating;
     static bool m_DoesExist;
     static float m_Offset;
     static int m_Direction;

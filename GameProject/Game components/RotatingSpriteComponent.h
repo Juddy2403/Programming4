@@ -5,6 +5,10 @@
 
 #include "Components/Component.h"
 
+namespace GameEngine
+{
+    class SpriteComponent;
+}
 class RotatingSpriteComponent final : public GameEngine::Component
 {
 public:

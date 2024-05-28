@@ -5,7 +5,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-//#include <thread>
 #include "Minigin.h"
 
 #include "Managers/InputManager.h"
@@ -14,8 +13,6 @@
 #include "Managers/ResourceManager.h"
 #include "Sound/DerivedSoundSystems.h"
 #include "Managers/TimeManager.h"
-
-//using namespace std::chrono;
 
 SDL_Window* g_window{};
 
@@ -95,6 +92,7 @@ void GameEngine::Minigin::Run(const std::function<void()>& load)
     bool doContinue = true;
     while (doContinue)
     {
+        //TODO: Check if the window is minimized or not focused and pause the game
         time.Update();
         doContinue = input.ProcessInput();
 

@@ -9,7 +9,7 @@ CollisionComponent::CollisionComponent(GameObject* gameObj,SDL_Rect collisionRec
     Component(gameObj),
     m_CollisionRect(collisionRect)
 {
-    m_LastPosition = GetGameObjParent()->GetPosition();
+    m_LastPosition = GetGameObjParent()->GetIntPosition();
     CollisionManager::AddCollisionComponent(this);
 }
 const SDL_Rect& CollisionComponent::GetCollisionRect() const
@@ -29,7 +29,7 @@ void CollisionComponent::CollidedWith(CollisionComponent* other) const
 
 void CollisionComponent::Update()
 {
-    auto pos = GetGameObjParent()->GetPosition();
+    auto pos = GetGameObjParent()->GetIntPosition();
     m_CollisionRect.x += pos.x - m_LastPosition.x;
     m_CollisionRect.y += pos.y - m_LastPosition.y;
     m_LastPosition = {pos.x,pos.y};

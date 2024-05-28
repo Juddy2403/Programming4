@@ -2,11 +2,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 using namespace GameEngine;
 
-void GameEngine::Transform::SetPosition( int x,  int y,  int z)
+void GameEngine::Transform::SetPosition(float x, float y, float z)
 {
-	m_Position.x =static_cast<float>(x);
-	m_Position.y =static_cast<float>(y);
-	m_Position.z =static_cast<float>(z);
+	m_Position = {x,y,z};
 	m_TranslateMatrix = glm::translate(glm::mat4(1.f), m_Position);
 }
 

@@ -103,7 +103,6 @@ GameObject* GameObject::GetChildAt(int index) const
 }
 #pragma endregion
 
-
 int GameEngine::GameObject::GetID() const
 {
     return m_ID;
@@ -119,18 +118,22 @@ void GameEngine::GameObject::SetDestroyedFlag()
     m_IsDestroyed = true;
 }
 
-void GameObject::SetPosition(int x, int y, int z)
+void GameObject::SetPosition(float x, float y, float z)
 {
     m_LocalTransform.SetPosition(x, y, z);
     SetPositionIsDirty();
 }
 
-void GameEngine::GameObject::SetPosition(const glm::ivec3& pos)
+void GameEngine::GameObject::SetPosition(const glm::vec3& pos)
 {
     SetPosition(pos.x, pos.y, pos.z);
 }
 
-glm::ivec3 GameObject::GetPosition()
+glm::ivec3 GameObject::GetIntPosition()
+{
+    return glm::round(GetWorldTransform().GetPosition());
+}
+glm::vec3 GameObject::GetPosition()
 {
     return GetWorldTransform().GetPosition();
 }

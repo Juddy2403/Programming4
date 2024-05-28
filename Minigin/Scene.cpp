@@ -8,7 +8,7 @@
 
 using namespace GameEngine;
 
-#define CHECK_COLLISION_RECTS
+//#define CHECK_COLLISION_RECTS
 
 Scene::Scene(const std::string& name) : m_Name(name) {}
 
@@ -67,7 +67,6 @@ void Scene::RemoveDestroyedObjects()
         [](const auto& obj) {
             return obj->IsDestroyed();
         });
-
     // Erase the destroyed objects from the vector
     m_GameObjects.erase(range.begin(), range.end());
 }
