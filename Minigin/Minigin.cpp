@@ -92,7 +92,6 @@ void GameEngine::Minigin::Run(const std::function<void()>& load)
     bool doContinue = true;
     while (doContinue)
     {
-        //TODO: Check if the window is minimized or not focused and pause the game
         time.Update();
         doContinue = input.ProcessInput();
 

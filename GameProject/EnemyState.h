@@ -12,6 +12,9 @@ struct EnemyPathData
 {
     bool isRotating{false};
     bool isRotatingClockwise{true};
+    float radius{};
+    float totalRotationAngle{};
+    float accumRotationAngle{};
     glm::vec2 centerOfRotation{};
     glm::vec2 destination{};
 };

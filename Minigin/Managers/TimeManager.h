@@ -1,6 +1,7 @@
 #pragma once
-#include "Singleton.h"
 #include <chrono>
+
+#include "Singleton.h"
 
 namespace GameEngine
 {
@@ -9,14 +10,13 @@ namespace GameEngine
 	public:
 		static float GetElapsed();
 		[[nodiscard]] std::chrono::high_resolution_clock::time_point GetCurrent() const;
-		[[nodiscard]] std::chrono::duration<float, std::milli> GetFixedTimeStep() const;
 		void Update();
 	private:
 		friend class GameEngine::Singleton<TimeManager>;
 		TimeManager() = default;
-		static std::chrono::duration<float> m_ElapsedTime;
+		static float m_ElapsedTime;
+		const float m_ElapsedTimeCap{ 0.05f };
 		std::chrono::high_resolution_clock::time_point m_Previous{std::chrono::high_resolution_clock::now() };
-		const std::chrono::duration<float, std::milli> m_FixedTimeStep{ 100.f / 16.f };
 		std::chrono::high_resolution_clock::time_point m_Current{};
 	};
 }
