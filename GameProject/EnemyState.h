@@ -1,6 +1,5 @@
 ﻿#pragma once
-#include <queue>
-#include <glm/vec2.hpp>
+#include "Trajectory Logic/Trajectory.h"
 
 class RotatingSpriteComponent;
 namespace GameEngine
@@ -8,16 +7,7 @@ namespace GameEngine
     class SpriteComponent;
 }
 class EnemyComponent;
-struct EnemyPathData
-{
-    bool isRotating{false};
-    bool isRotatingClockwise{true};
-    float radius{};
-    float totalRotationAngle{};
-    float accumRotationAngle{};
-    glm::vec2 centerOfRotation{};
-    glm::vec2 destination{};
-};
+
 class EnemyState
 {
 public:
@@ -42,8 +32,6 @@ public:
     virtual EnemyState* Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
         RotatingSpriteComponent* rotatingSpriteComponent) override;
 private:
+    Trajectory m_Trajectory{};
     int GetRotationStage(EnemyComponent* enemyComponent);
-    bool m_IsFollowingPath{false};
-    glm::vec2 m_Direction{ 0,0 };
-    std::queue<EnemyPathData> m_PathData;
 };

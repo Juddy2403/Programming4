@@ -183,6 +183,8 @@
     <ClCompile Include="GameCommands.cpp" />
     <ClCompile Include="Initializers.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Trajectory Logic\Trajectory.cpp" />
+    <ClCompile Include="Trajectory Logic\TrajectoryStates.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BossStage.h" />
@@ -205,7 +207,10 @@
     <ClInclude Include="Game observers\ScoreManager.h" />
     <ClInclude Include="GameCommands.h" />
     <ClInclude Include="Initializers.h" />
-    <ClInclude Include="TrajectoryMath.h" />
+    <ClInclude Include="Trajectory Logic\PathDataStruct.h" />
+    <ClInclude Include="Trajectory Logic\Trajectory.h" />
+    <ClInclude Include="Trajectory Logic\TrajectoryMath.h" />
+    <ClInclude Include="Trajectory Logic\TrajectoryStates.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
