@@ -32,6 +32,5 @@ public:
     virtual EnemyState* Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
         RotatingSpriteComponent* rotatingSpriteComponent) override;
 private:
-    Trajectory m_Trajectory{};
     int GetRotationStage(EnemyComponent* enemyComponent);
 };

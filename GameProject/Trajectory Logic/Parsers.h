@@ -4,6 +4,7 @@
 #include <json.hpp>
 
 #include "Initializers.h"
+#include "Minigin.h"
 #include "PathDataStruct.h"
 
 namespace Parser
@@ -36,25 +37,94 @@ namespace Parser
 
         return pathDataQueue;
     }
-    inline std::vector<std::unique_ptr<GameEngine::GameObject>> ParseEnemyInfo(const std::string& filePath)
-    {
-        std::unique_ptr<GameEngine::GameObject> enemy;
-        std::vector<std::unique_ptr<GameEngine::GameObject>> enemyVec;
-        std::ifstream fileStream(filePath);
-        nlohmann::json jsonData;
-        fileStream >> jsonData;
 
-        for (const auto& element : jsonData)
+    inline std::vector<std::vector<PathData>> ParseTrajectoryVec(const std::string& trajectoryPath, std::vector<glm::vec2>& startPositions)
+    {
+        std::vector<std::vector<PathData>> pathDataQueueVec;
+        std::ifstream trajectoryFileStream(trajectoryPath);
+        nlohmann::json trajectoryJsonData;
+        trajectoryFileStream >> trajectoryJsonData;
+
+        for (const auto& element : trajectoryJsonData)
+        {
+            startPositions.emplace_back(element["startPos"][0].get<float>(), element["startPos"][1].get<float>());
+            const auto trajectory = element["trajectory"];
+            std::vector<PathData> pathDataQueue;
+            for(const auto& path : trajectory)
+            {
+                PathData pathData{};
+                pathData.isRotating = path["isRotating"].get<bool>();
+                if (pathData.isRotating)
+                {
+                    pathData.isRotatingClockwise = path["isRotatingClockwise"].get<bool>();
+                    pathData.totalRotationAngle = path["totalRotationAngle"].get<float>();
+                    pathData.centerOfRotation.x = path["centerOfRotation"][0].get<float>();
+                    pathData.centerOfRotation.y = path["centerOfRotation"][1].get<float>();
+                }
+                else
+                {
+                    if (path["destination"].is_string() && path["destination"].get<std::string>() == "formationPos")
+                    {
+                        pathData.destination = {-1,-1};
+                    }
+                    else
+                    {
+                        pathData.destination.x = path["destination"][0].get<float>();
+                        pathData.destination.y = path["destination"][1].get<float>();
+                    }
+                }
+                pathDataQueue.emplace_back(pathData);
+            }
+            pathDataQueueVec.emplace_back(pathDataQueue);
+        }
+
+        return pathDataQueueVec;
+    }
+    
+    inline std::vector<std::unique_ptr<GameEngine::GameObject>> ParseEnemyInfoByStage(const std::string& enemyInfoPath,const std::string& trajectoryPath)
+    {
+        std::vector<std::vector<PathData>> pathDataQueueVec;
+        std::vector<glm::vec2> startPositions;
+        pathDataQueueVec = ParseTrajectoryVec(trajectoryPath, startPositions);
+
+        std::vector<std::unique_ptr<GameEngine::GameObject>> enemyVec;
+        std::ifstream enemyFileStream(enemyInfoPath);
+        nlohmann::json enemyJsonData;
+        enemyFileStream >> enemyJsonData;
+        
+        for (const auto& element : enemyJsonData)
         {
             std::string enemyType = element["enemyType"];
-            if(enemyType == "Bee") enemy = InitBee();
-            else if(enemyType == "Butterfly") enemy = InitButterfly();
-            else if(enemyType == "BossGalaga") enemy = InitBossGalaga();
-            
-            glm::vec2 pos = { element["formationPosition"][0].get<int>(),element["formationPosition"][1].get<int>() };
-            enemy->SetPosition(0, 0);
-            enemy->GetComponent<EnemyComponent>()->SetFormationPosition({ pos.x,pos.y });
-            enemyVec.emplace_back(std::move(enemy));
+            const auto positions = element["positions"];
+            for (size_t i{}; i < positions.size(); ++i)
+            {
+                std::unique_ptr<GameEngine::GameObject> enemy{};
+                glm::vec2 pos = { positions[i]["formationPosition"][0].get<float>(),positions[i]["formationPosition"][1].get<float>() };
+                int formationStage = positions[i]["formationStage"];
+                std::queue<PathData> pathDataQueue;
+                auto pathDataVec = pathDataQueueVec[formationStage];
+                for(auto path : pathDataVec)
+                {
+                    if(path.destination.x == -1 && path.destination.y == -1)
+                    {
+                        path.destination = pos;
+                    }
+                    else if(positions[i].contains("isXReversed") && positions[i]["isXReversed"].get<bool>())
+                    {
+                        path.destination.x = GameEngine::g_WindowRect.w-path.destination.x;
+                        path.centerOfRotation.x = GameEngine::g_WindowRect.w-path.centerOfRotation.x;
+                        path.isRotatingClockwise = !path.isRotatingClockwise;
+                    }
+                    pathDataQueue.push(path);
+                }
+                if (enemyType == "Bee") enemy = InitBee();
+                else if (enemyType == "Butterfly") enemy = InitButterfly();
+                else if (enemyType == "BossGalaga") enemy = InitBossGalaga();
+                enemy->SetPosition({startPositions[formationStage],0});
+                enemy->GetComponent<EnemyComponent>()->SetFormationPosition({ pos.x,pos.y });
+                enemy->GetComponent<EnemyComponent>()->SetFormationTrajectory(pathDataQueue);
+                enemyVec.emplace_back(std::move(enemy));
+            }
         }
         return enemyVec;
     }

@@ -46,17 +46,10 @@ void Galaga::LoadLevel()
     auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 32);
     auto smallerFont = ResourceManager::GetInstance().LoadFont("Lingua.otf", 16);
 
-    //------TITLE--------
+    //------TITLE------
     gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
     gameObject->SetPosition(80, 20);
     gameObject->AddComponent<TextComponent>(font, "Galaga");
-    gameObject->AddComponent<TextureComponent>();
-    scene->AddObject(std::move(gameObject));
-
-    //-------EXTRATEXT---------
-    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
-    gameObject->SetPosition(20, 500);
-    gameObject->AddComponent<TextComponent>(smallerFont, "Use WASD to move, press space to shoot a bullet and shoot the enemies for sound");
     gameObject->AddComponent<TextureComponent>();
     scene->AddObject(std::move(gameObject));
 
@@ -73,7 +66,8 @@ void Galaga::LoadLevel()
     auto scoreObserverUnique = std::make_unique<ScoreManager>();
     auto scoreObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserverUnique), nullptr);
     
-    auto enemyVec = Parser::ParseEnemyInfo("../Data/Formations/EnemyInfo1.json");
+    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfoTest.json",
+        "../Data/Formations/FormationTrajectories1.json");
     for (int i = 0; i < enemyVec.size(); ++i)
     {
         enemyVec[i]->AddObserver(-1, enemyObserver);

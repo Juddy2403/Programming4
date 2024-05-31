@@ -15,7 +15,8 @@ std::pair<glm::vec2, bool> CircleTrajectory::Update(PathData& pathData, float sp
     glm::vec2 nextPos = TrajectoryMath::CalculateNextPosition(currentPos, m_Direction, speed);
     const float currentAngle = std::atan2(-currentPos.y + pathData.centerOfRotation.y, currentPos.x - pathData.centerOfRotation.x);
     const float nextAngle = std::atan2(-nextPos.y + pathData.centerOfRotation.y, nextPos.x - pathData.centerOfRotation.x);
-    pathData.accumRotationAngle += abs(currentAngle - nextAngle);
+    float angleDifference = std::atan2(std::sin(nextAngle - currentAngle), std::cos(nextAngle - currentAngle));
+    pathData.accumRotationAngle += std::abs(angleDifference);
 
     if (pathData.accumRotationAngle >= pathData.totalRotationAngle)
     {

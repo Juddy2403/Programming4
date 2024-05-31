@@ -1,0 +1,20 @@
+[
+  {
+  "enemyType": "Bee",
+  "positions": [
+    { "formationPosition": [298, 130], "formationStage": 0 , "turn": 0},
+    { "formationPosition": [335, 130], "formationStage": 0 , "turn": 1},
+    { "formationPosition": [298, 162], "formationStage": 0 , "turn": 2},
+    { "formationPosition": [335, 162], "formationStage": 0 , "turn": 3}
+  ]
+  },
+  {
+    "enemyType": "Butterfly",
+    "positions": [
+      {"formationPosition": [298, 70], "formationStage": 0 ,"isXReversed":true, "turn": 0},
+      {"formationPosition": [335, 70], "formationStage": 0 ,"isXReversed":true, "turn": 1},
+      {"formationPosition": [298, 102], "formationStage": 0,"isXReversed":true, "turn": 2},
+      {"formationPosition": [335, 102], "formationStage": 0,"isXReversed":true, "turn": 3}
+    ]
+  }
+]

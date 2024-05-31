@@ -12,7 +12,7 @@ class Trajectory
 {
 public:
     std::pair<glm::vec2,bool> Update(float speed, const glm::vec2& currentPos);
-    void SetPathData(std::queue<PathData>&& pathData, const glm::vec2& currentPos);
+    void SetPathData(const std::queue<PathData>& pathData, const glm::vec2& currentPos);
     ~Trajectory() = default;
     [[nodiscard]] glm::vec2 GetDirection() const { return m_Direction; }
     [[nodiscard]] bool IsComplete() const { return m_IsComplete; }

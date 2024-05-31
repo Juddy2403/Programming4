@@ -32,20 +32,13 @@ EnemyState* IdleState::Update(EnemyComponent* enemyComponent, [[maybe_unused]] G
 
 void GetInFormationState::Enter(EnemyComponent* enemyComponent)
 {
-    std::queue<PathData> pathDataQueue = Parser::ParseTrajectory("../Data/Formations/trajectory.json");
-    // PathData pathData{};
-    // pathData.destination = enemyComponent->GetFormationPosition();
-    // pathDataQueue.push(pathData);
-    // pathData.isRotating = true;
-    // pathData.centerOfRotation = enemyComponent->GetFormationPosition() + glm::ivec2{ 0,100 };
-    // pathData.totalRotationAngle = 8 * glm::pi<float>();
-    // pathDataQueue.push(pathData);
-    m_Trajectory.SetPathData(std::move(pathDataQueue), enemyComponent->GetGameObjParent()->GetPosition());
+    //std::queue<PathData> pathDataQueue = Parser::ParseTrajectory("../Data/Formations/trajectory.json");
+    enemyComponent;
 }
 int GetInFormationState::GetRotationStage(EnemyComponent* enemyComponent)
 {
     //calculate rotation angle based on the direction
-    const auto direction = m_Trajectory.GetDirection();
+    const auto direction = enemyComponent->GetFormationTrajectory().GetDirection();
     float rotationAngle = -(glm::atan(-direction.y, direction.x) - glm::pi<float>() / 2);
     //convert angle between 0 and 2*pi
     if (rotationAngle < 0) rotationAngle += glm::pi<float>() * 2;
@@ -56,10 +49,10 @@ EnemyState* GetInFormationState::Update(EnemyComponent* enemyComponent, GameEngi
     RotatingSpriteComponent* rotatingSpriteComponent)
 {
     const glm::vec2 currentPos = enemyComponent->GetGameObjParent()->GetPosition();
-    auto [newPos, hasDirectionChanged] = m_Trajectory.Update(enemyComponent->GetSpeed().x, currentPos);
+    auto [newPos, hasDirectionChanged] = enemyComponent->GetFormationTrajectory().Update(enemyComponent->GetSpeed().x, currentPos);
     if(hasDirectionChanged)
     {
-        if(m_Trajectory.IsComplete()) return new IdleState;
+        if(enemyComponent->GetFormationTrajectory().IsComplete()) return new IdleState;
         int rotationStage = GetRotationStage(enemyComponent);
         UpdateSprite(enemyComponent, spriteComponent, rotatingSpriteComponent, rotationStage);
     }

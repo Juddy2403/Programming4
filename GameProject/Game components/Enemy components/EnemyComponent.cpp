@@ -1,6 +1,7 @@
 ﻿#include "EnemyComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Game components/RotatingSpriteComponent.h"
+#include "Subjects/GameObject.h"
 
 EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
     RotatingSpriteComponent* rotatingComponent):
@@ -18,6 +19,11 @@ void EnemyComponent::SetFormationPosition(const glm::ivec2& formationPos)
     m_FormationPosition = formationPos;
     m_CurrentState->Enter(this);
 }
+void EnemyComponent::SetFormationTrajectory(const std::queue<PathData>& pathDataQueue)
+{
+    m_FormationTrajectory.SetPathData(pathDataQueue, GetGameObjParent()->GetPosition());
+}
+
 void EnemyComponent::Update()
 {
     if(auto nextState = m_CurrentState->Update(this, m_SpriteComponent, m_RotatingComponent))

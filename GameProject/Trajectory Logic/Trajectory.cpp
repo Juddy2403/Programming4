@@ -22,9 +22,9 @@ std::pair<glm::vec2, bool> Trajectory::Update(float speed, const glm::vec2& curr
     return { stateInfo.first,m_HasDirectionChanged };
  
 }
-void Trajectory::SetPathData(std::queue<PathData>&& pathData, const glm::vec2& currentPos)
+void Trajectory::SetPathData(const std::queue<PathData>& pathData, const glm::vec2& currentPos)
 {
-    m_PathData = std::move(pathData);
+    m_PathData = pathData;
     UpdateState(currentPos);
 }
 
