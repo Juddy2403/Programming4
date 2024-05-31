@@ -1,0 +1,50 @@
+[
+  {
+    "enemyType": "Bee",
+    "formationPosition": [ 372, 130 ],
+    "formationStage": 0,
+    "timeOffset": 0.01
+  },
+  {
+    "enemyType": "Bee",
+    "formationPosition": [ 372, 162 ],
+    "formationStage": 0,
+    "timeOffset": 0.01
+  },
+  {
+    "enemyType": "Bee",
+    "formationPosition": [ 409, 130 ],
+    "formationStage": 0,
+    "timeOffset": 0.01
+  },
+  {
+    "enemyType": "Bee",
+    "formationPosition": [ 409, 162 ],
+    "formationStage": 0,
+    "timeOffset": 0.01
+  },
+  {
+    "enemyType": "Butterfly",
+    "formationPosition": [ 372, 70 ],
+    "formationStage": 0,
+    "timeOffset": 0.01
+  },
+  {
+    "enemyType": "Butterfly",
+    "formationPosition": [ 372, 102 ],
+    "formationStage": 0,
+    "timeOffset": 0.01
+  },
+  {
+    "enemyType": "Butterfly",
+    "formationPosition": [ 409, 70 ],
+    "formationStage": 0,
+    "timeOffset": 0.01
+  },
+  {
+    "enemyType": "Butterfly",
+    "formationPosition": [ 409, 102 ],
+    "formationStage": 0,
+    "timeOffset": 0.01
+  }
+]

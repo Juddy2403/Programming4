@@ -4,12 +4,12 @@
 void CircleTrajectory::Enter(PathData& pathData, const glm::vec2& currentPos)
 {
     pathData.radius = glm::distance(currentPos, pathData.centerOfRotation);
-    auto nextPos = TrajectoryMath::CalculateNextPositionInCircle(currentPos, pathData.centerOfRotation, pathData.radius);
+    auto nextPos = TrajectoryMath::CalculateNextPositionInCircle(currentPos, pathData.centerOfRotation, pathData.radius, pathData.isRotatingClockwise);
     m_Direction = TrajectoryMath::CalculateDirection(currentPos, nextPos);
 }
 std::pair<glm::vec2, bool> CircleTrajectory::Update(PathData& pathData, float speed, const glm::vec2& currentPos)
 {
-    const auto nextPosInCircle = TrajectoryMath::CalculateNextPositionInCircle(currentPos, pathData.centerOfRotation, pathData.radius);
+    const auto nextPosInCircle = TrajectoryMath::CalculateNextPositionInCircle(currentPos, pathData.centerOfRotation, pathData.radius, pathData.isRotatingClockwise);
     m_Direction = TrajectoryMath::CalculateDirection(currentPos, nextPosInCircle);
 
     glm::vec2 nextPos = TrajectoryMath::CalculateNextPosition(currentPos, m_Direction, speed);
@@ -30,7 +30,6 @@ void LinearTrajectory::Enter(PathData& pathData, const glm::vec2& currentPos)
 
 std::pair<glm::vec2, bool> LinearTrajectory::Update(PathData& pathData, float speed, const glm::vec2& currentPos)
 {
-    //glm::vec2 direction = TrajectoryMath::CalculateDirection(currentPos, m_Destination);
     glm::vec2 nextPos = TrajectoryMath::CalculateNextPosition(currentPos, m_Direction, speed);
     if (TrajectoryMath::ArePositionsEqual(pathData.destination, nextPos))
     {

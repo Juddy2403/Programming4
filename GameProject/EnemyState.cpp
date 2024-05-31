@@ -5,9 +5,9 @@
 #include "Game components/FormationComponent.h"
 #include "Game components/RotatingSpriteComponent.h"
 #include "Game components/Enemy components/EnemyComponent.h"
-#include "Managers/TimeManager.h"
 #include "Subjects/GameObject.h"
 #include "Components/SpriteComponent.h"
+#include "Trajectory Logic/Parsers.h"
 
 //TODO: move to a helper class or sum
 inline void UpdateSprite(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
@@ -32,14 +32,14 @@ EnemyState* IdleState::Update(EnemyComponent* enemyComponent, [[maybe_unused]] G
 
 void GetInFormationState::Enter(EnemyComponent* enemyComponent)
 {
-    std::queue<PathData> pathDataQueue;
-    PathData pathData{};
-    pathData.destination = enemyComponent->GetFormationPosition();
-    pathDataQueue.push(pathData);
-    pathData.isRotating = true;
-    pathData.centerOfRotation = enemyComponent->GetFormationPosition() + glm::ivec2{ 0,100 };
-    pathData.totalRotationAngle = 4 * glm::pi<float>();
-    pathDataQueue.push(pathData);
+    std::queue<PathData> pathDataQueue = Parser::ParseTrajectory("../Data/Formations/trajectory.json");
+    // PathData pathData{};
+    // pathData.destination = enemyComponent->GetFormationPosition();
+    // pathDataQueue.push(pathData);
+    // pathData.isRotating = true;
+    // pathData.centerOfRotation = enemyComponent->GetFormationPosition() + glm::ivec2{ 0,100 };
+    // pathData.totalRotationAngle = 8 * glm::pi<float>();
+    // pathDataQueue.push(pathData);
     m_Trajectory.SetPathData(std::move(pathDataQueue), enemyComponent->GetGameObjParent()->GetPosition());
 }
 int GetInFormationState::GetRotationStage(EnemyComponent* enemyComponent)

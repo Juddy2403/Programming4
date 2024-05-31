@@ -17,14 +17,15 @@ namespace TrajectoryMath
         return currentPos + direction * speed * GameEngine::TimeManager::GetElapsed();
     }
 
-    inline glm::vec2 CalculateNextPositionInCircle(const glm::vec2& currentPos, const glm::vec2& center, const float radius)
+    inline glm::vec2 CalculateNextPositionInCircle(const glm::vec2& currentPos, const glm::vec2& center, const float radius, bool isClockwise)
     {
         // Calculate the current angle of the currentPos with respect to the center
         float currentAngle = std::atan2(currentPos.y - center.y , currentPos.x - center.x);
         if (currentAngle < 0) currentAngle += glm::pi<float>() * 2;
 
         // Increment the angle to move clockwise
-        constexpr float angleStep = glm::pi<float>() / 180;
+        float angleStep = glm::pi<float>() / 180;
+        if(isClockwise) angleStep *= -1;
         const float nextAngle = currentAngle - angleStep; // Subtracting to move clockwise
         // Calculate the next position on the circle
         return {

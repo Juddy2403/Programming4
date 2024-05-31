@@ -20,6 +20,7 @@
 #include "Sound/DerivedSoundSystems.h"
 #include "Sound/ServiceLocator.h"
 #include "Subjects/GameObject.h"
+#include "Trajectory Logic/Parsers.h"
 
 using namespace GameEngine;
 void Galaga::LoadLevel()
@@ -71,36 +72,14 @@ void Galaga::LoadLevel()
     auto enemyObserver = scene->AddObserver(-1, std::move(enemyObserverUnique), nullptr);
     auto scoreObserverUnique = std::make_unique<ScoreManager>();
     auto scoreObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserverUnique), nullptr);
-
-    auto InitEnemyFromFile = [&](const std::string& filePath, std::function<std::unique_ptr<GameEngine::GameObject>()> initFunc) {
-        std::ifstream file(filePath);
-        std::string line;
-        while (std::getline(file, line))
-        {
-            if (line.empty()) continue;
-            line = line.substr(1, line.size() - 2);  // Remove the brackets
-            std::stringstream ss(line);
-            std::string xStr, yStr;
-
-            std::getline(ss, xStr, ',');
-            std::getline(ss, yStr);
-
-            int x = std::stoi(xStr);
-            int y = std::stoi(yStr);
-
-            auto enemy = initFunc();
-            enemy->SetPosition(0, 0);
-            enemy->GetComponent<EnemyComponent>()->SetFormationPosition({x,y});
-            enemy->AddObserver(-1, enemyObserver);
-            enemy->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
-            scene->AddObject(std::move(enemy));
-        }
-    };
-
-    // Use the lambda function to initialize enemies
-    InitEnemyFromFile("../Data/Formations/Formation1Bees.txt", InitBee);
-    InitEnemyFromFile("../Data/Formations/Formation1Butterflies.txt", InitButterfly);
-    InitEnemyFromFile("../Data/Formations/Formation1Boss.txt", InitBossGalaga);
+    
+    auto enemyVec = Parser::ParseEnemyInfo("../Data/Formations/EnemyInfo1.json");
+    for (int i = 0; i < enemyVec.size(); ++i)
+    {
+        enemyVec[i]->AddObserver(-1, enemyObserver);
+        enemyVec[i]->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
+        scene->AddObject(std::move(enemyVec[i]));
+    }
 
     //--------- Enemy formation component------------
     gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
