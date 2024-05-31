@@ -66,7 +66,7 @@ void Galaga::LoadLevel()
     auto scoreObserverUnique = std::make_unique<ScoreManager>();
     auto scoreObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserverUnique), nullptr);
     
-    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfoTest.json",
+    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfo1.json",
         "../Data/Formations/FormationTrajectories1.json");
     for (int i = 0; i < enemyVec.size(); ++i)
     {

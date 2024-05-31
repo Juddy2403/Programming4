@@ -1,16 +1,16 @@
 [
   {
-    "startPos": [ 330, 0 ],
+    "startPos": [ 310, -20 ],
     "trajectory": [
       {
         "isRotating": false,
-        "destination": [ 170, 350 ]
+        "destination": [ 100, 350 ]
       },
       {
         "isRotating": true,
         "isRotatingClockwise": false,
         "totalRotationAngle": 3.49066,
-        "centerOfRotation": [ 170, 410 ]
+        "centerOfRotation": [ 100, 410 ]
       },
       {
         "isRotating": false,
@@ -57,7 +57,7 @@
       },
       {
         "isRotating": false,
-        "destination": [ 257, 350 ]
+        "destination": [ 320, 350 ]
       },
       {
         "isRotating": false,
@@ -66,7 +66,7 @@
     ]
   },
   {
-    "startPos": [ 515, -20 ],
+    "startPos": [ 515, -30 ],
     "trajectory": [
       {
         "isRotating": false,
@@ -93,7 +93,7 @@
       },
       {
         "isRotating": true,
-        "isRotatingClockwise": false,
+        "isRotatingClockwise": true,
         "totalRotationAngle": 4.71239,
         "centerOfRotation": [ 512, 400 ]
       },

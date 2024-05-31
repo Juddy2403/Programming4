@@ -6,6 +6,7 @@
 #include "Initializers.h"
 #include "Minigin.h"
 #include "PathDataStruct.h"
+#include "Game components/Enemy components/EnemyComponent.h"
 
 namespace Parser
 {
@@ -50,7 +51,7 @@ namespace Parser
             startPositions.emplace_back(element["startPos"][0].get<float>(), element["startPos"][1].get<float>());
             const auto trajectory = element["trajectory"];
             std::vector<PathData> pathDataQueue;
-            for(const auto& path : trajectory)
+            for (const auto& path : trajectory)
             {
                 PathData pathData{};
                 pathData.isRotating = path["isRotating"].get<bool>();
@@ -65,7 +66,7 @@ namespace Parser
                 {
                     if (path["destination"].is_string() && path["destination"].get<std::string>() == "formationPos")
                     {
-                        pathData.destination = {-1,-1};
+                        pathData.destination = { -1,-1 };
                     }
                     else
                     {
@@ -80,8 +81,8 @@ namespace Parser
 
         return pathDataQueueVec;
     }
-    
-    inline std::vector<std::unique_ptr<GameEngine::GameObject>> ParseEnemyInfoByStage(const std::string& enemyInfoPath,const std::string& trajectoryPath)
+
+    inline std::vector<std::unique_ptr<GameEngine::GameObject>> ParseEnemyInfoByStage(const std::string& enemyInfoPath, const std::string& trajectoryPath)
     {
         std::vector<std::vector<PathData>> pathDataQueueVec;
         std::vector<glm::vec2> startPositions;
@@ -91,7 +92,7 @@ namespace Parser
         std::ifstream enemyFileStream(enemyInfoPath);
         nlohmann::json enemyJsonData;
         enemyFileStream >> enemyJsonData;
-        
+
         for (const auto& element : enemyJsonData)
         {
             std::string enemyType = element["enemyType"];
@@ -103,16 +104,17 @@ namespace Parser
                 int formationStage = positions[i]["formationStage"];
                 std::queue<PathData> pathDataQueue;
                 auto pathDataVec = pathDataQueueVec[formationStage];
-                for(auto path : pathDataVec)
+                for (auto path : pathDataVec)
                 {
-                    if(path.destination.x == -1 && path.destination.y == -1)
+                    if (path.destination.x == -1 && path.destination.y == -1)
                     {
                         path.destination = pos;
                     }
-                    else if(positions[i].contains("isXReversed") && positions[i]["isXReversed"].get<bool>())
+                    else if (positions[i].contains("isXReversed") && positions[i]["isXReversed"].get<bool>())
                     {
-                        path.destination.x = GameEngine::g_WindowRect.w-path.destination.x;
-                        path.centerOfRotation.x = GameEngine::g_WindowRect.w-path.centerOfRotation.x;
+                        const int spriteWidth = 16;
+                        path.destination.x = GameEngine::g_WindowRect.w - path.destination.x - spriteWidth;
+                        path.centerOfRotation.x = GameEngine::g_WindowRect.w - path.centerOfRotation.x - spriteWidth;
                         path.isRotatingClockwise = !path.isRotatingClockwise;
                     }
                     pathDataQueue.push(path);
@@ -120,9 +122,11 @@ namespace Parser
                 if (enemyType == "Bee") enemy = InitBee();
                 else if (enemyType == "Butterfly") enemy = InitButterfly();
                 else if (enemyType == "BossGalaga") enemy = InitBossGalaga();
-                enemy->SetPosition({startPositions[formationStage],0});
+                enemy->SetPosition({ startPositions[formationStage],0 });
                 enemy->GetComponent<EnemyComponent>()->SetFormationPosition({ pos.x,pos.y });
                 enemy->GetComponent<EnemyComponent>()->SetFormationTrajectory(pathDataQueue);
+                int turn = positions[i]["turn"];
+                enemy->GetComponent<EnemyComponent>()->m_SetOutTurn = turn;
                 enemyVec.emplace_back(std::move(enemy));
             }
         }

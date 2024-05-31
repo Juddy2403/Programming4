@@ -32,5 +32,8 @@ public:
     virtual EnemyState* Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
         RotatingSpriteComponent* rotatingSpriteComponent) override;
 private:
+    float m_AccumWaitTime{};
+    float m_WaitTime{};
+    static const float m_TimeInBetween;
     int GetRotationStage(EnemyComponent* enemyComponent);
 };

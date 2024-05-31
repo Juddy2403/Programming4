@@ -34,6 +34,8 @@ public:
     virtual bool HasBeenHit() = 0;
     [[nodiscard]] bool IsDiving() const { return m_IsDiving; }
     [[nodiscard]] virtual EnemyId GetEnemyID() const = 0;
+    
+    int m_SetOutTurn{};
 protected:
     std::unique_ptr<EnemyState> m_CurrentState;
     bool m_IsDiving{ false };

@@ -9,6 +9,8 @@
 #include "Components/SpriteComponent.h"
 #include "Trajectory Logic/Parsers.h"
 
+const float GetInFormationState::m_TimeInBetween = 0.3f;
+
 //TODO: move to a helper class or sum
 inline void UpdateSprite(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
     RotatingSpriteComponent* rotatingSpriteComponent, int rotationStage)
@@ -33,7 +35,9 @@ EnemyState* IdleState::Update(EnemyComponent* enemyComponent, [[maybe_unused]] G
 void GetInFormationState::Enter(EnemyComponent* enemyComponent)
 {
     //std::queue<PathData> pathDataQueue = Parser::ParseTrajectory("../Data/Formations/trajectory.json");
-    enemyComponent;
+    //TODO: the wait time should be set here but it isnt since at this point the set out turn is 0
+    m_WaitTime = m_TimeInBetween * enemyComponent->m_SetOutTurn;
+    
 }
 int GetInFormationState::GetRotationStage(EnemyComponent* enemyComponent)
 {
@@ -48,11 +52,14 @@ int GetInFormationState::GetRotationStage(EnemyComponent* enemyComponent)
 EnemyState* GetInFormationState::Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
     RotatingSpriteComponent* rotatingSpriteComponent)
 {
+    m_WaitTime = m_TimeInBetween * enemyComponent->m_SetOutTurn;
+    m_AccumWaitTime += GameEngine::TimeManager::GetElapsed();
+    if(m_AccumWaitTime < m_WaitTime) return nullptr;
     const glm::vec2 currentPos = enemyComponent->GetGameObjParent()->GetPosition();
     auto [newPos, hasDirectionChanged] = enemyComponent->GetFormationTrajectory().Update(enemyComponent->GetSpeed().x, currentPos);
-    if(hasDirectionChanged)
+    if (hasDirectionChanged)
     {
-        if(enemyComponent->GetFormationTrajectory().IsComplete()) return new IdleState;
+        if (enemyComponent->GetFormationTrajectory().IsComplete()) return new IdleState;
         int rotationStage = GetRotationStage(enemyComponent);
         UpdateSprite(enemyComponent, spriteComponent, rotatingSpriteComponent, rotationStage);
     }

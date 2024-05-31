@@ -32,17 +32,6 @@ void EnemyComponent::Update()
         m_CurrentState.reset(nextState);
         m_CurrentState->Enter(this);
     }
-    // m_CurrentTime += GameEngine::TimeManager::GetElapsed();
-    // if (m_CurrentTime < .5f) return;
-    // const auto rotationInfo = m_RotatingComponent->GetColFlipPair(m_NrOfStages/2);
-    //
-    // m_SpriteComponent->m_SpriteInfo.m_StartPos.x = rotationInfo.first * (m_SpriteComponent->m_SpriteInfo.m_Width
-    //     + m_SpriteComponent->m_SpriteInfo.m_Spacing) + m_InitXPos;
-    //
-    // m_SpriteComponent->SetFlipMode(rotationInfo.second);
-    // //++m_CurrentRotationStage %= m_NrOfStages;
-    // m_SpriteComponent->UpdateSrcRect();
-    //m_CurrentTime = 0;
 }
 
 

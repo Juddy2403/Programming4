@@ -10,16 +10,14 @@
     <list default="true" id="43cfb645-803b-40f9-a35f-cf674a51c400" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Formations/EnemyInfo1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Formations/EnemyInfo1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Formations/Formation1Bees.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Formations/Formation1Bees.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Formations/EnemyInfoTest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Formations/EnemyInfoTest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Formations/FormationTrajectories1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Formations/FormationTrajectories1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/EnemyState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyState.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/EnemyState.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/EnemyState.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Trajectory Logic/Parsers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Trajectory Logic/Parsers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Trajectory Logic/Trajectory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Trajectory Logic/Trajectory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Trajectory Logic/Trajectory.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Trajectory Logic/Trajectory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Trajectory Logic/TrajectoryStates.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Trajectory Logic/TrajectoryStates.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +28,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -251,7 +255,7 @@
       <workItem from="1716982116552" duration="20121000" />
       <workItem from="1717069856916" duration="2035000" />
       <workItem from="1717082528413" duration="18903000" />
-      <workItem from="1717171053235" duration="16278000" />
+      <workItem from="1717171053235" duration="19038000" />
     </task>
     <servers />
   </component>
