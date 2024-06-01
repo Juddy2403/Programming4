@@ -1,34 +1,22 @@
 ﻿#include "EnemyState.h"
-
-#include <glm/gtc/constants.hpp>
-
 #include "Game components/FormationComponent.h"
 #include "Game components/RotatingSpriteComponent.h"
 #include "Game components/Enemy components/EnemyComponent.h"
 #include "Subjects/GameObject.h"
-#include "Components/SpriteComponent.h"
 #include "Trajectory Logic/Parsers.h"
 
-const float GetInFormationState::m_TimeInBetween = 0.3f;
+const float GetInFormationState::m_TimeInBetween = 0.2f;
 
-//TODO: move to a helper class or sum
-inline void UpdateSprite(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
-    RotatingSpriteComponent* rotatingSpriteComponent, int rotationStage)
+void IdleState::Enter(EnemyComponent* enemyComponent)
 {
-    const auto rotationInfo = rotatingSpriteComponent->GetColFlipPair(rotationStage);
-
-    spriteComponent->m_SpriteInfo.m_StartPos.x = rotationInfo.first * (spriteComponent->m_SpriteInfo.m_Width
-        + spriteComponent->m_SpriteInfo.m_Spacing) + enemyComponent->GetInitXPos();
-    spriteComponent->SetFlipMode(rotationInfo.second);
-    spriteComponent->UpdateSrcRect();
+    int rotationStage = enemyComponent->GetRotationStage();
+    enemyComponent->UpdateSprite(rotationStage);
 }
-
-EnemyState* IdleState::Update(EnemyComponent* enemyComponent, [[maybe_unused]] GameEngine::SpriteComponent* spriteComponent,
-    [[maybe_unused]] RotatingSpriteComponent* rotatingSpriteComponent)
+EnemyState* IdleState::Update(EnemyComponent* enemyComponent)
 {
     glm::vec2 formationPos = enemyComponent->GetFormationPosition();
     formationPos.x += FormationComponent::GetOffset();
-    enemyComponent->GetGameObjParent()->SetPosition({ formationPos,1 });
+    enemyComponent->GetGameObjParent()->SetPosition({ formationPos,0 });
     return nullptr;
 }
 
@@ -39,29 +27,24 @@ void GetInFormationState::Enter(EnemyComponent* enemyComponent)
     m_WaitTime = m_TimeInBetween * enemyComponent->m_SetOutTurn;
     
 }
-int GetInFormationState::GetRotationStage(EnemyComponent* enemyComponent)
-{
-    //calculate rotation angle based on the direction
-    const auto direction = enemyComponent->GetFormationTrajectory().GetDirection();
-    float rotationAngle = -(glm::atan(-direction.y, direction.x) - glm::pi<float>() / 2);
-    //convert angle between 0 and 2*pi
-    if (rotationAngle < 0) rotationAngle += glm::pi<float>() * 2;
-    return static_cast<int>(rotationAngle / (glm::pi<float>() * 2) * enemyComponent->GetNrOfStages());
-}
 
-EnemyState* GetInFormationState::Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
-    RotatingSpriteComponent* rotatingSpriteComponent)
+EnemyState* GetInFormationState::Update(EnemyComponent* enemyComponent)
 {
     m_WaitTime = m_TimeInBetween * enemyComponent->m_SetOutTurn;
     m_AccumWaitTime += GameEngine::TimeManager::GetElapsed();
     if(m_AccumWaitTime < m_WaitTime) return nullptr;
     const glm::vec2 currentPos = enemyComponent->GetGameObjParent()->GetPosition();
-    auto [newPos, hasDirectionChanged] = enemyComponent->GetFormationTrajectory().Update(enemyComponent->GetSpeed().x, currentPos);
+    auto [newPos, hasDirectionChanged] = enemyComponent->GetFormationTrajectory().Update(enemyComponent->GetSpeed(), currentPos);
     if (hasDirectionChanged)
     {
-        if (enemyComponent->GetFormationTrajectory().IsComplete()) return new IdleState;
-        int rotationStage = GetRotationStage(enemyComponent);
-        UpdateSprite(enemyComponent, spriteComponent, rotatingSpriteComponent, rotationStage);
+        if (enemyComponent->GetFormationTrajectory().IsComplete())
+           {
+            enemyComponent->GetGameObjParent()->Notify(GameEngine::GameEvent::gotInFormation,
+                static_cast<int>(GameEngine::ObserverIdentifier::formation));
+            return new IdleState;
+           }
+        int rotationStage = enemyComponent->GetRotationStage();
+        enemyComponent->UpdateSprite(rotationStage);
     }
     enemyComponent->GetGameObjParent()->SetPosition({ newPos,0 });
     return nullptr;

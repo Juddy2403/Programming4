@@ -13,27 +13,24 @@ class EnemyState
 public:
     virtual void Enter([[maybe_unused]] EnemyComponent* enemyComponent) {}
     virtual void Exit([[maybe_unused]] EnemyComponent* enemyComponent) {}
-    virtual EnemyState* Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
-        RotatingSpriteComponent* rotatingSpriteComponent) = 0;
+    virtual EnemyState* Update(EnemyComponent* enemyComponent) = 0;
     virtual ~EnemyState() = default;
 };
 
 class IdleState final : public EnemyState
 {
 public:
-    virtual EnemyState* Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
-        RotatingSpriteComponent* rotatingSpriteComponent) override;
+    void Enter([[maybe_unused]] EnemyComponent* enemyComponent) override;
+    virtual EnemyState* Update(EnemyComponent* enemyComponent) override;
 };
 
 class GetInFormationState final : public EnemyState
 {
 public:
     virtual void Enter([[maybe_unused]] EnemyComponent* enemyComponent) override;
-    virtual EnemyState* Update(EnemyComponent* enemyComponent, GameEngine::SpriteComponent* spriteComponent,
-        RotatingSpriteComponent* rotatingSpriteComponent) override;
+    virtual EnemyState* Update(EnemyComponent* enemyComponent) override;
 private:
     float m_AccumWaitTime{};
     float m_WaitTime{};
     static const float m_TimeInBetween;
-    int GetRotationStage(EnemyComponent* enemyComponent);
 };

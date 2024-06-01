@@ -14,6 +14,7 @@
 #include "Game components/Enemy components/EnemyComponent.h"
 #include "Game observers/BulletObserver.h"
 #include "Game observers/EnemyObserver.h"
+#include "Game observers/FormationObserver.h"
 #include "Game observers/ScoreManager.h"
 #include "Managers/ResourceManager.h"
 #include "Managers/SceneManager.h"
@@ -65,20 +66,26 @@ void Galaga::LoadLevel()
     auto enemyObserver = scene->AddObserver(-1, std::move(enemyObserverUnique), nullptr);
     auto scoreObserverUnique = std::make_unique<ScoreManager>();
     auto scoreObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserverUnique), nullptr);
-    
+
+    //--------- Enemy formation------------
+    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
+    gameObject->AddComponent<FormationComponent>();
+    scene->AddObject(std::move(gameObject));
+
+    auto formationObserverUnique = std::make_unique<FormationObserver>();
+    auto formationObserver = scene->AddObserver( static_cast<int>(GameEngine::ObserverIdentifier::formation),
+        std::move(formationObserverUnique),nullptr);
+
+    //--------- Enemy creation------------
     auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfo1.json",
         "../Data/Formations/FormationTrajectories1.json");
     for (auto& enemy : enemyVec)
     {
         enemy->AddObserver(-1, enemyObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
+        enemy->AddObserver(static_cast<int>(ObserverIdentifier::formation), formationObserver);
         scene->AddObject(std::move(enemy));
     }
-
-    //--------- Enemy formation component------------
-    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
-    gameObject->AddComponent<FormationComponent>();
-    scene->AddObject(std::move(gameObject));
     
     SceneManager::GetInstance().SetScene(std::move(scene));
 }

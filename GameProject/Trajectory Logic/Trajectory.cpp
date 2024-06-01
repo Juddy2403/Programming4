@@ -9,6 +9,7 @@ std::pair<glm::vec2, bool> Trajectory::Update(float speed, const glm::vec2& curr
         m_HasDirectionChanged = true;
         if (m_PathData.empty())
         {
+            m_Direction = { 0,1 };
             m_IsComplete = true;
             return { stateInfo.first,m_HasDirectionChanged };
         }

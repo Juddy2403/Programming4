@@ -26,24 +26,28 @@ public:
     void SetFormationPosition(const glm::ivec2& formationPos);
     void SetFormationTrajectory(const std::queue<PathData>& pathDataQueue);
     Trajectory& GetFormationTrajectory() { return m_FormationTrajectory; }
+    
     [[nodiscard]] glm::ivec2 GetFormationPosition() const { return m_FormationPosition; }
-    [[nodiscard]] int GetNrOfStages() const { return m_NrOfStages; }
     [[nodiscard]] int GetInitXPos() const { return m_InitXPos; }
-    [[nodiscard]] glm::vec2 GetSpeed() const { return m_Speed; }
+    [[nodiscard]] float GetSpeed() const { return m_Speed; }
     virtual void Update() override;
     virtual bool HasBeenHit() = 0;
     [[nodiscard]] bool IsDiving() const { return m_IsDiving; }
     [[nodiscard]] virtual EnemyId GetEnemyID() const = 0;
+
+    int GetRotationStage() const;
+    void UpdateSprite(int rotationStage) const;
     
     int m_SetOutTurn{};
+    int m_Stage{};
 protected:
     std::unique_ptr<EnemyState> m_CurrentState;
     bool m_IsDiving{ false };
-    glm::vec2 m_Speed{ 150.0f,150.0f };
+    float m_Speed{ 200.f };
     GameEngine::SpriteComponent* m_SpriteComponent{};
     RotatingSpriteComponent* m_RotatingComponent{};
     glm::ivec2 m_FormationPosition{};
-    const int m_NrOfStages{};
+    const int m_NrOfRotationStages{};
     int m_InitXPos{};
     float m_CurrentTime{};
     int m_CurrentRotationStage{};

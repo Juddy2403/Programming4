@@ -7,6 +7,7 @@
 #include "Minigin.h"
 #include "PathDataStruct.h"
 #include "Game components/Enemy components/EnemyComponent.h"
+#include "Game observers/FormationObserver.h"
 
 namespace Parser
 {
@@ -45,7 +46,8 @@ namespace Parser
         std::ifstream trajectoryFileStream(trajectoryPath);
         nlohmann::json trajectoryJsonData;
         trajectoryFileStream >> trajectoryJsonData;
-
+        
+        FormationObserver::SetNrOfStages(static_cast<int>(trajectoryJsonData.size()));
         for (const auto& element : trajectoryJsonData)
         {
             startPositions.emplace_back(element["startPos"][0].get<float>(), element["startPos"][1].get<float>());
@@ -124,6 +126,7 @@ namespace Parser
                 enemy->GetComponent<EnemyComponent>()->SetFormationTrajectory(pathDataQueue);
                 int turn = posElem["turn"];
                 enemy->GetComponent<EnemyComponent>()->m_SetOutTurn = turn;
+                enemy->GetComponent<EnemyComponent>()->m_Stage = formationStage;
                 enemyVec.emplace_back(std::move(enemy));
             }
         }

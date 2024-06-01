@@ -12,14 +12,17 @@ namespace GameEngine
         score,
         bullet,
         collision,
+        formation
     };
     enum class GameEvent
     {
         hasBeenHit,
+        died,
         bulletShot,
         bulletOutOfBounds,
         collision,
         scoreIncrease,
+        gotInFormation,
         event //for when smth generic happens
     };
 

@@ -9,8 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="43cfb645-803b-40f9-a35f-cf674a51c400" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Trajectory Logic/Parsers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Trajectory Logic/Parsers.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
