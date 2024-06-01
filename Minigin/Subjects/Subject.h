@@ -5,27 +5,10 @@
 namespace GameEngine
 {
     struct EventData;
-    //TODO: replace these enums with an int id. Declare the enums in the game not the engine
-    enum class ObserverIdentifier
+    enum class EngineGameEvent
     {
-        health,
-        score,
-        bullet,
-        collision,
-        formation
+        collision
     };
-    enum class GameEvent
-    {
-        hasBeenHit,
-        died,
-        bulletShot,
-        bulletOutOfBounds,
-        collision,
-        scoreIncrease,
-        gotInFormation,
-        event //for when smth generic happens
-    };
-
     class IObserver;
     class Subject
     {
@@ -37,8 +20,8 @@ namespace GameEngine
     public:
         void AddObserver(int message, IObserver* observer);
         void RemoveObserver(int message, IObserver* observer);
-        void NotifyAll(GameEvent event, EventData* eventData = nullptr);
-        void Notify(GameEvent event, int message, EventData* eventData = nullptr);
+        void NotifyAll(int event, EventData* eventData = nullptr);
+        void Notify(int event, int message, EventData* eventData = nullptr);
 
         Subject() = default;
         virtual ~Subject() = default;

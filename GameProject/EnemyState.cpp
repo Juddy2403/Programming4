@@ -39,8 +39,8 @@ EnemyState* GetInFormationState::Update(EnemyComponent* enemyComponent)
     {
         if (enemyComponent->GetFormationTrajectory().IsComplete())
            {
-            enemyComponent->GetGameObjParent()->Notify(GameEngine::GameEvent::gotInFormation,
-                static_cast<int>(GameEngine::ObserverIdentifier::formation));
+            enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::gotInFormation),
+                static_cast<int>(ObserverIdentifier::formation));
             return new IdleState;
            }
         int rotationStage = enemyComponent->GetRotationStage();

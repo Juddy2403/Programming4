@@ -1,5 +1,6 @@
 ﻿#include "BulletComponent.h"
 
+#include "DataStructs.h"
 #include "Components/SpriteComponent.h"
 #include "Subjects/GameObject.h"
 #include "Managers/TimeManager.h"
@@ -17,7 +18,8 @@ void BulletComponent::Update()
     
     if (bulletYPos < 0)
     {
-        GetGameObjParent()->Notify( GameEngine::GameEvent::bulletOutOfBounds,static_cast<int>(GameEngine::ObserverIdentifier::bullet));
+        GetGameObjParent()->Notify( static_cast<int>(GameEvent::bulletOutOfBounds),
+            static_cast<int>(ObserverIdentifier::bullet));
         return;
     }
 

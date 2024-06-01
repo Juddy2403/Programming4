@@ -1,19 +1,21 @@
 ﻿#include "FighterObserver.h"
 
-void FighterObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent event,
+#include "DataStructs.h"
+
+void FighterObserver::Notify(GameEngine::Subject* subject, int event,
     [[maybe_unused]] GameEngine::EventData* eventData)
 {
     subject;
-    switch(event) {
-    case GameEngine::GameEvent::hasBeenHit:
+    switch(static_cast<GameEvent>(event)) {
+    case GameEvent::hasBeenHit:
         break;
-    case GameEngine::GameEvent::bulletShot:
+    case GameEvent::bulletShot:
         break;
-    case GameEngine::GameEvent::bulletOutOfBounds:
+    case GameEvent::bulletOutOfBounds:
         break;
-    case GameEngine::GameEvent::collision:
+    case GameEvent::collision:
         break;
-    case GameEngine::GameEvent::event:
+    case GameEvent::event:
         break;
     }
 

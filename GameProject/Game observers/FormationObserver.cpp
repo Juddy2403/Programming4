@@ -1,5 +1,6 @@
 ﻿#include "FormationObserver.h"
 
+#include "DataStructs.h"
 #include "Game components/FormationComponent.h"
 
 int FormationObserver::m_CurrentStage = 0;
@@ -7,17 +8,17 @@ int FormationObserver::m_CurrentEnemiesSetOut = 0;
 int FormationObserver::m_CurrentEnemiesGotInFormation = 0;
 int FormationObserver::m_NrOfStages;
 
-void FormationObserver::Notify([[maybe_unused]] GameEngine::Subject* subject, GameEngine::GameEvent event,
+void FormationObserver::Notify([[maybe_unused]] GameEngine::Subject* subject, int event,
     [[maybe_unused]] GameEngine::EventData* eventData)
 {
-    switch (event)
+    switch (static_cast<GameEvent>(event))
     {
-    case GameEngine::GameEvent::died:
+    case GameEvent::died:
     {
         if (m_CurrentEnemiesSetOut) --m_CurrentEnemiesSetOut;
     }
         break;
-    case GameEngine::GameEvent::gotInFormation:
+    case GameEvent::gotInFormation:
     {
         ++m_CurrentEnemiesGotInFormation;
     }

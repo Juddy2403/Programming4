@@ -4,7 +4,7 @@
 class FormationObserver : public GameEngine::IObserver
 {
 public:
-    void Notify(GameEngine::Subject* subject, GameEngine::GameEvent event, GameEngine::EventData* eventData = nullptr) override;
+    void Notify(GameEngine::Subject* subject, int event, GameEngine::EventData* eventData = nullptr) override;
     static int GetCurrentStage() { return m_CurrentStage; }
     static void EnemySetOut() { ++m_CurrentEnemiesSetOut; }
     static void SetNrOfStages(int nrOfStages) { m_NrOfStages = nrOfStages; }

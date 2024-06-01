@@ -6,7 +6,7 @@ void GameEngine::Subject::AddObserver(int message, IObserver* observer)
     const auto it = m_Observers.find(message);
     if (it == m_Observers.end()) m_Observers[message] = ObserverList();
     m_Observers[message].push_front(observer);
-    m_Observers[message].front()->Notify(this, GameEvent::event);
+    m_Observers[message].front()->Notify(this, -1);
 }
 
 void GameEngine::Subject::RemoveObserver(int message, IObserver* observer)
@@ -17,7 +17,7 @@ void GameEngine::Subject::RemoveObserver(int message, IObserver* observer)
     }
 }
 
-void GameEngine::Subject::NotifyAll(GameEvent event, EventData* eventData)
+void GameEngine::Subject::NotifyAll(int event, EventData* eventData)
 {
     for (auto it = m_Observers.begin(); it != m_Observers.end(); ++it)
     {
@@ -26,7 +26,7 @@ void GameEngine::Subject::NotifyAll(GameEvent event, EventData* eventData)
     }
 }
 
-void GameEngine::Subject::Notify(GameEvent event, int message, EventData* eventData)
+void GameEngine::Subject::Notify(int event, int message, EventData* eventData)
 {
     for (auto& observer : m_Observers[message])
         observer->Notify(this, event, eventData);

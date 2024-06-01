@@ -8,7 +8,7 @@ namespace GameEngine
     class IObserver
     {
     public:
-        virtual void Notify(Subject* subject, GameEvent event, EventData* eventData = nullptr) = 0;
+        virtual void Notify(Subject* subject, int event, EventData* eventData = nullptr) = 0;
 
         IObserver() = default;
         virtual ~IObserver() = default;

@@ -19,9 +19,9 @@ void ScoreManager::AddScore(int playerId, EnemyId enemyId)
     std::cout << "Player " << playerId << " has score: " << m_PlayerScores[playerId] << '\n';
 #endif
 }
-void ScoreManager::Notify([[maybe_unused]] GameEngine::Subject* subject, GameEngine::GameEvent event,[[maybe_unused]] GameEngine::EventData* eventData)
+void ScoreManager::Notify([[maybe_unused]] GameEngine::Subject* subject, int event,[[maybe_unused]] GameEngine::EventData* eventData)
 {
-    if(event != GameEngine::GameEvent::scoreIncrease) return;
+    if(static_cast<GameEvent>(event) != GameEvent::scoreIncrease) return;
     if(const auto scoreData = reinterpret_cast<ScoreData*>(eventData))
     {
         AddScore(scoreData->playerId, static_cast<EnemyId>(scoreData->enemyId));

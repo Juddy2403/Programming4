@@ -7,7 +7,7 @@ class ScoreManager : public GameEngine::IObserver
 {
 public:
     void AddScore(int playerId, EnemyId enemyId);
-    virtual void Notify(GameEngine::Subject* subject, GameEngine::GameEvent event
+    virtual void Notify(GameEngine::Subject* subject, int event
         , GameEngine::EventData* eventData) override;
     static int GetPlayerScore(int playerId);
 private:

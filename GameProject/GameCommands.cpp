@@ -1,4 +1,6 @@
 ﻿#include "GameCommands.h"
+
+#include "DataStructs.h"
 #include "Subjects/GameObject.h"
 
 ShootBulletCommand::ShootBulletCommand(GameEngine::GameObject* actor): Command(actor) {}
@@ -12,7 +14,8 @@ void ShootBulletCommand::Execute()
     if (m_ShootsAvailable <= 0) return;
     
     --m_ShootsAvailable;
-    m_Actor->Notify(GameEngine::GameEvent::bulletShot, static_cast<int>(GameEngine::ObserverIdentifier::bullet));
+    m_Actor->Notify(static_cast<int>(GameEvent::bulletShot),
+        static_cast<int>(ObserverIdentifier::bullet));
     
     m_Previous = m_Current;
 }

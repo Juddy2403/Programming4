@@ -5,7 +5,7 @@ class FighterObserver final : public GameEngine::IObserver
 {
 public:
     FighterObserver() = default;
-    virtual void Notify(GameEngine::Subject* subject, GameEngine::GameEvent event
+    virtual void Notify(GameEngine::Subject* subject, int event
         , GameEngine::EventData* eventData) override;
 private:
 };

@@ -11,7 +11,6 @@
 #include "Components/TextureComponent.h"
 #include "Game components/BackgroundComponent.h"
 #include "Game components/FormationComponent.h"
-#include "Game components/Enemy components/EnemyComponent.h"
 #include "Game observers/BulletObserver.h"
 #include "Game observers/EnemyObserver.h"
 #include "Game observers/FormationObserver.h"
@@ -57,7 +56,7 @@ void Galaga::LoadLevel()
     //--------FIGHTER--------
     gameObject = InitFighter();
     auto bulletObserver = std::make_unique<BulletObserver>(scene.get());
-    scene->AddObserver(static_cast<int>(GameEngine::ObserverIdentifier::bullet), std::move(bulletObserver), gameObject.get());
+    scene->AddObserver(static_cast<int>(ObserverIdentifier::bullet), std::move(bulletObserver), gameObject.get());
 
     scene->AddObject(std::move(gameObject));
 
@@ -73,7 +72,7 @@ void Galaga::LoadLevel()
     scene->AddObject(std::move(gameObject));
 
     auto formationObserverUnique = std::make_unique<FormationObserver>();
-    auto formationObserver = scene->AddObserver( static_cast<int>(GameEngine::ObserverIdentifier::formation),
+    auto formationObserver = scene->AddObserver( static_cast<int>(ObserverIdentifier::formation),
         std::move(formationObserverUnique),nullptr);
 
     //--------- Enemy creation------------

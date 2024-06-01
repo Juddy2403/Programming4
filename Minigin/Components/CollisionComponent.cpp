@@ -24,7 +24,7 @@ void CollisionComponent::CollidedWith(CollisionComponent* other) const
 {
     CollisionData data;
     data.pOtherCollider = other->GetGameObjParent();
-    GetGameObjParent()->NotifyAll(GameEvent::collision,&data);
+    GetGameObjParent()->NotifyAll(static_cast<int>(EngineGameEvent::collision),&data);
 }
 
 void CollisionComponent::Update()

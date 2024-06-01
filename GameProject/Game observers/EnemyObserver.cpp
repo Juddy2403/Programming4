@@ -8,13 +8,13 @@
 #include "Subjects/GameObject.h"
 
 EnemyObserver::EnemyObserver() {}
-void EnemyObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent event
+void EnemyObserver::Notify(GameEngine::Subject* subject, int event
     , [[maybe_unused]] GameEngine::EventData* eventData)
 {
     //GameEngine::GameObject* actor = dynamic_cast<GameEngine::GameObject*>(subject);
-    switch (event)
+    switch (static_cast<GameEvent>(event))
     {
-    case GameEngine::GameEvent::collision:
+    case GameEvent::collision:
     {
         const auto collisionData = reinterpret_cast<GameEngine::CollisionData*>(eventData);
         if (collisionData->pOtherCollider->GetID() == static_cast<int>(GameId::bullet))
@@ -28,8 +28,8 @@ void EnemyObserver::Notify(GameEngine::Subject* subject, GameEngine::GameEvent e
                 ScoreData scoreData;
                 scoreData.enemyId = static_cast<int>(enemyComp->GetEnemyID());
                 scoreData.playerId = playerId;
-                subject->Notify(GameEngine::GameEvent::scoreIncrease,static_cast<int>(GameEngine::ObserverIdentifier::score),&scoreData);
-                subject->NotifyAll(GameEngine::GameEvent::died);
+                subject->Notify(static_cast<int>(GameEvent::scoreIncrease),static_cast<int>(ObserverIdentifier::score),&scoreData);
+                subject->NotifyAll(static_cast<int>(GameEvent::died));
             }
         }
         //std::cout<<"Enemy collided with: "<<collisionData->pOtherCollider->GetID()<< '\n';
