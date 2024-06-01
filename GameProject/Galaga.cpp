@@ -68,11 +68,11 @@ void Galaga::LoadLevel()
     
     auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfo1.json",
         "../Data/Formations/FormationTrajectories1.json");
-    for (int i = 0; i < enemyVec.size(); ++i)
+    for (auto& enemy : enemyVec)
     {
-        enemyVec[i]->AddObserver(-1, enemyObserver);
-        enemyVec[i]->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
-        scene->AddObject(std::move(enemyVec[i]));
+        enemy->AddObserver(-1, enemyObserver);
+        enemy->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
+        scene->AddObject(std::move(enemy));
     }
 
     //--------- Enemy formation component------------

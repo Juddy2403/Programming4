@@ -97,24 +97,21 @@ namespace Parser
         {
             std::string enemyType = element["enemyType"];
             const auto positions = element["positions"];
-            for (size_t i{}; i < positions.size(); ++i)
+            for (auto posElem : positions)
             {
                 std::unique_ptr<GameEngine::GameObject> enemy{};
-                glm::vec2 pos = { positions[i]["formationPosition"][0].get<float>(),positions[i]["formationPosition"][1].get<float>() };
-                int formationStage = positions[i]["formationStage"];
+                glm::vec2 pos = { posElem["formationPosition"][0].get<float>(),posElem["formationPosition"][1].get<float>() };
+                int formationStage = posElem["formationStage"];
                 std::queue<PathData> pathDataQueue;
                 auto pathDataVec = pathDataQueueVec[formationStage];
                 for (auto path : pathDataVec)
                 {
-                    if (path.destination.x == -1 && path.destination.y == -1)
+                    if (path.destination.x == -1 && path.destination.y == -1) path.destination = pos;
+                    else if (posElem.contains("isXReversed") && posElem["isXReversed"].get<bool>())
                     {
-                        path.destination = pos;
-                    }
-                    else if (positions[i].contains("isXReversed") && positions[i]["isXReversed"].get<bool>())
-                    {
-                        const int spriteWidth = 16;
-                        path.destination.x = GameEngine::g_WindowRect.w - path.destination.x - spriteWidth;
-                        path.centerOfRotation.x = GameEngine::g_WindowRect.w - path.centerOfRotation.x - spriteWidth;
+                        constexpr int spriteOffset = 16;
+                        path.destination.x = GameEngine::g_WindowRect.w - path.destination.x - spriteOffset;
+                        path.centerOfRotation.x = GameEngine::g_WindowRect.w - path.centerOfRotation.x - spriteOffset;
                         path.isRotatingClockwise = !path.isRotatingClockwise;
                     }
                     pathDataQueue.push(path);
@@ -125,7 +122,7 @@ namespace Parser
                 enemy->SetPosition({ startPositions[formationStage],0 });
                 enemy->GetComponent<EnemyComponent>()->SetFormationPosition({ pos.x,pos.y });
                 enemy->GetComponent<EnemyComponent>()->SetFormationTrajectory(pathDataQueue);
-                int turn = positions[i]["turn"];
+                int turn = posElem["turn"];
                 enemy->GetComponent<EnemyComponent>()->m_SetOutTurn = turn;
                 enemyVec.emplace_back(std::move(enemy));
             }
