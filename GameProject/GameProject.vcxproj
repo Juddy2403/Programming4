@@ -173,7 +173,7 @@
     <ClCompile Include="Game components\Enemy components\ButterflyComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\EnemyComponent.cpp" />
     <ClCompile Include="Game components\FormationComponent.cpp" />
-    <ClCompile Include="Game components\HealthComponent.cpp" />
+    <ClCompile Include="Game components\PlayerHealthComponent.cpp" />
     <ClCompile Include="Game components\PlayerComponent.cpp" />
     <ClCompile Include="Game components\RotatingSpriteComponent.cpp" />
     <ClCompile Include="Game observers\BulletObserver.cpp" />
@@ -199,7 +199,7 @@
     <ClInclude Include="Game components\Enemy components\ButterflyComponent.h" />
     <ClInclude Include="Game components\Enemy components\EnemyComponent.h" />
     <ClInclude Include="Game components\FormationComponent.h" />
-    <ClInclude Include="Game components\HealthComponent.h" />
+    <ClInclude Include="Game components\PlayerHealthComponent.h" />
     <ClInclude Include="Game components\PlayerComponent.h" />
     <ClInclude Include="Game components\RotatingSpriteComponent.h" />
     <ClInclude Include="Game observers\BulletObserver.h" />

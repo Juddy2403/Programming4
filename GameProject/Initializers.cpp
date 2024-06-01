@@ -2,7 +2,7 @@
 #include "Game components/BulletComponent.h"
 #include "DataStructs.h"
 #include "GameCommands.h"
-#include "Game components/HealthComponent.h"
+#include "Game components/PlayerHealthComponent.h"
 #include "Game components/PlayerComponent.h"
 #include "Game components/RotatingSpriteComponent.h"
 #include "Components/CollisionComponent.h"
@@ -33,7 +33,7 @@ std::unique_ptr<GameEngine::GameObject> InitFighter()
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
     gameObject->SetPosition(150, 450);
 
-    gameObject->AddComponent<HealthComponent>(3);
+    gameObject->AddComponent<PlayerHealthComponent>(3,spriteComponent);
     auto& input = GameEngine::InputManager::GetInstance();
     input.BindCommand(GameEngine::KeyboardInputKey::W,
         std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }, 200));
