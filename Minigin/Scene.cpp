@@ -41,12 +41,12 @@ void Scene::RemoveAll()
 void Scene::Update()
 {
     bool areElemsToErase = false;
-    CollisionManager::CheckCollisions();
     for (const auto& object : m_GameObjects)
     {
         if (!object->IsDestroyed()) object->Update();
         else areElemsToErase = true;
     }
+    CollisionManager::CheckCollisions();
     if (areElemsToErase) RemoveDestroyedObjects();
 }
 

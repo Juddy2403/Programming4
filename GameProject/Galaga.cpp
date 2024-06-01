@@ -13,6 +13,7 @@
 #include "Game components/FormationComponent.h"
 #include "Game observers/BulletObserver.h"
 #include "Game observers/EnemyObserver.h"
+#include "Game observers/FighterObserver.h"
 #include "Game observers/FormationObserver.h"
 #include "Game observers/ScoreManager.h"
 #include "Managers/ResourceManager.h"
@@ -53,13 +54,6 @@ void Galaga::LoadLevel()
     gameObject->AddComponent<TextureComponent>();
     scene->AddObject(std::move(gameObject));
 
-    //--------FIGHTER--------
-    gameObject = InitFighter();
-    auto bulletObserver = std::make_unique<BulletObserver>(scene.get());
-    scene->AddObserver(static_cast<int>(ObserverIdentifier::bullet), std::move(bulletObserver), gameObject.get());
-
-    scene->AddObject(std::move(gameObject));
-
     //----------------ENEMIES--------------------
     auto enemyObserverUnique = std::make_unique<EnemyObserver>();
     auto enemyObserver = scene->AddObserver(-1, std::move(enemyObserverUnique), nullptr);
@@ -85,6 +79,15 @@ void Galaga::LoadLevel()
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::formation), formationObserver);
         scene->AddObject(std::move(enemy));
     }
+
+    //--------FIGHTER--------
+    gameObject = InitFighter();
+    auto fighterObserver = std::make_unique<FighterObserver>();
+    auto bulletObserver = std::make_unique<BulletObserver>(scene.get());
+    scene->AddObserver(static_cast<int>(ObserverIdentifier::bullet), std::move(bulletObserver), gameObject.get());
+    scene->AddObserver(-1, std::move(fighterObserver), gameObject.get());
+
+    scene->AddObject(std::move(gameObject));
     
     SceneManager::GetInstance().SetScene(std::move(scene));
 }

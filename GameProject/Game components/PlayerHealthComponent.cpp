@@ -26,6 +26,10 @@ void PlayerHealthComponent::Render()
 }
 void PlayerHealthComponent::Hit()
 {
+    if (m_Health <= 0)
+    {
+        GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::died));
+        return;
+    }
     --m_Health;
-    if (m_Health <= 0) GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::died));
 }
