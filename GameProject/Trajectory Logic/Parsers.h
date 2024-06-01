@@ -82,13 +82,13 @@ namespace Parser
         return pathDataQueueVec;
     }
 
-    inline std::vector<std::vector<std::unique_ptr<GameEngine::GameObject>>> ParseEnemyInfoByStage(const std::string& enemyInfoPath, const std::string& trajectoryPath)
+    inline std::vector<std::unique_ptr<GameEngine::GameObject>> ParseEnemyInfoByStage(const std::string& enemyInfoPath, const std::string& trajectoryPath)
     {
         std::vector<std::vector<PathData>> pathDataQueueVec;
         std::vector<glm::vec2> startPositions;
         pathDataQueueVec = ParseTrajectoryVec(trajectoryPath, startPositions);
 
-        std::vector<std::vector<std::unique_ptr<GameEngine::GameObject>>> enemyVecPerStage;
+        std::vector<std::unique_ptr<GameEngine::GameObject>> enemyVec;
         std::ifstream enemyFileStream(enemyInfoPath);
         nlohmann::json enemyJsonData;
         enemyFileStream >> enemyJsonData;
@@ -127,9 +127,9 @@ namespace Parser
                 enemy->GetComponent<EnemyComponent>()->SetFormationTrajectory(pathDataQueue);
                 int turn = positions[i]["turn"];
                 enemy->GetComponent<EnemyComponent>()->m_SetOutTurn = turn;
-                enemyVecPerStage[formationStage].emplace_back(std::move(enemy));
+                enemyVec.emplace_back(std::move(enemy));
             }
         }
-        return enemyVecPerStage;
+        return enemyVec;
     }
 }
