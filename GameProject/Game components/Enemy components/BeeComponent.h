@@ -5,7 +5,7 @@ class BeeComponent final : public EnemyComponent
 {
 public:
     explicit BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-        RotatingSpriteComponent* rotatingComponent);
+        RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent);
 
     BeeComponent(const BeeComponent& other) = delete;
     BeeComponent(BeeComponent&& other) noexcept = delete;

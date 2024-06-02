@@ -10,6 +10,7 @@
 #include "Game components/Enemy components/BeeComponent.h"
 #include "Game components/Enemy components/BossGalagaComponent.h"
 #include "Game components/Enemy components/ButterflyComponent.h"
+#include "Game components/Enemy components/EnemyBulletComponent.h"
 #include "Managers/InputManager.h"
 
 std::unique_ptr<GameEngine::GameObject> InitFighter()
@@ -70,8 +71,29 @@ std::unique_ptr<GameEngine::GameObject> InitBullet(int playerID)
     bullet->AddComponent<GameEngine::CollisionComponent>(collisionRect);
     return bullet;
 }
+std::unique_ptr<GameEngine::GameObject> InitEnemyBullet(const glm::vec2& direction)
+{
+    auto bullet = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::enemyBullet));
 
-std::unique_ptr<GameEngine::GameObject> InitBee()
+    auto* bulletSpriteComp = bullet->AddComponent<GameEngine::SpriteComponent>("GalagaUpdated.png");
+    bulletSpriteComp->m_SpriteInfo.m_Height = 16;
+    bulletSpriteComp->m_SpriteInfo.m_Width = 16;
+    bulletSpriteComp->m_SpriteInfo.m_StartPos = glm::vec2{ 145,1 };
+    bulletSpriteComp->m_SpriteInfo.m_NrOfCols = 1;
+    bulletSpriteComp->m_SpriteInfo.m_NrOfRows = 1;
+    bulletSpriteComp->m_IsActive = false;
+    bulletSpriteComp->m_Scale = 2;
+    bulletSpriteComp->UpdateSrcRect();
+    bullet->AddComponent<EnemyBulletComponent>(direction);
+
+    SDL_Rect collisionRect = bulletSpriteComp->m_DestRect;
+    collisionRect.w /= 3;
+    collisionRect.x += collisionRect.w;
+    bullet->AddComponent<GameEngine::CollisionComponent>(collisionRect);
+    return bullet;
+}
+
+std::unique_ptr<GameEngine::GameObject> InitBee(PlayerComponent* playerComponent)
 {
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::enemy));
     auto* spriteComponent = gameObject->AddComponent<GameEngine::SpriteComponent>("GalagaUpdated.png");
@@ -89,13 +111,14 @@ std::unique_ptr<GameEngine::GameObject> InitBee()
     spriteComponent->m_IsActive = true;
 
     gameObject->AddComponent<BeeComponent>(spriteComponent,
-        gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols));
+        gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols),
+        playerComponent);
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
 
     return gameObject;
 }
 
-std::unique_ptr<GameEngine::GameObject> InitButterfly()
+std::unique_ptr<GameEngine::GameObject> InitButterfly(PlayerComponent* playerComponent)
 {
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::enemy));
     auto* spriteComponent = gameObject->AddComponent<GameEngine::SpriteComponent>("GalagaUpdated.png");
@@ -113,13 +136,14 @@ std::unique_ptr<GameEngine::GameObject> InitButterfly()
     spriteComponent->m_IsActive = true;
 
     gameObject->AddComponent<ButterflyComponent>(spriteComponent,
-        gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols));
+        gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols),
+        playerComponent);
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
 
     return gameObject;
 }
 
-std::unique_ptr<GameEngine::GameObject> InitBossGalaga()
+std::unique_ptr<GameEngine::GameObject> InitBossGalaga(PlayerComponent* playerComponent)
 {
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::enemy));
     auto* spriteComponent = gameObject->AddComponent<GameEngine::SpriteComponent>("GalagaUpdated.png");
@@ -137,7 +161,8 @@ std::unique_ptr<GameEngine::GameObject> InitBossGalaga()
     spriteComponent->m_IsActive = true;
 
     gameObject->AddComponent<BossGalagaComponent>(spriteComponent,
-        gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols));
+        gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols),
+        playerComponent);
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
 
     return gameObject;

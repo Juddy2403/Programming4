@@ -1,6 +1,7 @@
 ﻿#include "GameCommands.h"
 
 #include "DataStructs.h"
+#include "Galaga.h"
 #include "Subjects/GameObject.h"
 
 ShootBulletCommand::ShootBulletCommand(GameEngine::GameObject* actor): Command(actor) {}

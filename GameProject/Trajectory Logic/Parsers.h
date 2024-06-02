@@ -84,7 +84,8 @@ namespace Parser
         return pathDataQueueVec;
     }
 
-    inline std::vector<std::unique_ptr<GameEngine::GameObject>> ParseEnemyInfoByStage(const std::string& enemyInfoPath, const std::string& trajectoryPath)
+    inline std::vector<std::unique_ptr<GameEngine::GameObject>> ParseEnemyInfoByStage(const std::string& enemyInfoPath,
+        const std::string& trajectoryPath, PlayerComponent* playerComponent)
     {
         std::vector<std::vector<PathData>> pathDataQueueVec;
         std::vector<glm::vec2> startPositions;
@@ -118,9 +119,9 @@ namespace Parser
                     }
                     pathDataQueue.push(path);
                 }
-                if (enemyType == "Bee") enemy = InitBee();
-                else if (enemyType == "Butterfly") enemy = InitButterfly();
-                else if (enemyType == "BossGalaga") enemy = InitBossGalaga();
+                if (enemyType == "Bee") enemy = InitBee(playerComponent);
+                else if (enemyType == "Butterfly") enemy = InitButterfly(playerComponent);
+                else if (enemyType == "BossGalaga") enemy = InitBossGalaga(playerComponent);
                 enemy->SetPosition({ startPositions[formationStage],0 });
                 enemy->GetComponent<EnemyComponent>()->SetFormationPosition({ pos.x,pos.y });
                 enemy->GetComponent<EnemyComponent>()->SetFormationTrajectory(pathDataQueue);

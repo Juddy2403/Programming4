@@ -2,8 +2,8 @@
 #include "Subjects/GameObject.h"
 
 BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-    RotatingSpriteComponent* rotatingComponent):
-    EnemyComponent(gameObj, spriteComponent, rotatingComponent)
+    RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent):
+    EnemyComponent(gameObj, spriteComponent, rotatingComponent,playerComponent)
 {}
 
 void BeeComponent::Update()

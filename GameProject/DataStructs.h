@@ -28,6 +28,7 @@ enum class GameId
     enemy,
     player,
     bullet,
+    enemyBullet,
     observer,
     text,
     texture,

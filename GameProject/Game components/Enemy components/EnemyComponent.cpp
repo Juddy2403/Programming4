@@ -6,8 +6,9 @@
 #include "Subjects/GameObject.h"
 
 EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-    RotatingSpriteComponent* rotatingComponent):
+    RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent):
     Component(gameObj),
+    m_PlayerComponent(playerComponent),
     m_CurrentState(nullptr),
     m_SpriteComponent(spriteComponent),
     m_RotatingComponent(rotatingComponent),
@@ -27,9 +28,9 @@ void EnemyComponent::SetFormationTrajectory(const std::queue<PathData>& pathData
 
 void EnemyComponent::Update()
 {
-    if(m_CurrentState)
+    if (m_CurrentState)
     {
-        if(auto nextState = m_CurrentState->Update(this))
+        if (auto nextState = m_CurrentState->Update(this))
         {
             m_CurrentState->Exit(this);
             m_CurrentState.reset(nextState);
@@ -38,7 +39,7 @@ void EnemyComponent::Update()
     }
     else
     {
-        if(FormationObserver::GetCurrentStage() == m_Stage)
+        if (FormationObserver::GetCurrentStage() == m_Stage)
         {
             FormationObserver::EnemySetOut();
             m_CurrentState = std::make_unique<GetInFormationState>();
@@ -63,6 +64,3 @@ void EnemyComponent::UpdateSprite(int rotationStage) const
     m_SpriteComponent->SetFlipMode(rotationInfo.second);
     m_SpriteComponent->UpdateSrcRect();
 }
-
-
-

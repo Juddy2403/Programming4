@@ -1,6 +1,7 @@
 ﻿#include "FighterObserver.h"
 
 #include "DataStructs.h"
+#include "Galaga.h"
 #include "Game components/PlayerComponent.h"
 #include "Game components/PlayerHealthComponent.h"
 #include "Subjects/GameObject.h"
@@ -14,6 +15,8 @@ void FighterObserver::Notify(GameEngine::Subject* subject, int event,
     case GameEvent::bulletShot:
         break;
     case GameEvent::bulletOutOfBounds:
+        break;
+    case GameEvent::died:
         break;
     case GameEvent::collision:
     {

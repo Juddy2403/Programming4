@@ -41,6 +41,8 @@ EnemyState* GetInFormationState::Update(EnemyComponent* enemyComponent)
            {
             enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::gotInFormation),
                 static_cast<int>(ObserverIdentifier::formation));
+            enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bulletShot),
+                static_cast<int>(ObserverIdentifier::bullet));
             return new IdleState;
            }
         int rotationStage = enemyComponent->GetRotationStage();

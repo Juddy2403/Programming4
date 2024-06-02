@@ -2,6 +2,7 @@
 #include <glm/vec3.hpp>
 
 #include "Components/Component.h"
+#include "Subjects/GameObject.h"
 
 class PlayerComponent final : public GameEngine::Component
 {
@@ -14,7 +15,7 @@ public:
     ~PlayerComponent() override = default;
     
     [[nodiscard]] int GetPlayerID() const { return m_PlayerID; }
-    static constexpr glm::vec3 m_RespawnPos{330,540,0};
+    static constexpr glm::vec3 m_RespawnPos{330,520,0};
 private:
     int m_PlayerID{ -1 };
 };

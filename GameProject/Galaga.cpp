@@ -12,6 +12,7 @@
 #include "Game components/BackgroundComponent.h"
 #include "Game components/FormationComponent.h"
 #include "Game observers/BulletObserver.h"
+#include "Game observers/EnemyBulletObserver.h"
 #include "Game observers/EnemyObserver.h"
 #include "Game observers/FighterObserver.h"
 #include "Game observers/FormationObserver.h"
@@ -54,11 +55,22 @@ void Galaga::LoadLevel()
     gameObject->AddComponent<TextureComponent>();
     scene->AddObject(std::move(gameObject));
 
+    //--------FIGHTER--------
+    gameObject = InitFighter();
+    auto fighterObserver = std::make_unique<FighterObserver>();
+    auto bulletObserver = std::make_unique<BulletObserver>(scene.get());
+    scene->AddObserver(static_cast<int>(ObserverIdentifier::bullet), std::move(bulletObserver), gameObject.get());
+    scene->AddObserver(-1, std::move(fighterObserver), gameObject.get());
+    auto playerComp = gameObject->GetComponent<PlayerComponent>();
+    scene->AddObject(std::move(gameObject));
+    
     //----------------ENEMIES--------------------
     auto enemyObserverUnique = std::make_unique<EnemyObserver>();
     auto enemyObserver = scene->AddObserver(-1, std::move(enemyObserverUnique), nullptr);
     auto scoreObserverUnique = std::make_unique<ScoreManager>();
     auto scoreObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserverUnique), nullptr);
+    auto enemyBulletObserverUnique = std::make_unique<EnemyBulletObserver>(scene.get());
+    auto enemyBulletObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::bullet), std::move(enemyBulletObserverUnique), nullptr);
 
     //--------- Enemy formation------------
     gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
@@ -71,23 +83,15 @@ void Galaga::LoadLevel()
 
     //--------- Enemy creation------------
     auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfo1.json",
-        "../Data/Formations/FormationTrajectories1.json");
+        "../Data/Formations/FormationTrajectories1.json", playerComp);
     for (auto& enemy : enemyVec)
     {
         enemy->AddObserver(-1, enemyObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::formation), formationObserver);
+        enemy->AddObserver(static_cast<int>(ObserverIdentifier::bullet), enemyBulletObserver);
         scene->AddObject(std::move(enemy));
     }
-
-    //--------FIGHTER--------
-    gameObject = InitFighter();
-    auto fighterObserver = std::make_unique<FighterObserver>();
-    auto bulletObserver = std::make_unique<BulletObserver>(scene.get());
-    scene->AddObserver(static_cast<int>(ObserverIdentifier::bullet), std::move(bulletObserver), gameObject.get());
-    scene->AddObserver(-1, std::move(fighterObserver), gameObject.get());
-
-    scene->AddObject(std::move(gameObject));
     
     SceneManager::GetInstance().SetScene(std::move(scene));
 }

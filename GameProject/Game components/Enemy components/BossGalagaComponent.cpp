@@ -1,8 +1,8 @@
 ﻿#include "BossGalagaComponent.h"
 
 BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-    RotatingSpriteComponent* rotatingComponent):
-    EnemyComponent(gameObj, spriteComponent, rotatingComponent),
+    RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent):
+    EnemyComponent(gameObj, spriteComponent, rotatingComponent, playerComponent),
     m_BossStage(std::make_unique<BossStageOne>())
 {}
 void BossGalagaComponent::Update()

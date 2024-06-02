@@ -6,7 +6,7 @@ class BossGalagaComponent final : public EnemyComponent
 {
 public:
     explicit BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-        RotatingSpriteComponent* rotatingComponent);
+        RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent);
 
     BossGalagaComponent(const BossGalagaComponent& other) = delete;
     BossGalagaComponent(BossGalagaComponent&& other) noexcept = delete;

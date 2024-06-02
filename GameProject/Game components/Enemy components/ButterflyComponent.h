@@ -5,7 +5,7 @@ class ButterflyComponent final : public EnemyComponent
 {
 public:
     explicit ButterflyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-        RotatingSpriteComponent* rotatingComponent);
+        RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent);
 
     ButterflyComponent(const ButterflyComponent& other) = delete;
     ButterflyComponent(ButterflyComponent&& other) noexcept = delete;

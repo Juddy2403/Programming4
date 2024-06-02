@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include <glm/vec2.hpp>
 
 #include "DataStructs.h"
 #include "EnemyState.h"
 #include "Components/Component.h"
+#include "Game components/PlayerComponent.h"
 
 class RotatingSpriteComponent;
 namespace GameEngine
@@ -15,7 +15,7 @@ class EnemyComponent : public GameEngine::Component
 {
 public:
     explicit EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-        RotatingSpriteComponent* rotatingComponent);
+        RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent);
 
     EnemyComponent(const EnemyComponent& other) = delete;
     EnemyComponent(EnemyComponent&& other) noexcept = delete;
@@ -37,10 +37,12 @@ public:
 
     int GetRotationStage() const;
     void UpdateSprite(int rotationStage) const;
+    PlayerComponent* GetPlayerComponent() const { return m_PlayerComponent; }
     
     int m_SetOutTurn{};
     int m_Stage{};
 protected:
+    PlayerComponent* m_PlayerComponent{};
     std::unique_ptr<EnemyState> m_CurrentState;
     bool m_IsDiving{ false };
     float m_Speed{ 200.f };
