@@ -18,6 +18,8 @@ public:
     //returns true if boss is destroyed
     virtual bool HasBeenHit() override;
     virtual EnemyId GetEnemyID() const override;
+    virtual void GetInAttackState() override;
+
 private:
     std::unique_ptr<BossStage> m_BossStage;
 };

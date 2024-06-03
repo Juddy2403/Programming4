@@ -10,6 +10,12 @@ void ButterflyComponent::Update()
 {
     EnemyComponent::Update();
 }
+void ButterflyComponent::GetInAttackState()
+{
+    m_CurrentState->Exit(this);
+    m_CurrentState = std::make_unique<BossBombingRun>();
+    m_CurrentState->Enter(this);
+}
 bool ButterflyComponent::HasBeenHit()
 {
     GetGameObjParent()->SetDestroyedFlag();
@@ -17,6 +23,6 @@ bool ButterflyComponent::HasBeenHit()
 }
 EnemyId ButterflyComponent::GetEnemyID() const
 {
-    if (m_IsDiving) return EnemyId::butterflyDiving;
+    if (m_CurrentState->IsDiving()) return EnemyId::butterflyDiving;
     return EnemyId::butterfly;
 }

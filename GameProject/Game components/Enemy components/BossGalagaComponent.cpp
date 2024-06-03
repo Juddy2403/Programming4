@@ -21,6 +21,12 @@ bool BossGalagaComponent::HasBeenHit()
 }
 EnemyId BossGalagaComponent::GetEnemyID() const
 {
-    if (m_IsDiving) return EnemyId::bossGalagaDiving;
+    if (m_CurrentState->IsDiving()) return EnemyId::bossGalagaDiving;
     return EnemyId::bossGalaga;
+}
+void BossGalagaComponent::GetInAttackState()
+{
+    m_CurrentState->Exit(this);
+    m_CurrentState = std::make_unique<BossBombingRun>();
+    m_CurrentState->Enter(this);
 }

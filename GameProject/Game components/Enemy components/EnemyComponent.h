@@ -21,8 +21,9 @@ public:
     EnemyComponent(EnemyComponent&& other) noexcept = delete;
     EnemyComponent& operator=(const EnemyComponent& other) = delete;
     EnemyComponent& operator=(EnemyComponent&& other) noexcept = delete;
-    ~EnemyComponent() override = default;
+    ~EnemyComponent() override;
 
+    virtual void GetInAttackState() = 0;
     void SetFormationPosition(const glm::ivec2& formationPos);
     void SetFormationTrajectory(const std::queue<PathData>& pathDataQueue);
     Trajectory& GetFormationTrajectory() { return m_FormationTrajectory; }
@@ -32,10 +33,9 @@ public:
     [[nodiscard]] float GetSpeed() const { return m_Speed; }
     virtual void Update() override;
     virtual bool HasBeenHit() = 0;
-    [[nodiscard]] bool IsDiving() const { return m_IsDiving; }
     [[nodiscard]] virtual EnemyId GetEnemyID() const = 0;
 
-    int GetRotationStage() const;
+    int GetRotationStage(const glm::vec2& direction) const;
     void UpdateSprite(int rotationStage) const;
     PlayerComponent* GetPlayerComponent() const { return m_PlayerComponent; }
     
@@ -44,8 +44,7 @@ public:
 protected:
     PlayerComponent* m_PlayerComponent{};
     std::unique_ptr<EnemyState> m_CurrentState;
-    bool m_IsDiving{ false };
-    float m_Speed{ 200.f };
+    float m_Speed{ 300.f };
     GameEngine::SpriteComponent* m_SpriteComponent{};
     RotatingSpriteComponent* m_RotatingComponent{};
     glm::ivec2 m_FormationPosition{};
@@ -54,6 +53,7 @@ protected:
     float m_CurrentTime{};
     int m_CurrentRotationStage{};
 private:
+    //TODO: make trajectories unique ptrs 
     Trajectory m_FormationTrajectory{};
 };
 

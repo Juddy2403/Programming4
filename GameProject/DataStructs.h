@@ -20,6 +20,7 @@ enum class GameEvent
     bulletOutOfBounds,
     scoreIncrease,
     gotInFormation,
+    leftFormation,
     event = -1//for when smth generic happens
 };
 

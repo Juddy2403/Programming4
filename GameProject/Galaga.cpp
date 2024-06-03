@@ -12,6 +12,7 @@
 #include "Game components/BackgroundComponent.h"
 #include "Game components/FormationComponent.h"
 #include "Game observers/BulletObserver.h"
+#include "Game observers/EnemyAIManager.h"
 #include "Game observers/EnemyBulletObserver.h"
 #include "Game observers/EnemyObserver.h"
 #include "Game observers/FighterObserver.h"
@@ -36,8 +37,9 @@ void Galaga::LoadLevel()
 
     ServiceLocator::GetSoundSystem().FillSoundPaths("../Data/Audio/SoundPaths.txt");
 
-    //------BACKGROUND--------
     auto scene = std::make_unique<Scene>("First level");
+
+    //------BACKGROUND--------
     auto gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::texture));
     SDL_Rect& destRect = gameObject->AddComponent<TextureComponent>("Background.png")->m_DestRect;
     destRect.w = GameEngine::g_WindowRect.w;
@@ -47,13 +49,6 @@ void Galaga::LoadLevel()
 
     auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 32);
     auto smallerFont = ResourceManager::GetInstance().LoadFont("Lingua.otf", 16);
-
-    //------TITLE------
-    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
-    gameObject->SetPosition(80, 20);
-    gameObject->AddComponent<TextComponent>(font, "Galaga");
-    gameObject->AddComponent<TextureComponent>();
-    scene->AddObject(std::move(gameObject));
 
     //--------FIGHTER--------
     gameObject = InitFighter();
@@ -65,6 +60,10 @@ void Galaga::LoadLevel()
     scene->AddObject(std::move(gameObject));
     
     //----------------ENEMIES--------------------
+    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
+    auto enemyAIObserver = gameObject->AddComponent<EnemyAIManager>();
+    scene->AddObject(std::move(gameObject));
+
     auto enemyObserverUnique = std::make_unique<EnemyObserver>();
     auto enemyObserver = scene->AddObserver(-1, std::move(enemyObserverUnique), nullptr);
     auto scoreObserverUnique = std::make_unique<ScoreManager>();
@@ -90,6 +89,7 @@ void Galaga::LoadLevel()
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::formation), formationObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::bullet), enemyBulletObserver);
+        enemy->AddObserver(-1, enemyAIObserver);
         scene->AddObject(std::move(enemy));
     }
     
