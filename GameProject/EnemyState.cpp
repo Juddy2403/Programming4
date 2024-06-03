@@ -7,14 +7,44 @@
 
 const float GetInFormationState::m_TimeInBetween = 0.2f;
 
+void IdleState::UpdateBackToFormationTrajectory(EnemyComponent* enemyComponent) const
+{
+    std::queue<PathData> pathDataQueue;
+    PathData pathData;
+    pathData.destination = glm::vec2(enemyComponent->GetFormationPosition()) + glm::vec2(FormationComponent::GetOffset(),0);
+    pathDataQueue.push(pathData);
+    m_BackToFormationTrajectory->SetPathData(pathDataQueue, enemyComponent->GetGameObjParent()->GetPosition());
+}
+void IdleState::GotInFormation(EnemyComponent* enemyComponent) {
+    enemyComponent->GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::gotInFormation));
+    int rotationStage = enemyComponent->GetRotationStage({ 0,1 });
+    enemyComponent->UpdateSprite(rotationStage);
+}
 void IdleState::Enter(EnemyComponent* enemyComponent)
 {
-    enemyComponent->GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::gotInFormation));
-    int rotationStage = enemyComponent->GetRotationStage({0,1});
-    enemyComponent->UpdateSprite(rotationStage);
+    if(!TrajectoryMath::ArePositionsEqual(enemyComponent->GetGameObjParent()->GetPosition(),
+        enemyComponent->GetFormationPosition()+glm::ivec2{FormationComponent::GetOffset(),0}))
+    {
+        m_BackToFormationTrajectory = std::make_unique<Trajectory>();
+        UpdateBackToFormationTrajectory(enemyComponent);
+        return;
+    }
+    GotInFormation(enemyComponent);
 }
 std::unique_ptr<EnemyState> IdleState::Update(EnemyComponent* enemyComponent)
 {
+    if(m_BackToFormationTrajectory != nullptr)
+    {
+        if (enemyComponent->UpdateTrajectory(*m_BackToFormationTrajectory))
+        {
+            m_BackToFormationTrajectory = nullptr;
+            GotInFormation(enemyComponent);
+            return nullptr;
+        }
+        UpdateBackToFormationTrajectory(enemyComponent);
+
+        return nullptr;
+    }
     glm::vec2 formationPos = enemyComponent->GetFormationPosition();
     formationPos.x += FormationComponent::GetOffset();
     enemyComponent->GetGameObjParent()->SetPosition({ formationPos,0 });
@@ -25,30 +55,12 @@ void IdleState::Exit(EnemyComponent* enemyComponent)
     enemyComponent->GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::leftFormation));
 }
 
-void GetInFormationState::Enter(EnemyComponent* enemyComponent)
-{
-    //std::queue<PathData> pathDataQueue = Parser::ParseTrajectory("../Data/Formations/trajectory.json");
-    //TODO: the wait time should be set here but it isnt since at this point the set out turn is 0
-    m_WaitTime = m_TimeInBetween * enemyComponent->m_SetOutTurn;
-    
-}
-
 std::unique_ptr<EnemyState> GetInFormationState::Update(EnemyComponent* enemyComponent)
 {
     m_WaitTime = m_TimeInBetween * enemyComponent->m_SetOutTurn;
     m_AccumWaitTime += GameEngine::TimeManager::GetElapsed();
-    if(m_AccumWaitTime < m_WaitTime) return nullptr;
-    const glm::vec2 currentPos = enemyComponent->GetGameObjParent()->GetPosition();
-    auto [newPos, hasDirectionChanged] = enemyComponent->GetFormationTrajectory().Update(enemyComponent->GetSpeed(),
-        currentPos);
-    if (hasDirectionChanged)
-    {
-        if (enemyComponent->GetFormationTrajectory().IsComplete()) return std::make_unique<IdleState>();
-           
-        int rotationStage = enemyComponent->GetRotationStage(enemyComponent->GetFormationTrajectory().GetDirection());
-        enemyComponent->UpdateSprite(rotationStage);
-    }
-    enemyComponent->GetGameObjParent()->SetPosition({ newPos,0 });
+    if (m_AccumWaitTime < m_WaitTime) return nullptr;
+    if (enemyComponent->UpdateTrajectory(enemyComponent->GetFormationTrajectory())) return std::make_unique<IdleState>();
     return nullptr;
 }
 void BeeBombingRun::Enter(EnemyComponent* enemyComponent)
@@ -73,7 +85,7 @@ void BeeBombingRun::Enter(EnemyComponent* enemyComponent)
     // Dive towards the player
     pathData = {};
     const glm::vec2 playerPos = enemyComponent->GetPlayerComponent()->GetGameObjParent()->GetPosition();
-    pathData.destination = playerPos + glm::vec2{0, -50};
+    pathData.destination = playerPos + glm::vec2{ 0,-50 };
     pathDataQueue.push(pathData);
 
     // Loop movement
@@ -89,20 +101,11 @@ void BeeBombingRun::Enter(EnemyComponent* enemyComponent)
     pathDataQueue.push(pathData);
 
     // Set the trajectory
-    m_BombingTrajectory.SetPathData(pathDataQueue, enemyComponent->GetGameObjParent()->GetPosition());
+    m_BombingTrajectory->SetPathData(pathDataQueue, enemyComponent->GetGameObjParent()->GetPosition());
 }
 std::unique_ptr<EnemyState> BeeBombingRun::Update(EnemyComponent* enemyComponent)
 {
-    const glm::vec2 currentPos = enemyComponent->GetGameObjParent()->GetPosition();
-    auto [newPos, hasDirectionChanged] = m_BombingTrajectory.Update(enemyComponent->GetSpeed(),
-        currentPos);
-    if (hasDirectionChanged)
-    {
-        if (m_BombingTrajectory.IsComplete()) return std::make_unique<IdleState>();
-        int rotationStage = enemyComponent->GetRotationStage(m_BombingTrajectory.GetDirection());
-        enemyComponent->UpdateSprite(rotationStage);
-    }
-    enemyComponent->GetGameObjParent()->SetPosition({ newPos,0 });
+    if (enemyComponent->UpdateTrajectory(*m_BombingTrajectory)) return std::make_unique<IdleState>();
     return nullptr;
 }
 void ButterflyBombingRun::Enter(EnemyComponent* enemyComponent)
@@ -111,7 +114,8 @@ void ButterflyBombingRun::Enter(EnemyComponent* enemyComponent)
 }
 std::unique_ptr<EnemyState> ButterflyBombingRun::Update(EnemyComponent* enemyComponent)
 {
-    enemyComponent; return nullptr;
+    enemyComponent;
+    return nullptr;
 }
 void BossBombingRun::Enter(EnemyComponent* enemyComponent)
 {
@@ -119,5 +123,6 @@ void BossBombingRun::Enter(EnemyComponent* enemyComponent)
 }
 std::unique_ptr<EnemyState> BossBombingRun::Update(EnemyComponent* enemyComponent)
 {
-    enemyComponent; return nullptr;
+    enemyComponent;
+    return nullptr;
 }

@@ -37,6 +37,7 @@ public:
 
     int GetRotationStage(const glm::vec2& direction) const;
     void UpdateSprite(int rotationStage) const;
+    bool UpdateTrajectory(Trajectory& trajectory) const;
     PlayerComponent* GetPlayerComponent() const { return m_PlayerComponent; }
     
     int m_SetOutTurn{};

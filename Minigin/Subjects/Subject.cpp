@@ -1,4 +1,7 @@
 #include "Subject.h"
+
+#include <ranges>
+
 #include "Minigin/IObserver.h"
 
 void GameEngine::Subject::AddObserver(int message, IObserver* observer)
@@ -19,10 +22,10 @@ void GameEngine::Subject::RemoveObserver(int message, IObserver* observer)
 
 void GameEngine::Subject::NotifyAll(int event, EventData* eventData)
 {
-    for (auto it = m_Observers.begin(); it != m_Observers.end(); ++it)
-    {
-        for (auto& observer : m_Observers[it->first])
+    for (const auto& val : m_Observers | std::views::values) {
+        for (IObserver* observer : val) {
             observer->Notify(this, event, eventData);
+        }
     }
 }
 

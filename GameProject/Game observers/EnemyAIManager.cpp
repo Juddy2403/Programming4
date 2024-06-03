@@ -30,8 +30,7 @@ void EnemyAIManager::Update()
     {
         int enemyToSetOut = rand() % m_Enemies.size();
         m_Enemies[enemyToSetOut]->GetInAttackState();
-        m_Enemies[enemyToSetOut+1]->GetInAttackState();
+        if(m_Enemies[enemyToSetOut]->GetEnemyID() == EnemyId::bossGalaga || m_Enemies.size() == 1) return;
+        if(rand() % 2) m_Enemies[enemyToSetOut - 1]->GetInAttackState();
     }
-    // enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bulletShot),
-    //     static_cast<int>(ObserverIdentifier::bullet));
 }

@@ -25,12 +25,15 @@ public:
     virtual std::unique_ptr<EnemyState> Update(EnemyComponent* enemyComponent) override;
     void Exit([[maybe_unused]] EnemyComponent* enemyComponent) override;
     virtual bool IsDiving() const override { return false; }
+private:
+    void UpdateBackToFormationTrajectory(EnemyComponent* enemyComponent) const;
+    static void GotInFormation(EnemyComponent* enemyComponent);
+    std::unique_ptr<Trajectory> m_BackToFormationTrajectory{ nullptr };
 };
 
 class GetInFormationState final : public EnemyState
 {
 public:
-    virtual void Enter([[maybe_unused]] EnemyComponent* enemyComponent) override;
     virtual std::unique_ptr<EnemyState> Update(EnemyComponent* enemyComponent) override;
     virtual bool IsDiving() const override { return true; }
 private:
@@ -45,9 +48,8 @@ public:
     virtual void Enter([[maybe_unused]] EnemyComponent* enemyComponent) override;
     virtual std::unique_ptr<EnemyState> Update(EnemyComponent* enemyComponent) override;
     virtual bool IsDiving() const override { return true; }
-
 private:
-    Trajectory m_BombingTrajectory;
+    std::unique_ptr<Trajectory> m_BombingTrajectory{ std::make_unique<Trajectory>() };
 };
 
 class ButterflyBombingRun final : public EnemyState
@@ -56,9 +58,8 @@ public:
     virtual void Enter([[maybe_unused]] EnemyComponent* enemyComponent) override;
     virtual std::unique_ptr<EnemyState> Update(EnemyComponent* enemyComponent) override;
     virtual bool IsDiving() const override { return true; }
-
 private:
-    Trajectory m_BombingTrajectory;
+    std::unique_ptr<Trajectory> m_BombingTrajectory{ std::make_unique<Trajectory>() };
 };
 
 class BossBombingRun final : public EnemyState
@@ -67,7 +68,6 @@ public:
     virtual void Enter([[maybe_unused]] EnemyComponent* enemyComponent) override;
     virtual std::unique_ptr<EnemyState> Update(EnemyComponent* enemyComponent) override;
     virtual bool IsDiving() const override { return true; }
-
 private:
-    Trajectory m_BombingTrajectory;
+    std::unique_ptr<Trajectory> m_BombingTrajectory{ std::make_unique<Trajectory>() };
 };

@@ -21,6 +21,7 @@ EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::Spri
 }
 EnemyComponent::~EnemyComponent()
 {
+    if(m_CurrentState) m_CurrentState->Exit(this);
     EnemyAIManager::RemoveEnemy(this);
 }
 void EnemyComponent::SetFormationPosition(const glm::ivec2& formationPos)
@@ -65,4 +66,18 @@ void EnemyComponent::UpdateSprite(int rotationStage) const
         + m_SpriteComponent->m_SpriteInfo.m_Spacing) + GetInitXPos();
     m_SpriteComponent->SetFlipMode(rotationInfo.second);
     m_SpriteComponent->UpdateSrcRect();
+}
+
+bool EnemyComponent::UpdateTrajectory(Trajectory& trajectory) const
+{
+    const glm::vec2 currentPos = GetGameObjParent()->GetPosition();
+    auto [newPos, hasDirectionChanged] = trajectory.Update(GetSpeed(), currentPos);
+    if (hasDirectionChanged)
+    {
+        if (trajectory.IsComplete()) return true;
+        int rotationStage = GetRotationStage(trajectory.GetDirection());
+        UpdateSprite(rotationStage);
+    }
+    GetGameObjParent()->SetPosition({ newPos,0 });
+    return false;
 }

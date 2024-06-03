@@ -46,8 +46,8 @@ void Scene::Update()
         if (!object->IsDestroyed()) object->Update();
         else areElemsToErase = true;
     }
-    CollisionManager::CheckCollisions();
     if (areElemsToErase) RemoveDestroyedObjects();
+    CollisionManager::CheckCollisions();
 }
 
 void Scene::Render() const

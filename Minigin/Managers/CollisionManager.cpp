@@ -1,6 +1,7 @@
 ﻿#include "CollisionManager.h"
 #include "Minigin/Components/CollisionComponent.h"
 #include "Minigin/Renderable/Renderer.h"
+#include "Minigin/Subjects/GameObject.h"
 using namespace GameEngine;
 
 std::vector<GameEngine::CollisionComponent*> CollisionManager::m_CollisionComponents{};
@@ -13,7 +14,7 @@ void CollisionManager::RemoveCollisionComponent(GameEngine::CollisionComponent* 
 {
     std::erase(m_CollisionComponents, collisionComponent);
 }
-void CollisionManager::CheckCollisions() 
+void CollisionManager::CheckCollisions()
 {
     const size_t size = m_CollisionComponents.size();
     for (size_t first = 0; first < size - 1; ++first)
@@ -32,6 +33,6 @@ void CollisionManager::RenderCollisionRects()
 {
     for (auto pComponent : m_CollisionComponents)
     {
-        Renderer::GetInstance().RenderRect(pComponent->GetCollisionRect(), { 255, 0, 0, 255});
+        Renderer::GetInstance().RenderRect(pComponent->GetCollisionRect(), { 255,0,0,255 });
     }
 }
