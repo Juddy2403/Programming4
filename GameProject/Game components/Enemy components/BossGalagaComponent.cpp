@@ -1,5 +1,7 @@
 ﻿#include "BossGalagaComponent.h"
 
+#include "Enemy States/BossBombingRunState.h"
+
 BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
     RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent):
     EnemyComponent(gameObj, spriteComponent, rotatingComponent, playerComponent),

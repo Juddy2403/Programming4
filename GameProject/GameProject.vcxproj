@@ -163,8 +163,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BossStage.cpp" />
-    <ClCompile Include="EnemyState.cpp" />
+    <ClCompile Include="Enemy States\BeeBombingRunState.cpp" />
+    <ClCompile Include="Enemy States\BossBombingRunState.cpp" />
+    <ClCompile Include="Enemy States\BossStage.cpp" />
+    <ClCompile Include="Enemy States\ButterflyBombingRunState.cpp" />
+    <ClCompile Include="Enemy States\GetInFormationState.cpp" />
+    <ClCompile Include="Enemy States\IdleState.cpp" />
     <ClCompile Include="Galaga.cpp" />
     <ClCompile Include="Game components\BackgroundComponent.cpp" />
     <ClCompile Include="Game components\BulletComponent.cpp" />
@@ -191,9 +195,14 @@
     <ClCompile Include="Trajectory Logic\TrajectoryStates.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BossStage.h" />
     <ClInclude Include="DataStructs.h" />
-    <ClInclude Include="EnemyState.h" />
+    <ClInclude Include="Enemy States\BeeBombingRunState.h" />
+    <ClInclude Include="Enemy States\BossBombingRunState.h" />
+    <ClInclude Include="Enemy States\BossStage.h" />
+    <ClInclude Include="Enemy States\ButterflyBombingRunState.h" />
+    <ClInclude Include="Enemy States\EnemyState.h" />
+    <ClInclude Include="Enemy States\GetInFormationState.h" />
+    <ClInclude Include="Enemy States\IdleState.h" />
     <ClInclude Include="Game components\BackgroundComponent.h" />
     <ClInclude Include="Game components\BulletComponent.h" />
     <ClInclude Include="Game components\Enemy components\BeeComponent.h" />

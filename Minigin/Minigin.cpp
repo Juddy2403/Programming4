@@ -15,6 +15,7 @@
 #include "Managers/TimeManager.h"
 
 SDL_Window* g_window{};
+constexpr float g_TargetFPS{1/160.f};
 
 void PrintSDLVersion()
 {
@@ -80,7 +81,7 @@ GameEngine::Minigin::~Minigin()
 
 void GameEngine::Minigin::Run(const std::function<void()>& load)
 {
-    SDL_GL_SetSwapInterval(1); //for a steady framerate of 160 using Vsync
+    //SDL_GL_SetSwapInterval(1); //for a steady framerate of 160 using Vsync
 
     load();
 
@@ -97,5 +98,12 @@ void GameEngine::Minigin::Run(const std::function<void()>& load)
 
         sceneManager.Update();
         renderer.Render();
+
+        float frameTime = time.GetElapsed(); 
+
+        if (frameTime < g_TargetFPS)
+        {
+            SDL_Delay(static_cast<int>((g_TargetFPS - frameTime) * 1000.f)); // Delay for the remaining time
+        }
     }
 }

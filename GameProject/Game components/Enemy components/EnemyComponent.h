@@ -1,8 +1,9 @@
 ﻿#pragma once
-
+#include <queue>
+#include "Trajectory Logic/Trajectory.h"
 #include "DataStructs.h"
-#include "EnemyState.h"
 #include "Components/Component.h"
+#include "Enemy States/EnemyState.h"
 #include "Game components/PlayerComponent.h"
 
 class RotatingSpriteComponent;

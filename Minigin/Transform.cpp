@@ -8,12 +8,12 @@ void GameEngine::Transform::SetPosition(float x, float y, float z)
 	m_TranslateMatrix = glm::translate(glm::mat4(1.f), m_Position);
 }
 
-void GameEngine::Transform::Translate(int x, int y)
+void GameEngine::Transform::Translate(float x, float y)
 {
-	m_TranslateMatrix = glm::translate(m_TranslateMatrix, glm::vec3(x, y, 1.f));
+	m_TranslateMatrix = glm::translate(m_TranslateMatrix, glm::vec3(x, y, 0.f));
 }
 
-void GameEngine::Transform::Translate(const glm::ivec2& vec)
+void GameEngine::Transform::Translate(const glm::vec2& vec)
 {
 	Translate(vec.x, vec.y);
 }

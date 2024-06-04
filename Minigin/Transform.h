@@ -8,8 +8,8 @@ namespace GameEngine
 	public:
 		[[nodiscard]] glm::vec3 GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);
-		void Translate(int x, int y);
-		void Translate(const glm::ivec2& vec);
+		void Translate(float x, float y);
+		void Translate(const glm::vec2& vec);
 		void SetRotation(float angle);
 		void SetScale(float xScale, float yScale);
 

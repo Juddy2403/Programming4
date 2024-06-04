@@ -30,12 +30,6 @@
     <ClCompile Include="Game components\Enemy components\BossGalagaComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BossStage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameCommands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,9 +54,6 @@
     <ClCompile Include="Game components\FormationComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game components\HealthComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game components\PlayerComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -81,6 +72,39 @@
     <ClCompile Include="Trajectory Logic\TrajectoryStates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy States\BeeBombingRunState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy States\BossBombingRunState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy States\ButterflyBombingRunState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy States\GetInFormationState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy States\IdleState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game components\Enemy components\EnemyBulletComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game components\PlayerHealthComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game observers\EnemyAIManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game observers\EnemyBulletObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game observers\FormationObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy States\BossStage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Galaga.h">
@@ -95,13 +119,7 @@
     <ClInclude Include="Game components\Enemy components\BossGalagaComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BossStage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DataStructs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameCommands.h">
@@ -128,9 +146,6 @@
     <ClInclude Include="Game components\FormationComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game components\HealthComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game components\PlayerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -152,10 +167,46 @@
     <ClInclude Include="Trajectory Logic\TrajectoryMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Trajectory Logic\TrajectoryParser.h">
+    <ClInclude Include="Trajectory Logic\TrajectoryStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Trajectory Logic\TrajectoryStates.h">
+    <ClInclude Include="Enemy States\BeeBombingRunState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy States\BossBombingRunState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy States\BossStage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy States\ButterflyBombingRunState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy States\EnemyState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy States\GetInFormationState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy States\IdleState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game components\Enemy components\EnemyBulletComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game components\PlayerHealthComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game observers\EnemyAIManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game observers\EnemyBulletObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game observers\FormationObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Trajectory Logic\Parsers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

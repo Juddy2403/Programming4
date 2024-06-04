@@ -1,5 +1,6 @@
 ﻿#include "EnemyComponent.h"
 #include "Components/SpriteComponent.h"
+#include "Enemy States/GetInFormationState.h"
 #include "Game components/FormationComponent.h"
 #include "Game components/RotatingSpriteComponent.h"
 #include "Game observers/EnemyAIManager.h"

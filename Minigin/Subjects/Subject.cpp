@@ -1,7 +1,5 @@
 #include "Subject.h"
-
 #include <ranges>
-
 #include "Minigin/IObserver.h"
 
 void GameEngine::Subject::AddObserver(int message, IObserver* observer)
@@ -14,10 +12,7 @@ void GameEngine::Subject::AddObserver(int message, IObserver* observer)
 
 void GameEngine::Subject::RemoveObserver(int message, IObserver* observer)
 {
-    if (m_Observers.find(message) != m_Observers.end())
-    {
-        m_Observers[message].remove(observer);
-    }
+    if (m_Observers.contains(message)) m_Observers[message].remove(observer);
 }
 
 void GameEngine::Subject::NotifyAll(int event, EventData* eventData)

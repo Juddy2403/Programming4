@@ -1,4 +1,6 @@
 ﻿#include "BeeComponent.h"
+
+#include "Enemy States/BeeBombingRunState.h"
 #include "Subjects/GameObject.h"
 
 BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,

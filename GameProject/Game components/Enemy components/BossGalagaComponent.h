@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "BossStage.h"
+#include "Enemy States/BossStage.h"
 #include "EnemyComponent.h"
 
 class BossGalagaComponent final : public EnemyComponent

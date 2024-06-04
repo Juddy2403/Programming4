@@ -35,6 +35,6 @@ namespace TrajectoryMath
     }
     inline bool ArePositionsEqual(const glm::vec2& pos1, const glm::vec2& pos2)
     {
-        return abs(pos1.x - pos2.x) <= 2 && abs(pos1.y - pos2.y) <= 2;
+        return abs(pos1.x - pos2.x) <= 5 && abs(pos1.y - pos2.y) <= 5;
     }
 };
