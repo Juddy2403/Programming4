@@ -12,7 +12,7 @@
 #include "Game components/FPSComponent.h"
 #include "Game observers/BulletObserver.h"
 #include "Game observers/EnemyAIManager.h"
-#include "Game observers/EnemyBulletObserver.h"
+#include "Game observers/EnemyAttacksObserver.h"
 #include "Game observers/EnemyObserver.h"
 #include "Game observers/FighterObserver.h"
 #include "Game observers/FormationObserver.h"
@@ -75,8 +75,8 @@ void Galaga::LoadLevel()
     auto enemyObserver = scene->AddObserver(-1, std::move(enemyObserverUnique), nullptr);
     auto scoreObserverUnique = std::make_unique<ScoreManager>();
     auto scoreObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserverUnique), nullptr);
-    auto enemyBulletObserverUnique = std::make_unique<EnemyBulletObserver>(scene.get());
-    auto enemyBulletObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::bullet), std::move(enemyBulletObserverUnique), nullptr);
+    auto enemyAttackObserverUnique = std::make_unique<EnemyAttacksObserver>(scene.get());
+    auto enemyAttackObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), std::move(enemyAttackObserverUnique), nullptr);
 
     //--------- Enemy formation------------
     gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
@@ -88,14 +88,14 @@ void Galaga::LoadLevel()
         std::move(formationObserverUnique),nullptr);
 
     //--------- Enemy creation------------
-    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfo1.json",
-        "../Data/Formations/FormationTrajectories1.json", playerComp);
+    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfoTest.json",
+        "../Data/Formations/FormationTrajectoriesTest.json", playerComp);
     for (auto& enemy : enemyVec)
     {
         enemy->AddObserver(-1, enemyObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::formation), formationObserver);
-        enemy->AddObserver(static_cast<int>(ObserverIdentifier::bullet), enemyBulletObserver);
+        enemy->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), enemyAttackObserver);
         enemy->AddObserver(-1, enemyAIObserver);
         scene->AddObject(std::move(enemy));
     }

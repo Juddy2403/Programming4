@@ -190,7 +190,7 @@
     <ClCompile Include="Game components\PlayerComponent.cpp" />
     <ClCompile Include="Game observers\BulletObserver.cpp" />
     <ClCompile Include="Game observers\EnemyAIManager.cpp" />
-    <ClCompile Include="Game observers\EnemyBulletObserver.cpp" />
+    <ClCompile Include="Game observers\EnemyAttacksObserver.cpp" />
     <ClCompile Include="Game observers\EnemyObserver.cpp" />
     <ClCompile Include="Game observers\FighterObserver.cpp" />
     <ClCompile Include="Game observers\FormationObserver.cpp" />
@@ -304,7 +304,7 @@
     <ClInclude Include="Game components\PlayerComponent.h" />
     <ClInclude Include="Game observers\BulletObserver.h" />
     <ClInclude Include="Game observers\EnemyAIManager.h" />
-    <ClInclude Include="Game observers\EnemyBulletObserver.h" />
+    <ClInclude Include="Game observers\EnemyAttacksObserver.h" />
     <ClInclude Include="Game observers\EnemyObserver.h" />
     <ClInclude Include="Game observers\FighterObserver.h" />
     <ClInclude Include="Game observers\FormationObserver.h" />

@@ -10,7 +10,7 @@ void BossBombingRun::Enter(EnemyComponent* enemyComponent)
     PathData pathData;
 
     enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bulletShot),
-        static_cast<int>(ObserverIdentifier::bullet));
+        static_cast<int>(ObserverIdentifier::enemyAttack));
     // Initial upward movement
     pathData.destination = glm::vec2(enemyComponent->GetGameObjParent()->GetPosition()) + glm::vec2(0, -50);
     pathDataQueue.push(pathData);
@@ -57,7 +57,7 @@ void BossShootingBeam::Enter(EnemyComponent* enemyComponent)
     auto enemyPos = enemyComponent->GetGameObjParent()->GetPosition();
     
     enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bulletShot),
-        static_cast<int>(ObserverIdentifier::bullet));
+        static_cast<int>(ObserverIdentifier::enemyAttack));
     // Initial upward movement
     pathData.destination = glm::vec2(enemyPos) + glm::vec2(0, -50);
     pathDataQueue.push(pathData);
@@ -85,7 +85,7 @@ std::unique_ptr<EnemyState> BossShootingBeam::Update(EnemyComponent* enemyCompon
     if (enemyComponent->UpdateTrajectory(*m_BeamTrajectory))
     {
         enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bossShotBeam),
-        static_cast<int>(ObserverIdentifier::bullet));
+        static_cast<int>(ObserverIdentifier::enemyAttack));
         enemyComponent->GetRotatingSprite()->RotateSpriteInDirection({0,1});
         m_IsShootingBeam = true;
     }

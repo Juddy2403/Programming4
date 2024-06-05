@@ -17,7 +17,7 @@ void PlayerComponent::GetCaptured(const glm::vec2& enemyPos)
     PathData pathData{};
 
     pathData.destination = glm::vec2(enemyPos);
-    pathData.destination.x += 20;
+    pathData.destination.x += 10;
     pathDataQueue.push(pathData);
 
     // Set the trajectory
@@ -48,6 +48,7 @@ void PlayerComponent::Update()
         healthComp->Hit();
         RebindCommands();
         m_IsGettingCaptured = false;
+        m_RotatingSprite->RotateSpriteInDirection({0,-1});
         return;
     }
     const glm::vec2 currentPos = GetGameObjParent()->GetPosition();

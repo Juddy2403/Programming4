@@ -8,6 +8,7 @@ enum class ObserverIdentifier
     health,
     score,
     bullet,
+    enemyAttack,
     collision,
     formation
 };

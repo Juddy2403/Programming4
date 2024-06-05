@@ -1,13 +1,14 @@
-﻿#include "EnemyBulletObserver.h"
+﻿#include "EnemyAttacksObserver.h"
 
 #include "DataStructs.h"
 #include "Initializers.h"
+#include "Components/CollisionComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Game components/Enemy components/BeamComponent.h"
 #include "Game components/Enemy components/EnemyComponent.h"
 #include "Subjects/GameObject.h"
-EnemyBulletObserver::EnemyBulletObserver(GameEngine::Scene* scene): m_Scene(scene) {}
-void EnemyBulletObserver::Notify(GameEngine::Subject* subject, int event,
+EnemyAttacksObserver::EnemyAttacksObserver(GameEngine::Scene* scene): m_Scene(scene) {}
+void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
     [[maybe_unused]] GameEngine::EventData* eventData)
 {
     GameEngine::GameObject* actor = dynamic_cast<GameEngine::GameObject*>(subject);
@@ -17,26 +18,31 @@ void EnemyBulletObserver::Notify(GameEngine::Subject* subject, int event,
     {
         const auto collisionData = reinterpret_cast<GameEngine::CollisionData*>(eventData);
         int otherId = collisionData->pOtherCollider->GetID();
-        if (otherId == static_cast<int>(GameId::player) && actor->GetID() == static_cast<int>(GameId::enemyBullet))
+        if (otherId == static_cast<int>(GameId::player))
         {
-            actor->SetDestroyedFlag();
+            if (actor->GetID() == static_cast<int>(GameId::enemyBullet)) actor->SetDestroyedFlag();
+            if (actor->GetID() == static_cast<int>(GameId::bossBeam))
+            {
+                BossGalagaComponent* bossComp = dynamic_cast<BossGalagaComponent*>(actor->GetComponent<BeamComponent>()->GetParentComp());
+                bossComp->CapturedFighter();
+            }
         }
     }
-        break;
+    break;
     case GameEvent::bulletShot:
     {
         const auto playerPos = actor->GetComponent<EnemyComponent>()->GetPlayerComponent()->GetGameObjParent()->GetPosition();
         auto enemyPos = actor->GetPosition();
-        auto bullet = InitEnemyBullet(TrajectoryMath::CalculateDirection(enemyPos,playerPos));
-
+        auto bullet = InitEnemyBullet(TrajectoryMath::CalculateDirection(enemyPos, playerPos));
+        
         enemyPos.y += bullet->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h;
         bullet->SetPosition(enemyPos);
-
-        bullet->AddObserver(static_cast<int>(ObserverIdentifier::bullet), this);
-
+        
+        bullet->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
+        
         m_Scene->AddObject(std::move(bullet));
     }
-        break;
+    break;
     case GameEvent::bulletOutOfBounds:
         actor->SetDestroyedFlag();
         break;
@@ -45,23 +51,23 @@ void EnemyBulletObserver::Notify(GameEngine::Subject* subject, int event,
         auto enemyPos = actor->GetPosition();
         auto enemyComp = actor->GetComponent<EnemyComponent>();
         auto beam = InitBossBeam(enemyComp);
-
+        
         enemyPos.y += actor->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h;
-        enemyPos.x += actor->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2;
-        enemyPos.x -= beam->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2;
+        enemyPos.x += actor->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2.f;
+        enemyPos.x -= beam->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2.f;
         
         beam->SetPosition(enemyPos);
-        beam->AddObserver(static_cast<int>(ObserverIdentifier::bullet), this);
+        beam->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
         m_Scene->AddObject(std::move(beam));
     }
-        break;
+    break;
     case GameEvent::beamRetracted:
     {
         actor->SetDestroyedFlag();
         auto parentComp = actor->GetComponent<BeamComponent>()->GetParentComp();
         parentComp->GetInIdleState();
     }
-        break;
+    break;
     default: break;
     }
 }

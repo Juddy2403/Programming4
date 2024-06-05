@@ -4,6 +4,7 @@
 #include "Minigin.h"
 #include "Managers/TimeManager.h"
 #include "Subjects/GameObject.h"
+
 EnemyBulletComponent::EnemyBulletComponent(GameEngine::GameObject* gameObj, const glm::vec2& direction):
 Component(gameObj), m_Direction(direction) {}
 void EnemyBulletComponent::Update()
@@ -13,7 +14,7 @@ void EnemyBulletComponent::Update()
     if (bulletYPos > GameEngine::g_WindowRect.h)
     {
         GetGameObjParent()->Notify( static_cast<int>(GameEvent::bulletOutOfBounds),
-            static_cast<int>(ObserverIdentifier::bullet));
+            static_cast<int>(ObserverIdentifier::enemyAttack));
         return;
     }
 

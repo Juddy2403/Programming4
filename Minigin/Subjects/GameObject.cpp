@@ -21,12 +21,6 @@ void GameObject::Update()
             std::cerr << "Error updating component: " << e.what() << '\n';
         }
     }
-    /*if (m_Name == "Pacman") {
-        MathHelper::Vector3 pos = GetPosition();
-        pos += (MathHelper::Vector3{ 1,0,0 } * (20.f * TimeManager::GetElapsed()));
-        SetPosition(pos);
-    }*/
-    //UpdateWorldTransform();
     if (areElemsToErase) RemoveDestroyedObjects();
 }
 

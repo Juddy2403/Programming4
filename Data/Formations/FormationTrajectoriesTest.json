@@ -1,101 +1,16 @@
 [
   {
-    "startPos": [ 396, 0 ],
+    "startPos": [ 310, -20 ],
     "trajectory": [
       {
         "isRotating": false,
-        "destination": [ 170, 350 ]
+        "destination": [ 100, 320 ]
       },
       {
         "isRotating": true,
         "isRotatingClockwise": false,
         "totalRotationAngle": 3.49066,
-        "centerOfRotation": [ 170, 410 ]
-      },
-      {
-        "isRotating": false,
-        "destination": "formationPos"
-      }
-    ]
-  },
-
-  {
-    "startPos": [ -30, 680 ],
-    "trajectory": [
-      {
-        "isRotating": false,
-        "destination": [ 250, 516 ]
-      },
-      {
-        "isRotating": true,
-        "isRotatingClockwise": false,
-        "totalRotationAngle": 7.85398,
-        "centerOfRotation": [ 250, 456 ]
-      },
-      {
-        "isRotating": false,
-        "destination": [ 415, 350 ]
-      },
-      {
-        "isRotating": false,
-        "destination": "formationPos"
-      }
-    ]
-  },
-  {
-    "startPos": [ 700, 680 ],
-    "trajectory": [
-      {
-        "isRotating": false,
-        "destination": [ 422, 516 ]
-      },
-      {
-        "isRotating": true,
-        "isRotatingClockwise": true,
-        "totalRotationAngle": 7.85398,
-        "centerOfRotation": [ 422, 456 ]
-      },
-      {
-        "isRotating": false,
-        "destination": [ 257, 350 ]
-      },
-      {
-        "isRotating": false,
-        "destination": "formationPos"
-      }
-    ]
-  },
-  {
-    "startPos": [ 515, -20 ],
-    "trajectory": [
-      {
-        "isRotating": false,
-        "destination": [ 160, 340 ]
-      },
-      {
-        "isRotating": true,
-        "isRotatingClockwise": false,
-        "totalRotationAngle": 4.71239,
-        "centerOfRotation": [ 160, 400 ]
-      },
-      {
-        "isRotating": false,
-        "destination": "formationPos"
-      }
-    ]
-  },
-  {
-    "startPos": [ 157, -20 ],
-    "trajectory": [
-      {
-        "isRotating": false,
-        "destination": [ 512, 340 ]
-      },
-      {
-        "isRotating": true,
-        "isRotatingClockwise": false,
-        "totalRotationAngle": 4.71239,
-        "centerOfRotation": [ 512, 400 ]
+        "centerOfRotation": [ 100, 350 ]
       },
       {
         "isRotating": false,

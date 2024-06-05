@@ -14,10 +14,18 @@ Scene::Scene(const std::string& name) : m_Name(name) {}
 
 Scene::~Scene() = default;
 
+void Scene::AddGameObjectsToBeAdded()
+{
+    std::ranges::move(m_GameObjectsToBeAdded, std::back_inserter(m_GameObjects));
+    m_GameObjectsToBeAdded.clear();
+    m_AreElemsToBeAdded = false;
+}
+
 GameObject* Scene::AddObject(std::unique_ptr<GameObject>&& object)
 {
-    m_GameObjects.emplace_back(std::move(object));
-    return m_GameObjects.back().get();
+    m_GameObjectsToBeAdded.emplace_back(std::move(object));
+    m_AreElemsToBeAdded = true;
+    return m_GameObjectsToBeAdded.back().get();
 }
 
 IObserver* GameEngine::Scene::AddObserver(int message, std::unique_ptr<IObserver>&& observer, GameObject* gameObj)
@@ -40,6 +48,7 @@ void Scene::RemoveAll()
 
 void Scene::Update()
 {
+    if(m_AreElemsToBeAdded) AddGameObjectsToBeAdded();
     bool areElemsToErase = false;
     for (const auto& object : m_GameObjects)
     {

@@ -18,7 +18,9 @@ public:
     virtual EnemyId GetEnemyID() const override;
     virtual void GetInAttackState() override;
     virtual void GetInBeamAttackState();
-
+    void CapturedFighter() { m_HasCapturedFighter = true; }
+    bool HasCapturedFighter() const { return m_HasCapturedFighter; }
 private:
+    bool m_HasCapturedFighter{ false };
     std::unique_ptr<BossStage> m_BossStage;
 };

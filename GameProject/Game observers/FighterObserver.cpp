@@ -4,6 +4,7 @@
 #include "Galaga.h"
 #include "Game components/PlayerComponent.h"
 #include "Game components/PlayerHealthComponent.h"
+#include "Game components/Enemy components/BeamComponent.h"
 #include "Input/KeyboardInput.h"
 #include "Managers/InputManager.h"
 #include "Subjects/GameObject.h"
@@ -28,7 +29,8 @@ void FighterObserver::Notify(GameEngine::Subject* subject, int event,
             actor->SetPosition(PlayerComponent::m_RespawnPos);
             healthComp->Hit();
         }
-        else if (collisionData->pOtherCollider->GetID() == static_cast<int>(GameId::bossBeam))
+        else if (collisionData->pOtherCollider->GetID() == static_cast<int>(GameId::bossBeam) &&
+            !collisionData->pOtherCollider->GetComponent<BeamComponent>()->IsBeamActive())
         {
             auto actor = dynamic_cast<GameEngine::GameObject*>(subject);
             if(actor->GetComponent<PlayerComponent>()->IsCaptured()) return;

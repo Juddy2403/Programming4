@@ -19,7 +19,7 @@ void BulletComponent::Update()
     if (bulletYPos < 0)
     {
         GetGameObjParent()->Notify( static_cast<int>(GameEvent::bulletOutOfBounds),
-            static_cast<int>(ObserverIdentifier::bullet));
+            static_cast<int>(ObserverIdentifier::enemyAttack));
         return;
     }
 

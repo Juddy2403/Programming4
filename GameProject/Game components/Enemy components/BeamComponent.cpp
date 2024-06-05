@@ -18,7 +18,7 @@ void BeamComponent::Update()
             if (m_CurrentRow == 0)
             {
                 GetGameObjParent()->Notify(static_cast<int>(GameEvent::beamRetracted),
-                    static_cast<int>(ObserverIdentifier::bullet));
+                    static_cast<int>(ObserverIdentifier::enemyAttack));
                 return;
             }
             m_SpriteComponent->m_SpriteInfo.m_CurrentCol = 0;
@@ -37,4 +37,9 @@ void BeamComponent::Update()
         m_SpriteComponent->m_SpriteInfo.m_NrOfRows = 1;
         m_SpriteComponent->m_SpriteInfo.m_StartPos.y += (m_SpriteComponent->m_SpriteInfo.m_Height + m_SpriteComponent->m_SpriteInfo.m_Spacing) * m_CurrentRow;
     }
+}
+bool BeamComponent::IsBeamActive() const
+{
+    BossGalagaComponent* bossComp = dynamic_cast<BossGalagaComponent*>(m_ParentComp);
+    return bossComp->HasCapturedFighter();
 }

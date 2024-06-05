@@ -10,7 +10,7 @@ void ButterflyBombingRun::Enter(EnemyComponent* enemyComponent)
     PathData pathData;
 
     enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bulletShot),
-        static_cast<int>(ObserverIdentifier::bullet));
+        static_cast<int>(ObserverIdentifier::enemyAttack));
     // Initial upward movement
     pathData.destination = glm::vec2(enemyComponent->GetGameObjParent()->GetPosition()) + glm::vec2(0, -50);
     pathDataQueue.push(pathData);

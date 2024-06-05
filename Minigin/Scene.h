@@ -27,10 +27,13 @@ namespace GameEngine
 		Scene& operator=(const Scene& other) = delete;
 		Scene& operator=(Scene&& other) noexcept = delete;
 		
-	private: 
+	private:
+		void AddGameObjectsToBeAdded();
+		bool m_AreElemsToBeAdded = false;
 		std::string m_Name;
 		std::vector<std::unique_ptr<IObserver>> m_Observers;
 		std::vector<std::unique_ptr<GameObject>> m_GameObjects;
+		std::vector<std::unique_ptr<GameObject>> m_GameObjectsToBeAdded;
 
 	};
 
