@@ -1,6 +1,7 @@
 ﻿#include "EnemyComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Enemy States/GetInFormationState.h"
+#include "Enemy States/IdleState.h"
 #include "Game components/FormationComponent.h"
 #include "Game components/RotatingSpriteComponent.h"
 #include "Game observers/EnemyAIManager.h"
@@ -24,6 +25,12 @@ EnemyComponent::~EnemyComponent()
 {
     if(m_CurrentState) m_CurrentState->Exit(this);
     EnemyAIManager::RemoveEnemy(this);
+}
+void EnemyComponent::GetInIdleState()
+{
+    m_CurrentState->Exit(this);
+    m_CurrentState = std::make_unique<IdleState>();
+    m_CurrentState->Enter(this);
 }
 void EnemyComponent::SetFormationPosition(const glm::ivec2& formationPos)
 {

@@ -20,14 +20,12 @@ void FormationObserver::Notify([[maybe_unused]] GameEngine::Subject* subject, in
         if (m_CurrentEnemiesSetOut)
         {
             --m_CurrentEnemiesSetOut;
-            std::cout << "Enemy died. Current enemies set out:" << m_CurrentEnemiesSetOut << '\n';
         }
     }
     break;
     case GameEvent::gotInFormation:
     {
         ++m_CurrentEnemiesGotInFormation;
-        std::cout << "Enemy got in formation. Current enemies in formation:" << m_CurrentEnemiesGotInFormation << '\n';
     }
     break;
     default: break;

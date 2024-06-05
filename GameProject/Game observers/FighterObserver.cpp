@@ -21,7 +21,8 @@ void FighterObserver::Notify(GameEngine::Subject* subject, int event,
     case GameEvent::collision:
     {
         const auto collisionData = reinterpret_cast<GameEngine::CollisionData*>(eventData);
-        if (collisionData->pOtherCollider->GetID() == static_cast<int>(GameId::enemy))
+        if (collisionData->pOtherCollider->GetID() == static_cast<int>(GameId::enemy)||
+           collisionData->pOtherCollider->GetID() == static_cast<int>(GameId::enemyBullet) )
         {
             GameEngine::GameObject* actor = dynamic_cast<GameEngine::GameObject*>(subject);
             auto healthComp = actor->GetComponent<PlayerHealthComponent>();

@@ -1,5 +1,7 @@
 ﻿#include "EnemyAIManager.h"
 
+#include "Game components/Enemy components/BossGalagaComponent.h"
+
 std::vector<EnemyComponent*> EnemyAIManager::m_Enemies;
 void EnemyAIManager::AddEnemy(EnemyComponent* enemy)
 {
@@ -29,8 +31,18 @@ void EnemyAIManager::Update()
     if (m_EnemiesInFormation == static_cast<int>(m_Enemies.size()))
     {
         int enemyToSetOut = rand() % m_Enemies.size();
+        if (m_Enemies[enemyToSetOut]->GetEnemyID() == EnemyId::bossGalaga)
+        {
+            if (rand() % 2 == 0)
+            {
+                auto boss = dynamic_cast<BossGalagaComponent*>(m_Enemies[enemyToSetOut]);
+                boss->GetInBeamAttackState();
+                return;
+            }
+        }
         m_Enemies[enemyToSetOut]->GetInAttackState();
-        if(m_Enemies[enemyToSetOut]->GetEnemyID() == EnemyId::bossGalaga || m_Enemies.size() == 1) return;
-        if(rand() % 2) m_Enemies[enemyToSetOut - 1]->GetInAttackState();
+        if (m_Enemies.size() == 1) return;
+        //set out a second enemy
+        if (rand() % 3 <= 1) m_Enemies[enemyToSetOut - 1]->GetInAttackState();
     }
 }

@@ -1,8 +1,6 @@
 ﻿#include "Galaga.h"
 
-#include <fstream>
 #include <SDL_rect.h>
-#include <sstream>
 #include "DataStructs.h"
 #include "Initializers.h"
 #include "Minigin.h"
@@ -11,6 +9,7 @@
 #include "Components/TextureComponent.h"
 #include "Game components/BackgroundComponent.h"
 #include "Game components/FormationComponent.h"
+#include "Game components/FPSComponent.h"
 #include "Game observers/BulletObserver.h"
 #include "Game observers/EnemyAIManager.h"
 #include "Game observers/EnemyBulletObserver.h"
@@ -48,8 +47,16 @@ void Galaga::LoadLevel()
     scene->AddObject(std::move(gameObject));
 
     auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 32);
-    auto smallerFont = ResourceManager::GetInstance().LoadFont("Lingua.otf", 16);
-
+    auto smallerFont = ResourceManager::GetInstance().LoadFont("Lingua.otf", 20);
+    //------FPS--------
+    #ifndef NDEBUG
+    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
+    gameObject->AddComponent<TextureComponent>();
+    gameObject->AddComponent<FPSComponent>(gameObject->AddComponent<TextComponent>(smallerFont,"160 FPS"));
+    gameObject->SetPosition( 10, 30);
+    scene->AddObject(std::move(gameObject));
+    #endif
+    
     //--------FIGHTER--------
     gameObject = InitFighter();
     auto fighterObserver = std::make_unique<FighterObserver>();

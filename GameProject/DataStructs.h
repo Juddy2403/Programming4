@@ -21,6 +21,8 @@ enum class GameEvent
     scoreIncrease,
     gotInFormation,
     leftFormation,
+    bossShotBeam,
+    beamRetracted,
     event = -1//for when smth generic happens
 };
 
@@ -30,6 +32,7 @@ enum class GameId
     player,
     bullet,
     enemyBullet,
+    bossBeam,
     observer,
     text,
     texture,

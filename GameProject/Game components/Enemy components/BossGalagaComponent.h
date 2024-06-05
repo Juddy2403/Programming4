@@ -19,6 +19,7 @@ public:
     virtual bool HasBeenHit() override;
     virtual EnemyId GetEnemyID() const override;
     virtual void GetInAttackState() override;
+    virtual void GetInBeamAttackState();
 
 private:
     std::unique_ptr<BossStage> m_BossStage;

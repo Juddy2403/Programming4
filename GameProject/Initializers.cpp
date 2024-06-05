@@ -7,6 +7,7 @@
 #include "Game components/RotatingSpriteComponent.h"
 #include "Components/CollisionComponent.h"
 #include "Components/SpriteComponent.h"
+#include "Game components/Enemy components/BeamComponent.h"
 #include "Game components/Enemy components/BeeComponent.h"
 #include "Game components/Enemy components/BossGalagaComponent.h"
 #include "Game components/Enemy components/ButterflyComponent.h"
@@ -34,7 +35,7 @@ std::unique_ptr<GameEngine::GameObject> InitFighter()
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
     gameObject->SetPosition(150, 450);
 
-    gameObject->AddComponent<PlayerHealthComponent>(3,spriteComponent);
+    gameObject->AddComponent<PlayerHealthComponent>(3, spriteComponent);
     auto& input = GameEngine::InputManager::GetInstance();
     input.BindCommand(GameEngine::KeyboardInputKey::W,
         std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }, 200));
@@ -165,5 +166,24 @@ std::unique_ptr<GameEngine::GameObject> InitBossGalaga(PlayerComponent* playerCo
         playerComponent);
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
 
+    return gameObject;
+}
+std::unique_ptr<GameEngine::GameObject> InitBossBeam(EnemyComponent* parentComp)
+{
+    auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::enemy));
+    auto* spriteComponent = gameObject->AddComponent<GameEngine::SpriteComponent>("TractorBeam.png");
+    spriteComponent->m_SpriteInfo.m_Height = 80;
+    spriteComponent->m_SpriteInfo.m_Width = 48;
+    spriteComponent->m_SpriteInfo.m_Spacing = 2;
+    spriteComponent->m_SpriteInfo.m_StartPos.x = 1;
+    spriteComponent->m_SpriteInfo.m_StartPos.y = 1;
+    spriteComponent->m_SpriteInfo.m_NrOfCols = 3;
+    spriteComponent->m_SpriteInfo.m_NrOfRows = 6;
+    spriteComponent->m_SpriteInfo.m_TimeInterval = 0.15f;
+    spriteComponent->m_Scale = 2;
+    spriteComponent->UpdateSrcRect();
+    spriteComponent->m_IsActive = true;
+    gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
+    gameObject->AddComponent<BeamComponent>(spriteComponent,parentComp);
     return gameObject;
 }

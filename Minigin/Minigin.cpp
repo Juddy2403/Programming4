@@ -93,17 +93,20 @@ void GameEngine::Minigin::Run(const std::function<void()>& load)
     bool doContinue = true;
     while (doContinue)
     {
+        float frameStartTime = SDL_GetTicks() / 1000.0f; // Get the current time in seconds
+        
         time.Update();
         doContinue = input.ProcessInput();
 
         sceneManager.Update();
         renderer.Render();
 
-        float frameTime = time.GetElapsed(); 
+        float frameEndTime = SDL_GetTicks() / 1000.0f; // Get the current time in seconds
+        float frameTime = frameEndTime - frameStartTime; // Calculate the elapsed time 
 
         if (frameTime < g_TargetFPS)
         {
-            SDL_Delay(static_cast<int>((g_TargetFPS - frameTime) * 1000.f)); // Delay for the remaining time
+            SDL_Delay(static_cast<Uint32>((g_TargetFPS - frameTime) * 1000)); // Delay for the remaining time
         }
     }
 }

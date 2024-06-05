@@ -25,6 +25,7 @@ public:
     ~EnemyComponent() override;
 
     virtual void GetInAttackState() = 0;
+    virtual void GetInIdleState();
     void SetFormationPosition(const glm::ivec2& formationPos);
     void SetFormationTrajectory(const std::queue<PathData>& pathDataQueue);
     Trajectory& GetFormationTrajectory() { return m_FormationTrajectory; }

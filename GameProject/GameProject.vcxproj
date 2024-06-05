@@ -172,12 +172,14 @@
     <ClCompile Include="Galaga.cpp" />
     <ClCompile Include="Game components\BackgroundComponent.cpp" />
     <ClCompile Include="Game components\BulletComponent.cpp" />
+    <ClCompile Include="Game components\Enemy components\BeamComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\BeeComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\BossGalagaComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\ButterflyComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\EnemyBulletComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\EnemyComponent.cpp" />
     <ClCompile Include="Game components\FormationComponent.cpp" />
+    <ClCompile Include="Game components\FPSComponent.cpp" />
     <ClCompile Include="Game components\PlayerHealthComponent.cpp" />
     <ClCompile Include="Game components\PlayerComponent.cpp" />
     <ClCompile Include="Game components\RotatingSpriteComponent.cpp" />
@@ -205,6 +207,7 @@
     <ClInclude Include="Enemy States\IdleState.h" />
     <ClInclude Include="Game components\BackgroundComponent.h" />
     <ClInclude Include="Game components\BulletComponent.h" />
+    <ClInclude Include="Game components\Enemy components\BeamComponent.h" />
     <ClInclude Include="Game components\Enemy components\BeeComponent.h" />
     <ClInclude Include="Game components\Enemy components\BossGalagaComponent.h" />
     <ClInclude Include="Galaga.h" />
@@ -212,6 +215,7 @@
     <ClInclude Include="Game components\Enemy components\EnemyBulletComponent.h" />
     <ClInclude Include="Game components\Enemy components\EnemyComponent.h" />
     <ClInclude Include="Game components\FormationComponent.h" />
+    <ClInclude Include="Game components\FPSComponent.h" />
     <ClInclude Include="Game components\PlayerHealthComponent.h" />
     <ClInclude Include="Game components\PlayerComponent.h" />
     <ClInclude Include="Game components\RotatingSpriteComponent.h" />

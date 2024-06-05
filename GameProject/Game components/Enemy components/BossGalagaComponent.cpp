@@ -32,3 +32,9 @@ void BossGalagaComponent::GetInAttackState()
     m_CurrentState = std::make_unique<BossBombingRun>();
     m_CurrentState->Enter(this);
 }
+void BossGalagaComponent::GetInBeamAttackState()
+{
+    m_CurrentState->Exit(this);
+    m_CurrentState = std::make_unique<BossShootingBeam>();
+    m_CurrentState->Enter(this);
+}

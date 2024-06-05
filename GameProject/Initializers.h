@@ -3,6 +3,8 @@
 #include "Subjects/GameObject.h"
 
 class PlayerComponent;
+class EnemyComponent;
+
 std::unique_ptr<GameEngine::GameObject> InitFighter();
 
 std::unique_ptr<GameEngine::GameObject> InitBullet(int playerID);
@@ -14,3 +16,5 @@ std::unique_ptr<GameEngine::GameObject> InitBee(PlayerComponent* playerComponent
 std::unique_ptr<GameEngine::GameObject> InitButterfly(PlayerComponent* playerComponent);
 
 std::unique_ptr<GameEngine::GameObject> InitBossGalaga(PlayerComponent* playerComponent);
+
+std::unique_ptr<GameEngine::GameObject> InitBossBeam(EnemyComponent* parentComp);
