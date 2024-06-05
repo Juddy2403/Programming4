@@ -5,7 +5,7 @@
 #include "Components/Component.h"
 #include "Enemy States/EnemyState.h"
 #include "Game components/PlayerComponent.h"
-#include "Game components/RotatingSpriteComponent.h"
+#include "RotatingSprite.h"
 
 namespace GameEngine
 {
@@ -30,17 +30,15 @@ public:
     Trajectory& GetFormationTrajectory() { return m_FormationTrajectory; }
     
     [[nodiscard]] glm::ivec2 GetFormationPosition() const { return m_FormationPosition; }
-    [[nodiscard]] int GetInitXPos() const { return m_InitXPos; }
     [[nodiscard]] float GetSpeed() const { return m_Speed; }
     virtual void Update() override;
     virtual bool HasBeenHit() {Died();return true;}
     virtual void Died();
     [[nodiscard]] virtual EnemyId GetEnemyID() const = 0;
 
-    int GetRotationStage(const glm::vec2& direction) const;
-    void UpdateSprite(int rotationStage) const;
     bool UpdateTrajectory(Trajectory& trajectory) const;
     PlayerComponent* GetPlayerComponent() const { return m_PlayerComponent; }
+    RotatingSprite* GetRotatingSprite() const { return m_RotatingSprite.get(); }
     
     int m_SetOutTurn{};
     int m_Stage{};
@@ -48,11 +46,8 @@ protected:
     PlayerComponent* m_PlayerComponent{};
     std::unique_ptr<EnemyState> m_CurrentState;
     float m_Speed{ 300.f };
-    GameEngine::SpriteComponent* m_SpriteComponent{};
     std::unique_ptr<RotatingSprite> m_RotatingSprite{};
     glm::ivec2 m_FormationPosition{};
-    const int m_NrOfRotationStages{};
-    int m_InitXPos{};
     float m_CurrentTime{};
     int m_CurrentRotationStage{};
 private:

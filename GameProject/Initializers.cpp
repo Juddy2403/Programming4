@@ -16,7 +16,6 @@
 std::unique_ptr<GameEngine::GameObject> InitFighter()
 {
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::player));
-    gameObject->AddComponent<PlayerComponent>(0);
     auto* spriteComponent = gameObject->AddComponent<GameEngine::SpriteComponent>("GalagaUpdated.png");
     spriteComponent->m_SpriteInfo.m_Height = 16;
     spriteComponent->m_SpriteInfo.m_Width = 16;
@@ -32,14 +31,15 @@ std::unique_ptr<GameEngine::GameObject> InitFighter()
     spriteComponent->m_IsActive = false;
 
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
-    gameObject->SetPosition(150, 450);
+    gameObject->SetPosition(PlayerComponent::m_RespawnPos);
 
+    gameObject->AddComponent<PlayerComponent>(spriteComponent,0);
     gameObject->AddComponent<PlayerHealthComponent>(3, spriteComponent);
     auto& input = GameEngine::InputManager::GetInstance();
     input.BindCommand(GameEngine::KeyboardInputKey::A,
-        std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ -1.f,0.f }, 200));
+        std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ -1.f,0.f }, PlayerComponent::m_PlayerSpeed));
     input.BindCommand(GameEngine::KeyboardInputKey::D,
-        std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 1.f,0.f }, 200));
+        std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 1.f,0.f }, PlayerComponent::m_PlayerSpeed));
     input.BindCommand(GameEngine::KeyboardInputKey::SPACE,
         std::make_unique<ShootBulletCommand>(gameObject.get()));
 

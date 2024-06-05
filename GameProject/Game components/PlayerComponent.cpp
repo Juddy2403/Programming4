@@ -1,9 +1,15 @@
 ﻿#include "PlayerComponent.h"
 
+#include "GameCommands.h"
 #include "PlayerHealthComponent.h"
+#include "Managers/InputManager.h"
 
-PlayerComponent::PlayerComponent(GameEngine::GameObject* gameObject, int playerID):
-Component(gameObject), m_PlayerID(playerID){}
+PlayerComponent::PlayerComponent(GameEngine::GameObject* gameObject, GameEngine::SpriteComponent* spriteComponent, int playerID):
+    Component(gameObject),
+    m_SpriteComponent(spriteComponent),
+    m_RotatingSprite(std::make_unique<RotatingSprite>(spriteComponent)),
+    m_PlayerID(playerID)
+{}
 
 void PlayerComponent::GetCaptured(const glm::vec2& enemyPos)
 {
@@ -21,22 +27,37 @@ void PlayerComponent::GetCaptured(const glm::vec2& enemyPos)
     m_IsGettingCaptured = true;
 }
 
+void PlayerComponent::RebindCommands() const
+{
+    auto& input = GameEngine::InputManager::GetInstance();
+    input.BindCommand(GameEngine::KeyboardInputKey::A,
+        std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ -1.f,0.f }, m_PlayerSpeed));
+    input.BindCommand(GameEngine::KeyboardInputKey::D,
+        std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ 1.f,0.f }, m_PlayerSpeed));
+    input.BindCommand(GameEngine::KeyboardInputKey::SPACE,
+        std::make_unique<ShootBulletCommand>(GetGameObjParent()));
+}
 void PlayerComponent::Update()
 {
-    if(m_IsGettingCaptured)
+    if (!m_IsGettingCaptured) return;
+    
+    if (m_CapturedTrajectory->IsComplete())
     {
-        if(m_CapturedTrajectory->IsComplete())
-        {
-            auto healthComp = GetGameObjParent()->GetComponent<PlayerHealthComponent>();
-            GetGameObjParent()->SetPosition(m_RespawnPos);
-            healthComp->Hit();
-            m_IsGettingCaptured = false;
-            return;
-        }
-        const glm::vec2 currentPos = GetGameObjParent()->GetPosition();
-        auto [newPos, hasDirectionChanged] = m_CapturedTrajectory->Update(m_Speed, currentPos);
-        GetGameObjParent()->SetPosition({ newPos,0 });
+        auto healthComp = GetGameObjParent()->GetComponent<PlayerHealthComponent>();
+        GetGameObjParent()->SetPosition(m_RespawnPos);
+        healthComp->Hit();
+        RebindCommands();
+        m_IsGettingCaptured = false;
+        return;
     }
+    const glm::vec2 currentPos = GetGameObjParent()->GetPosition();
+    auto newPos = m_CapturedTrajectory->Update(m_Speed, currentPos).first;
+    GetGameObjParent()->SetPosition({ newPos,0 });
+
+    //rotate the sprite
+    m_AccumTime += GameEngine::TimeManager::GetElapsed();
+    if (m_AccumTime < m_TimeBetweenStages) return;
+    ++m_CurrentRotationStage %= m_RotatingSprite->GetNrOfRotationStages();
+    m_RotatingSprite->UpdateSprite(m_CurrentRotationStage);
+    m_AccumTime -= m_TimeBetweenStages;
 }
-
-

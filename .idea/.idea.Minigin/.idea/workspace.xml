@@ -8,28 +8,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afbd271e-3457-4656-98e8-f358f8b4d7b0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BeeComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BeeComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BeeComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BeeComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/ButterflyComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/ButterflyComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/ButterflyComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/ButterflyComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Formations/FormationTrajectories1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Formations/FormationTrajectories1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Enemy States/BossBombingRunState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Enemy States/BossBombingRunState.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Enemy States/GetInFormationState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Enemy States/GetInFormationState.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Enemy States/IdleState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Enemy States/IdleState.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/RotatingSpriteComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/RotatingSpriteComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/RotatingSpriteComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/RotatingSpriteComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/FighterObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/FighterObserver.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game components/RotatingSpriteComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/RotatingSprite.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game components/RotatingSpriteComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/RotatingSprite.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/EnemyObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyObserver.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/EnemyObserver.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyObserver.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/FormationObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/FormationObserver.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/GameProject.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameProject.vcxproj.filters" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Initializers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Managers/InputManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/InputManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Managers/InputManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/InputManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Minigin.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Minigin.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Scene.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +35,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/memory" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/vector" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -165,6 +167,7 @@
       <workItem from="1717600013586" duration="121000" />
       <workItem from="1717600377881" duration="672000" />
       <workItem from="1717601472101" duration="270000" />
+      <workItem from="1717607346488" duration="6865000" />
     </task>
     <servers />
   </component>

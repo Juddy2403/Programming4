@@ -16,13 +16,8 @@ void FormationObserver::Notify([[maybe_unused]] GameEngine::Subject* subject, in
     switch (static_cast<GameEvent>(event))
     {
     case GameEvent::died:
-    {
-        if (m_CurrentEnemiesSetOut)
-        {
-            --m_CurrentEnemiesSetOut;
-        }
-    }
-    break;
+        if (m_CurrentEnemiesSetOut) --m_CurrentEnemiesSetOut;
+        break;
     case GameEvent::gotInFormation:
     {
         ++m_CurrentEnemiesGotInFormation;

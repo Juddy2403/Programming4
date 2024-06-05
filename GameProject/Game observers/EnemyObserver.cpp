@@ -7,7 +7,6 @@
 #include "Sound/ServiceLocator.h"
 #include "Subjects/GameObject.h"
 
-EnemyObserver::EnemyObserver() {}
 void EnemyObserver::Notify(GameEngine::Subject* subject, int event
     , [[maybe_unused]] GameEngine::EventData* eventData)
 {

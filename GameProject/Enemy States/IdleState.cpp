@@ -13,8 +13,8 @@ void IdleState::UpdateBackToFormationTrajectory(EnemyComponent* enemyComponent) 
 }
 void IdleState::GotInFormation(EnemyComponent* enemyComponent) {
     enemyComponent->GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::gotInFormation));
-    int rotationStage = enemyComponent->GetRotationStage({ 0,1 });
-    enemyComponent->UpdateSprite(rotationStage);
+    enemyComponent->GetRotatingSprite()->RotateSpriteInDirection({0,1});
+
 }
 void IdleState::Enter(EnemyComponent* enemyComponent)
 {

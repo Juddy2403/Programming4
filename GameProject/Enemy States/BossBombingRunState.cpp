@@ -86,8 +86,7 @@ std::unique_ptr<EnemyState> BossShootingBeam::Update(EnemyComponent* enemyCompon
     {
         enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bossShotBeam),
         static_cast<int>(ObserverIdentifier::bullet));
-        int rotationStage = enemyComponent->GetRotationStage({ 0,1 });
-        enemyComponent->UpdateSprite(rotationStage);
+        enemyComponent->GetRotatingSprite()->RotateSpriteInDirection({0,1});
         m_IsShootingBeam = true;
     }
     return nullptr;

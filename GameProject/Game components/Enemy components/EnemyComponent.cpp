@@ -1,9 +1,7 @@
 ﻿#include "EnemyComponent.h"
-#include "Components/SpriteComponent.h"
 #include "Enemy States/GetInFormationState.h"
 #include "Enemy States/IdleState.h"
 #include "Game components/FormationComponent.h"
-#include "Game components/RotatingSpriteComponent.h"
 #include "Game observers/EnemyAIManager.h"
 #include "Game observers/FormationObserver.h"
 #include "Subjects/GameObject.h"
@@ -12,12 +10,8 @@ EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::Spri
     Component(gameObj),
     m_PlayerComponent(playerComponent),
     m_CurrentState(nullptr),
-    m_SpriteComponent(spriteComponent),
-    m_RotatingSprite(std::make_unique<RotatingSprite>(spriteComponent->m_SpriteInfo.m_NrOfCols)),
-    m_NrOfRotationStages((m_SpriteComponent->m_SpriteInfo.m_NrOfCols - 1) * 4)
+    m_RotatingSprite(std::make_unique<RotatingSprite>(spriteComponent))
 {
-    m_InitXPos = spriteComponent->m_SpriteInfo.m_StartPos.x;
-    spriteComponent->m_SpriteInfo.m_NrOfCols = 1;
     EnemyAIManager::AddEnemy(this);
 }
 void EnemyComponent::GetInIdleState()
@@ -59,22 +53,6 @@ void EnemyComponent::Died()
     EnemyAIManager::RemoveEnemy(this);
     GetGameObjParent()->SetDestroyedFlag();
 }
-int EnemyComponent::GetRotationStage(const glm::vec2& direction) const
-{
-    //calculate rotation angle based on the direction
-    float rotationAngle = -(glm::atan(-direction.y, direction.x) - glm::pi<float>() / 2);
-    //convert angle between 0 and 2*pi
-    if (rotationAngle < 0) rotationAngle += glm::pi<float>() * 2;
-    return static_cast<int>(rotationAngle / (glm::pi<float>() * 2) * m_NrOfRotationStages);
-}
-void EnemyComponent::UpdateSprite(int rotationStage) const
-{
-    const auto rotationInfo = m_RotatingSprite->GetColFlipPair(rotationStage);
-    m_SpriteComponent->m_SpriteInfo.m_StartPos.x = rotationInfo.first * (m_SpriteComponent->m_SpriteInfo.m_Width
-        + m_SpriteComponent->m_SpriteInfo.m_Spacing) + GetInitXPos();
-    m_SpriteComponent->SetFlipMode(rotationInfo.second);
-    m_SpriteComponent->UpdateSrcRect();
-}
 
 bool EnemyComponent::UpdateTrajectory(Trajectory& trajectory) const
 {
@@ -83,8 +61,7 @@ bool EnemyComponent::UpdateTrajectory(Trajectory& trajectory) const
     if (hasDirectionChanged)
     {
         if (trajectory.IsComplete()) return true;
-        int rotationStage = GetRotationStage(trajectory.GetDirection());
-        UpdateSprite(rotationStage);
+        m_RotatingSprite->RotateSpriteInDirection(trajectory.GetDirection());
     }
     GetGameObjParent()->SetPosition({ newPos,0 });
     return false;

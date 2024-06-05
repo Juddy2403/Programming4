@@ -4,7 +4,7 @@
 class EnemyObserver final : public GameEngine::IObserver
 {
 public:
-    explicit EnemyObserver();
+    EnemyObserver() = default;
     virtual void Notify(GameEngine::Subject* subject, int event
         , GameEngine::EventData* eventData) override;
 private:
