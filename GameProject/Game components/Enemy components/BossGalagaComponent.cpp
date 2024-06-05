@@ -7,13 +7,10 @@ BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEn
     EnemyComponent(gameObj, spriteComponent, rotatingComponent, playerComponent),
     m_BossStage(std::make_unique<BossStageOne>())
 {}
-void BossGalagaComponent::Update()
-{
-    EnemyComponent::Update();
-}
+
 bool BossGalagaComponent::HasBeenHit()
 {
-    BossStage* bossStage = m_BossStage->HasBeenHit(*GetGameObjParent());
+    BossStage* bossStage = m_BossStage->HasBeenHit(this);
     if (bossStage)
     {
         m_BossStage.reset(bossStage);
@@ -23,6 +20,7 @@ bool BossGalagaComponent::HasBeenHit()
 }
 EnemyId BossGalagaComponent::GetEnemyID() const
 {
+    if(!m_CurrentState) return EnemyId::bossGalaga;
     if (m_CurrentState->IsDiving()) return EnemyId::bossGalagaDiving;
     return EnemyId::bossGalaga;
 }

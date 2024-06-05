@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+class EnemyComponent;
 namespace GameEngine
 {
     class GameObject;
@@ -21,20 +22,20 @@ namespace GameEngine
 class BossStage
 {
 public:
-    virtual BossStage* HasBeenHit(GameEngine::GameObject& bossObj) = 0;
+    virtual BossStage* HasBeenHit(EnemyComponent* bossObj) = 0;
     virtual ~BossStage() = default;
 };
 
 class BossStageOne final : public BossStage
 {
 public:
-    virtual BossStage* HasBeenHit(GameEngine::GameObject& bossObj) override;
+    virtual BossStage* HasBeenHit(EnemyComponent* bossObj) override;
     virtual ~BossStageOne() = default;
 };
 
 class BossStageTwo final : public BossStage
 {
 public:
-    virtual BossStage* HasBeenHit(GameEngine::GameObject& bossObj) override;
+    virtual BossStage* HasBeenHit(EnemyComponent* bossObj) override;
     virtual ~BossStageTwo() = default;
 };

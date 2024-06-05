@@ -1,6 +1,7 @@
 ﻿#include "BeeComponent.h"
 
 #include "Enemy States/BeeBombingRunState.h"
+#include "Game observers/EnemyAIManager.h"
 #include "Subjects/GameObject.h"
 
 BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
@@ -8,15 +9,6 @@ BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteCo
     EnemyComponent(gameObj, spriteComponent, rotatingComponent,playerComponent)
 {}
 
-void BeeComponent::Update()
-{
-    EnemyComponent::Update();
-}
-bool BeeComponent::HasBeenHit()
-{
-    GetGameObjParent()->SetDestroyedFlag();
-    return true;
-}
 void BeeComponent::GetInAttackState()
 {
     m_CurrentState->Exit(this);
@@ -25,6 +17,7 @@ void BeeComponent::GetInAttackState()
 }
 EnemyId BeeComponent::GetEnemyID() const
 {
+    if(!m_CurrentState) return EnemyId::bee;
     if (m_CurrentState->IsDiving()) return EnemyId::beeDiving;
     return EnemyId::bee;
 }

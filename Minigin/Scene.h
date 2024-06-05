@@ -29,8 +29,8 @@ namespace GameEngine
 		
 	private: 
 		std::string m_Name;
-		std::vector<std::unique_ptr<GameObject>> m_GameObjects;
 		std::vector<std::unique_ptr<IObserver>> m_Observers;
+		std::vector<std::unique_ptr<GameObject>> m_GameObjects;
 
 	};
 

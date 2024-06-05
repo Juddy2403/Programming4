@@ -21,11 +21,6 @@ EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::Spri
     spriteComponent->m_SpriteInfo.m_NrOfCols = 1;
     EnemyAIManager::AddEnemy(this);
 }
-EnemyComponent::~EnemyComponent()
-{
-    if(m_CurrentState) m_CurrentState->Exit(this);
-    EnemyAIManager::RemoveEnemy(this);
-}
 void EnemyComponent::GetInIdleState()
 {
     m_CurrentState->Exit(this);
@@ -58,6 +53,12 @@ void EnemyComponent::Update()
         m_CurrentState = std::make_unique<GetInFormationState>();
         m_CurrentState->Enter(this);
     }
+}
+void EnemyComponent::Died()
+{
+    if(m_CurrentState) m_CurrentState->Exit(this);
+    EnemyAIManager::RemoveEnemy(this);
+    GetGameObjParent()->SetDestroyedFlag();
 }
 int EnemyComponent::GetRotationStage(const glm::vec2& direction) const
 {

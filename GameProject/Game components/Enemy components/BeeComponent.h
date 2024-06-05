@@ -13,8 +13,6 @@ public:
     BeeComponent& operator=(BeeComponent&& other) noexcept = delete;
     ~BeeComponent() override = default;
 
-    void Update() override;
-    virtual bool HasBeenHit() override;
     virtual void GetInAttackState() override;
     virtual EnemyId GetEnemyID() const override;
 private:

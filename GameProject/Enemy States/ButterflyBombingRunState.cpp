@@ -44,17 +44,17 @@ void ButterflyBombingRun::Enter(EnemyComponent* enemyComponent)
     pathData.destination = playerPos + glm::vec2{ 0,-50 };
     pathDataQueue.push(pathData);
 
-    // Loop movement
-    pathData = {};
-    pathData.isRotating = true;
-    pathData.isRotatingClockwise = static_cast<bool>(rand() % 2);
-    pathData.centerOfRotation = playerPos;
-    pathData.totalRotationAngle = 4.88692f;
-    pathDataQueue.push(pathData);
-
     // Dive outside of the screen
-    if(playerPos.x >= GameEngine::g_WindowRect.w)
+    if(playerPos.x >= GameEngine::g_WindowRect.w/2)
     {
+        // Loop movement
+        pathData = {};
+        pathData.isRotating = true;
+        pathData.isRotatingClockwise = false;
+        pathData.centerOfRotation = playerPos;
+        pathData.totalRotationAngle = 4.7f;
+        pathDataQueue.push(pathData);
+        
         pathData = {};
         pathData.destination = {GameEngine::g_WindowRect.w + 100, playerPos.y};
         pathDataQueue.push(pathData);
@@ -65,6 +65,14 @@ void ButterflyBombingRun::Enter(EnemyComponent* enemyComponent)
     }
     else
     {
+        // Loop movement
+        pathData = {};
+        pathData.isRotating = true;
+        pathData.isRotatingClockwise = true;
+        pathData.centerOfRotation = playerPos;
+        pathData.totalRotationAngle = 4.7f;
+        pathDataQueue.push(pathData);
+        
         pathData = {};
         pathData.destination = {-100, playerPos.y};
         pathDataQueue.push(pathData);

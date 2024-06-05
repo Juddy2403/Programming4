@@ -14,7 +14,6 @@ public:
     BossGalagaComponent& operator=(BossGalagaComponent&& other) noexcept = delete;
     ~BossGalagaComponent() override = default;
 
-    void Update() override;
     //returns true if boss is destroyed
     virtual bool HasBeenHit() override;
     virtual EnemyId GetEnemyID() const override;

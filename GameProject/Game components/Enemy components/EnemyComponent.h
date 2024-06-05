@@ -22,7 +22,7 @@ public:
     EnemyComponent(EnemyComponent&& other) noexcept = delete;
     EnemyComponent& operator=(const EnemyComponent& other) = delete;
     EnemyComponent& operator=(EnemyComponent&& other) noexcept = delete;
-    ~EnemyComponent() override;
+    ~EnemyComponent() override = default;
 
     virtual void GetInAttackState() = 0;
     virtual void GetInIdleState();
@@ -34,7 +34,8 @@ public:
     [[nodiscard]] int GetInitXPos() const { return m_InitXPos; }
     [[nodiscard]] float GetSpeed() const { return m_Speed; }
     virtual void Update() override;
-    virtual bool HasBeenHit() = 0;
+    virtual bool HasBeenHit() {Died();return true;}
+    virtual void Died();
     [[nodiscard]] virtual EnemyId GetEnemyID() const = 0;
 
     int GetRotationStage(const glm::vec2& direction) const;

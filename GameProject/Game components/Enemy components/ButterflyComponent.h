@@ -13,9 +13,7 @@ public:
     ButterflyComponent& operator=(ButterflyComponent&& other) noexcept = delete;
     ~ButterflyComponent() override = default;
 
-    void Update() override;
     virtual void GetInAttackState() override;
-    virtual bool HasBeenHit() override;
     virtual EnemyId GetEnemyID() const override;
 private:
 };
