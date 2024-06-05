@@ -3,22 +3,20 @@
 #include <utility>
 #include <vector>
 
-#include "Components/Component.h"
-
 namespace GameEngine
 {
     class SpriteComponent;
 }
-class RotatingSpriteComponent final : public GameEngine::Component
+class RotatingSprite final
 {
 public:
-    explicit RotatingSpriteComponent(GameEngine::GameObject* gameObj, int nrOfCols);
+    explicit RotatingSprite(int nrOfCols);
 
-    RotatingSpriteComponent(const RotatingSpriteComponent& other) = delete;
-    RotatingSpriteComponent(RotatingSpriteComponent&& other) noexcept = delete;
-    RotatingSpriteComponent& operator=(const RotatingSpriteComponent& other) = delete;
-    RotatingSpriteComponent& operator=(RotatingSpriteComponent&& other) noexcept = delete;
-    ~RotatingSpriteComponent() override = default;
+    RotatingSprite(const RotatingSprite& other) = delete;
+    RotatingSprite(RotatingSprite&& other) noexcept = delete;
+    RotatingSprite& operator=(const RotatingSprite& other) = delete;
+    RotatingSprite& operator=(RotatingSprite&& other) noexcept = delete;
+    ~RotatingSprite() = default;
 
     std::pair<int,SDL_RendererFlip> GetColFlipPair(int index) const { return m_ColFlipPairs[index]; }
 private:

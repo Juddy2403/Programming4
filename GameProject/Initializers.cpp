@@ -4,7 +4,6 @@
 #include "GameCommands.h"
 #include "Game components/PlayerHealthComponent.h"
 #include "Game components/PlayerComponent.h"
-#include "Game components/RotatingSpriteComponent.h"
 #include "Components/CollisionComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Game components/Enemy components/BeamComponent.h"
@@ -37,10 +36,6 @@ std::unique_ptr<GameEngine::GameObject> InitFighter()
 
     gameObject->AddComponent<PlayerHealthComponent>(3, spriteComponent);
     auto& input = GameEngine::InputManager::GetInstance();
-    input.BindCommand(GameEngine::KeyboardInputKey::W,
-        std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 0.f,-1.f }, 200));
-    input.BindCommand(GameEngine::KeyboardInputKey::S,
-        std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 0.f,1.f }, 200));
     input.BindCommand(GameEngine::KeyboardInputKey::A,
         std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ -1.f,0.f }, 200));
     input.BindCommand(GameEngine::KeyboardInputKey::D,
@@ -111,9 +106,7 @@ std::unique_ptr<GameEngine::GameObject> InitBee(PlayerComponent* playerComponent
     spriteComponent->UpdateSrcRect();
     spriteComponent->m_IsActive = true;
 
-    gameObject->AddComponent<BeeComponent>(spriteComponent,
-        gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols),
-        playerComponent);
+    gameObject->AddComponent<BeeComponent>(spriteComponent, playerComponent);
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
 
     return gameObject;
@@ -136,9 +129,7 @@ std::unique_ptr<GameEngine::GameObject> InitButterfly(PlayerComponent* playerCom
     spriteComponent->UpdateSrcRect();
     spriteComponent->m_IsActive = true;
 
-    gameObject->AddComponent<ButterflyComponent>(spriteComponent,
-        gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols),
-        playerComponent);
+    gameObject->AddComponent<ButterflyComponent>(spriteComponent, playerComponent);
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
 
     return gameObject;
@@ -161,16 +152,14 @@ std::unique_ptr<GameEngine::GameObject> InitBossGalaga(PlayerComponent* playerCo
     spriteComponent->UpdateSrcRect();
     spriteComponent->m_IsActive = true;
 
-    gameObject->AddComponent<BossGalagaComponent>(spriteComponent,
-        gameObject->AddComponent<RotatingSpriteComponent>(spriteComponent->m_SpriteInfo.m_NrOfCols),
-        playerComponent);
+    gameObject->AddComponent<BossGalagaComponent>(spriteComponent, playerComponent);
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
 
     return gameObject;
 }
 std::unique_ptr<GameEngine::GameObject> InitBossBeam(EnemyComponent* parentComp)
 {
-    auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::enemy));
+    auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::bossBeam));
     auto* spriteComponent = gameObject->AddComponent<GameEngine::SpriteComponent>("TractorBeam.png");
     spriteComponent->m_SpriteInfo.m_Height = 80;
     spriteComponent->m_SpriteInfo.m_Width = 48;
@@ -184,6 +173,6 @@ std::unique_ptr<GameEngine::GameObject> InitBossBeam(EnemyComponent* parentComp)
     spriteComponent->UpdateSrcRect();
     spriteComponent->m_IsActive = true;
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
-    gameObject->AddComponent<BeamComponent>(spriteComponent,parentComp);
+    gameObject->AddComponent<BeamComponent>(spriteComponent, parentComp);
     return gameObject;
 }

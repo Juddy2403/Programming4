@@ -4,9 +4,8 @@
 #include "Game observers/EnemyAIManager.h"
 #include "Subjects/GameObject.h"
 
-BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-    RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent):
-    EnemyComponent(gameObj, spriteComponent, rotatingComponent,playerComponent)
+BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent, PlayerComponent* playerComponent):
+    EnemyComponent(gameObj, spriteComponent,playerComponent)
 {}
 
 void BeeComponent::GetInAttackState()

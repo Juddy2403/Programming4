@@ -26,7 +26,8 @@ namespace GameEngine
 
         void BindCommand(KeyboardInputKey inputKey, std::unique_ptr<Command>&& command);
         void BindCommand(ControllerInputKey inputKey, std::unique_ptr<Command>&& command, int controllerIdx);
-
+        void UnbindCommand(KeyboardInputKey inputKey);
+        void UnbindCommand(ControllerInputKey inputKey, int controllerIdx);
     private:
         //Commands
         typedef std::unique_ptr<Command> CommandUnique;

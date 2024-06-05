@@ -4,9 +4,8 @@
 #include "Enemy States/ButterflyBombingRunState.h"
 #include "Subjects/GameObject.h"
 
-ButterflyComponent::ButterflyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-    RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent):
-    EnemyComponent(gameObj, spriteComponent, rotatingComponent, playerComponent)
+ButterflyComponent::ButterflyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,PlayerComponent* playerComponent):
+    EnemyComponent(gameObj, spriteComponent, playerComponent)
 {}
 
 void ButterflyComponent::GetInAttackState()

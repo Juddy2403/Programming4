@@ -8,13 +8,12 @@
 #include "Game observers/FormationObserver.h"
 #include "Subjects/GameObject.h"
 
-EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-    RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent):
+EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent, PlayerComponent* playerComponent):
     Component(gameObj),
     m_PlayerComponent(playerComponent),
     m_CurrentState(nullptr),
     m_SpriteComponent(spriteComponent),
-    m_RotatingComponent(rotatingComponent),
+    m_RotatingSprite(std::make_unique<RotatingSprite>(spriteComponent->m_SpriteInfo.m_NrOfCols)),
     m_NrOfRotationStages((m_SpriteComponent->m_SpriteInfo.m_NrOfCols - 1) * 4)
 {
     m_InitXPos = spriteComponent->m_SpriteInfo.m_StartPos.x;
@@ -70,7 +69,7 @@ int EnemyComponent::GetRotationStage(const glm::vec2& direction) const
 }
 void EnemyComponent::UpdateSprite(int rotationStage) const
 {
-    const auto rotationInfo = m_RotatingComponent->GetColFlipPair(rotationStage);
+    const auto rotationInfo = m_RotatingSprite->GetColFlipPair(rotationStage);
     m_SpriteComponent->m_SpriteInfo.m_StartPos.x = rotationInfo.first * (m_SpriteComponent->m_SpriteInfo.m_Width
         + m_SpriteComponent->m_SpriteInfo.m_Spacing) + GetInitXPos();
     m_SpriteComponent->SetFlipMode(rotationInfo.second);

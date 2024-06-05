@@ -5,8 +5,8 @@
 #include "Components/Component.h"
 #include "Enemy States/EnemyState.h"
 #include "Game components/PlayerComponent.h"
+#include "Game components/RotatingSpriteComponent.h"
 
-class RotatingSpriteComponent;
 namespace GameEngine
 {
     class SpriteComponent;
@@ -15,8 +15,7 @@ namespace GameEngine
 class EnemyComponent : public GameEngine::Component
 {
 public:
-    explicit EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-        RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent);
+    explicit EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent, PlayerComponent* playerComponent);
 
     EnemyComponent(const EnemyComponent& other) = delete;
     EnemyComponent(EnemyComponent&& other) noexcept = delete;
@@ -50,7 +49,7 @@ protected:
     std::unique_ptr<EnemyState> m_CurrentState;
     float m_Speed{ 300.f };
     GameEngine::SpriteComponent* m_SpriteComponent{};
-    RotatingSpriteComponent* m_RotatingComponent{};
+    std::unique_ptr<RotatingSprite> m_RotatingSprite{};
     glm::ivec2 m_FormationPosition{};
     const int m_NrOfRotationStages{};
     int m_InitXPos{};

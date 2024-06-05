@@ -2,9 +2,8 @@
 
 #include "Enemy States/BossBombingRunState.h"
 
-BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent,
-    RotatingSpriteComponent* rotatingComponent, PlayerComponent* playerComponent):
-    EnemyComponent(gameObj, spriteComponent, rotatingComponent, playerComponent),
+BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent, PlayerComponent* playerComponent):
+    EnemyComponent(gameObj, spriteComponent, playerComponent),
     m_BossStage(std::make_unique<BossStageOne>())
 {}
 

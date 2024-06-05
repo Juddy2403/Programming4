@@ -70,3 +70,14 @@ void GameEngine::InputManager::BindCommand(ControllerInputKey inputKey, std::uni
     m_pControllerCommands[controllerIdx][inputKey] = std::move(command);
 }
 
+void GameEngine::InputManager::UnbindCommand(KeyboardInputKey inputKey)
+{
+    m_pKeyboardCommands.erase(inputKey);
+    
+}
+
+void GameEngine::InputManager::UnbindCommand(ControllerInputKey inputKey, int controllerIdx)
+{
+    m_pControllerCommands[controllerIdx].erase(inputKey);
+}
+
