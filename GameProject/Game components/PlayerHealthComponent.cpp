@@ -18,8 +18,8 @@ void PlayerHealthComponent::Render()
         destRect.x = static_cast<int>(m_HealthPosition.x + i * m_TextureOffset);
         destRect.y = static_cast<int>(m_HealthPosition.y);
         auto srcRect = m_TextureComponent->m_SrcRect;
-        srcRect.x = m_TextureComponent->m_SpriteInfo.m_StartPos.x;
-        srcRect.y = m_TextureComponent->m_SpriteInfo.m_StartPos.y;
+        srcRect.x = 1;
+        srcRect.y = 1;
         GameEngine::Renderer::GetInstance().RenderTexture(*m_TextureComponent->GetTexture(), srcRect,
             destRect);
     }

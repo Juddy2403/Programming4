@@ -9,7 +9,8 @@
 #include "Minigin/Subjects/GameObject.h"
 
 using namespace GameEngine;
-TextComponent::TextComponent(GameObject* gameObj, std::shared_ptr<Font> font, const std::string& text) : Component(gameObj)
+TextComponent::TextComponent(GameObject* gameObj, std::shared_ptr<Font> font, const std::string& text, const SDL_Color& color) : Component(gameObj),
+                                                                                                                                 m_Color(color)
 {
     if (font) SetFont(font);
     SetText(text);
@@ -28,13 +29,13 @@ void TextComponent::SetFont(const std::shared_ptr<Font>& font)
     assert(font);
     if (font) m_Font = font;
 }
+void TextComponent::SetColor(const SDL_Color& color) { m_Color = color; }
 
 void TextComponent::Update()
 {
     if (m_NeedsUpdate && GetGameObjParent()->CheckIfComponentExists<TextureComponent>())
     {
-        constexpr SDL_Color color = { 255,255,255,255 }; // only white text is supported now
-        const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), color);
+        const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), m_Color);
         if (surf == nullptr)
         {
             throw std::runtime_error(std::string("Render  text failed: ") + SDL_GetError());

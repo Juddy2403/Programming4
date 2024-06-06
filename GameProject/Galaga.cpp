@@ -46,16 +46,23 @@ void Galaga::LoadLevel()
     gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<TextureComponent>(), 700);
     scene->AddObject(std::move(gameObject));
 
-    auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 32);
-    auto smallerFont = ResourceManager::GetInstance().LoadFont("Lingua.otf", 20);
+    auto font = ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 16);
+    auto smallerFont = ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 10);
     //------FPS--------
     #ifndef NDEBUG
-    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
+    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
     gameObject->AddComponent<TextureComponent>();
     gameObject->AddComponent<FPSComponent>(gameObject->AddComponent<TextComponent>(smallerFont,"160 FPS"));
-    gameObject->SetPosition( 10, 30);
+    gameObject->SetPosition( 550, 20);
     scene->AddObject(std::move(gameObject));
     #endif
+
+    //----------NR OF PLAYERS---------
+    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<TextureComponent>();
+    gameObject->AddComponent<TextComponent>(font,"1UP", SDL_Color{ 255,0,0 });
+    gameObject->SetPosition( 10, 20);
+    scene->AddObject(std::move(gameObject));
     
     //--------FIGHTER--------
     gameObject = InitFighter();
