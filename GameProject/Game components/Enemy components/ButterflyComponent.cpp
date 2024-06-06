@@ -1,6 +1,6 @@
 ﻿#include "ButterflyComponent.h"
 
-#include "Enemy States/BossBombingRunState.h"
+#include "Enemy States/BossShootingBeamState.h"
 #include "Enemy States/ButterflyBombingRunState.h"
 #include "Subjects/GameObject.h"
 
@@ -11,7 +11,7 @@ ButterflyComponent::ButterflyComponent(GameEngine::GameObject* gameObj, GameEngi
 void ButterflyComponent::GetInAttackState()
 {
     m_CurrentState->Exit(this);
-    m_CurrentState = std::make_unique<ButterflyBombingRun>();
+    m_CurrentState = std::make_unique<ButterflyBombingRunState>();
     m_CurrentState->Enter(this);
 }
 

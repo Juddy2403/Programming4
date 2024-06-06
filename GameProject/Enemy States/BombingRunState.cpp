@@ -1,10 +1,10 @@
-﻿#include "BeeBombingRunState.h"
+﻿#include "BombingRunState.h"
 #include <queue>
 #include "DataStructs.h"
 #include "IdleState.h"
 #include "Game components/Enemy components/EnemyComponent.h"
 
-void BeeBombingRun::Enter(EnemyComponent* enemyComponent)
+void BombingRunState::Enter(EnemyComponent* enemyComponent)
 {
     std::queue<PathData> pathDataQueue;
     PathData pathData;
@@ -19,7 +19,7 @@ void BeeBombingRun::Enter(EnemyComponent* enemyComponent)
     pathData = {};
     pathData.isRotating = true;
     pathData.isRotatingClockwise = static_cast<bool>(rand() % 2);
-    pathData.centerOfRotation = glm::vec2(enemyComponent->GetGameObjParent()->GetPosition())+ glm::vec2{ 0,20 };
+    pathData.centerOfRotation = glm::vec2(enemyComponent->GetGameObjParent()->GetPosition()) + glm::vec2{ 0,20 };
     pathData.totalRotationAngle = 3.49066f;
     pathDataQueue.push(pathData);
 
@@ -44,8 +44,18 @@ void BeeBombingRun::Enter(EnemyComponent* enemyComponent)
     // Set the trajectory
     m_BombingTrajectory->SetPathData(pathDataQueue, enemyComponent->GetGameObjParent()->GetPosition());
 }
-std::unique_ptr<EnemyState> BeeBombingRun::Update(EnemyComponent* enemyComponent)
+std::unique_ptr<EnemyState> BombingRunState::Update(EnemyComponent* enemyComponent)
 {
+    if (!m_NextBulletShot)
+    {
+        m_AccumTime += GameEngine::TimeManager::GetElapsed();
+        if (m_AccumTime >= m_TimeTillNextBulletShot)
+        {
+            m_NextBulletShot = true;
+            enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bulletShot),
+                static_cast<int>(ObserverIdentifier::enemyAttack));
+        }
+    }
     if (enemyComponent->UpdateTrajectory(*m_BombingTrajectory)) return std::make_unique<IdleState>();
     return nullptr;
 }

@@ -1,10 +1,9 @@
 ﻿#include "ButterflyBombingRunState.h"
 
-#include "IdleState.h"
 #include "Minigin.h"
 #include "Game components/Enemy components/EnemyComponent.h"
 
-void ButterflyBombingRun::Enter(EnemyComponent* enemyComponent)
+void ButterflyBombingRunState::Enter(EnemyComponent* enemyComponent)
 {
     std::queue<PathData> pathDataQueue;
     PathData pathData;
@@ -88,9 +87,4 @@ void ButterflyBombingRun::Enter(EnemyComponent* enemyComponent)
 
     // Set the trajectory
     m_BombingTrajectory->SetPathData(pathDataQueue, enemyComponent->GetGameObjParent()->GetPosition());
-}
-std::unique_ptr<EnemyState> ButterflyBombingRun::Update(EnemyComponent* enemyComponent)
-{
-    if (enemyComponent->UpdateTrajectory(*m_BombingTrajectory)) return std::make_unique<IdleState>();
-    return nullptr;
 }

@@ -1,6 +1,7 @@
 ﻿#include "BossGalagaComponent.h"
 
-#include "Enemy States/BossBombingRunState.h"
+#include "Enemy States/BombingRunState.h"
+#include "Enemy States/BossShootingBeamState.h"
 
 BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent, PlayerComponent* playerComponent):
     EnemyComponent(gameObj, spriteComponent, playerComponent),
@@ -26,12 +27,12 @@ EnemyId BossGalagaComponent::GetEnemyID() const
 void BossGalagaComponent::GetInAttackState()
 {
     m_CurrentState->Exit(this);
-    m_CurrentState = std::make_unique<BossBombingRun>();
+    m_CurrentState = std::make_unique<BombingRunState>();
     m_CurrentState->Enter(this);
 }
 void BossGalagaComponent::GetInBeamAttackState()
 {
     m_CurrentState->Exit(this);
-    m_CurrentState = std::make_unique<BossShootingBeam>();
+    m_CurrentState = std::make_unique<BossShootingBeamState>();
     m_CurrentState->Enter(this);
 }

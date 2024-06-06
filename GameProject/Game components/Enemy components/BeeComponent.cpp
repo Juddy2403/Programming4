@@ -1,8 +1,7 @@
 ﻿#include "BeeComponent.h"
 
-#include "Enemy States/BeeBombingRunState.h"
+#include "Enemy States/BombingRunState.h"
 #include "Game observers/EnemyAIManager.h"
-#include "Subjects/GameObject.h"
 
 BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent, PlayerComponent* playerComponent):
     EnemyComponent(gameObj, spriteComponent,playerComponent)
@@ -11,7 +10,7 @@ BeeComponent::BeeComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteCo
 void BeeComponent::GetInAttackState()
 {
     m_CurrentState->Exit(this);
-    m_CurrentState = std::make_unique<BeeBombingRun>();
+    m_CurrentState = std::make_unique<BombingRunState>();
     m_CurrentState->Enter(this);
 }
 EnemyId BeeComponent::GetEnemyID() const

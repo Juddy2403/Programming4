@@ -169,7 +169,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Enemy States\BeeBombingRunState.cpp" />
+    <ClCompile Include="Enemy States\BombingRunState.cpp" />
     <ClCompile Include="Enemy States\BossBombingRunState.cpp" />
     <ClCompile Include="Enemy States\BossStage.cpp" />
     <ClCompile Include="Enemy States\ButterflyBombingRunState.cpp" />
@@ -283,8 +283,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructs.h" />
-    <ClInclude Include="Enemy States\BeeBombingRunState.h" />
-    <ClInclude Include="Enemy States\BossBombingRunState.h" />
+    <ClInclude Include="Enemy States\BombingRunState.h" />
+    <ClInclude Include="Enemy States\BossShootingBeamState.h" />
     <ClInclude Include="Enemy States\BossStage.h" />
     <ClInclude Include="Enemy States\ButterflyBombingRunState.h" />
     <ClInclude Include="Enemy States\EnemyState.h" />

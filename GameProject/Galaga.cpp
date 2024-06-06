@@ -88,8 +88,8 @@ void Galaga::LoadLevel()
         std::move(formationObserverUnique),nullptr);
 
     //--------- Enemy creation------------
-    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfoTest.json",
-        "../Data/Formations/FormationTrajectoriesTest.json", playerComp);
+    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfo1.json",
+        "../Data/Formations/FormationTrajectories1.json", playerComp);
     for (auto& enemy : enemyVec)
     {
         enemy->AddObserver(-1, enemyObserver);
