@@ -38,6 +38,7 @@ public:
 
     bool UpdateTrajectory(Trajectory& trajectory);
     glm::vec2 GetCurDirection() const { return m_CurDirection; }
+    void SetCurDirection(const glm::vec2& direction) { m_CurDirection = direction; }
     PlayerComponent* GetPlayerComponent() const { return m_PlayerComponent; }
     RotatingSprite* GetRotatingSprite() const { return m_RotatingSprite.get(); }
     

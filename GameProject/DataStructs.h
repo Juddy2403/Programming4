@@ -24,6 +24,7 @@ enum class GameEvent
     leftFormation,
     bossShotBeam,
     beamRetracted,
+    fighterCaptured,
     event = -1//for when smth generic happens
 };
 

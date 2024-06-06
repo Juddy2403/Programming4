@@ -8,25 +8,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afbd271e-3457-4656-98e8-f358f8b4d7b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Formations/FormationTrajectories1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Formations/FormationTrajectories1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Formations/FormationTrajectoriesTest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Formations/FormationTrajectoriesTest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/DataStructs.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/DataStructs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Enemy States/BeeBombingRunState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Enemy States/BeeBombingRunState.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Enemy States/BossBombingRunState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Enemy States/BossBombingRunState.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Enemy States/ButterflyBombingRunState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Enemy States/ButterflyBombingRunState.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/BulletComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/BulletComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/BulletComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/BulletComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyBulletComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyBulletComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/EnemyComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/EnemyAIManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyAIManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game observers/EnemyAttacksObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyAttacksObserver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Initializers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Initializers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +28,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -143,7 +144,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C++ Project.CleanProject.executor": "Debug",
-    "C++ Project.GameProject.executor": "Run",
+    "C++ Project.GameProject.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -255,7 +256,7 @@
       <workItem from="1717600377881" duration="672000" />
       <workItem from="1717601472101" duration="270000" />
       <workItem from="1717607346488" duration="16917000" />
-      <workItem from="1717679376778" duration="6417000" />
+      <workItem from="1717679376778" duration="9120000" />
     </task>
     <servers />
   </component>

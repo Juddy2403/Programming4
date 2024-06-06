@@ -2,11 +2,11 @@
 
 #include "GameCommands.h"
 #include "PlayerHealthComponent.h"
+#include "Enemy components/BossGalagaComponent.h"
 #include "Managers/InputManager.h"
 
 PlayerComponent::PlayerComponent(GameEngine::GameObject* gameObject, GameEngine::SpriteComponent* spriteComponent, int playerID):
     Component(gameObject),
-    m_SpriteComponent(spriteComponent),
     m_RotatingSprite(std::make_unique<RotatingSprite>(spriteComponent)),
     m_PlayerID(playerID)
 {}
@@ -43,6 +43,8 @@ void PlayerComponent::Update()
     
     if (m_CapturedTrajectory->IsComplete())
     {
+        m_EnemyCapturing->GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::fighterCaptured));
+        m_EnemyCapturing = nullptr;
         auto healthComp = GetGameObjParent()->GetComponent<PlayerHealthComponent>();
         GetGameObjParent()->SetPosition(m_RespawnPos);
         healthComp->Hit();

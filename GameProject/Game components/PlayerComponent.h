@@ -7,6 +7,7 @@
 #include "Subjects/GameObject.h"
 #include "Trajectory Logic/Trajectory.h"
 
+class BossGalagaComponent;
 class PlayerComponent final : public GameEngine::Component
 {
 public:
@@ -16,7 +17,8 @@ public:
     PlayerComponent& operator=(const PlayerComponent& other) = delete;
     PlayerComponent& operator=(PlayerComponent&& other) noexcept = delete;
     ~PlayerComponent() override = default;
-    
+
+    void SetEnemyCapturing(BossGalagaComponent* enemy) { m_EnemyCapturing = enemy; }
     [[nodiscard]] int GetPlayerID() const { return m_PlayerID; }
     static constexpr glm::vec3 m_RespawnPos{330,520,0};
     static constexpr int m_PlayerSpeed{ 200 };
@@ -26,8 +28,8 @@ public:
     void Update() override;
 private:
     std::unique_ptr<Trajectory> m_CapturedTrajectory{nullptr};
-    GameEngine::SpriteComponent* m_SpriteComponent;
     std::unique_ptr<RotatingSprite> m_RotatingSprite;
+    BossGalagaComponent* m_EnemyCapturing{};
     int m_CurrentRotationStage{};
     const float m_TimeBetweenStages{0.03f};
     float m_AccumTime{};

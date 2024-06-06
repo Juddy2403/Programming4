@@ -24,17 +24,20 @@ void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
             if (actor->GetID() == static_cast<int>(GameId::bossBeam))
             {
                 BossGalagaComponent* bossComp = dynamic_cast<BossGalagaComponent*>(actor->GetComponent<BeamComponent>()->GetParentComp());
-                if(!bossComp->HasCapturedFighter())
-                {
-                    bossComp->CapturedFighter();
-                    auto capturedFighter = InitCapturedFighter(bossComp);
-                    capturedFighter->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
-                    m_Scene->AddObject(std::move(capturedFighter));
-                }
+                if(!bossComp->HasCapturedFighter()) bossComp->CapturedFighter();
+                collisionData->pOtherCollider->GetComponent<PlayerComponent>()->SetEnemyCapturing(bossComp);
             }
         }
     }
     break;
+    case GameEvent::fighterCaptured:
+    {
+        BossGalagaComponent* bossComp = dynamic_cast<BossGalagaComponent*>(actor->GetComponent<EnemyComponent>());
+        auto capturedFighter = InitCapturedFighter(bossComp);
+        capturedFighter->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
+        m_Scene->AddObject(std::move(capturedFighter));
+    }
+        break;
     case GameEvent::bulletShot:
     {
         const auto playerPos = actor->GetComponent<EnemyComponent>()->GetPlayerComponent()->GetGameObjParent()->GetPosition();
@@ -51,6 +54,7 @@ void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
         if (bossComp && bossComp->HasCapturedFighter())
         {
             bullet = InitEnemyBullet(TrajectoryMath::CalculateDirection(enemyPos, playerPos));
+            enemyPos.y -= bullet->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h;
             bullet->SetPosition(enemyPos);
             bullet->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
             m_Scene->AddObject(std::move(bullet));

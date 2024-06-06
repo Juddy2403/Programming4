@@ -19,7 +19,7 @@ void BeeBombingRun::Enter(EnemyComponent* enemyComponent)
     pathData = {};
     pathData.isRotating = true;
     pathData.isRotatingClockwise = static_cast<bool>(rand() % 2);
-    pathData.centerOfRotation = glm::vec2(enemyComponent->GetGameObjParent()->GetPosition());
+    pathData.centerOfRotation = glm::vec2(enemyComponent->GetGameObjParent()->GetPosition())+ glm::vec2{ 0,20 };
     pathData.totalRotationAngle = 3.49066f;
     pathDataQueue.push(pathData);
 

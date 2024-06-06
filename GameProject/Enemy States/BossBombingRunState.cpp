@@ -19,7 +19,7 @@ void BossBombingRun::Enter(EnemyComponent* enemyComponent)
     pathData = {};
     pathData.isRotating = true;
     pathData.isRotatingClockwise = static_cast<bool>(rand() % 2);
-    pathData.centerOfRotation = glm::vec2(enemyComponent->GetGameObjParent()->GetPosition());
+    pathData.centerOfRotation = glm::vec2(enemyComponent->GetGameObjParent()->GetPosition())+ glm::vec2{ 0,20 };
     pathData.totalRotationAngle = 3.49066f;
     pathDataQueue.push(pathData);
 
@@ -54,8 +54,8 @@ void BossShootingBeam::Enter(EnemyComponent* enemyComponent)
     std::queue<PathData> pathDataQueue;
     PathData pathData;
 
-    auto enemyPos = enemyComponent->GetGameObjParent()->GetPosition();
-    
+    const auto enemyPos = enemyComponent->GetGameObjParent()->GetPosition();
+
     enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bulletShot),
         static_cast<int>(ObserverIdentifier::enemyAttack));
     // Initial upward movement
@@ -66,14 +66,14 @@ void BossShootingBeam::Enter(EnemyComponent* enemyComponent)
     pathData = {};
     pathData.isRotating = true;
     pathData.isRotatingClockwise = static_cast<bool>(rand() % 2);
-    pathData.centerOfRotation = glm::vec2(enemyPos);
+    pathData.centerOfRotation = glm::vec2(enemyPos) + glm::vec2{ 0,20 };
     pathData.totalRotationAngle = 3.49066f;
     pathDataQueue.push(pathData);
 
     // Dive towards the player
     pathData = {};
     const glm::vec2 playerPos = enemyComponent->GetPlayerComponent()->GetGameObjParent()->GetPosition();
-    pathData.destination = playerPos + glm::vec2{ 0, (enemyPos.y - playerPos.y)/2 + 100};
+    pathData.destination = playerPos + glm::vec2{ 0,(enemyPos.y - playerPos.y) / 2 + 100 };
     pathDataQueue.push(pathData);
 
     // Set the trajectory
@@ -81,12 +81,13 @@ void BossShootingBeam::Enter(EnemyComponent* enemyComponent)
 }
 std::unique_ptr<EnemyState> BossShootingBeam::Update(EnemyComponent* enemyComponent)
 {
-    if(m_IsShootingBeam) return nullptr;
+    if (m_IsShootingBeam) return nullptr;
     if (enemyComponent->UpdateTrajectory(*m_BeamTrajectory))
     {
         enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bossShotBeam),
-        static_cast<int>(ObserverIdentifier::enemyAttack));
-        enemyComponent->GetRotatingSprite()->RotateSpriteInDirection({0,1});
+            static_cast<int>(ObserverIdentifier::enemyAttack));
+        enemyComponent->GetRotatingSprite()->RotateSpriteInDirection({ 0,1 });
+        enemyComponent->SetCurDirection({ 0,1 });
         m_IsShootingBeam = true;
     }
     return nullptr;

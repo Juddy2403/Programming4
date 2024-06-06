@@ -28,16 +28,17 @@ void EnemyAIManager::Update()
 {
     if (m_EnemiesInFormation != static_cast<int>(m_Enemies.size())) return;
     if (m_Enemies.empty()) return; //TODO: here send a notif that the level is cleared
-    
+
     int enemyToSetOut = rand() % m_Enemies.size();
     if (m_Enemies[enemyToSetOut]->GetEnemyID() == EnemyId::bossGalaga)
     {
-        if (rand() % 2 == 0)
+        auto boss = dynamic_cast<BossGalagaComponent*>(m_Enemies[enemyToSetOut]);
+        if (rand() % 2 == 0 && !boss->HasCapturedFighter())
         {
-            auto boss = dynamic_cast<BossGalagaComponent*>(m_Enemies[enemyToSetOut]);
             boss->GetInBeamAttackState();
             return;
         }
+        boss->GetInAttackState();
         //set out butterfly
         auto it = std::ranges::find_if(m_Enemies,
             [](EnemyComponent* enemy) { return enemy->GetEnemyID() == EnemyId::butterfly; });
