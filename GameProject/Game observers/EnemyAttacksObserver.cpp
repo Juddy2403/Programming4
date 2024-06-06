@@ -24,7 +24,13 @@ void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
             if (actor->GetID() == static_cast<int>(GameId::bossBeam))
             {
                 BossGalagaComponent* bossComp = dynamic_cast<BossGalagaComponent*>(actor->GetComponent<BeamComponent>()->GetParentComp());
-                bossComp->CapturedFighter();
+                if(!bossComp->HasCapturedFighter())
+                {
+                    bossComp->CapturedFighter();
+                    auto capturedFighter = InitCapturedFighter(bossComp);
+                    capturedFighter->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
+                    m_Scene->AddObject(std::move(capturedFighter));
+                }
             }
         }
     }
@@ -34,13 +40,21 @@ void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
         const auto playerPos = actor->GetComponent<EnemyComponent>()->GetPlayerComponent()->GetGameObjParent()->GetPosition();
         auto enemyPos = actor->GetPosition();
         auto bullet = InitEnemyBullet(TrajectoryMath::CalculateDirection(enemyPos, playerPos));
-        
+
         enemyPos.y += bullet->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h;
         bullet->SetPosition(enemyPos);
-        
         bullet->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
-        
         m_Scene->AddObject(std::move(bullet));
+
+        //shoot a second bullet if the enemy is a boss that has a fighter captured
+        auto bossComp = dynamic_cast<BossGalagaComponent*>(actor->GetComponent<EnemyComponent>());
+        if (bossComp && bossComp->HasCapturedFighter())
+        {
+            bullet = InitEnemyBullet(TrajectoryMath::CalculateDirection(enemyPos, playerPos));
+            bullet->SetPosition(enemyPos);
+            bullet->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
+            m_Scene->AddObject(std::move(bullet));
+        }
     }
     break;
     case GameEvent::bulletOutOfBounds:
@@ -51,11 +65,11 @@ void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
         auto enemyPos = actor->GetPosition();
         auto enemyComp = actor->GetComponent<EnemyComponent>();
         auto beam = InitBossBeam(enemyComp);
-        
+
         enemyPos.y += actor->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h;
         enemyPos.x += actor->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2.f;
         enemyPos.x -= beam->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2.f;
-        
+
         beam->SetPosition(enemyPos);
         beam->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
         m_Scene->AddObject(std::move(beam));

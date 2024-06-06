@@ -6,7 +6,7 @@
 
 void ButterflyBombingRun::Enter(EnemyComponent* enemyComponent)
 {
-        std::queue<PathData> pathDataQueue;
+    std::queue<PathData> pathDataQueue;
     PathData pathData;
 
     enemyComponent->GetGameObjParent()->Notify(static_cast<int>(GameEvent::bulletShot),

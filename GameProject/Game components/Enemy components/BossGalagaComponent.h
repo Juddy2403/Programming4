@@ -13,6 +13,7 @@ public:
     BossGalagaComponent& operator=(BossGalagaComponent&& other) noexcept = delete;
     ~BossGalagaComponent() override = default;
 
+    bool IsDiving() const { return m_CurrentState->IsDiving(); }
     //returns true if boss is destroyed
     virtual bool HasBeenHit() override;
     virtual EnemyId GetEnemyID() const override;

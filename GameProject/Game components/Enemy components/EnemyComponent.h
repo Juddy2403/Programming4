@@ -36,7 +36,8 @@ public:
     virtual void Died();
     [[nodiscard]] virtual EnemyId GetEnemyID() const = 0;
 
-    bool UpdateTrajectory(Trajectory& trajectory) const;
+    bool UpdateTrajectory(Trajectory& trajectory);
+    glm::vec2 GetCurDirection() const { return m_CurDirection; }
     PlayerComponent* GetPlayerComponent() const { return m_PlayerComponent; }
     RotatingSprite* GetRotatingSprite() const { return m_RotatingSprite.get(); }
     
@@ -53,6 +54,7 @@ protected:
 private:
     //TODO: make trajectories unique ptrs 
     Trajectory m_FormationTrajectory{};
+    glm::vec2 m_CurDirection{};
 };
 
 

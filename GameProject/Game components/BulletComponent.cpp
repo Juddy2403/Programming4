@@ -16,10 +16,10 @@ void BulletComponent::Update()
 {
     int bulletYPos = m_SpriteComponent->m_DestRect.y + m_SpriteComponent->m_DestRect.h;
     
-    if (bulletYPos < 0)
+    if (bulletYPos <= 0)
     {
         GetGameObjParent()->Notify( static_cast<int>(GameEvent::bulletOutOfBounds),
-            static_cast<int>(ObserverIdentifier::enemyAttack));
+            static_cast<int>(ObserverIdentifier::bullet));
         return;
     }
 

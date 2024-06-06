@@ -22,6 +22,6 @@ public:
     [[nodiscard]] int GetPlayerID() const { return m_PlayerID; }
 private:
     int m_PlayerID{-1};
-    glm::vec2 m_Velocity{ 0.0f, -400.0f };
+    glm::vec2 m_Velocity{ 0.0f, -500.0f };
     GameEngine::SpriteComponent* m_SpriteComponent{};
 };

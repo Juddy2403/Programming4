@@ -178,6 +178,7 @@
     <ClCompile Include="Galaga.cpp" />
     <ClCompile Include="Game components\BackgroundComponent.cpp" />
     <ClCompile Include="Game components\BulletComponent.cpp" />
+    <ClCompile Include="Game components\CapturedFighterComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\BeamComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\BeeComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\BossGalagaComponent.cpp" />
@@ -291,6 +292,7 @@
     <ClInclude Include="Enemy States\IdleState.h" />
     <ClInclude Include="Game components\BackgroundComponent.h" />
     <ClInclude Include="Game components\BulletComponent.h" />
+    <ClInclude Include="Game components\CapturedFighterComponent.h" />
     <ClInclude Include="Game components\Enemy components\BeamComponent.h" />
     <ClInclude Include="Game components\Enemy components\BeeComponent.h" />
     <ClInclude Include="Game components\Enemy components\BossGalagaComponent.h" />

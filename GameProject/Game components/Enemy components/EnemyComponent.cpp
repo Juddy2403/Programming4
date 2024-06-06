@@ -16,6 +16,7 @@ EnemyComponent::EnemyComponent(GameEngine::GameObject* gameObj, GameEngine::Spri
 }
 void EnemyComponent::GetInIdleState()
 {
+    m_CurDirection = { 0,1 };
     m_CurrentState->Exit(this);
     m_CurrentState = std::make_unique<IdleState>();
     m_CurrentState->Enter(this);
@@ -54,13 +55,14 @@ void EnemyComponent::Died()
     GetGameObjParent()->SetDestroyedFlag();
 }
 
-bool EnemyComponent::UpdateTrajectory(Trajectory& trajectory) const
+bool EnemyComponent::UpdateTrajectory(Trajectory& trajectory) 
 {
     const glm::vec2 currentPos = GetGameObjParent()->GetPosition();
     auto [newPos, hasDirectionChanged] = trajectory.Update(GetSpeed(), currentPos);
     if (hasDirectionChanged)
     {
         if (trajectory.IsComplete()) return true;
+        m_CurDirection = trajectory.GetDirection();
         m_RotatingSprite->RotateSpriteInDirection(trajectory.GetDirection());
     }
     GetGameObjParent()->SetPosition({ newPos,0 });

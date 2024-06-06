@@ -10,6 +10,7 @@ public:
     ~FormationComponent() override = default;
     static float GetOffset();
     static void ToggleUpdate() { m_IsUpdating = !m_IsUpdating; }
+    static int GetDirection() { return m_Direction; }
 
 private:
     static bool m_IsUpdating;

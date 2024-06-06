@@ -6,6 +6,7 @@
 #include "Game components/PlayerComponent.h"
 #include "Components/CollisionComponent.h"
 #include "Components/SpriteComponent.h"
+#include "Game components/CapturedFighterComponent.h"
 #include "Game components/Enemy components/BeamComponent.h"
 #include "Game components/Enemy components/BeeComponent.h"
 #include "Game components/Enemy components/BossGalagaComponent.h"
@@ -42,6 +43,28 @@ std::unique_ptr<GameEngine::GameObject> InitFighter()
         std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 1.f,0.f }, PlayerComponent::m_PlayerSpeed));
     input.BindCommand(GameEngine::KeyboardInputKey::SPACE,
         std::make_unique<ShootBulletCommand>(gameObject.get()));
+
+    return gameObject;
+}
+
+std::unique_ptr<GameEngine::GameObject> InitCapturedFighter(BossGalagaComponent* parent)
+{
+    auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::capturedFighter));
+    auto* spriteComponent = gameObject->AddComponent<GameEngine::SpriteComponent>("GalagaUpdated.png");
+    spriteComponent->m_SpriteInfo.m_Height = 16;
+    spriteComponent->m_SpriteInfo.m_Width = 16;
+    spriteComponent->m_SpriteInfo.m_Spacing = 2;
+    spriteComponent->m_SpriteInfo.m_StartPos.x = 1;
+    spriteComponent->m_SpriteInfo.m_StartPos.y = 163;
+    spriteComponent->m_SpriteInfo.m_NrOfCols = 5;
+    spriteComponent->m_SpriteInfo.m_NrOfRows = 1;
+    spriteComponent->m_Scale = 2;
+    spriteComponent->UpdateSrcRect();
+    spriteComponent->m_IsActive = false;
+
+    gameObject->SetPosition(parent->GetGameObjParent()->GetPosition() + glm::vec3{ 0, 32,0 });
+    gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
+    gameObject->AddComponent<CapturedFighterComponent>(parent,spriteComponent);
 
     return gameObject;
 }

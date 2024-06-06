@@ -32,6 +32,7 @@ enum class GameId
     enemy,
     player,
     bullet,
+    capturedFighter,
     enemyBullet,
     bossBeam,
     observer,

@@ -4,8 +4,11 @@
 
 class PlayerComponent;
 class EnemyComponent;
+class BossGalagaComponent;
 
 std::unique_ptr<GameEngine::GameObject> InitFighter();
+
+std::unique_ptr<GameEngine::GameObject> InitCapturedFighter(BossGalagaComponent* parent);
 
 std::unique_ptr<GameEngine::GameObject> InitBullet(int playerID);
 
