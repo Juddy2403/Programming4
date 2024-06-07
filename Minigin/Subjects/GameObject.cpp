@@ -110,6 +110,7 @@ bool GameEngine::GameObject::IsDestroyed() const
 void GameEngine::GameObject::SetDestroyedFlag()
 {
     m_IsDestroyed = true;
+    for(auto child : m_pChildren) child->SetDestroyedFlag();
 }
 
 void GameObject::SetPosition(float x, float y, float z)

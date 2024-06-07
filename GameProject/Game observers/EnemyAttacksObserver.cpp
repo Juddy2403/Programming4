@@ -27,7 +27,7 @@ void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
             if (actor->GetID() == static_cast<int>(GameId::bossBeam))
             {
                 BossGalagaComponent* bossComp = dynamic_cast<BossGalagaComponent*>(actor->GetComponent<BeamComponent>()->GetParentComp());
-                if(!bossComp->HasCapturedFighter()) bossComp->CapturedFighter();
+                if (!bossComp->HasCapturedFighter()) bossComp->CapturedFighter();
                 collisionData->pOtherCollider->GetComponent<PlayerComponent>()->SetEnemyCapturing(bossComp);
             }
         }
@@ -38,11 +38,14 @@ void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
         GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::capturedShip), Galaga::volume);
         BossGalagaComponent* bossComp = dynamic_cast<BossGalagaComponent*>(actor->GetComponent<EnemyComponent>());
         auto capturedFighter = InitCapturedFighter(bossComp);
-        bossComp->SetCapturedFighter(capturedFighter->GetComponent<CapturedFighterComponent>());
+        capturedFighter->SetParent(actor, false);
+        auto sprite = actor->GetComponent<GameEngine::SpriteComponent>();
+        capturedFighter->SetPosition(glm::vec3{ 0,sprite->m_DestRect.h,0 });
+        capturedFighter->GetComponent<CapturedFighterComponent>()->UploadGetBackTrajectory();
         capturedFighter->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
         m_Scene->AddObject(std::move(capturedFighter));
     }
-        break;
+    break;
     case GameEvent::bulletShot:
     {
         const auto playerPos = actor->GetComponent<EnemyComponent>()->GetPlayerComponent()->GetGameObjParent()->GetPosition();
@@ -71,15 +74,16 @@ void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
         break;
     case GameEvent::bossShotBeam:
     {
-        auto enemyPos = actor->GetPosition();
         auto enemyComp = actor->GetComponent<EnemyComponent>();
         auto beam = InitBossBeam(enemyComp);
+        beam->SetParent(actor, false);
 
-        enemyPos.y += actor->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h;
-        enemyPos.x += actor->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2.f;
-        enemyPos.x -= beam->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2.f;
+        glm::vec2 posOffset{};
+        posOffset.y += actor->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.h;
+        posOffset.x += actor->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2.f;
+        posOffset.x -= beam->GetComponent<GameEngine::SpriteComponent>()->m_DestRect.w / 2.f;
 
-        beam->SetPosition(enemyPos);
+        beam->SetPosition({ posOffset,0 });
         beam->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
         m_Scene->AddObject(std::move(beam));
     }

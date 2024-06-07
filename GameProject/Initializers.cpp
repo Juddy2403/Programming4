@@ -62,7 +62,6 @@ std::unique_ptr<GameEngine::GameObject> InitCapturedFighter(BossGalagaComponent*
     spriteComponent->UpdateSrcRect();
     spriteComponent->m_IsActive = false;
 
-    gameObject->SetPosition(parent->GetGameObjParent()->GetPosition() + glm::vec3{ 0, 32,0 });
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
     gameObject->AddComponent<CapturedFighterComponent>(parent,spriteComponent);
 

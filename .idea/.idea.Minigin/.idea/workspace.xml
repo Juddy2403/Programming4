@@ -9,18 +9,12 @@
   <component name="ChangeListManager">
     <list default="true" id="afbd271e-3457-4656-98e8-f358f8b4d7b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Enemy States/BossBombingRunState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Enemy States/BossShootingBeamState.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Galaga.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/BulletObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/BulletObserver.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game observers/EnemyAttacksObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyAttacksObserver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/EnemyObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyObserver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/FighterObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/FighterObserver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Initializers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Minigin/Subjects/GameObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subjects/GameObject.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,28 +27,6 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://5" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/forward_list" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/memory" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Apps/School/VS/VC/Tools/MSVC/14.38.33130/include/queue" root0="SKIP_HIGHLIGHTING" />
@@ -74,7 +46,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "C++ Project.CleanProject.executor": "Run",
+    "C++ Project.CleanProject.executor": "Debug",
     "C++ Project.GameProject.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -108,6 +80,18 @@
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="AUTO_DETECT" />
       </configuration_1>
+      <configuration_2>
+        <option name="CONFIGURATION" value="Release" />
+        <option name="PLATFORM" value="x64" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXE_PATH" value="$(TargetPath)" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="$(ProjectDir)" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="AUTO_DETECT" />
+      </configuration_2>
       <option name="DEFAULT_PROJECT_PATH" value="" />
       <option name="AUTO_SELECT_PRIORITY" value="0" />
       <method v="2">
@@ -189,7 +173,8 @@
       <workItem from="1717607346488" duration="16917000" />
       <workItem from="1717679376778" duration="13628000" />
       <workItem from="1717764918316" duration="1476000" />
-      <workItem from="1717767286946" duration="5621000" />
+      <workItem from="1717767286946" duration="7469000" />
+      <workItem from="1717780835983" duration="995000" />
     </task>
     <servers />
   </component>

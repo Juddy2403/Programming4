@@ -34,7 +34,7 @@ void Galaga::LoadLevel()
 #if NDEBUG
     GameEngine::ServiceLocator::RegisterSoundSystem(std::make_unique<GameEngine::SdlSoundSystem>());
 #else
-    ServiceLocator::RegisterSoundSystem(std::make_unique<LoggingSoundSystem>(std::make_unique<SdlSoundSystem>()));
+    GameEngine::ServiceLocator::RegisterSoundSystem(std::make_unique<GameEngine::LoggingSoundSystem>(std::make_unique<GameEngine::SdlSoundSystem>()));
 #endif
 
     GameEngine::ServiceLocator::GetSoundSystem().FillSoundPaths("../Data/Audio/SoundPaths.txt");
@@ -54,9 +54,9 @@ void Galaga::LoadLevel()
     auto smallerFont = GameEngine::ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 10);
     //------FPS--------
     #ifndef NDEBUG
-    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
-    gameObject->AddComponent<TextureComponent>();
-    gameObject->AddComponent<FPSComponent>(gameObject->AddComponent<TextComponent>(smallerFont,"160 FPS"));
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<FPSComponent>(gameObject->AddComponent<GameEngine::TextComponent>(smallerFont,"160 FPS"));
     gameObject->SetPosition( 550, 20);
     scene->AddObject(std::move(gameObject));
     #endif

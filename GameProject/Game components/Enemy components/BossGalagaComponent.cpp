@@ -2,7 +2,6 @@
 
 #include "Enemy States/BombingRunState.h"
 #include "Enemy States/BossShootingBeamState.h"
-#include "Game components/CapturedFighterComponent.h"
 
 BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent, PlayerComponent* playerComponent):
     EnemyComponent(gameObj, spriteComponent, playerComponent),
@@ -17,7 +16,6 @@ bool BossGalagaComponent::HasBeenHit()
         m_BossStage.reset(bossStage);
         return false;
     }
-    if(m_CapturedFighter) m_CapturedFighter->GetGameObjParent()->SetDestroyedFlag();
     return true;
 }
 EnemyId BossGalagaComponent::GetEnemyID() const
@@ -37,8 +35,4 @@ void BossGalagaComponent::GetInBeamAttackState()
     m_CurrentState->Exit(this);
     m_CurrentState = std::make_unique<BossShootingBeamState>();
     m_CurrentState->Enter(this);
-}
-void BossGalagaComponent::SetCapturedFighter(CapturedFighterComponent* capturedFighter)
-{
-     m_CapturedFighter = capturedFighter; 
 }

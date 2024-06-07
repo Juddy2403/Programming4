@@ -6,6 +6,7 @@ class CapturedFighterComponent : public GameEngine::Component
 {
 public:
     explicit CapturedFighterComponent(GameEngine::GameObject* gameObj,BossGalagaComponent* parent,GameEngine::SpriteComponent* spriteComponent);
+    void UploadGetBackTrajectory() const;
     void Update() override;
 private:
     std::unique_ptr<RotatingSprite> m_RotatingSprite{};
