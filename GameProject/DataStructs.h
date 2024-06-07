@@ -69,3 +69,12 @@ struct ScoreData : GameEngine::EventData
     int enemyId;
 };
 
+enum class SceneId
+{
+    startMenu,
+    levelOne,
+    levelTwo,
+    levelThree,
+    gameOver
+};
+

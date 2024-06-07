@@ -29,9 +29,14 @@
 #include "Game components/FPSComponent.h"
 #endif
 
-void Galaga::LoadLevel()
+void Galaga::LoadScenes()
 {
-    //----------SOUND----------------
+    GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::levelOne), LoadLevelOne());
+    GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::levelOne));
+}
+std::unique_ptr<GameEngine::Scene> Galaga::LoadLevelOne()
+{
+        //----------SOUND----------------
 #if NDEBUG
     GameEngine::ServiceLocator::RegisterSoundSystem(std::make_unique<GameEngine::SdlSoundSystem>());
 #else
@@ -124,5 +129,5 @@ void Galaga::LoadLevel()
         scene->AddObject(std::move(enemy));
     }
     
-    GameEngine::SceneManager::GetInstance().SetScene(std::move(scene));
+    return scene;
 }

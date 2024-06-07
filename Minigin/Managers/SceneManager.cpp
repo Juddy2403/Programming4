@@ -1,19 +1,21 @@
 #include "SceneManager.h"
 #include "Minigin/Subjects/GameObject.h"
 
+void GameEngine::SceneManager::SetCurrentScene(int sceneId)
+{
+    m_CurrentSceneId = sceneId;
+}
+void GameEngine::SceneManager::AddScene(int sceneId, std::unique_ptr<Scene>&& scene)
+{
+    m_Scenes[sceneId] = std::move(scene);
+}
 void GameEngine::SceneManager::Update()
 {
-    m_Scene->Update();
+    if(m_CurrentSceneId != -1) m_Scenes[m_CurrentSceneId]->Update();
 }
 
 void GameEngine::SceneManager::Render()
 {
-    m_Scene->Render();
-
+    if(m_CurrentSceneId != -1) m_Scenes[m_CurrentSceneId]->Render();
 }
 
-void GameEngine::SceneManager::SetScene(std::unique_ptr<Scene>&& scene)
-{
-    // m_Scene.reset(std::move(scene).get());
-    m_Scene = std::move(scene);
-}

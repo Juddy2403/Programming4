@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <memory>
+namespace GameEngine {class Scene;}
 class Galaga final 
 {
 public:
@@ -9,6 +11,8 @@ public:
     Galaga& operator=(const Galaga& other) = delete;
     Galaga& operator=(Galaga&& other) noexcept = delete;
 
-    static void LoadLevel();
+    void LoadScenes();
     static constexpr int volume = 50;
+private:
+    std::unique_ptr<GameEngine::Scene> LoadLevelOne();
 };
