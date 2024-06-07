@@ -189,6 +189,7 @@
     <ClCompile Include="Game components\FPSComponent.cpp" />
     <ClCompile Include="Game components\PlayerHealthComponent.cpp" />
     <ClCompile Include="Game components\PlayerComponent.cpp" />
+    <ClCompile Include="Game components\ScoreComponent.cpp" />
     <ClCompile Include="Game observers\BulletObserver.cpp" />
     <ClCompile Include="Game observers\EnemyAIManager.cpp" />
     <ClCompile Include="Game observers\EnemyAttacksObserver.cpp" />
@@ -199,85 +200,7 @@
     <ClCompile Include="GameCommands.cpp" />
     <ClCompile Include="Initializers.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="RotatingSprite.cpp">
-      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <Optimization>Disabled</Optimization>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <AssemblerOutput>NoListing</AssemblerOutput>
-      <AssemblerListingLocation>x64\Debug\GameProject\</AssemblerListingLocation>
-      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
-      <BrowseInformation>false</BrowseInformation>
-      <BrowseInformationFile>x64\Debug\GameProject\</BrowseInformationFile>
-      <CompileAs>Default</CompileAs>
-      <ConformanceMode>true</ConformanceMode>
-      <DiagnosticsFormat>Column</DiagnosticsFormat>
-      <DisableLanguageExtensions>false</DisableLanguageExtensions>
-      <ErrorReporting>Prompt</ErrorReporting>
-      <ExpandAttributedSource>false</ExpandAttributedSource>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <EnableASAN>false</EnableASAN>
-      <EnableFuzzer>false</EnableFuzzer>
-      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Precise</FloatingPointModel>
-      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
-      <GenerateModuleDependencies>false</GenerateModuleDependencies>
-      <GenerateSourceDependencies>false</GenerateSourceDependencies>
-      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
-      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
-      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <LanguageStandard_C>Default</LanguageStandard_C>
-      <MinimalRebuild>false</MinimalRebuild>
-      <ModuleDependenciesFile>x64\Debug\GameProject\</ModuleDependenciesFile>
-      <ModuleOutputFile>x64\Debug\GameProject\</ModuleOutputFile>
-      <OmitDefaultLibName>false</OmitDefaultLibName>
-      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <ObjectFileName>x64\Debug\GameProject\</ObjectFileName>
-      <CallingConvention>Cdecl</CallingConvention>
-      <ProgramDataBaseFileName>x64\Debug\GameProject\vc143.pdb</ProgramDataBaseFileName>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>x64\Debug\GameProject\GameProject.pch</PrecompiledHeaderOutputFile>
-      <PreprocessToFile>false</PreprocessToFile>
-      <PreprocessKeepComments>false</PreprocessKeepComments>
-      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
-      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
-      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
-      <ShowIncludes>false</ShowIncludes>
-      <SourceDependenciesFile>x64\Debug\GameProject\</SourceDependenciesFile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <BufferSecurityCheck>true</BufferSecurityCheck>
-      <SmallerTypeCheck>false</SmallerTypeCheck>
-      <SpectreMitigation>false</SpectreMitigation>
-      <StructMemberAlignment>Default</StructMemberAlignment>
-      <TrackerLogDirectory>x64\Debug\GameProject\GameProject.tlog\</TrackerLogDirectory>
-      <TranslateIncludes>false</TranslateIncludes>
-      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <UseFullPaths>true</UseFullPaths>
-      <WarningLevel>Level4</WarningLevel>
-      <XMLDocumentationFileName>x64\Debug\GameProject\</XMLDocumentationFileName>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <IntelJCCErratum>false</IntelJCCErratum>
-      <BuildStlModules>false</BuildStlModules>
-      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
-      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
-      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
-      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Howest\Sem 4\Programming 4\GameEngine\Minigin;D:\Howest\Sem 4\Programming 4\GameEngine\GameProject;D:\Howest\Sem 4\Programming 4\GameEngine\3rdParty\nlohmann;D:\Howest\Sem 4\Programming 4\GameEngine\3rdParty\SDL2_ttf\include;
-	  D:\Howest\Sem 4\Programming 4\GameEngine\3rdParty\SDL2_image\include;
-	  D:\Howest\Sem 4\Programming 4\GameEngine\3rdParty\SDL2_mixer\include;
-	  D:\Howest\Sem 4\Programming 4\GameEngine\3rdParty\glm;
-	  D:\Howest\Sem 4\Programming 4\GameEngine\3rdParty\SDL2\include;C:\Program Files (x86)\Visual Leak Detector\include;</AdditionalIncludeDirectories>
-      <SDLCheck>true</SDLCheck>
-      <LinkCompiled>true</LinkCompiled>
-    </ClCompile>
+    <ClCompile Include="RotatingSprite.cpp" />
     <ClCompile Include="Trajectory Logic\Trajectory.cpp" />
     <ClCompile Include="Trajectory Logic\TrajectoryStates.cpp" />
   </ItemGroup>
@@ -304,6 +227,7 @@
     <ClInclude Include="Game components\FPSComponent.h" />
     <ClInclude Include="Game components\PlayerHealthComponent.h" />
     <ClInclude Include="Game components\PlayerComponent.h" />
+    <ClInclude Include="Game components\ScoreComponent.h" />
     <ClInclude Include="Game observers\BulletObserver.h" />
     <ClInclude Include="Game observers\EnemyAIManager.h" />
     <ClInclude Include="Game observers\EnemyAttacksObserver.h" />

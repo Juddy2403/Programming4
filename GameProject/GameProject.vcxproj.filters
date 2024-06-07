@@ -57,9 +57,6 @@
     <ClCompile Include="Game components\PlayerComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game components\RotatingSpriteComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game components\Enemy components\ButterflyComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -70,9 +67,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Trajectory Logic\TrajectoryStates.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy States\BeeBombingRunState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Enemy States\BossBombingRunState.cpp">
@@ -96,9 +90,6 @@
     <ClCompile Include="Game observers\EnemyAIManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game observers\EnemyBulletObserver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game observers\FormationObserver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -109,6 +100,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game components\FPSComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy States\BombingRunState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game components\CapturedFighterComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game components\ScoreComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game observers\EnemyAttacksObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RotatingSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,9 +161,6 @@
     <ClInclude Include="Game components\PlayerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game components\RotatingSpriteComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game components\Enemy components\ButterflyComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -174,12 +177,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Trajectory Logic\TrajectoryStates.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy States\BeeBombingRunState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy States\BossBombingRunState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Enemy States\BossStage.h">
@@ -206,9 +203,6 @@
     <ClInclude Include="Game observers\EnemyAIManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game observers\EnemyBulletObserver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game observers\FormationObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -219,6 +213,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game components\FPSComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy States\BombingRunState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy States\BossShootingBeamState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game components\CapturedFighterComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game components\ScoreComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game observers\EnemyAttacksObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RotatingSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

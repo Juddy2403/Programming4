@@ -10,6 +10,7 @@
 #include "Game components/BackgroundComponent.h"
 #include "Game components/FormationComponent.h"
 #include "Game components/FPSComponent.h"
+#include "Game components/ScoreComponent.h"
 #include "Game observers/BulletObserver.h"
 #include "Game observers/EnemyAIManager.h"
 #include "Game observers/EnemyAttacksObserver.h"
@@ -61,7 +62,14 @@ void Galaga::LoadLevel()
     gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
     gameObject->AddComponent<TextureComponent>();
     gameObject->AddComponent<TextComponent>(font,"1UP", SDL_Color{ 255,0,0 });
-    gameObject->SetPosition( 10, 20);
+    gameObject->SetPosition( 10, 10);
+    scene->AddObject(std::move(gameObject));
+
+    //----------SCORE---------
+    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<TextureComponent>();
+    gameObject->AddComponent<ScoreComponent>(gameObject->AddComponent<TextComponent>(font));
+    gameObject->SetPosition( 10, 30);
     scene->AddObject(std::move(gameObject));
     
     //--------FIGHTER--------
