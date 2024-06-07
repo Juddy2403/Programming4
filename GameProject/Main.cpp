@@ -12,7 +12,6 @@ void Load()
 {
 	Galaga::LoadLevel();
 }
-
 int main(int, char* []) {
 	GameEngine::Minigin engine("../Data/");
 	engine.Run(Load);

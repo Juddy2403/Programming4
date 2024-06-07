@@ -1,11 +1,14 @@
 ﻿#include "EnemyAttacksObserver.h"
 
 #include "DataStructs.h"
+#include "Galaga.h"
 #include "Initializers.h"
 #include "Components/CollisionComponent.h"
 #include "Components/SpriteComponent.h"
+#include "Game components/CapturedFighterComponent.h"
 #include "Game components/Enemy components/BeamComponent.h"
 #include "Game components/Enemy components/EnemyComponent.h"
+#include "Sound/ServiceLocator.h"
 #include "Subjects/GameObject.h"
 EnemyAttacksObserver::EnemyAttacksObserver(GameEngine::Scene* scene): m_Scene(scene) {}
 void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
@@ -32,8 +35,10 @@ void EnemyAttacksObserver::Notify(GameEngine::Subject* subject, int event,
     break;
     case GameEvent::fighterCaptured:
     {
+        GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::capturedShip), Galaga::volume);
         BossGalagaComponent* bossComp = dynamic_cast<BossGalagaComponent*>(actor->GetComponent<EnemyComponent>());
         auto capturedFighter = InitCapturedFighter(bossComp);
+        bossComp->SetCapturedFighter(capturedFighter->GetComponent<CapturedFighterComponent>());
         capturedFighter->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), this);
         m_Scene->AddObject(std::move(capturedFighter));
     }

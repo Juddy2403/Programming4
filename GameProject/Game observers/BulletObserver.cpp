@@ -1,9 +1,11 @@
 ﻿#include "BulletObserver.h"
 
 #include "DataStructs.h"
+#include "Galaga.h"
 #include "Initializers.h"
 #include "Components/SpriteComponent.h"
 #include "Game components/PlayerComponent.h"
+#include "Sound/ServiceLocator.h"
 
 BulletObserver::BulletObserver(GameEngine::Scene* scene):
     m_Scene(scene) {}
@@ -26,6 +28,7 @@ void BulletObserver::Notify(GameEngine::Subject* subject, int event
         break;
     case GameEvent::bulletShot:
     {
+        GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::playerShoot), Galaga::volume);
         auto bullet = InitBullet(actor->GetComponent<PlayerComponent>()->GetPlayerID());
 
         glm::vec3 pos = actor->GetPosition();

@@ -9,7 +9,6 @@
 #include "Components/TextureComponent.h"
 #include "Game components/BackgroundComponent.h"
 #include "Game components/FormationComponent.h"
-#include "Game components/FPSComponent.h"
 #include "Game components/ScoreComponent.h"
 #include "Game observers/BulletObserver.h"
 #include "Game observers/EnemyAIManager.h"
@@ -25,30 +24,34 @@
 #include "Subjects/GameObject.h"
 #include "Trajectory Logic/Parsers.h"
 
-using namespace GameEngine;
+#ifndef NDEBUG
+#include "Game components/FPSComponent.h"
+#endif
+
 void Galaga::LoadLevel()
 {
     //----------SOUND----------------
 #if NDEBUG
-    ServiceLocator::RegisterSoundSystem(std::make_unique<SdlSoundSystem>());
+    GameEngine::ServiceLocator::RegisterSoundSystem(std::make_unique<GameEngine::SdlSoundSystem>());
 #else
     ServiceLocator::RegisterSoundSystem(std::make_unique<LoggingSoundSystem>(std::make_unique<SdlSoundSystem>()));
 #endif
 
-    ServiceLocator::GetSoundSystem().FillSoundPaths("../Data/Audio/SoundPaths.txt");
+    GameEngine::ServiceLocator::GetSoundSystem().FillSoundPaths("../Data/Audio/SoundPaths.txt");
+    GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::start), Galaga::volume);
 
-    auto scene = std::make_unique<Scene>("First level");
+    auto scene = std::make_unique<GameEngine::Scene>("First level");
 
     //------BACKGROUND--------
-    auto gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::texture));
-    SDL_Rect& destRect = gameObject->AddComponent<TextureComponent>("Background.png")->m_DestRect;
+    auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::texture));
+    SDL_Rect& destRect = gameObject->AddComponent<GameEngine::TextureComponent>("Background.png")->m_DestRect;
     destRect.w = GameEngine::g_WindowRect.w;
     destRect.h = GameEngine::g_WindowRect.h;
-    gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<TextureComponent>(), 700);
+    gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<GameEngine::TextureComponent>(), 700);
     scene->AddObject(std::move(gameObject));
 
-    auto font = ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 16);
-    auto smallerFont = ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 10);
+    auto font = GameEngine::ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 16);
+    auto smallerFont = GameEngine::ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 10);
     //------FPS--------
     #ifndef NDEBUG
     gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
@@ -59,16 +62,16 @@ void Galaga::LoadLevel()
     #endif
 
     //----------NR OF PLAYERS---------
-    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
-    gameObject->AddComponent<TextureComponent>();
-    gameObject->AddComponent<TextComponent>(font,"1UP", SDL_Color{ 255,0,0 });
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<GameEngine::TextComponent>(font,"1UP", SDL_Color{ 255,0,0 });
     gameObject->SetPosition( 10, 10);
     scene->AddObject(std::move(gameObject));
 
     //----------SCORE---------
-    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::text));
-    gameObject->AddComponent<TextureComponent>();
-    gameObject->AddComponent<ScoreComponent>(gameObject->AddComponent<TextComponent>(font));
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<ScoreComponent>(gameObject->AddComponent<GameEngine::TextComponent>(font));
     gameObject->SetPosition( 10, 30);
     scene->AddObject(std::move(gameObject));
     
@@ -82,7 +85,7 @@ void Galaga::LoadLevel()
     scene->AddObject(std::move(gameObject));
     
     //----------------ENEMIES--------------------
-    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
     auto enemyAIObserver = gameObject->AddComponent<EnemyAIManager>();
     scene->AddObject(std::move(gameObject));
 
@@ -94,7 +97,7 @@ void Galaga::LoadLevel()
     auto enemyAttackObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), std::move(enemyAttackObserverUnique), nullptr);
 
     //--------- Enemy formation------------
-    gameObject = std::make_unique<GameObject>(static_cast<int>(GameId::misc));
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
     gameObject->AddComponent<FormationComponent>();
     scene->AddObject(std::move(gameObject));
 
@@ -103,8 +106,8 @@ void Galaga::LoadLevel()
         std::move(formationObserverUnique),nullptr);
 
     //--------- Enemy creation------------
-    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfo1.json",
-        "../Data/Formations/FormationTrajectories1.json", playerComp);
+    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfoTest.json",
+        "../Data/Formations/FormationTrajectoriesTest.json", playerComp);
     for (auto& enemy : enemyVec)
     {
         enemy->AddObserver(-1, enemyObserver);
@@ -115,5 +118,5 @@ void Galaga::LoadLevel()
         scene->AddObject(std::move(enemy));
     }
     
-    SceneManager::GetInstance().SetScene(std::move(scene));
+    GameEngine::SceneManager::GetInstance().SetScene(std::move(scene));
 }

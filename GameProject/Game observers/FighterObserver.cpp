@@ -7,6 +7,7 @@
 #include "Game components/Enemy components/BeamComponent.h"
 #include "Input/KeyboardInput.h"
 #include "Managers/InputManager.h"
+#include "Sound/ServiceLocator.h"
 #include "Subjects/GameObject.h"
 
 void FighterObserver::Notify(GameEngine::Subject* subject, int event,
@@ -27,6 +28,7 @@ void FighterObserver::Notify(GameEngine::Subject* subject, int event,
             GameEngine::GameObject* actor = dynamic_cast<GameEngine::GameObject*>(subject);
             auto healthComp = actor->GetComponent<PlayerHealthComponent>();
             actor->SetPosition(PlayerComponent::m_RespawnPos);
+            GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::playerDeath), Galaga::volume);
             healthComp->Hit();
         }
         else if (collisionData->pOtherCollider->GetID() == static_cast<int>(GameId::bossBeam) &&

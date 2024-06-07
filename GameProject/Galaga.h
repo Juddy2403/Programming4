@@ -10,4 +10,5 @@ public:
     Galaga& operator=(Galaga&& other) noexcept = delete;
 
     static void LoadLevel();
+    static constexpr int volume = 50;
 };

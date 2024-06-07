@@ -18,7 +18,7 @@ CapturedFighterComponent::CapturedFighterComponent(GameEngine::GameObject* gameO
 }
 void CapturedFighterComponent::Update()
 {
-    if(m_Parent == nullptr || m_Parent->IsDestroyed())
+    if(m_Parent->IsDestroyed())
     {
         GetGameObjParent()->SetDestroyedFlag();
         return;

@@ -1,6 +1,9 @@
 ﻿#include "BossShootingBeamState.h"
+
+#include "Galaga.h"
 #include "Minigin.h"
 #include "Game components/Enemy components/EnemyComponent.h"
+#include "Sound/ServiceLocator.h"
 
 void BossShootingBeamState::Enter(EnemyComponent* enemyComponent)
 {
@@ -41,6 +44,7 @@ std::unique_ptr<EnemyState> BossShootingBeamState::Update(EnemyComponent* enemyC
             static_cast<int>(ObserverIdentifier::enemyAttack));
         enemyComponent->GetRotatingSprite()->RotateSpriteInDirection({ 0,1 });
         enemyComponent->SetCurDirection({ 0,1 });
+        GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::tractorBeam), Galaga::volume);
         m_IsShootingBeam = true;
     }
     return nullptr;

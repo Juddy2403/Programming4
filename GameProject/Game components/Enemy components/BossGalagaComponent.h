@@ -2,6 +2,7 @@
 #include "Enemy States/BossStage.h"
 #include "EnemyComponent.h"
 
+class CapturedFighterComponent;
 class BossGalagaComponent final : public EnemyComponent
 {
 public:
@@ -20,8 +21,10 @@ public:
     virtual void GetInAttackState() override;
     virtual void GetInBeamAttackState();
     void CapturedFighter() { m_HasCapturedFighter = true; }
+    void SetCapturedFighter(CapturedFighterComponent* capturedFighter);
     bool HasCapturedFighter() const { return m_HasCapturedFighter; }
 private:
     bool m_HasCapturedFighter{ false };
+    CapturedFighterComponent* m_CapturedFighter{ nullptr };
     std::unique_ptr<BossStage> m_BossStage;
 };

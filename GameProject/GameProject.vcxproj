@@ -170,7 +170,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Enemy States\BombingRunState.cpp" />
-    <ClCompile Include="Enemy States\BossBombingRunState.cpp" />
+    <ClCompile Include="Enemy States\BossShootingBeamState.cpp" />
     <ClCompile Include="Enemy States\BossStage.cpp" />
     <ClCompile Include="Enemy States\ButterflyBombingRunState.cpp" />
     <ClCompile Include="Enemy States\GetInFormationState.cpp" />
