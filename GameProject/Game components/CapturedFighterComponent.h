@@ -1,7 +1,12 @@
 ﻿#pragma once
-#include "Components/Component.h"
-#include "Enemy components/BossGalagaComponent.h"
+#include <memory>
 
+#include "Components/Component.h"
+#include "Components/SpriteComponent.h"
+
+class Trajectory;
+class RotatingSprite;
+class BossGalagaComponent;
 class CapturedFighterComponent : public GameEngine::Component
 {
 public:

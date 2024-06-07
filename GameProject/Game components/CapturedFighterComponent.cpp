@@ -1,6 +1,8 @@
 ﻿#include "CapturedFighterComponent.h"
 
 #include "FormationComponent.h"
+#include "Enemy components/BossGalagaComponent.h"
+
 CapturedFighterComponent::CapturedFighterComponent(GameEngine::GameObject* gameObj, BossGalagaComponent* parent, GameEngine::SpriteComponent* spriteComponent):
     Component(gameObj),
     m_RotatingSprite(std::make_unique<RotatingSprite>(spriteComponent)),
@@ -39,7 +41,5 @@ void CapturedFighterComponent::Update()
     {
         if (m_Parent->IsDiving()) m_RotatingSprite->RotateSpriteInDirection(m_Parent->GetCurDirection());
         else m_RotatingSprite->RotateSpriteInDirection({ FormationComponent::GetDirection(),0 });
-        //auto newPos = m_Parent->GetGameObjParent()->GetPosition() + glm::vec3{ 0, -32,0 };
-        // GetGameObjParent()->SetPosition(newPos);
     }
 }

@@ -21,3 +21,5 @@ std::unique_ptr<GameEngine::GameObject> InitButterfly(PlayerComponent* playerCom
 std::unique_ptr<GameEngine::GameObject> InitBossGalaga(PlayerComponent* playerComponent);
 
 std::unique_ptr<GameEngine::GameObject> InitBossBeam(EnemyComponent* parentComp);
+
+std::unique_ptr<GameEngine::GameObject> InitExplosion(GameEngine::GameObject* parentObj);

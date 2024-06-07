@@ -19,17 +19,15 @@ void PlayerHealthComponent::Render()
         destRect.y = static_cast<int>(m_HealthPosition.y);
         auto srcRect = m_TextureComponent->m_SrcRect;
         srcRect.x = 1;
-        srcRect.y = 1;
         GameEngine::Renderer::GetInstance().RenderTexture(*m_TextureComponent->GetTexture(), srcRect,
             destRect);
     }
 }
 void PlayerHealthComponent::Hit()
 {
-    if (m_Health <= 0)
-    {
-        GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::died));
-        return;
-    }
+    if (m_Health <= 0) return; 
+
+    GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::died));
+
     --m_Health;
 }

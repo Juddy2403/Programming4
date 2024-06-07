@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "Enemy States/BossStage.h"
 #include "EnemyComponent.h"
+#include "Enemy States/BossHealthStage.h"
 
 class BossGalagaComponent final : public EnemyComponent
 {
@@ -23,5 +23,5 @@ public:
     bool HasCapturedFighter() const { return m_HasCapturedFighter; }
 private:
     bool m_HasCapturedFighter{ false };
-    std::unique_ptr<BossStage> m_BossStage;
+    std::unique_ptr<BossHealthStage> m_BossStage;
 };

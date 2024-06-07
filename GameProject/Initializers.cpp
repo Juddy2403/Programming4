@@ -7,6 +7,7 @@
 #include "Components/CollisionComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Game components/CapturedFighterComponent.h"
+#include "Game components/ExplosionComponent.h"
 #include "Game components/Enemy components/BeamComponent.h"
 #include "Game components/Enemy components/BeeComponent.h"
 #include "Game components/Enemy components/BossGalagaComponent.h"
@@ -196,5 +197,33 @@ std::unique_ptr<GameEngine::GameObject> InitBossBeam(EnemyComponent* parentComp)
     spriteComponent->m_IsActive = true;
     gameObject->AddComponent<GameEngine::CollisionComponent>(spriteComponent->m_DestRect);
     gameObject->AddComponent<BeamComponent>(spriteComponent, parentComp);
+    return gameObject;
+}
+std::unique_ptr<GameEngine::GameObject> InitExplosion(GameEngine::GameObject* parentObj)
+{
+    auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
+    auto* spriteComponent = gameObject->AddComponent<GameEngine::SpriteComponent>("GalagaUpdated.png");
+    spriteComponent->m_SpriteInfo.m_Height = 32;
+    spriteComponent->m_SpriteInfo.m_Width = 32;
+    spriteComponent->m_SpriteInfo.m_Spacing = 2;
+    spriteComponent->m_SpriteInfo.m_StartPos.x = 91;
+    spriteComponent->m_SpriteInfo.m_StartPos.y = 19;
+    spriteComponent->m_SpriteInfo.m_NrOfCols = 5;
+    spriteComponent->m_SpriteInfo.m_NrOfRows = 1;
+    spriteComponent->m_SpriteInfo.m_CurrentCol = 0;
+    spriteComponent->m_SpriteInfo.m_TimeInterval = 0.05f;
+    spriteComponent->m_Scale = 2;
+    spriteComponent->UpdateSrcRect();
+    spriteComponent->m_IsActive = true;
+    gameObject->AddComponent<ExplosionComponent>(spriteComponent);
+
+    //calculate the center of the parent object
+    const auto parentRect = parentObj->GetComponent<GameEngine::SpriteComponent>()->m_DestRect;
+    const auto centerParent = glm::vec2{ parentRect.x + parentRect.w / 2, parentRect.y + parentRect.h / 2 };
+    const auto explosionPos = glm::vec2{ centerParent.x - spriteComponent->m_DestRect.w / 2,
+        centerParent.y - spriteComponent->m_DestRect.h / 2 };
+    
+    gameObject->SetPosition({explosionPos,0});
+    
     return gameObject;
 }

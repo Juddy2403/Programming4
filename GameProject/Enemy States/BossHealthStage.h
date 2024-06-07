@@ -19,23 +19,23 @@ namespace GameEngine
 //                         ├────────────────┤                             
 //                         │ score increases│                             
 //                         └────────────────┘                             
-class BossStage
+class BossHealthStage
 {
 public:
-    virtual BossStage* HasBeenHit(EnemyComponent* bossObj) = 0;
-    virtual ~BossStage() = default;
+    virtual BossHealthStage* HasBeenHit(EnemyComponent* bossObj) = 0;
+    virtual ~BossHealthStage() = default;
 };
 
-class BossStageOne final : public BossStage
+class BossStageOne final : public BossHealthStage
 {
 public:
-    virtual BossStage* HasBeenHit(EnemyComponent* bossObj) override;
+    virtual BossHealthStage* HasBeenHit(EnemyComponent* bossObj) override;
     virtual ~BossStageOne() = default;
 };
 
-class BossStageTwo final : public BossStage
+class BossStageTwo final : public BossHealthStage
 {
 public:
-    virtual BossStage* HasBeenHit(EnemyComponent* bossObj) override;
+    virtual BossHealthStage* HasBeenHit(EnemyComponent* bossObj) override;
     virtual ~BossStageTwo() = default;
 };

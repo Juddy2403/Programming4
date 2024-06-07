@@ -1,5 +1,6 @@
 ﻿#include "BulletObserver.h"
 
+#include "BulletTracker.h"
 #include "DataStructs.h"
 #include "Galaga.h"
 #include "Initializers.h"
@@ -22,6 +23,7 @@ void BulletObserver::Notify(GameEngine::Subject* subject, int event
         int otherId = collisionData->pOtherCollider->GetID();
         if (otherId == static_cast<int>(GameId::enemy) && actor->GetID() == static_cast<int>(GameId::bullet))
         {
+            BulletTracker::BulletHit();
             actor->SetDestroyedFlag();
         }
     }

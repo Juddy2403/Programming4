@@ -8,13 +8,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afbd271e-3457-4656-98e8-f358f8b4d7b0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GameProject/BulletTracker.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/BulletTracker.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/ExplosionComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game components/ExplosionComponent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game observers/ExplosionObserver.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameProject/Game observers/ExplosionObserver.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Enemy States/BossStage.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Enemy States/BossHealthStage.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Enemy States/BossStage.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Enemy States/BossHealthStage.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/CapturedFighterComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/EnemyAttacksObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyAttacksObserver.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/Enemy components/BossGalagaComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game components/PlayerHealthComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/PlayerHealthComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/BulletObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/BulletObserver.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/GameCommands.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameCommands.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/GameProject.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Initializers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Subjects/GameObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Subjects/GameObject.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Initializers.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +60,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "C++ Project.CleanProject.executor": "Debug",
-    "C++ Project.GameProject.executor": "Debug",
+    "C++ Project.GameProject.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -174,7 +187,7 @@
       <workItem from="1717679376778" duration="13628000" />
       <workItem from="1717764918316" duration="1476000" />
       <workItem from="1717767286946" duration="7469000" />
-      <workItem from="1717780835983" duration="995000" />
+      <workItem from="1717780835983" duration="5944000" />
     </task>
     <servers />
   </component>

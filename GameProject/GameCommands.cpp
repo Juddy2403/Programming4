@@ -1,7 +1,7 @@
 ﻿#include "GameCommands.h"
 
+#include "BulletTracker.h"
 #include "DataStructs.h"
-#include "Galaga.h"
 #include "Subjects/GameObject.h"
 
 ShootBulletCommand::ShootBulletCommand(GameEngine::GameObject* actor): Command(actor) {}
@@ -19,6 +19,7 @@ void ShootBulletCommand::Execute()
         static_cast<int>(ObserverIdentifier::bullet));
     
     m_Previous = m_Current;
+    BulletTracker::BulletFired();
 }
 
 GameEngine::Command::ExecuteOn ShootBulletCommand::ExecuteOnKeyState() const

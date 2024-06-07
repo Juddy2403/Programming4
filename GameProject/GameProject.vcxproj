@@ -169,9 +169,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BulletTracker.cpp" />
     <ClCompile Include="Enemy States\BombingRunState.cpp" />
     <ClCompile Include="Enemy States\BossShootingBeamState.cpp" />
-    <ClCompile Include="Enemy States\BossStage.cpp" />
+    <ClCompile Include="Enemy States\BossHealthStage.cpp" />
     <ClCompile Include="Enemy States\ButterflyBombingRunState.cpp" />
     <ClCompile Include="Enemy States\GetInFormationState.cpp" />
     <ClCompile Include="Enemy States\IdleState.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Game components\Enemy components\ButterflyComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\EnemyBulletComponent.cpp" />
     <ClCompile Include="Game components\Enemy components\EnemyComponent.cpp" />
+    <ClCompile Include="Game components\ExplosionComponent.cpp" />
     <ClCompile Include="Game components\FormationComponent.cpp" />
     <ClCompile Include="Game components\FPSComponent.cpp" />
     <ClCompile Include="Game components\PlayerHealthComponent.cpp" />
@@ -194,6 +196,7 @@
     <ClCompile Include="Game observers\EnemyAIManager.cpp" />
     <ClCompile Include="Game observers\EnemyAttacksObserver.cpp" />
     <ClCompile Include="Game observers\EnemyObserver.cpp" />
+    <ClCompile Include="Game observers\ExplosionObserver.cpp" />
     <ClCompile Include="Game observers\FighterObserver.cpp" />
     <ClCompile Include="Game observers\FormationObserver.cpp" />
     <ClCompile Include="Game observers\ScoreManager.cpp" />
@@ -205,10 +208,11 @@
     <ClCompile Include="Trajectory Logic\TrajectoryStates.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BulletTracker.h" />
     <ClInclude Include="DataStructs.h" />
     <ClInclude Include="Enemy States\BombingRunState.h" />
     <ClInclude Include="Enemy States\BossShootingBeamState.h" />
-    <ClInclude Include="Enemy States\BossStage.h" />
+    <ClInclude Include="Enemy States\BossHealthStage.h" />
     <ClInclude Include="Enemy States\ButterflyBombingRunState.h" />
     <ClInclude Include="Enemy States\EnemyState.h" />
     <ClInclude Include="Enemy States\GetInFormationState.h" />
@@ -223,6 +227,7 @@
     <ClInclude Include="Game components\Enemy components\ButterflyComponent.h" />
     <ClInclude Include="Game components\Enemy components\EnemyBulletComponent.h" />
     <ClInclude Include="Game components\Enemy components\EnemyComponent.h" />
+    <ClInclude Include="Game components\ExplosionComponent.h" />
     <ClInclude Include="Game components\FormationComponent.h" />
     <ClInclude Include="Game components\FPSComponent.h" />
     <ClInclude Include="Game components\PlayerHealthComponent.h" />
@@ -232,6 +237,7 @@
     <ClInclude Include="Game observers\EnemyAIManager.h" />
     <ClInclude Include="Game observers\EnemyAttacksObserver.h" />
     <ClInclude Include="Game observers\EnemyObserver.h" />
+    <ClInclude Include="Game observers\ExplosionObserver.h" />
     <ClInclude Include="Game observers\FighterObserver.h" />
     <ClInclude Include="Game observers\FormationObserver.h" />
     <ClInclude Include="Game observers\ScoreManager.h" />

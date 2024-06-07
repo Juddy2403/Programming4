@@ -14,6 +14,7 @@
 #include "Game observers/EnemyAIManager.h"
 #include "Game observers/EnemyAttacksObserver.h"
 #include "Game observers/EnemyObserver.h"
+#include "Game observers/ExplosionObserver.h"
 #include "Game observers/FighterObserver.h"
 #include "Game observers/FormationObserver.h"
 #include "Game observers/ScoreManager.h"
@@ -76,11 +77,15 @@ void Galaga::LoadLevel()
     scene->AddObject(std::move(gameObject));
     
     //--------FIGHTER--------
+    auto explosionObserverUnique = std::make_unique<ExplosionObserver>(scene.get());
+    auto explosionObserver = scene->AddObserver(-1, std::move(explosionObserverUnique), nullptr);
+
     gameObject = InitFighter();
     auto fighterObserver = std::make_unique<FighterObserver>();
     auto bulletObserver = std::make_unique<BulletObserver>(scene.get());
     scene->AddObserver(static_cast<int>(ObserverIdentifier::bullet), std::move(bulletObserver), gameObject.get());
     scene->AddObserver(-1, std::move(fighterObserver), gameObject.get());
+    gameObject->AddObserver(-1, explosionObserver);
     auto playerComp = gameObject->GetComponent<PlayerComponent>();
     scene->AddObject(std::move(gameObject));
     
@@ -115,6 +120,7 @@ void Galaga::LoadLevel()
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::formation), formationObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), enemyAttackObserver);
         enemy->AddObserver(-1, enemyAIObserver);
+        enemy->AddObserver(-1, explosionObserver);
         scene->AddObject(std::move(enemy));
     }
     

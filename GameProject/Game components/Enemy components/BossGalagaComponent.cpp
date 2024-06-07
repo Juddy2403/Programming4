@@ -10,8 +10,7 @@ BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEn
 
 bool BossGalagaComponent::HasBeenHit()
 {
-    BossStage* bossStage = m_BossStage->HasBeenHit(this);
-    if (bossStage)
+    if (BossHealthStage* bossStage = m_BossStage->HasBeenHit(this))
     {
         m_BossStage.reset(bossStage);
         return false;
