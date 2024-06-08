@@ -61,7 +61,7 @@ public:
         }
         catch (const std::out_of_range& e)
         {
-            std::cerr <<"Out of range error: "<<e.what()<<" KeyboardInput.cpp\n";
+            std::cerr << "Out of range error: " << e.what() << " KeyboardInput.cpp\n";
         }
         return false;
     }
@@ -74,7 +74,7 @@ public:
         }
         catch (const std::out_of_range& e)
         {
-            std::cerr <<"Out of range error: "<<e.what()<<" KeyboardInput.cpp\n";
+            std::cerr << "Out of range error: " << e.what() << " KeyboardInput.cpp\n";
         }
         return false;
     }
@@ -87,7 +87,7 @@ public:
         }
         catch (const std::out_of_range& e)
         {
-            std::cerr <<"Out of range error: "<<e.what()<<" KeyboardInput.cpp\n";
+            std::cerr << "Out of range error: " << e.what() << " KeyboardInput.cpp\n";
         }
         return false;
     }
@@ -119,8 +119,32 @@ private:
         { KeyboardInputKey::X,SDL_SCANCODE_X },
         { KeyboardInputKey::Y,SDL_SCANCODE_Y },
         { KeyboardInputKey::SPACE,SDL_SCANCODE_SPACE },
-        { KeyboardInputKey::Z,SDL_SCANCODE_Z } };
-    
+        { KeyboardInputKey::Z,SDL_SCANCODE_Z },
+        { KeyboardInputKey::UP,SDL_SCANCODE_UP },
+        { KeyboardInputKey::DOWN,SDL_SCANCODE_DOWN },
+        { KeyboardInputKey::LEFT,SDL_SCANCODE_LEFT },
+        { KeyboardInputKey::RIGHT,SDL_SCANCODE_RIGHT },
+        { KeyboardInputKey::F1,SDL_SCANCODE_F1 },
+        { KeyboardInputKey::F2,SDL_SCANCODE_F2 },
+        { KeyboardInputKey::F3,SDL_SCANCODE_F3 },
+        { KeyboardInputKey::F4,SDL_SCANCODE_F4 },
+        { KeyboardInputKey::F5,SDL_SCANCODE_F5 },
+        { KeyboardInputKey::F6,SDL_SCANCODE_F6 },
+        { KeyboardInputKey::F7,SDL_SCANCODE_F7 },
+        { KeyboardInputKey::F8,SDL_SCANCODE_F8 },
+        { KeyboardInputKey::F9,SDL_SCANCODE_F9 },
+        { KeyboardInputKey::F10,SDL_SCANCODE_F10 },
+        { KeyboardInputKey::F11,SDL_SCANCODE_F11 },
+        { KeyboardInputKey::F12,SDL_SCANCODE_F12 },
+        { KeyboardInputKey::ESCAPE,SDL_SCANCODE_ESCAPE },
+        { KeyboardInputKey::ENTER,SDL_SCANCODE_RETURN },
+        { KeyboardInputKey::RETURN,SDL_SCANCODE_RETURN2 },
+        { KeyboardInputKey::SHIFT,SDL_SCANCODE_LSHIFT },
+        { KeyboardInputKey::CTRL,SDL_SCANCODE_LCTRL },
+        { KeyboardInputKey::ALT,SDL_SCANCODE_LALT },
+        { KeyboardInputKey::TAB,SDL_SCANCODE_TAB }
+    };
+
     std::array<Uint8, SDL_NUM_SCANCODES> m_PreviousState;
     std::array<Uint8, SDL_NUM_SCANCODES> m_CurrentState;
     std::array<Uint8, SDL_NUM_SCANCODES> m_KeysPressedThisFrame;
@@ -128,7 +152,7 @@ private:
 };
 KeyboardInput::KeyboardInput(): m_pSDLInput(std::make_unique<SDLInput>())
 {}
-KeyboardInput::~KeyboardInput() {}
+KeyboardInput::~KeyboardInput() {} //doesn't work without this (some unique ptr shenanigans)
 
 bool KeyboardInput::ProcessKeyboardInput() const
 {

@@ -14,7 +14,7 @@ namespace GameEngine
         void CollidedWith(CollisionComponent* other) const;
         virtual void Update() override;
     
-        virtual ~CollisionComponent() override;
+        virtual ~CollisionComponent() override = default;
         CollisionComponent(const CollisionComponent& other) = delete;
         CollisionComponent(CollisionComponent&& other) = delete;
         CollisionComponent& operator=(const CollisionComponent& other) = delete;

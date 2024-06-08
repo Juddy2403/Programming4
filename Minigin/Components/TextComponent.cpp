@@ -29,7 +29,11 @@ void TextComponent::SetFont(const std::shared_ptr<Font>& font)
     assert(font);
     if (font) m_Font = font;
 }
-void TextComponent::SetColor(const SDL_Color& color) { m_Color = color; }
+void TextComponent::SetColor(const SDL_Color& color)
+{
+    m_Color = color;
+    m_NeedsUpdate = true;
+}
 
 void TextComponent::Update()
 {

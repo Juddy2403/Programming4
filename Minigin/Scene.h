@@ -3,8 +3,11 @@
 #include <memory>
 #include <vector>
 
+#include "Managers/CollisionManager.h"
+
 namespace GameEngine
 {
+	class CollisionManager;
 	class IObserver;
 	class GameObject;
 	class Scene final
@@ -31,6 +34,7 @@ namespace GameEngine
 		void AddGameObjectsToBeAdded();
 		bool m_AreElemsToBeAdded = false;
 		std::string m_Name;
+		std::unique_ptr<CollisionManager> m_CollisionManager;
 		std::vector<std::unique_ptr<IObserver>> m_Observers;
 		std::vector<std::unique_ptr<GameObject>> m_GameObjects;
 		std::vector<std::unique_ptr<GameObject>> m_GameObjectsToBeAdded;

@@ -10,8 +10,7 @@
 
 void Load()
 {
-	Galaga galaga;
-	galaga.LoadScenes();
+	Galaga::GetInstance().LoadScenes();
 }
 int main(int, char* []) {
 	GameEngine::Minigin engine("../Data/");

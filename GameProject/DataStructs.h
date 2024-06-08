@@ -78,3 +78,10 @@ enum class SceneId
     gameOver
 };
 
+enum class GameMode
+{
+    singlePlayer,
+    coop,
+    versus
+};
+

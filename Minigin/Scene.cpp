@@ -3,6 +3,7 @@
 #include "IObserver.h"
 #include <algorithm>
 #include "Managers/CollisionManager.h"
+#include "Components/CollisionComponent.h"
 #include "Managers/InputManager.h"
 #include "Managers/TimeManager.h"
 
@@ -10,7 +11,9 @@ using namespace GameEngine;
 
 //#define CHECK_COLLISION_RECTS
 
-Scene::Scene(const std::string& name) : m_Name(name) {}
+Scene::Scene(const std::string& name) : m_Name(name),
+                                        m_CollisionManager(std::make_unique<CollisionManager>())
+{}
 
 Scene::~Scene() = default;
 
@@ -23,6 +26,10 @@ void Scene::AddGameObjectsToBeAdded()
 
 GameObject* Scene::AddObject(std::unique_ptr<GameObject>&& object)
 {
+    if (object->CheckIfComponentExists<CollisionComponent>())
+    {
+        m_CollisionManager->AddCollisionComponent(object->GetComponent<CollisionComponent>());
+    }
     m_GameObjectsToBeAdded.emplace_back(std::move(object));
     m_AreElemsToBeAdded = true;
     return m_GameObjectsToBeAdded.back().get();
@@ -38,6 +45,10 @@ IObserver* GameEngine::Scene::AddObserver(int message, std::unique_ptr<IObserver
 
 void Scene::Remove(const std::unique_ptr<GameObject>& object)
 {
+    if (object->CheckIfComponentExists<CollisionComponent>())
+    {
+        m_CollisionManager->RemoveCollisionComponent(object->GetComponent<CollisionComponent>());
+    }
     std::erase(m_GameObjects, object);
 }
 
@@ -48,7 +59,7 @@ void Scene::RemoveAll()
 
 void Scene::Update()
 {
-    if(m_AreElemsToBeAdded) AddGameObjectsToBeAdded();
+    if (m_AreElemsToBeAdded) AddGameObjectsToBeAdded();
     bool areElemsToErase = false;
     for (const auto& object : m_GameObjects)
     {
@@ -56,7 +67,7 @@ void Scene::Update()
         else areElemsToErase = true;
     }
     if (areElemsToErase) RemoveDestroyedObjects();
-    CollisionManager::CheckCollisions();
+    m_CollisionManager->CheckCollisions();
 }
 
 void Scene::Render() const
