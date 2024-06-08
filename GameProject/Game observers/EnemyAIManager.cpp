@@ -1,5 +1,6 @@
 ﻿#include "EnemyAIManager.h"
 
+#include "Galaga.h"
 #include "Game components/Enemy components/BossGalagaComponent.h"
 
 std::vector<EnemyComponent*> EnemyAIManager::m_Enemies;
@@ -27,7 +28,11 @@ void EnemyAIManager::Notify([[maybe_unused]] GameEngine::Subject* subject, int e
 void EnemyAIManager::Update()
 {
     if (m_EnemiesInFormation != static_cast<int>(m_Enemies.size())) return;
-    if (m_Enemies.empty()) return; //TODO: here send a notif that the level is cleared
+    if (m_Enemies.empty())
+    {
+        Galaga::GetInstance().LevelCleared();
+        return;
+    }
 
     int enemyToSetOut = rand() % m_Enemies.size();
     if (m_Enemies[enemyToSetOut]->GetEnemyID() == EnemyId::bossGalaga)

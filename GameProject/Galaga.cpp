@@ -60,18 +60,19 @@ void Galaga::LevelCleared()
         ChangeScene(SceneId::levelThree, LoadLevel("../Data/Formations/EnemyInfo3.json", "../Data/Formations/FormationTrajectories3.json"));
         break;
     case SceneId::levelThree:
-        ChangeScene(SceneId::gameOver, LoadLevel("../Data/Formations/EnemyInfo3.json", "../Data/Formations/FormationTrajectories3.json"));
+        ChangeScene(SceneId::gameOver, LoadGameOverScene());
         break;
+    default: break;
     }
 }
 void Galaga::ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene)
 {
-    for(auto key : m_KeyboardSceneKeys)
+    for(auto key : m_PrevKeyboardSceneKeys)
         GameEngine::InputManager::GetInstance().UnbindCommand(key);
-    for(auto [key, controllerIdx] : m_ControllerSceneKeys)
+    for(auto [key, controllerIdx] : m_PrevControllerSceneKeys)
         GameEngine::InputManager::GetInstance().UnbindCommand(key, controllerIdx);
-    m_KeyboardSceneKeys.clear();
-    m_ControllerSceneKeys.clear();
+    //m_KeyboardSceneKeys.clear();
+    //m_ControllerSceneKeys.clear();
     
     GameEngine::SceneManager::GetInstance().RemoveScene(static_cast<int>(m_CurrentScene));
     GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(sceneId), std::move(scene));
@@ -83,7 +84,7 @@ void Galaga::SetGameMode(GameMode mode)
     if(m_HasGameModeBeenSet) return;
     m_CurrentGameMode = mode;
     m_HasGameModeBeenSet = true;
-    ChangeScene(SceneId::levelOne, LoadLevel("../Data/Formations/EnemyInfo1.json", "../Data/Formations/FormationTrajectories1.json"));
+    ChangeScene(SceneId::levelTwo, LoadLevel("../Data/Formations/EnemyInfo2.json", "../Data/Formations/FormationTrajectories2.json"));
 }
 std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInfoPath, const std::string& trajectoryInfoPath)
 {
@@ -173,7 +174,7 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInf
         enemy->AddObserver(-1, explosionObserver);
         scene->AddObject(std::move(enemy));
     }
-    
+    m_PrevKeyboardSceneKeys = std::move(m_KeyboardSceneKeys);
     m_KeyboardSceneKeys = { GameEngine::KeyboardInputKey::A, GameEngine::KeyboardInputKey::D, GameEngine::KeyboardInputKey::SPACE };
 
     return scene;

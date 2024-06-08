@@ -29,7 +29,7 @@ public:
     void LevelCleared();
     void ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene);
     void SetGameMode(GameMode mode);
-    static constexpr int volume = 0;
+    static constexpr int volume = 50;
     GameEngine::GameObject* m_pPlayer;
 private:
     friend class Singleton<Galaga>;
@@ -40,6 +40,8 @@ private:
     SceneId m_CurrentScene;
     std::vector<GameEngine::KeyboardInputKey> m_KeyboardSceneKeys;
     std::vector<std::pair<GameEngine::ControllerInputKey,int>> m_ControllerSceneKeys;
+    std::vector<GameEngine::KeyboardInputKey> m_PrevKeyboardSceneKeys;
+    std::vector<std::pair<GameEngine::ControllerInputKey,int>> m_PrevControllerSceneKeys;
     std::unique_ptr<GameEngine::Scene> LoadLevel(const std::string& enemyInfoPath, const std::string& trajectoryInfoPath);
     std::unique_ptr<GameEngine::Scene> LoadStartScreen();
     std::unique_ptr<GameEngine::Scene> LoadGameOverScene();

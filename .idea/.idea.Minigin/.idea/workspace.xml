@@ -9,22 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="afbd271e-3457-4656-98e8-f358f8b4d7b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/DataStructs.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/DataStructs.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Galaga.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/PlayerComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/FighterObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/FighterObserver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Initializers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Initializers.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Input/Command.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Input/Command.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Managers/InputManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/InputManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Managers/InputManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/InputManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Managers/SceneManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/SceneManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Managers/SceneManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/SceneManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Scene.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/EnemyAIManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/EnemyAIManager.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +21,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -78,7 +66,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="C++ Project.CleanProject">
+  <component name="RunManager" selected="C++ Project.GameProject">
     <configuration name="CleanProject" type="CppProject" factoryName="C++ Project">
       <configuration_1>
         <option name="CONFIGURATION" value="Debug" />
@@ -189,7 +177,7 @@
       <workItem from="1717780835983" duration="14618000" />
       <workItem from="1717841844685" duration="6532000" />
       <workItem from="1717858000730" duration="10304000" />
-      <workItem from="1717880910739" duration="1844000" />
+      <workItem from="1717880910739" duration="4848000" />
     </task>
     <servers />
   </component>
@@ -199,5 +187,16 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/GameProject/Galaga.cpp</url>
+          <line>71</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
