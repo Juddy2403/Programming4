@@ -84,7 +84,7 @@ void Galaga::SetGameMode(GameMode mode)
     if(m_HasGameModeBeenSet) return;
     m_CurrentGameMode = mode;
     m_HasGameModeBeenSet = true;
-    ChangeScene(SceneId::levelTwo, LoadLevel("../Data/Formations/EnemyInfo2.json", "../Data/Formations/FormationTrajectories2.json"));
+    ChangeScene(SceneId::levelOne, LoadLevel("../Data/Formations/EnemyInfo1.json", "../Data/Formations/FormationTrajectories1.json"));
 }
 std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInfoPath, const std::string& trajectoryInfoPath)
 {

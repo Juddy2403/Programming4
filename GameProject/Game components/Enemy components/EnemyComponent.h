@@ -27,6 +27,7 @@ public:
     virtual void GetInIdleState();
     void SetFormationPosition(const glm::ivec2& formationPos);
     void SetFormationTrajectory(const std::queue<PathData>& pathDataQueue);
+    bool HasSetOut() const;
     Trajectory& GetFormationTrajectory() { return m_FormationTrajectory; }
     
     [[nodiscard]] glm::ivec2 GetFormationPosition() const { return m_FormationPosition; }

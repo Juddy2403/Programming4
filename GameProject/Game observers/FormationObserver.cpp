@@ -4,6 +4,8 @@
 
 #include "DataStructs.h"
 #include "Game components/FormationComponent.h"
+#include "Game components/Enemy components/EnemyComponent.h"
+#include "Subjects/GameObject.h"
 
 int FormationObserver::m_CurrentStage = 0;
 int FormationObserver::m_CurrentEnemiesSetOut = 0;
@@ -16,11 +18,20 @@ void FormationObserver::Notify([[maybe_unused]] GameEngine::Subject* subject, in
     switch (static_cast<GameEvent>(event))
     {
     case GameEvent::died:
-        if (m_CurrentEnemiesSetOut) --m_CurrentEnemiesSetOut;
+    {
+        GameEngine::GameObject* actor = dynamic_cast<GameEngine::GameObject*>(subject);
+        if (actor->GetComponent<EnemyComponent>()->HasSetOut() && m_CurrentEnemiesSetOut)
+        {
+            --m_CurrentEnemiesSetOut;
+            std::cout << "Enemy that set out died\n";
+        }
+        
+    }
         break;
     case GameEvent::gotInFormation:
     {
         ++m_CurrentEnemiesGotInFormation;
+        std::cout << "Enemy got in formation\n";
     }
     break;
     default: break;

@@ -9,7 +9,7 @@
 
 using namespace GameEngine;
 
-//#define CHECK_COLLISION_RECTS
+#define CHECK_COLLISION_RECTS
 
 Scene::Scene() : m_CollisionManager(std::make_unique<CollisionManager>())
 {}
@@ -76,7 +76,7 @@ void Scene::Render() const
         object->Render();
     }
     #ifdef CHECK_COLLISION_RECTS
-    CollisionManager::RenderCollisionRects();
+    m_CollisionManager->RenderCollisionRects();
     #endif
 }
 

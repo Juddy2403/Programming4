@@ -1,4 +1,7 @@
 ﻿#include "CollisionComponent.h"
+
+#include <iostream>
+
 #include "../EventData.h"
 #include "../Managers/CollisionManager.h"
 #include "../Subjects/GameObject.h"
@@ -23,7 +26,7 @@ void CollisionComponent::CollidedWith(CollisionComponent* other) const
 {
     CollisionData data;
     data.pOtherCollider = other->GetGameObjParent();
-    GetGameObjParent()->NotifyAll(static_cast<int>(EngineGameEvent::collision),&data);
+    if(!GetGameObjParent()->IsDestroyed()) GetGameObjParent()->NotifyAll(static_cast<int>(EngineGameEvent::collision),&data);
 }
 
 void CollisionComponent::Update()

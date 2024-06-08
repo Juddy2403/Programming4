@@ -29,6 +29,12 @@ void EnemyComponent::SetFormationTrajectory(const std::queue<PathData>& pathData
 {
     m_FormationTrajectory.SetPathData(pathDataQueue, GetGameObjParent()->GetPosition());
 }
+bool EnemyComponent::HasSetOut() const
+{
+    if(auto getInFormationState = dynamic_cast<GetInFormationState*>(m_CurrentState.get()))
+        return getInFormationState->HasSetOut();
+    return false;
+}
 
 void EnemyComponent::Update()
 {
@@ -57,11 +63,11 @@ void EnemyComponent::Died()
 
 bool EnemyComponent::UpdateTrajectory(Trajectory& trajectory) 
 {
+    if (trajectory.IsComplete()) return true;
     const glm::vec2 currentPos = GetGameObjParent()->GetPosition();
     auto [newPos, hasDirectionChanged] = trajectory.Update(GetSpeed(), currentPos);
     if (hasDirectionChanged)
     {
-        if (trajectory.IsComplete()) return true;
         m_CurDirection = trajectory.GetDirection();
         m_RotatingSprite->RotateSpriteInDirection(trajectory.GetDirection());
     }
