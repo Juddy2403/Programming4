@@ -32,7 +32,8 @@
 #include "Game components/FPSComponent.h"
 #endif
 
-void Galaga::LoadScenes()
+
+void Galaga::LoadStartScene()
 {
     //----------SOUND----------------
 #if NDEBUG
@@ -44,22 +45,49 @@ void Galaga::LoadScenes()
     GameEngine::ServiceLocator::GetSoundSystem().FillSoundPaths("../Data/Audio/SoundPaths.txt");
     GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::start), Galaga::volume);
 
-
-    GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::levelOne), LoadLevelOne());
     GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::startMenu), LoadStartScreen());
     m_CurrentScene = SceneId::startMenu;
     GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::startMenu));
+}
+void Galaga::LevelCleared()
+{
+    switch(m_CurrentScene)
+    {
+    case SceneId::levelOne:
+        ChangeScene(SceneId::levelTwo, LoadLevel("../Data/Formations/EnemyInfo2.json", "../Data/Formations/FormationTrajectories2.json"));
+        break;
+    case SceneId::levelTwo:
+        ChangeScene(SceneId::levelThree, LoadLevel("../Data/Formations/EnemyInfo3.json", "../Data/Formations/FormationTrajectories3.json"));
+        break;
+    case SceneId::levelThree:
+        ChangeScene(SceneId::gameOver, LoadLevel("../Data/Formations/EnemyInfo3.json", "../Data/Formations/FormationTrajectories3.json"));
+        break;
+    }
+}
+void Galaga::ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene)
+{
+    for(auto key : m_KeyboardSceneKeys)
+        GameEngine::InputManager::GetInstance().UnbindCommand(key);
+    for(auto [key, controllerIdx] : m_ControllerSceneKeys)
+        GameEngine::InputManager::GetInstance().UnbindCommand(key, controllerIdx);
+    m_KeyboardSceneKeys.clear();
+    m_ControllerSceneKeys.clear();
+    
+    GameEngine::SceneManager::GetInstance().RemoveScene(static_cast<int>(m_CurrentScene));
+    GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(sceneId), std::move(scene));
+    GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(sceneId));
+    m_CurrentScene = sceneId;
 }
 void Galaga::SetGameMode(GameMode mode)
 {
     if(m_HasGameModeBeenSet) return;
     m_CurrentGameMode = mode;
     m_HasGameModeBeenSet = true;
-    GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::levelOne));
+    ChangeScene(SceneId::levelOne, LoadLevel("../Data/Formations/EnemyInfo1.json", "../Data/Formations/FormationTrajectories1.json"));
 }
-std::unique_ptr<GameEngine::Scene> Galaga::LoadLevelOne()
+std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInfoPath, const std::string& trajectoryInfoPath)
 {
-    auto scene = std::make_unique<GameEngine::Scene>("First level");
+    auto scene = std::make_unique<GameEngine::Scene>();
 
     //------BACKGROUND--------
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::texture));
@@ -83,7 +111,10 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevelOne()
     //----------NR OF PLAYERS---------
     gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
     gameObject->AddComponent<GameEngine::TextureComponent>();
-    gameObject->AddComponent<GameEngine::TextComponent>(font, "1UP", SDL_Color{ 255,0,0 });
+    std::string text{};
+    if(m_CurrentGameMode == GameMode::singlePlayer) text = "1UP";
+    else text = "2UP";
+    gameObject->AddComponent<GameEngine::TextComponent>(font, text, SDL_Color{ 255,0,0 });
     gameObject->SetPosition(30, 10);
     scene->AddObject(std::move(gameObject));
 
@@ -105,7 +136,8 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevelOne()
     scene->AddObserver(-1, std::move(fighterObserver), gameObject.get());
     gameObject->AddObserver(-1, explosionObserver);
     auto playerComp = gameObject->GetComponent<PlayerComponent>();
-    scene->AddObject(std::move(gameObject));
+    m_pPlayer = scene->AddObject(std::move(gameObject));
+    m_pPlayer->GetComponent<PlayerComponent>()->BindCommands();
 
     //----------------ENEMIES--------------------
     gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
@@ -129,8 +161,8 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevelOne()
         std::move(formationObserverUnique), nullptr);
 
     //--------- Enemy creation------------
-    auto enemyVec = Parser::ParseEnemyInfoByStage("../Data/Formations/EnemyInfoTest.json",
-        "../Data/Formations/FormationTrajectoriesTest.json", playerComp);
+    auto enemyVec = Parser::ParseEnemyInfoByStage(enemyInfoPath,
+        trajectoryInfoPath, playerComp);
     for (auto& enemy : enemyVec)
     {
         enemy->AddObserver(-1, enemyObserver);
@@ -141,12 +173,14 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevelOne()
         enemy->AddObserver(-1, explosionObserver);
         scene->AddObject(std::move(enemy));
     }
+    
+    m_KeyboardSceneKeys = { GameEngine::KeyboardInputKey::A, GameEngine::KeyboardInputKey::D, GameEngine::KeyboardInputKey::SPACE };
 
     return scene;
 }
 std::unique_ptr<GameEngine::Scene> Galaga::LoadStartScreen()
 {
-    auto scene = std::make_unique<GameEngine::Scene>("Start screen");
+    auto scene = std::make_unique<GameEngine::Scene>();
 
     //------BACKGROUND--------
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::texture));
@@ -179,14 +213,14 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadStartScreen()
     gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
     gameObject->AddComponent<GameEngine::TextureComponent>();
     textComp = gameObject->AddComponent<GameEngine::TextComponent>(font, "Coop");
-    switchModeComp->AddTextComponent(textComp, GameMode::singlePlayer);
+    switchModeComp->AddTextComponent(textComp, GameMode::coop);
     gameObject->SetPosition(200, 300);
     scene->AddObject(std::move(gameObject));
 
     gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
     gameObject->AddComponent<GameEngine::TextureComponent>();
     textComp = gameObject->AddComponent<GameEngine::TextComponent>(font, "Versus");
-    switchModeComp->AddTextComponent(textComp, GameMode::singlePlayer);
+    switchModeComp->AddTextComponent(textComp, GameMode::versus);
     gameObject->SetPosition(200, 350);
     scene->AddObject(std::move(gameObject));
 
@@ -198,6 +232,11 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadStartScreen()
     input.BindCommand(GameEngine::KeyboardInputKey::ENTER,
         std::make_unique<SelectModeCommand>(switchModesObject.get()));
     scene->AddObject(std::move(switchModesObject));
-
+    m_KeyboardSceneKeys = { GameEngine::KeyboardInputKey::UP, GameEngine::KeyboardInputKey::DOWN, GameEngine::KeyboardInputKey::ENTER };
+    
     return scene;
+}
+std::unique_ptr<GameEngine::Scene> Galaga::LoadGameOverScene()
+{
+    return nullptr;
 }

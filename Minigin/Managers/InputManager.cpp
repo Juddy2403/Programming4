@@ -1,10 +1,29 @@
 #include "InputManager.h"
+
+#include <algorithm>
 #include <ranges>
 
+void GameEngine::InputManager::UnbindRemovedCommands()
+{
+    std::erase_if(m_pKeyboardCommands, [](const auto& pair) {
+        return pair.second->IsDestroyed();
+    });
+    for (auto& controllerCommands : m_pControllerCommands)
+    {
+        std::erase_if(controllerCommands, [](const auto& pair) {
+            return pair.second->IsDestroyed();
+        });
+    }
+}
 bool GameEngine::InputManager::ProcessInput()
 {
-    if(!ProcessKeyboardInput()) return false;
+    if (!ProcessKeyboardInput()) return false;
     ProcessControllerInput();
+    if (m_AreElemsToUnbind)
+    {
+        m_AreElemsToUnbind = false;
+        UnbindRemovedCommands();
+    }
     return true;
 }
 
@@ -15,10 +34,11 @@ void GameEngine::InputManager::ProcessControllerInput()
     {
         if (m_pControllers[i] == nullptr) continue;
         m_pControllers[i]->ProcessControllerInput();
-        
+
         //TODO: perhaps create an event queue with the inputs received
         for (const auto& [inputKey, command] : m_pControllerCommands[i])
         {
+            if (command->IsDestroyed()) continue;
             switch (command->ExecuteOnKeyState())
             {
             case Command::ExecuteOn::keyPressed:
@@ -37,22 +57,27 @@ void GameEngine::InputManager::ProcessControllerInput()
 }
 bool GameEngine::InputManager::ProcessKeyboardInput()
 {
-    if(!m_pKeyboard->ProcessKeyboardInput()) return false;
-        
+    if (!m_pKeyboard->ProcessKeyboardInput()) return false;
     //TODO: perhaps create an event queue with the inputs received
     for (const auto& [inputKey, command] : m_pKeyboardCommands)
     {
         switch (command->ExecuteOnKeyState())
         {
         case Command::ExecuteOn::keyPressed:
+        {
             if (m_pKeyboard->IsKeyPressed(inputKey)) command->Execute();
-            break;
+        }
+        break;
         case Command::ExecuteOn::keyUp:
+        {
             if (m_pKeyboard->IsKeyUp(inputKey)) command->Execute();
-            break;
+        }
+        break;
         case Command::ExecuteOn::keyDown:
+        {
             if (m_pKeyboard->IsKeyDown(inputKey)) command->Execute();
-            break;
+        }
+        break;
         }
     }
     return true;
@@ -72,12 +97,12 @@ void GameEngine::InputManager::BindCommand(ControllerInputKey inputKey, std::uni
 
 void GameEngine::InputManager::UnbindCommand(KeyboardInputKey inputKey)
 {
-    m_pKeyboardCommands.erase(inputKey);
-    
+    m_AreElemsToUnbind = true;
+    m_pKeyboardCommands[inputKey]->SetDestroyedFlag();
 }
 
 void GameEngine::InputManager::UnbindCommand(ControllerInputKey inputKey, int controllerIdx)
 {
-    m_pControllerCommands[controllerIdx].erase(inputKey);
+    m_AreElemsToUnbind = true;
+    m_pControllerCommands[controllerIdx][inputKey]->SetDestroyedFlag();
 }
-

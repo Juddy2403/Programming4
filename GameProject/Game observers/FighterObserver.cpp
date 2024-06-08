@@ -15,10 +15,6 @@ void FighterObserver::Notify(GameEngine::Subject* subject, int event,
 {
     switch (static_cast<GameEvent>(event))
     {
-    case GameEvent::hasBeenHit:
-        break;
-    case GameEvent::died:
-        break;
     case GameEvent::collision:
     {
         const auto collisionData = reinterpret_cast<GameEngine::CollisionData*>(eventData);

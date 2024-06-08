@@ -24,7 +24,7 @@ public:
     static constexpr int m_PlayerSpeed{ 200 };
     void GetCaptured(const glm::vec2& enemyPos);
     [[nodiscard]] bool IsCaptured() const { return m_IsGettingCaptured; }
-    void RebindCommands() const;
+    void BindCommands() const;
     void Update() override;
 private:
     std::unique_ptr<Trajectory> m_CapturedTrajectory{nullptr};

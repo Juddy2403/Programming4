@@ -23,7 +23,7 @@ namespace GameEngine
 		void Render() const;
 		void RemoveDestroyedObjects();
 
-		explicit Scene(const std::string& name);
+		explicit Scene();
 		~Scene();
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;
@@ -33,7 +33,6 @@ namespace GameEngine
 	private:
 		void AddGameObjectsToBeAdded();
 		bool m_AreElemsToBeAdded = false;
-		std::string m_Name;
 		std::unique_ptr<CollisionManager> m_CollisionManager;
 		std::vector<std::unique_ptr<IObserver>> m_Observers;
 		std::vector<std::unique_ptr<GameObject>> m_GameObjects;

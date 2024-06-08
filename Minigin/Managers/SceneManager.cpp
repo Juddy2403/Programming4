@@ -9,6 +9,10 @@ void GameEngine::SceneManager::AddScene(int sceneId, std::unique_ptr<Scene>&& sc
 {
     m_Scenes[sceneId] = std::move(scene);
 }
+void GameEngine::SceneManager::RemoveScene(int sceneId)
+{
+    m_Scenes.erase(sceneId);
+}
 void GameEngine::SceneManager::Update()
 {
     if(m_CurrentSceneId != -1) m_Scenes[m_CurrentSceneId]->Update();

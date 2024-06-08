@@ -9,7 +9,6 @@
 namespace GameEngine
 {
     class KeyboardInput;
-    class GameActor;
     class InputManager final : public Singleton<InputManager>
     {
     public:
@@ -20,6 +19,7 @@ namespace GameEngine
         InputManager& operator=(InputManager&& other) noexcept = delete;
         ~InputManager() override = default;
 
+        void UnbindRemovedCommands();
         bool ProcessInput();
         void ProcessControllerInput();
         bool ProcessKeyboardInput();
@@ -29,6 +29,7 @@ namespace GameEngine
         void UnbindCommand(KeyboardInputKey inputKey);
         void UnbindCommand(ControllerInputKey inputKey, int controllerIdx);
     private:
+        bool m_AreElemsToUnbind{false};
         //Commands
         typedef std::unique_ptr<Command> CommandUnique;
         typedef std::unordered_map<KeyboardInputKey,CommandUnique> KeyboardCommandMap;

@@ -7,6 +7,8 @@ namespace GameEngine
 
 	class Command
 	{
+	private:
+		bool m_IsDestroyed{false};
 	protected:
 		GameObject* m_Actor;
 	public:
@@ -26,6 +28,8 @@ namespace GameEngine
 
 		[[nodiscard]] virtual ExecuteOn ExecuteOnKeyState() const = 0;
 		virtual void Execute() = 0;
+		void SetDestroyedFlag() { m_IsDestroyed = true; }
+		[[nodiscard]] bool IsDestroyed() const { return m_IsDestroyed; }
 	};
 
 	class Move final: public Command {

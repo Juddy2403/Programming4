@@ -27,7 +27,7 @@ void PlayerComponent::GetCaptured(const glm::vec2& enemyPos)
     m_IsGettingCaptured = true;
 }
 
-void PlayerComponent::RebindCommands() const
+void PlayerComponent::BindCommands() const
 {
     auto& input = GameEngine::InputManager::GetInstance();
     input.BindCommand(GameEngine::KeyboardInputKey::A,
@@ -48,7 +48,7 @@ void PlayerComponent::Update()
         auto healthComp = GetGameObjParent()->GetComponent<PlayerHealthComponent>();
         GetGameObjParent()->SetPosition(m_RespawnPos);
         healthComp->Hit();
-        RebindCommands();
+        BindCommands();
         m_IsGettingCaptured = false;
         m_RotatingSprite->RotateSpriteInDirection({0,-1});
         return;

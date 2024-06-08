@@ -11,8 +11,7 @@ using namespace GameEngine;
 
 //#define CHECK_COLLISION_RECTS
 
-Scene::Scene(const std::string& name) : m_Name(name),
-                                        m_CollisionManager(std::make_unique<CollisionManager>())
+Scene::Scene() : m_CollisionManager(std::make_unique<CollisionManager>())
 {}
 
 Scene::~Scene() = default;
@@ -83,10 +82,7 @@ void Scene::Render() const
 
 void Scene::RemoveDestroyedObjects()
 {
-    const auto range = std::ranges::remove_if(m_GameObjects,
-        [](const auto& obj) {
-            return obj->IsDestroyed();
-        });
-    // Erase the destroyed objects from the vector
-    m_GameObjects.erase(range.begin(), range.end());
+    std::erase_if(m_GameObjects, [](const auto& obj) {
+        return obj->IsDestroyed();
+    });
 }

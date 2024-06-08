@@ -37,13 +37,6 @@ std::unique_ptr<GameEngine::GameObject> InitFighter()
 
     gameObject->AddComponent<PlayerComponent>(spriteComponent,0);
     gameObject->AddComponent<PlayerHealthComponent>(3, spriteComponent);
-    auto& input = GameEngine::InputManager::GetInstance();
-    input.BindCommand(GameEngine::KeyboardInputKey::A,
-        std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ -1.f,0.f }, PlayerComponent::m_PlayerSpeed));
-    input.BindCommand(GameEngine::KeyboardInputKey::D,
-        std::make_unique<GameEngine::Move>(gameObject.get(), glm::vec2{ 1.f,0.f }, PlayerComponent::m_PlayerSpeed));
-    input.BindCommand(GameEngine::KeyboardInputKey::SPACE,
-        std::make_unique<ShootBulletCommand>(gameObject.get()));
 
     return gameObject;
 }

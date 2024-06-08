@@ -1,7 +1,18 @@
 ﻿#pragma once
 #include <memory>
+#include <string>
+#include <vector>
 
 #include "Managers/Singleton.h"
+namespace GameEngine
+{
+    enum class ControllerInputKey;
+}
+namespace GameEngine
+{
+    enum class KeyboardInputKey;
+    class GameObject;
+}
 enum class SceneId;
 enum class GameMode;
 namespace GameEngine {class Scene;}
@@ -14,9 +25,12 @@ public:
     Galaga& operator=(const Galaga& other) = delete;
     Galaga& operator=(Galaga&& other) noexcept = delete;
 
-    void LoadScenes();
+    void LoadStartScene();
+    void LevelCleared();
+    void ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene);
     void SetGameMode(GameMode mode);
-    static constexpr int volume = 50;
+    static constexpr int volume = 0;
+    GameEngine::GameObject* m_pPlayer;
 private:
     friend class Singleton<Galaga>;
     Galaga() = default;
@@ -24,6 +38,9 @@ private:
     bool m_HasGameModeBeenSet{false};
     GameMode m_CurrentGameMode;
     SceneId m_CurrentScene;
-    std::unique_ptr<GameEngine::Scene> LoadLevelOne();
+    std::vector<GameEngine::KeyboardInputKey> m_KeyboardSceneKeys;
+    std::vector<std::pair<GameEngine::ControllerInputKey,int>> m_ControllerSceneKeys;
+    std::unique_ptr<GameEngine::Scene> LoadLevel(const std::string& enemyInfoPath, const std::string& trajectoryInfoPath);
     std::unique_ptr<GameEngine::Scene> LoadStartScreen();
+    std::unique_ptr<GameEngine::Scene> LoadGameOverScene();
 };

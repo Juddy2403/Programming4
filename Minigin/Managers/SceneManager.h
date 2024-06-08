@@ -12,6 +12,7 @@ namespace GameEngine
 	public:
 		void SetCurrentScene(int sceneId);
 		void AddScene(int sceneId, std::unique_ptr<Scene>&& scene);
+		void RemoveScene(int sceneId);
 
 		void Update();
 		void Render();

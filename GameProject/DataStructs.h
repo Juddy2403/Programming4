@@ -75,7 +75,8 @@ enum class SceneId
     levelOne,
     levelTwo,
     levelThree,
-    gameOver
+    gameOver,
+    chooseName
 };
 
 enum class GameMode
