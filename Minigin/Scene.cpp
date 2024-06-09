@@ -4,12 +4,11 @@
 #include <algorithm>
 #include "Managers/CollisionManager.h"
 #include "Components/CollisionComponent.h"
-#include "Managers/InputManager.h"
 #include "Managers/TimeManager.h"
 
 using namespace GameEngine;
 
-#define CHECK_COLLISION_RECTS
+//#define CHECK_COLLISION_RECTS
 
 Scene::Scene() : m_CollisionManager(std::make_unique<CollisionManager>())
 {}

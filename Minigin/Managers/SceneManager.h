@@ -20,6 +20,8 @@ namespace GameEngine
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
 		std::map<int, std::unique_ptr<Scene>> m_Scenes;
+		bool m_AreScenesToBeRemoved = false;
+		std::vector<int> m_SceneIdsToBeRemoved;
 		int m_CurrentSceneId = -1;
 	};
 }

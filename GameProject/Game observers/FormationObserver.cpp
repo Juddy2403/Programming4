@@ -23,7 +23,6 @@ void FormationObserver::Notify([[maybe_unused]] GameEngine::Subject* subject, in
         if (actor->GetComponent<EnemyComponent>()->HasSetOut() && m_CurrentEnemiesSetOut)
         {
             --m_CurrentEnemiesSetOut;
-            std::cout << "Enemy that set out died\n";
         }
         
     }
@@ -31,7 +30,6 @@ void FormationObserver::Notify([[maybe_unused]] GameEngine::Subject* subject, in
     case GameEvent::gotInFormation:
     {
         ++m_CurrentEnemiesGotInFormation;
-        std::cout << "Enemy got in formation\n";
     }
     break;
     default: break;

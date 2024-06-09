@@ -1,6 +1,6 @@
 [
   {
-    "enemyType": "BossGalaga",
+    "enemyType": "Bee",
     "positions": [
       {"formationPosition": [298, 38], "formationStage": 0, "turn": 1},
       {"formationPosition": [335, 38], "formationStage": 0, "turn": 2},

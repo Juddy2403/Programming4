@@ -98,11 +98,11 @@ void GameEngine::InputManager::BindCommand(ControllerInputKey inputKey, std::uni
 void GameEngine::InputManager::UnbindCommand(KeyboardInputKey inputKey)
 {
     m_AreElemsToUnbind = true;
-    m_pKeyboardCommands[inputKey]->SetDestroyedFlag();
+    if(m_pKeyboardCommands[inputKey]) m_pKeyboardCommands[inputKey]->SetDestroyedFlag();
 }
 
 void GameEngine::InputManager::UnbindCommand(ControllerInputKey inputKey, int controllerIdx)
 {
     m_AreElemsToUnbind = true;
-    m_pControllerCommands[controllerIdx][inputKey]->SetDestroyedFlag();
+    if(m_pControllerCommands[controllerIdx][inputKey]) m_pControllerCommands[controllerIdx][inputKey]->SetDestroyedFlag();
 }
