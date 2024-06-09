@@ -10,7 +10,9 @@ int FormationComponent::m_Direction = 1;
 
 FormationComponent::FormationComponent(GameEngine::GameObject* gameObj):
     Component(gameObj)
-{}
+{
+    m_IsUpdating = false;
+}
 void FormationComponent::Update()
 {
     if (m_IsUpdating)

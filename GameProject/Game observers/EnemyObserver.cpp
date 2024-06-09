@@ -20,6 +20,7 @@ void EnemyObserver::Notify(GameEngine::Subject* subject, int event
         if (collisionData->pOtherCollider->GetID() == static_cast<int>(GameId::bullet))
         {
             auto enemyComp = actor->GetComponent<EnemyComponent>();
+            if(!enemyComp->HasCurrentState()) return;
             if (bool hasDied = enemyComp->HasBeenHit())
             {
                 int playerId = collisionData->pOtherCollider->GetComponent<BulletComponent>()->GetPlayerID();

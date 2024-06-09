@@ -81,7 +81,9 @@ void Scene::Render() const
 
 void Scene::RemoveDestroyedObjects()
 {
-    std::erase_if(m_GameObjects, [](const auto& obj) {
+    std::erase_if(m_GameObjects, [&](const auto& obj) {
+        if (obj->IsDestroyed() && obj->template CheckIfComponentExists<CollisionComponent>())
+            m_CollisionManager->RemoveCollisionComponent(obj->template GetComponent<CollisionComponent>());
         return obj->IsDestroyed();
     });
 }

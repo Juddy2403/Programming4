@@ -53,5 +53,5 @@ void EnemyAIManager::Update()
     m_Enemies[enemyToSetOut]->GetInAttackState();
     if (m_Enemies.size() == 1) return;
     //set out a second enemy
-    if (rand() % 3 <= 1) m_Enemies[enemyToSetOut - 1]->GetInAttackState();
+    if (rand() % 3 <= 1) m_Enemies[enemyToSetOut == 0 ? 1 : enemyToSetOut - 1]->GetInAttackState();
 }
