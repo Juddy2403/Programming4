@@ -38,6 +38,7 @@ void GameEngine::InputManager::ProcessControllerInput()
         //TODO: perhaps create an event queue with the inputs received
         for (const auto& [inputKey, command] : m_pControllerCommands[i])
         {
+            if (command == nullptr) continue;
             if (command->IsDestroyed()) continue;
             switch (command->ExecuteOnKeyState())
             {
@@ -61,6 +62,8 @@ bool GameEngine::InputManager::ProcessKeyboardInput()
     //TODO: perhaps create an event queue with the inputs received
     for (const auto& [inputKey, command] : m_pKeyboardCommands)
     {
+        if (command == nullptr) continue;
+        if (command->IsDestroyed()) continue;
         switch (command->ExecuteOnKeyState())
         {
         case Command::ExecuteOn::keyPressed:

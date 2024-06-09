@@ -19,6 +19,7 @@ public:
     virtual EnemyId GetEnemyID() const override;
     virtual void GetInAttackState() override;
     virtual void GetInBeamAttackState();
+    bool CanAttack() const;
     void CapturedFighter() { m_HasCapturedFighter = true; }
     bool HasCapturedFighter() const { return m_HasCapturedFighter; }
 private:

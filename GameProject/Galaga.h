@@ -15,7 +15,10 @@ namespace GameEngine
 }
 enum class SceneId;
 enum class GameMode;
-namespace GameEngine {class Scene;}
+namespace GameEngine
+{
+    class Scene;
+}
 class Galaga final : public GameEngine::Singleton<Galaga>
 {
 public:
@@ -30,19 +33,20 @@ public:
     void GameLost();
     void ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene);
     void SetGameMode(GameMode mode);
+    GameMode GetGameMode() const { return m_CurrentGameMode; }
     static constexpr int volume = 50;
     GameEngine::GameObject* m_pPlayer;
 private:
     friend class Singleton<Galaga>;
     Galaga() = default;
 
-    bool m_HasGameModeBeenSet{false};
+    bool m_HasGameModeBeenSet{ false };
     GameMode m_CurrentGameMode;
     SceneId m_CurrentScene;
     std::vector<GameEngine::KeyboardInputKey> m_KeyboardSceneKeys;
-    std::vector<std::pair<GameEngine::ControllerInputKey,int>> m_ControllerSceneKeys;
+    std::vector<std::pair<GameEngine::ControllerInputKey, int>> m_ControllerSceneKeys;
     std::vector<GameEngine::KeyboardInputKey> m_PrevKeyboardSceneKeys;
-    std::vector<std::pair<GameEngine::ControllerInputKey,int>> m_PrevControllerSceneKeys;
+    std::vector<std::pair<GameEngine::ControllerInputKey, int>> m_PrevControllerSceneKeys;
     std::unique_ptr<GameEngine::Scene> LoadLevel(const std::string& enemyInfoPath, const std::string& trajectoryInfoPath);
     std::unique_ptr<GameEngine::Scene> LoadStartScreen();
     std::unique_ptr<GameEngine::Scene> LoadGameOverScene();

@@ -2,6 +2,7 @@
 
 #include "Enemy States/BombingRunState.h"
 #include "Enemy States/BossShootingBeamState.h"
+#include "Enemy States/IdleState.h"
 
 BossGalagaComponent::BossGalagaComponent(GameEngine::GameObject* gameObj, GameEngine::SpriteComponent* spriteComponent, PlayerComponent* playerComponent):
     EnemyComponent(gameObj, spriteComponent, playerComponent),
@@ -34,4 +35,9 @@ void BossGalagaComponent::GetInBeamAttackState()
     m_CurrentState->Exit(this);
     m_CurrentState = std::make_unique<BossShootingBeamState>();
     m_CurrentState->Enter(this);
+}
+bool BossGalagaComponent::CanAttack() const
+{
+    if(dynamic_cast<IdleState*>(m_CurrentState.get())) return true;
+    return false;
 }

@@ -5,6 +5,7 @@
 #include "Galaga.h"
 #include "Subjects/GameObject.h"
 #include "Game components/ModeSelectionComp.h"
+#include "Game observers/EnemyAIManager.h"
 
 ShootBulletCommand::ShootBulletCommand(GameEngine::GameObject* actor): Command(actor) {}
 
@@ -51,6 +52,24 @@ void SelectModeCommand::Execute()
     Galaga::GetInstance().SetGameMode(mode);
 }
 GameEngine::Command::ExecuteOn SelectModeCommand::ExecuteOnKeyState() const
+{
+    return ExecuteOn::keyDown;
+}
+ShootBeamCommand::ShootBeamCommand(GameEngine::GameObject* actor): Command(actor) {}
+void ShootBeamCommand::Execute()
+{
+    EnemyAIManager::ShootBeam();
+}
+GameEngine::Command::ExecuteOn ShootBeamCommand::ExecuteOnKeyState() const
+{
+    return ExecuteOn::keyDown;
+}
+BombingRunCommand::BombingRunCommand(GameEngine::GameObject* actor): Command(actor) {}
+void BombingRunCommand::Execute()
+{
+    EnemyAIManager::BombingRun();
+}
+GameEngine::Command::ExecuteOn BombingRunCommand::ExecuteOnKeyState() const
 {
     return ExecuteOn::keyDown;
 }

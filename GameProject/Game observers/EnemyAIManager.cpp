@@ -12,6 +12,26 @@ void EnemyAIManager::RemoveEnemy(EnemyComponent* enemy)
 {
     std::erase(m_Enemies, enemy);
 }
+void EnemyAIManager::ShootBeam()
+{
+    auto it = std::ranges::find_if(m_Enemies,
+                    [](EnemyComponent* enemy) { return enemy->GetEnemyID() == EnemyId::bossGalaga; });
+    if (it != m_Enemies.end())
+    {
+        const auto bossGalagaComponent = dynamic_cast<BossGalagaComponent*>(*it);
+        if(bossGalagaComponent->CanAttack()) bossGalagaComponent->GetInBeamAttackState();
+    }
+}
+void EnemyAIManager::BombingRun()
+{
+    auto it = std::ranges::find_if(m_Enemies,
+                [](EnemyComponent* enemy) { return enemy->GetEnemyID() == EnemyId::bossGalaga; });
+    if (it != m_Enemies.end())
+    {
+        const auto bossGalagaComponent = dynamic_cast<BossGalagaComponent*>(*it);
+        if(bossGalagaComponent->CanAttack()) (*it)->GetInAttackState();
+    }
+}
 void EnemyAIManager::Notify([[maybe_unused]] GameEngine::Subject* subject, int event, [[maybe_unused]] GameEngine::EventData* eventData)
 {
     switch (static_cast<GameEvent>(event))

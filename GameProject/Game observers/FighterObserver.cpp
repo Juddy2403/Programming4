@@ -36,6 +36,10 @@ void FighterObserver::Notify(GameEngine::Subject* subject, int event,
             input.UnbindCommand(GameEngine::KeyboardInputKey::A);
             input.UnbindCommand(GameEngine::KeyboardInputKey::D);
             input.UnbindCommand(GameEngine::KeyboardInputKey::SPACE);
+            input.UnbindCommand(GameEngine::ControllerInputKey::dpadLeft, 0);
+            input.UnbindCommand(GameEngine::ControllerInputKey::dpadRight, 0);
+            input.UnbindCommand(GameEngine::ControllerInputKey::X, 0);
+            
             actor->GetComponent<PlayerComponent>()->GetCaptured(collisionData->pOtherCollider->GetPosition());
         }
     }

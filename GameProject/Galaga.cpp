@@ -21,7 +21,6 @@
 #include "Game observers/ExplosionObserver.h"
 #include "Game observers/FighterObserver.h"
 #include "Game observers/FormationObserver.h"
-#include "Game observers/ScoreManager.h"
 #include "Managers/InputManager.h"
 #include "Managers/ResourceManager.h"
 #include "Managers/SceneManager.h"
@@ -175,11 +174,29 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInf
         enemy->AddObserver(-1, explosionObserver);
         scene->AddObject(std::move(enemy));
     }
+
+    if(m_CurrentGameMode == GameMode::versus)
+    {
+        gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
+        auto& input = GameEngine::InputManager::GetInstance();
+        input.BindCommand(GameEngine::ControllerInputKey::X,
+            std::make_unique<BombingRunCommand>(gameObject.get()),0);
+        input.BindCommand(GameEngine::ControllerInputKey::Y,
+            std::make_unique<ShootBeamCommand>(gameObject.get()),0);
+        scene->AddObject(std::move(gameObject));
+    }
+    
     m_PrevKeyboardSceneKeys = std::move(m_KeyboardSceneKeys);
     m_KeyboardSceneKeys = { GameEngine::KeyboardInputKey::A, GameEngine::KeyboardInputKey::D, GameEngine::KeyboardInputKey::SPACE };
     //erase everything from the previous keyboard scene keys that match the current keyboard scene keys
     for(auto key : m_KeyboardSceneKeys)
         std::erase(m_PrevKeyboardSceneKeys, key);
+
+    //do the same for controller keys
+    m_PrevControllerSceneKeys = std::move(m_ControllerSceneKeys);
+    m_ControllerSceneKeys = { {GameEngine::ControllerInputKey::dpadLeft, 0}, {GameEngine::ControllerInputKey::dpadRight, 0}, {GameEngine::ControllerInputKey::X, 0} };
+    for(auto [key, controllerIdx] : m_ControllerSceneKeys)
+        std::erase(m_PrevControllerSceneKeys, std::pair{key, controllerIdx});
 
     return scene;
 }
@@ -236,8 +253,16 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadStartScreen()
         std::make_unique<SwitchModesCommand>(switchModesObject.get(), false));
     input.BindCommand(GameEngine::KeyboardInputKey::ENTER,
         std::make_unique<SelectModeCommand>(switchModesObject.get()));
+
+    input.BindCommand(GameEngine::ControllerInputKey::dpadUp,
+        std::make_unique<SwitchModesCommand>(switchModesObject.get(), true),0);
+    input.BindCommand(GameEngine::ControllerInputKey::dpadDown,
+        std::make_unique<SwitchModesCommand>(switchModesObject.get(), false),0);
+    input.BindCommand(GameEngine::ControllerInputKey::A,
+        std::make_unique<SelectModeCommand>(switchModesObject.get()),0);
     scene->AddObject(std::move(switchModesObject));
     m_KeyboardSceneKeys = { GameEngine::KeyboardInputKey::UP, GameEngine::KeyboardInputKey::DOWN, GameEngine::KeyboardInputKey::ENTER };
+    m_ControllerSceneKeys = { {GameEngine::ControllerInputKey::dpadUp, 0}, {GameEngine::ControllerInputKey::dpadDown, 0}, {GameEngine::ControllerInputKey::A, 0} };
     
     return scene;
 }

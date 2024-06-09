@@ -56,5 +56,33 @@ private:
     ModeSelectionComp* m_ModeSelectionComp;
 };
 
+class ShootBeamCommand final : public GameEngine::Command
+{
+public:
+    ShootBeamCommand(const ShootBeamCommand& other) = delete;
+    ShootBeamCommand(ShootBeamCommand&& other) noexcept = delete;
+    ShootBeamCommand& operator=(const ShootBeamCommand& other) = delete;
+    ShootBeamCommand& operator=(ShootBeamCommand&& other) noexcept = delete;
+
+    explicit ShootBeamCommand(GameEngine::GameObject* actor);
+    ~ShootBeamCommand() override = default;
+    void Execute() override;
+    [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
+};
+
+class BombingRunCommand final : public GameEngine::Command
+{
+public:
+    BombingRunCommand(const BombingRunCommand& other) = delete;
+    BombingRunCommand(BombingRunCommand&& other) noexcept = delete;
+    BombingRunCommand& operator=(const BombingRunCommand& other) = delete;
+    BombingRunCommand& operator=(BombingRunCommand&& other) noexcept = delete;
+
+    explicit BombingRunCommand(GameEngine::GameObject* actor);
+    ~BombingRunCommand() override = default;
+    void Execute() override;
+    [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
+};
+
 
 

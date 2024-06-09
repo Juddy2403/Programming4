@@ -1,5 +1,6 @@
 ﻿#include "PlayerComponent.h"
 
+#include "Galaga.h"
 #include "GameCommands.h"
 #include "PlayerHealthComponent.h"
 #include "Enemy components/BossGalagaComponent.h"
@@ -30,12 +31,47 @@ void PlayerComponent::GetCaptured(const glm::vec2& enemyPos)
 void PlayerComponent::BindCommands() const
 {
     auto& input = GameEngine::InputManager::GetInstance();
-    input.BindCommand(GameEngine::KeyboardInputKey::A,
-        std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ -1.f,0.f }, m_PlayerSpeed));
-    input.BindCommand(GameEngine::KeyboardInputKey::D,
-        std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ 1.f,0.f }, m_PlayerSpeed));
-    input.BindCommand(GameEngine::KeyboardInputKey::SPACE,
-        std::make_unique<ShootBulletCommand>(GetGameObjParent()));
+    switch(Galaga::GetInstance().GetGameMode())
+    {
+    case GameMode::versus:
+    {
+        input.BindCommand(GameEngine::KeyboardInputKey::A,
+       std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ -1.f,0.f }, m_PlayerSpeed));
+        input.BindCommand(GameEngine::KeyboardInputKey::D,
+            std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ 1.f,0.f }, m_PlayerSpeed));
+        input.BindCommand(GameEngine::KeyboardInputKey::SPACE,
+            std::make_unique<ShootBulletCommand>(GetGameObjParent()));
+    }
+        break;
+    case GameMode::singlePlayer:
+    {
+        input.BindCommand(GameEngine::KeyboardInputKey::A,
+       std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ -1.f,0.f }, m_PlayerSpeed));
+        input.BindCommand(GameEngine::KeyboardInputKey::D,
+            std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ 1.f,0.f }, m_PlayerSpeed));
+        input.BindCommand(GameEngine::KeyboardInputKey::SPACE,
+            std::make_unique<ShootBulletCommand>(GetGameObjParent()));
+        //bind commands to controller
+        input.BindCommand(GameEngine::ControllerInputKey::dpadLeft,
+            std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ -1.f,0.f }, m_PlayerSpeed),0);
+        input.BindCommand(GameEngine::ControllerInputKey::dpadRight,
+            std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ 1.f,0.f }, m_PlayerSpeed),0);
+        input.BindCommand(GameEngine::ControllerInputKey::X,
+            std::make_unique<ShootBulletCommand>(GetGameObjParent()),0);
+    }
+        break;
+    case GameMode::coop:
+    {
+        input.BindCommand(GameEngine::KeyboardInputKey::A,
+       std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ -1.f,0.f }, m_PlayerSpeed));
+        input.BindCommand(GameEngine::KeyboardInputKey::D,
+            std::make_unique<GameEngine::Move>(GetGameObjParent(), glm::vec2{ 1.f,0.f }, m_PlayerSpeed));
+        input.BindCommand(GameEngine::ControllerInputKey::X,
+            std::make_unique<ShootBulletCommand>(GetGameObjParent()),0);
+    }
+        break;
+    }
+    
 }
 void PlayerComponent::Update()
 {
