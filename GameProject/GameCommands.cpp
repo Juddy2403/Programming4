@@ -114,3 +114,12 @@ GameEngine::Command::ExecuteOn LoadChooseNameCommand::ExecuteOnKeyState() const
 {
     return ExecuteOn::keyDown;
 }
+SkipLevelCommand::SkipLevelCommand(GameEngine::GameObject* actor): Command(actor) {}
+void SkipLevelCommand::Execute()
+{
+    Galaga::GetInstance().LevelCleared();
+}
+GameEngine::Command::ExecuteOn SkipLevelCommand::ExecuteOnKeyState() const
+{
+    return ExecuteOn::keyDown;
+}

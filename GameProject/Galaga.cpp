@@ -260,6 +260,13 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInf
     m_KeyboardSceneKeys.push_back(GameEngine::KeyboardInputKey::M);
     
     scene->AddObject(std::move(gameObject));
+
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
+    input.BindCommand(GameEngine::KeyboardInputKey::F1,
+        std::make_unique<SkipLevelCommand>(gameObject.get()));
+    scene->AddObject(std::move(gameObject));
+    m_KeyboardSceneKeys.push_back(GameEngine::KeyboardInputKey::F1);
+    
     //erase everything from the previous keyboard scene keys that match the current keyboard scene keys
     for(auto key : m_KeyboardSceneKeys)
         std::erase(m_PrevKeyboardSceneKeys, key);

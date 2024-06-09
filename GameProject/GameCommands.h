@@ -147,3 +147,18 @@ public:
 private:
 };
 
+class SkipLevelCommand final : public GameEngine::Command
+{
+public:
+    SkipLevelCommand(const SkipLevelCommand& other) = delete;
+    SkipLevelCommand(SkipLevelCommand&& other) noexcept = delete;
+    SkipLevelCommand& operator=(const SkipLevelCommand& other) = delete;
+    SkipLevelCommand& operator=(SkipLevelCommand&& other) noexcept = delete;
+
+    explicit SkipLevelCommand(GameEngine::GameObject* actor);
+    ~SkipLevelCommand() override = default;
+    void Execute() override;
+    [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
+private:
+};
+
