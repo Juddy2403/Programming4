@@ -34,7 +34,8 @@ public:
     void ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene);
     void SetGameMode(GameMode mode);
     GameMode GetGameMode() const { return m_CurrentGameMode; }
-    static constexpr int volume = 50;
+    static constexpr int baseVolume = 50;
+    static int volume;
     GameEngine::GameObject* m_pPlayer;
 private:
     friend class Singleton<Galaga>;

@@ -33,6 +33,7 @@
 #include "Game components/FPSComponent.h"
 #endif
 
+int Galaga::volume = baseVolume;
 
 void Galaga::LoadStartScene()
 {
@@ -92,7 +93,16 @@ void Galaga::SetGameMode(GameMode mode)
 std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInfoPath, const std::string& trajectoryInfoPath)
 {
     auto scene = std::make_unique<GameEngine::Scene>();
+    
+    m_PrevKeyboardSceneKeys = std::move(m_KeyboardSceneKeys);
+    m_KeyboardSceneKeys = { GameEngine::KeyboardInputKey::A, GameEngine::KeyboardInputKey::D, GameEngine::KeyboardInputKey::SPACE };
 
+    //do the same for controller keys
+    m_PrevControllerSceneKeys = std::move(m_ControllerSceneKeys);
+    m_ControllerSceneKeys = { {GameEngine::ControllerInputKey::dpadLeft, 0}, {GameEngine::ControllerInputKey::dpadRight, 0}, {GameEngine::ControllerInputKey::X, 0} };
+    
+
+    
     //------BACKGROUND--------
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::texture));
     SDL_Rect& destRect = gameObject->AddComponent<GameEngine::TextureComponent>("Background.png")->m_DestRect;
@@ -175,29 +185,28 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInf
         scene->AddObject(std::move(enemy));
     }
 
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
+    auto& input = GameEngine::InputManager::GetInstance();
     if(m_CurrentGameMode == GameMode::versus)
     {
-        gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
-        auto& input = GameEngine::InputManager::GetInstance();
         input.BindCommand(GameEngine::ControllerInputKey::X,
             std::make_unique<BombingRunCommand>(gameObject.get()),0);
+        m_ControllerSceneKeys.push_back({ GameEngine::ControllerInputKey::X, 0 });
         input.BindCommand(GameEngine::ControllerInputKey::Y,
             std::make_unique<ShootBeamCommand>(gameObject.get()),0);
-        scene->AddObject(std::move(gameObject));
+        m_ControllerSceneKeys.push_back({ GameEngine::ControllerInputKey::Y, 0 });
     }
+    input.BindCommand(GameEngine::KeyboardInputKey::M,
+        std::make_unique<MuteCommand>(gameObject.get()));
+    m_KeyboardSceneKeys.push_back(GameEngine::KeyboardInputKey::M);
     
-    m_PrevKeyboardSceneKeys = std::move(m_KeyboardSceneKeys);
-    m_KeyboardSceneKeys = { GameEngine::KeyboardInputKey::A, GameEngine::KeyboardInputKey::D, GameEngine::KeyboardInputKey::SPACE };
+    scene->AddObject(std::move(gameObject));
     //erase everything from the previous keyboard scene keys that match the current keyboard scene keys
     for(auto key : m_KeyboardSceneKeys)
         std::erase(m_PrevKeyboardSceneKeys, key);
-
-    //do the same for controller keys
-    m_PrevControllerSceneKeys = std::move(m_ControllerSceneKeys);
-    m_ControllerSceneKeys = { {GameEngine::ControllerInputKey::dpadLeft, 0}, {GameEngine::ControllerInputKey::dpadRight, 0}, {GameEngine::ControllerInputKey::X, 0} };
     for(auto [key, controllerIdx] : m_ControllerSceneKeys)
         std::erase(m_PrevControllerSceneKeys, std::pair{key, controllerIdx});
-
+    
     return scene;
 }
 std::unique_ptr<GameEngine::Scene> Galaga::LoadStartScreen()
@@ -261,8 +270,15 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadStartScreen()
     input.BindCommand(GameEngine::ControllerInputKey::A,
         std::make_unique<SelectModeCommand>(switchModesObject.get()),0);
     scene->AddObject(std::move(switchModesObject));
+    
     m_KeyboardSceneKeys = { GameEngine::KeyboardInputKey::UP, GameEngine::KeyboardInputKey::DOWN, GameEngine::KeyboardInputKey::ENTER };
     m_ControllerSceneKeys = { {GameEngine::ControllerInputKey::dpadUp, 0}, {GameEngine::ControllerInputKey::dpadDown, 0}, {GameEngine::ControllerInputKey::A, 0} };
+
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
+    input.BindCommand(GameEngine::KeyboardInputKey::M,
+        std::make_unique<MuteCommand>(gameObject.get()));
+    m_KeyboardSceneKeys.push_back(GameEngine::KeyboardInputKey::M);
+    scene->AddObject(std::move(gameObject));
     
     return scene;
 }
@@ -330,7 +346,23 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadGameOverScene()
     gameObject->AddComponent<ScoreComponent>(gameObject->AddComponent<GameEngine::TextComponent>(smallerFont));
     gameObject->SetPosition(10, 30);
     scene->AddObject(std::move(gameObject));
-    
+
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
+    auto& input = GameEngine::InputManager::GetInstance();
+    input.BindCommand(GameEngine::KeyboardInputKey::M,
+        std::make_unique<MuteCommand>(gameObject.get()));
+    m_KeyboardSceneKeys.push_back(GameEngine::KeyboardInputKey::M);
+    scene->AddObject(std::move(gameObject));
+
     m_PrevKeyboardSceneKeys = std::move(m_KeyboardSceneKeys);
+    //erase everything from the previous keyboard scene keys that match the current keyboard scene keys
+    for(auto key : m_KeyboardSceneKeys)
+        std::erase(m_PrevKeyboardSceneKeys, key);
+
+    //do the same for controller keys
+    m_PrevControllerSceneKeys = std::move(m_ControllerSceneKeys);
+    for(auto [key, controllerIdx] : m_ControllerSceneKeys)
+        std::erase(m_PrevControllerSceneKeys, std::pair{key, controllerIdx});
+    
     return scene;
 }

@@ -84,5 +84,19 @@ public:
     [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
 };
 
+class MuteCommand final : public GameEngine::Command
+{
+public:
+    MuteCommand(const MuteCommand& other) = delete;
+    MuteCommand(MuteCommand&& other) noexcept = delete;
+    MuteCommand& operator=(const MuteCommand& other) = delete;
+    MuteCommand& operator=(MuteCommand&& other) noexcept = delete;
+
+    explicit MuteCommand(GameEngine::GameObject* actor);
+    ~MuteCommand() override = default;
+    void Execute() override;
+    [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
+};
+
 
 

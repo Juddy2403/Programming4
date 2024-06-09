@@ -73,3 +73,13 @@ GameEngine::Command::ExecuteOn BombingRunCommand::ExecuteOnKeyState() const
 {
     return ExecuteOn::keyDown;
 }
+MuteCommand::MuteCommand(GameEngine::GameObject* actor): Command(actor) {}
+void MuteCommand::Execute()
+{
+    if(Galaga::volume == 0) Galaga::volume = Galaga::baseVolume;
+    else Galaga::volume = 0;
+}
+GameEngine::Command::ExecuteOn MuteCommand::ExecuteOnKeyState() const
+{
+    return ExecuteOn::keyDown;
+}
