@@ -3,6 +3,7 @@
 #include "DataStructs.h"
 #include "EventData.h"
 #include "Galaga.h"
+#include "ScoreManager.h"
 #include "Game components/BulletComponent.h"
 #include "Game components/Enemy components/EnemyComponent.h"
 #include "Sound/ServiceLocator.h"
@@ -23,11 +24,7 @@ void EnemyObserver::Notify(GameEngine::Subject* subject, int event
             if(!enemyComp->HasCurrentState()) return;
             if (bool hasDied = enemyComp->HasBeenHit())
             {
-                int playerId = collisionData->pOtherCollider->GetComponent<BulletComponent>()->GetPlayerID();
-                ScoreData scoreData;
-                scoreData.enemyId = static_cast<int>(enemyComp->GetEnemyID());
-                scoreData.playerId = playerId;
-                subject->Notify(static_cast<int>(GameEvent::scoreIncrease), static_cast<int>(ObserverIdentifier::score), &scoreData);
+                ScoreManager::AddScore(enemyComp->GetEnemyID());
                 subject->NotifyAll(static_cast<int>(GameEvent::died));
                 //play sound
                 auto enemyID = actor->GetComponent<EnemyComponent>()->GetEnemyID();

@@ -6,7 +6,6 @@
 enum class ObserverIdentifier
 {
     health,
-    score,
     bullet,
     enemyAttack,
     collision,
@@ -19,7 +18,6 @@ enum class GameEvent
     died,
     bulletShot,
     bulletOutOfBounds,
-    scoreIncrease,
     gotInFormation,
     leftFormation,
     bossShotBeam,

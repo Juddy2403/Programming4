@@ -151,8 +151,6 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInf
 
     auto enemyObserverUnique = std::make_unique<EnemyObserver>();
     auto enemyObserver = scene->AddObserver(-1, std::move(enemyObserverUnique), nullptr);
-    auto scoreObserverUnique = std::make_unique<ScoreManager>();
-    auto scoreObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::score), std::move(scoreObserverUnique), nullptr);
     auto enemyAttackObserverUnique = std::make_unique<EnemyAttacksObserver>(scene.get());
     auto enemyAttackObserver = scene->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), std::move(enemyAttackObserverUnique), nullptr);
 
@@ -171,7 +169,6 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInf
     for (auto& enemy : enemyVec)
     {
         enemy->AddObserver(-1, enemyObserver);
-        enemy->AddObserver(static_cast<int>(ObserverIdentifier::score), scoreObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::formation), formationObserver);
         enemy->AddObserver(static_cast<int>(ObserverIdentifier::enemyAttack), enemyAttackObserver);
         enemy->AddObserver(-1, enemyAIObserver);
@@ -257,6 +254,7 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadGameOverScene()
     scene->AddObject(std::move(gameObject));
 
     auto font = GameEngine::ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 20);
+    auto smallerFont = GameEngine::ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 16);
 
     //------TITLE--------
     gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
@@ -290,6 +288,24 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadGameOverScene()
     gameObject->AddComponent<GameEngine::TextComponent>(font, "HIT-MISS RATIO    "+ hitMissStr.str())->SetColor({255, 255, 0,255});
     gameObject->SetPosition(50, 300);
     scene->AddObject(std::move(gameObject));
+
+    //----------NR OF PLAYERS---------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    std::string text{};
+    if(m_CurrentGameMode == GameMode::singlePlayer) text = "1UP";
+    else text = "2UP";
+    gameObject->AddComponent<GameEngine::TextComponent>(smallerFont, text, SDL_Color{ 255,0,0 });
+    gameObject->SetPosition(30, 10);
+    scene->AddObject(std::move(gameObject));
+
+    //----------SCORE---------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<ScoreComponent>(gameObject->AddComponent<GameEngine::TextComponent>(smallerFont));
+    gameObject->SetPosition(10, 30);
+    scene->AddObject(std::move(gameObject));
+    
     m_PrevKeyboardSceneKeys = std::move(m_KeyboardSceneKeys);
     return scene;
 }
