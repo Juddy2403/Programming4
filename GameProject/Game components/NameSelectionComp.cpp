@@ -20,7 +20,7 @@ bool NameSelectionComp::MoveRight()
 
     m_TextComponents[m_CurrentIdx]->SetColor({255,255,255,255});
     ++m_CurrentIdx;
-    m_TextComponents[m_CurrentIdx]->SetColor({255,255,0,255});
+    if(m_CurrentIdx != 3) m_TextComponents[m_CurrentIdx]->SetColor({255,255,0,255});
     return false;
 }
 void NameSelectionComp::MoveUp()

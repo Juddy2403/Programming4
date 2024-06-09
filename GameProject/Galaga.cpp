@@ -22,6 +22,7 @@
 #include "Game observers/ExplosionObserver.h"
 #include "Game observers/FighterObserver.h"
 #include "Game observers/FormationObserver.h"
+#include "Game observers/ScoreManager.h"
 #include "Managers/InputManager.h"
 #include "Managers/ResourceManager.h"
 #include "Managers/SceneManager.h"
@@ -48,13 +49,13 @@ void Galaga::LoadStartScene()
     GameEngine::ServiceLocator::GetSoundSystem().FillSoundPaths("../Data/Audio/SoundPaths.txt");
     GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::start), Galaga::volume);
 
-    // GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::startMenu), LoadStartScreen());
-    // m_CurrentScene = SceneId::startMenu;
-    // GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::startMenu));
+    GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::startMenu), LoadStartScreen());
+    m_CurrentScene = SceneId::startMenu;
+    GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::startMenu));
 
-    GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::gameOver), LoadGameOverScene());
-    m_CurrentScene = SceneId::gameOver;
-    GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::gameOver));
+    // GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::gameOver), LoadGameOverScene());
+    // m_CurrentScene = SceneId::gameOver;
+    // GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::gameOver));
 }
 void Galaga::LevelCleared()
 {
@@ -75,6 +76,40 @@ void Galaga::LevelCleared()
 void Galaga::SetPlayerName(const std::string& name)
 {
     m_PlayerName = name;
+    auto score = ScoreManager::GetPlayerScore();
+    
+    std::ifstream inFile("../Data/HighestScores.txt");
+    std::map<int,std::string> scores;
+
+    std::string line;
+    while (std::getline(inFile, line))
+    {
+        std::istringstream iss(line);
+        std::string playerName;
+        int playerScore;
+        iss >> playerName >> playerScore;
+        scores[playerScore] = playerName;
+    }
+    inFile.close();
+
+    scores[score] = name;
+    if(scores.size() > 10) scores.erase(scores.begin());
+
+    std::ofstream outFile("../Data/HighestScores.txt");
+    //write to the output file in descending order
+    for(auto it = scores.rbegin(); it != scores.rend(); ++it)
+    {
+        outFile << it->second << " " << it->first << "\n";
+    }
+
+    if(scores.size() < 10)
+    {
+        int scoresLeft = 10 - static_cast<int>(std::ssize(scores));
+        for(int i{}; i < scoresLeft; ++i)
+            outFile << "AAA 0" << "\n";
+    }
+    outFile.close();
+    
 }
 void Galaga::GameLost()
 {
@@ -114,8 +149,6 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInf
     m_PrevControllerSceneKeys = std::move(m_ControllerSceneKeys);
     m_ControllerSceneKeys = { {GameEngine::ControllerInputKey::dpadLeft, 0}, {GameEngine::ControllerInputKey::dpadRight, 0}, {GameEngine::ControllerInputKey::X, 0} };
     
-
-    
     //------BACKGROUND--------
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::texture));
     SDL_Rect& destRect = gameObject->AddComponent<GameEngine::TextureComponent>("Background.png")->m_DestRect;
@@ -150,6 +183,19 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadLevel(const std::string& enemyInf
     gameObject->AddComponent<GameEngine::TextureComponent>();
     gameObject->AddComponent<ScoreComponent>(gameObject->AddComponent<GameEngine::TextComponent>(font));
     gameObject->SetPosition(10, 30);
+    scene->AddObject(std::move(gameObject));
+
+    //----------HIGHEST SCORE---------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextComponent>(font,"HIGHEST SCORE", SDL_Color{ 255,0,0 });
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->SetPosition(200, 10);
+    scene->AddObject(std::move(gameObject));
+
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextComponent>(font,std::to_string(ScoreManager::GetHighestScore()));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->SetPosition(200, 30);
     scene->AddObject(std::move(gameObject));
 
     //--------FIGHTER--------
