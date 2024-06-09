@@ -54,7 +54,7 @@ void Galaga::LevelCleared()
     switch(m_CurrentScene)
     {
     case SceneId::levelOne:
-        ChangeScene(SceneId::levelTwo, LoadLevel("../Data/Formations/EnemyInfo1.json", "../Data/Formations/FormationTrajectories1.json"));
+        ChangeScene(SceneId::levelTwo, LoadLevel("../Data/Formations/EnemyInfo2.json", "../Data/Formations/FormationTrajectories2.json"));
            break;
     case SceneId::levelTwo:
         ChangeScene(SceneId::levelThree, LoadLevel("../Data/Formations/EnemyInfo3.json", "../Data/Formations/FormationTrajectories3.json"));

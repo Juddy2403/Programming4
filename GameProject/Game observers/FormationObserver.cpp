@@ -42,6 +42,7 @@ void FormationObserver::Notify([[maybe_unused]] GameEngine::Subject* subject, in
         if (m_CurrentStage == m_NrOfStages)
         {
             m_NrOfStages = -1;
+            m_CurrentStage = 0;
             FormationComponent::ToggleUpdate();
         }
     }

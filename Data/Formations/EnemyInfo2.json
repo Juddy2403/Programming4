@@ -2,7 +2,7 @@
   {
     "enemyType": "Bee",
     "positions": [
-      { "formationPosition": [150, 70], "formationStage": 0, "turn": 0 },
+      { "formationPosition": [150, 70], "formationStage": 1, "turn": 0 },
       { "formationPosition": [150, 102], "formationStage": 0, "turn": 0 },
       { "formationPosition": [187, 70], "formationStage": 0, "turn": 0 },
       { "formationPosition": [187, 102], "formationStage": 0, "turn": 0 },
@@ -12,7 +12,7 @@
       { "formationPosition": [261, 102], "formationStage": 0, "turn": 0 },
       { "formationPosition": [298, 70], "formationStage": 0, "turn": 0 },
       { "formationPosition": [298, 102], "formationStage": 0, "turn": 0 },
-      { "formationPosition": [335, 70], "formationStage": 0, "turn": 0 },
+      { "formationPosition": [335, 70], "formationStage": 2, "turn": 0 },
       { "formationPosition": [335, 102], "formationStage": 0, "turn": 0 },
       { "formationPosition": [372, 70], "formationStage": 0, "turn": 0 },
       { "formationPosition": [372, 102], "formationStage": 0, "turn": 0 },
@@ -27,13 +27,13 @@
   {
     "enemyType": "Butterfly",
     "positions": [
-      { "formationPosition": [150, 130], "formationStage": 0, "turn": 0 },
+      { "formationPosition": [150, 130], "formationStage": 1, "turn": 0 },
       { "formationPosition": [150, 162], "formationStage": 0, "turn": 0 },
       { "formationPosition": [187, 130], "formationStage": 0, "turn": 0 },
       { "formationPosition": [187, 162], "formationStage": 0, "turn": 0 },
       { "formationPosition": [224, 130], "formationStage": 0, "turn": 0 },
       { "formationPosition": [224, 162], "formationStage": 0, "turn": 0 },
-      { "formationPosition": [261, 130], "formationStage": 0, "turn": 0 },
+      { "formationPosition": [261, 130], "formationStage": 2, "turn": 0 },
       { "formationPosition": [261, 162], "formationStage": 0, "turn": 0 },
       { "formationPosition": [372, 130], "formationStage": 0, "turn": 0 },
       { "formationPosition": [372, 162], "formationStage": 0, "turn": 0 },
@@ -49,7 +49,7 @@
     "enemyType": "BossGalaga",
     "positions": [
       { "formationPosition": [224, 38], "formationStage": 0, "turn": 0 },
-      { "formationPosition": [261, 38], "formationStage": 0, "turn": 0 },
+      { "formationPosition": [261, 38], "formationStage": 3, "turn": 0 },
       { "formationPosition": [372, 38], "formationStage": 0, "turn": 0 },
       { "formationPosition": [409, 38], "formationStage": 0, "turn": 0 }
     ]

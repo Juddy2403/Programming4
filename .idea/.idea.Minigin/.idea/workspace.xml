@@ -9,15 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="afbd271e-3457-4656-98e8-f358f8b4d7b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Formations/EnemyInfoTest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Formations/EnemyInfoTest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Formations/EnemyInfo2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Formations/EnemyInfo2.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/FormationComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Game observers/FormationObserver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/FormationObserver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Managers/InputManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/InputManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Minigin/Managers/SceneManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/SceneManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Managers/SceneManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Managers/SceneManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/Scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/Scene.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +23,26 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -312,7 +327,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "C++ Project.CleanProject.executor": "Run",
+    "C++ Project.CleanProject.executor": "Debug",
     "C++ Project.GameProject.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -444,7 +459,7 @@
       <workItem from="1717841844685" duration="6532000" />
       <workItem from="1717858000730" duration="10304000" />
       <workItem from="1717880910739" duration="9555000" />
-      <workItem from="1717890897426" duration="2950000" />
+      <workItem from="1717890897426" duration="4420000" />
     </task>
     <servers />
   </component>
@@ -454,16 +469,5 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/GameProject/Game components/FormationComponent.h</url>
-          <line>11</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
