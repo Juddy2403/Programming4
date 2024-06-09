@@ -38,6 +38,7 @@ void EnemyObserver::Notify(GameEngine::Subject* subject, int event
             }
         }
     }
+        break;
     default: break;
     }
 }

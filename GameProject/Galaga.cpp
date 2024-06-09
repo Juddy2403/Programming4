@@ -1,6 +1,8 @@
 ﻿#include "Galaga.h"
 
 #include <SDL_rect.h>
+
+#include "BulletTracker.h"
 #include "DataStructs.h"
 #include "GameCommands.h"
 #include "Initializers.h"
@@ -64,6 +66,10 @@ void Galaga::LevelCleared()
         break;
     default: break;
     }
+}
+void Galaga::GameLost()
+{
+    ChangeScene(SceneId::gameOver, LoadGameOverScene());
 }
 void Galaga::ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene)
 {
@@ -240,5 +246,50 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadStartScreen()
 }
 std::unique_ptr<GameEngine::Scene> Galaga::LoadGameOverScene()
 {
-    return nullptr;
+    auto scene = std::make_unique<GameEngine::Scene>();
+
+    //------BACKGROUND--------
+    auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::texture));
+    SDL_Rect& destRect = gameObject->AddComponent<GameEngine::TextureComponent>("Background.png")->m_DestRect;
+    destRect.w = GameEngine::g_WindowRect.w;
+    destRect.h = GameEngine::g_WindowRect.h;
+    gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<GameEngine::TextureComponent>(), 700);
+    scene->AddObject(std::move(gameObject));
+
+    auto font = GameEngine::ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 20);
+
+    //------TITLE--------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<GameEngine::TextComponent>(font, "- RESULT -")->SetColor({255, 0, 0,255});
+    gameObject->SetPosition(200, 150);
+    scene->AddObject(std::move(gameObject));
+
+    auto bulletsFired = BulletTracker::GetBulletsFired();
+    auto bulletsHit = BulletTracker::GetBulletsHit();
+    auto hitMissRatio = static_cast<float>(bulletsHit) / bulletsFired * 100.f;
+    std::stringstream hitMissStr{};
+    hitMissStr << std::fixed << std::setprecision(1) << hitMissRatio<<"%";
+    //------SHOTS FIRED--------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<GameEngine::TextComponent>(font, "SHOTS FIRED       "+ std::to_string(bulletsFired))->SetColor({0, 0, 255,255});
+    gameObject->SetPosition(50, 200);
+    scene->AddObject(std::move(gameObject));
+
+    //------NUMBER OF HITS--------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<GameEngine::TextComponent>(font, "NUMBER OF HITS    "+ std::to_string(bulletsHit));
+    gameObject->SetPosition(50, 250);
+    scene->AddObject(std::move(gameObject));
+
+    //------HIT-MISS RATIO--------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<GameEngine::TextComponent>(font, "HIT-MISS RATIO    "+ hitMissStr.str())->SetColor({255, 255, 0,255});
+    gameObject->SetPosition(50, 300);
+    scene->AddObject(std::move(gameObject));
+    m_PrevKeyboardSceneKeys = std::move(m_KeyboardSceneKeys);
+    return scene;
 }

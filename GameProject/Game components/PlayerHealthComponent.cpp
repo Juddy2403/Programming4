@@ -1,6 +1,7 @@
 ﻿#include "PlayerHealthComponent.h"
 
 #include "DataStructs.h"
+#include "Galaga.h"
 #include "Renderable/Renderer.h"
 #include "Subjects/GameObject.h"
 
@@ -25,7 +26,7 @@ void PlayerHealthComponent::Render()
 }
 void PlayerHealthComponent::Hit()
 {
-    if (m_Health <= 0) return; 
+    if (m_Health <= 0) Galaga::GetInstance().GameLost(); 
 
     GetGameObjParent()->NotifyAll(static_cast<int>(GameEvent::died));
 

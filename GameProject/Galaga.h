@@ -27,6 +27,7 @@ public:
 
     void LoadStartScene();
     void LevelCleared();
+    void GameLost();
     void ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene);
     void SetGameMode(GameMode mode);
     static constexpr int volume = 50;
