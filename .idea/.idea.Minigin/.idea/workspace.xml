@@ -8,11 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afbd271e-3457-4656-98e8-f358f8b4d7b0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigin/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameProject/Galaga.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Galaga.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game components/NameSelectionComp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game components/NameSelectionComp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/ScoreManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/ScoreManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameProject/Game observers/ScoreManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameProject/Game observers/ScoreManager.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -587,7 +583,7 @@
       <workItem from="1717841844685" duration="6532000" />
       <workItem from="1717858000730" duration="10304000" />
       <workItem from="1717880910739" duration="9555000" />
-      <workItem from="1717890897426" duration="20932000" />
+      <workItem from="1717890897426" duration="21426000" />
     </task>
     <servers />
   </component>

@@ -503,6 +503,29 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadChooseNameScene()
     gameObject->SetPosition(240, 500);
     scene->AddObject(std::move(gameObject));
 
+    std::ifstream inFile("../Data/HighestScores.txt");
+    std::string line;
+    float yPosition = 100.f; // starting y position for the scores
+    int index = 0; // index for the scores
+
+    while (std::getline(inFile, line) && index < 10)
+    {
+        std::istringstream iss(line);
+        std::string playerName;
+        int playerScore;
+        iss >> playerName >> playerScore;
+
+        gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+        gameObject->AddComponent<GameEngine::TextureComponent>();
+        gameObject->AddComponent<GameEngine::TextComponent>(font, playerName + " " + std::to_string(playerScore));
+        gameObject->SetPosition(200, yPosition);
+        scene->AddObject(std::move(gameObject));
+
+        yPosition += 30; // increment y position for the next score
+        ++index; // increment the index
+    }
+    inFile.close();
+
     input.BindCommand(GameEngine::KeyboardInputKey::UP,
         std::make_unique<SwitchNameCommand>(nameObject.get(), true));
     input.BindCommand(GameEngine::KeyboardInputKey::DOWN,
