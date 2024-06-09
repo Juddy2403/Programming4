@@ -5,6 +5,7 @@
 #include "Galaga.h"
 #include "Subjects/GameObject.h"
 #include "Game components/ModeSelectionComp.h"
+#include "Game components/NameSelectionComp.h"
 #include "Game observers/EnemyAIManager.h"
 
 ShootBulletCommand::ShootBulletCommand(GameEngine::GameObject* actor): Command(actor) {}
@@ -80,6 +81,36 @@ void MuteCommand::Execute()
     else Galaga::volume = 0;
 }
 GameEngine::Command::ExecuteOn MuteCommand::ExecuteOnKeyState() const
+{
+    return ExecuteOn::keyDown;
+}
+SwitchNameCommand::SwitchNameCommand(GameEngine::GameObject* actor, bool movingUp):
+Command(actor), m_NameSelectionComp(actor->GetComponent<NameSelectionComp>()),m_IsMovingUp(movingUp){}
+void SwitchNameCommand::Execute()
+{
+    if(m_IsMovingUp) m_NameSelectionComp->MoveUp();
+    else m_NameSelectionComp->MoveDown();
+}
+GameEngine::Command::ExecuteOn SwitchNameCommand::ExecuteOnKeyState() const
+{
+    return ExecuteOn::keyDown;
+}
+SelectNameCommand::SelectNameCommand(GameEngine::GameObject* actor):
+Command(actor), m_NameSelectionComp(actor->GetComponent<NameSelectionComp>()){}
+void SelectNameCommand::Execute()
+{
+    if(m_NameSelectionComp->MoveRight()) Galaga::GetInstance().SetPlayerName(m_NameSelectionComp->GetName());
+}
+GameEngine::Command::ExecuteOn SelectNameCommand::ExecuteOnKeyState() const
+{
+    return ExecuteOn::keyDown;
+}
+LoadChooseNameCommand::LoadChooseNameCommand(GameEngine::GameObject* actor): Command(actor) {}
+void LoadChooseNameCommand::Execute()
+{
+    Galaga::GetInstance().ChooseName();
+}
+GameEngine::Command::ExecuteOn LoadChooseNameCommand::ExecuteOnKeyState() const
 {
     return ExecuteOn::keyDown;
 }

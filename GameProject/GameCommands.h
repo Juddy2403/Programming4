@@ -2,6 +2,7 @@
 #include "Input/Command.h"
 #include "Managers/TimeManager.h"
 
+class NameSelectionComp;
 class ModeSelectionComp;
 class ShootBulletCommand final : public GameEngine::Command
 {
@@ -98,5 +99,51 @@ public:
     [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
 };
 
+class SwitchNameCommand final : public GameEngine::Command
+{
+public:
+    SwitchNameCommand(const SwitchNameCommand& other) = delete;
+    SwitchNameCommand(SwitchNameCommand&& other) noexcept = delete;
+    SwitchNameCommand& operator=(const SwitchNameCommand& other) = delete;
+    SwitchNameCommand& operator=(SwitchNameCommand&& other) noexcept = delete;
 
+    explicit SwitchNameCommand(GameEngine::GameObject* actor, bool movingUp);
+    ~SwitchNameCommand() override = default;
+    void Execute() override;
+    [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
+private:
+    NameSelectionComp* m_NameSelectionComp;
+    bool m_IsMovingUp;
+};
+
+class SelectNameCommand final : public GameEngine::Command
+{
+public:
+    SelectNameCommand(const SelectNameCommand& other) = delete;
+    SelectNameCommand(SelectNameCommand&& other) noexcept = delete;
+    SelectNameCommand& operator=(const SelectNameCommand& other) = delete;
+    SelectNameCommand& operator=(SelectNameCommand&& other) noexcept = delete;
+
+    explicit SelectNameCommand(GameEngine::GameObject* actor);
+    ~SelectNameCommand() override = default;
+    void Execute() override;
+    [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
+private:
+    NameSelectionComp* m_NameSelectionComp;
+};
+
+class LoadChooseNameCommand final : public GameEngine::Command
+{
+public:
+    LoadChooseNameCommand(const LoadChooseNameCommand& other) = delete;
+    LoadChooseNameCommand(LoadChooseNameCommand&& other) noexcept = delete;
+    LoadChooseNameCommand& operator=(const LoadChooseNameCommand& other) = delete;
+    LoadChooseNameCommand& operator=(LoadChooseNameCommand&& other) noexcept = delete;
+
+    explicit LoadChooseNameCommand(GameEngine::GameObject* actor);
+    ~LoadChooseNameCommand() override = default;
+    void Execute() override;
+    [[nodiscard]] ExecuteOn ExecuteOnKeyState() const override;
+private:
+};
 

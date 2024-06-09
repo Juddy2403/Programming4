@@ -6,12 +6,12 @@
 void GameEngine::InputManager::UnbindRemovedCommands()
 {
     std::erase_if(m_pKeyboardCommands, [](const auto& pair) {
-        return pair.second->IsDestroyed();
+        return pair.second == nullptr || pair.second->IsDestroyed();
     });
     for (auto& controllerCommands : m_pControllerCommands)
     {
         std::erase_if(controllerCommands, [](const auto& pair) {
-            return pair.second->IsDestroyed();
+            return pair.second == nullptr || pair.second->IsDestroyed();
         });
     }
 }

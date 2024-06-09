@@ -30,7 +30,9 @@ public:
 
     void LoadStartScene();
     void LevelCleared();
+    void SetPlayerName(const std::string& name);
     void GameLost();
+    void ChooseName();
     void ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene);
     void SetGameMode(GameMode mode);
     GameMode GetGameMode() const { return m_CurrentGameMode; }
@@ -41,6 +43,7 @@ private:
     friend class Singleton<Galaga>;
     Galaga() = default;
 
+    std::string m_PlayerName{};
     bool m_HasGameModeBeenSet{ false };
     GameMode m_CurrentGameMode;
     SceneId m_CurrentScene;
@@ -51,4 +54,5 @@ private:
     std::unique_ptr<GameEngine::Scene> LoadLevel(const std::string& enemyInfoPath, const std::string& trajectoryInfoPath);
     std::unique_ptr<GameEngine::Scene> LoadStartScreen();
     std::unique_ptr<GameEngine::Scene> LoadGameOverScene();
+    std::unique_ptr<GameEngine::Scene> LoadChooseNameScene();
 };

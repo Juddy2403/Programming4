@@ -13,6 +13,7 @@
 #include "Game components/BackgroundComponent.h"
 #include "Game components/FormationComponent.h"
 #include "Game components/ModeSelectionComp.h"
+#include "Game components/NameSelectionComp.h"
 #include "Game components/ScoreComponent.h"
 #include "Game observers/BulletObserver.h"
 #include "Game observers/EnemyAIManager.h"
@@ -47,9 +48,13 @@ void Galaga::LoadStartScene()
     GameEngine::ServiceLocator::GetSoundSystem().FillSoundPaths("../Data/Audio/SoundPaths.txt");
     GameEngine::ServiceLocator::GetSoundSystem().PlaySound(static_cast<GameEngine::SoundId>(SoundId::start), Galaga::volume);
 
-    GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::startMenu), LoadStartScreen());
-    m_CurrentScene = SceneId::startMenu;
-    GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::startMenu));
+    // GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::startMenu), LoadStartScreen());
+    // m_CurrentScene = SceneId::startMenu;
+    // GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::startMenu));
+
+    GameEngine::SceneManager::GetInstance().AddScene(static_cast<int>(SceneId::gameOver), LoadGameOverScene());
+    m_CurrentScene = SceneId::gameOver;
+    GameEngine::SceneManager::GetInstance().SetCurrentScene(static_cast<int>(SceneId::gameOver));
 }
 void Galaga::LevelCleared()
 {
@@ -67,9 +72,17 @@ void Galaga::LevelCleared()
     default: break;
     }
 }
+void Galaga::SetPlayerName(const std::string& name)
+{
+    m_PlayerName = name;
+}
 void Galaga::GameLost()
 {
     ChangeScene(SceneId::gameOver, LoadGameOverScene());
+}
+void Galaga::ChooseName()
+{
+    ChangeScene(SceneId::chooseName, LoadChooseNameScene());
 }
 void Galaga::ChangeScene(SceneId sceneId, std::unique_ptr<GameEngine::Scene>&& scene)
 {
@@ -285,6 +298,8 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadStartScreen()
 std::unique_ptr<GameEngine::Scene> Galaga::LoadGameOverScene()
 {
     auto scene = std::make_unique<GameEngine::Scene>();
+    m_PrevKeyboardSceneKeys = std::move(m_KeyboardSceneKeys);
+    m_PrevControllerSceneKeys = std::move(m_ControllerSceneKeys);
 
     //------BACKGROUND--------
     auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::texture));
@@ -307,6 +322,7 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadGameOverScene()
     auto bulletsFired = BulletTracker::GetBulletsFired();
     auto bulletsHit = BulletTracker::GetBulletsHit();
     auto hitMissRatio = static_cast<float>(bulletsHit) / bulletsFired * 100.f;
+    if(bulletsFired == 0) hitMissRatio = 0;
     std::stringstream hitMissStr{};
     hitMissStr << std::fixed << std::setprecision(1) << hitMissRatio<<"%";
     //------SHOTS FIRED--------
@@ -354,15 +370,100 @@ std::unique_ptr<GameEngine::Scene> Galaga::LoadGameOverScene()
     m_KeyboardSceneKeys.push_back(GameEngine::KeyboardInputKey::M);
     scene->AddObject(std::move(gameObject));
 
-    m_PrevKeyboardSceneKeys = std::move(m_KeyboardSceneKeys);
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
+    input.BindCommand(GameEngine::KeyboardInputKey::ENTER,
+        std::make_unique<LoadChooseNameCommand>(gameObject.get()));
+    m_KeyboardSceneKeys.push_back(GameEngine::KeyboardInputKey::ENTER);
+    scene->AddObject(std::move(gameObject));
+
     //erase everything from the previous keyboard scene keys that match the current keyboard scene keys
     for(auto key : m_KeyboardSceneKeys)
         std::erase(m_PrevKeyboardSceneKeys, key);
 
     //do the same for controller keys
-    m_PrevControllerSceneKeys = std::move(m_ControllerSceneKeys);
     for(auto [key, controllerIdx] : m_ControllerSceneKeys)
         std::erase(m_PrevControllerSceneKeys, std::pair{key, controllerIdx});
+    
+    return scene;
+}
+
+std::unique_ptr<GameEngine::Scene> Galaga::LoadChooseNameScene()
+{
+    auto scene = std::make_unique<GameEngine::Scene>();
+
+    //------BACKGROUND--------
+    auto gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::texture));
+    SDL_Rect& destRect = gameObject->AddComponent<GameEngine::TextureComponent>("Background.png")->m_DestRect;
+    destRect.w = GameEngine::g_WindowRect.w;
+    destRect.h = GameEngine::g_WindowRect.h;
+    gameObject->AddComponent<BackgroundComponent>(gameObject->GetComponent<GameEngine::TextureComponent>(), 700);
+    scene->AddObject(std::move(gameObject));
+
+    auto font = GameEngine::ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 20);
+    auto smallerFont = GameEngine::ResourceManager::GetInstance().LoadFont("Emulogic.ttf", 16);
+
+    //------TITLE--------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<GameEngine::TextComponent>(font, "HIGHEST SCORES");
+    gameObject->SetPosition(200, 50);
+    scene->AddObject(std::move(gameObject));
+    
+
+    //----------SCORE---------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    gameObject->AddComponent<ScoreComponent>(gameObject->AddComponent<GameEngine::TextComponent>(smallerFont));
+    gameObject->SetPosition(10, 30);
+    scene->AddObject(std::move(gameObject));
+
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
+    auto& input = GameEngine::InputManager::GetInstance();
+    input.BindCommand(GameEngine::KeyboardInputKey::M,
+        std::make_unique<MuteCommand>(gameObject.get()));
+    m_KeyboardSceneKeys.push_back(GameEngine::KeyboardInputKey::M);
+    scene->AddObject(std::move(gameObject));
+
+    //-----------------NAME SELECTION----------------
+    auto nameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::misc));
+    auto nameSelectionComp = nameObject->AddComponent<NameSelectionComp>();
+    
+    //----------Play modes---------
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    auto textComp = gameObject->AddComponent<GameEngine::TextComponent>(font, "A");
+    nameSelectionComp->AddTextComponent(textComp);
+    gameObject->SetPosition(200, 500);
+    scene->AddObject(std::move(gameObject));
+
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    textComp = gameObject->AddComponent<GameEngine::TextComponent>(font, "A");
+    nameSelectionComp->AddTextComponent(textComp);
+    gameObject->SetPosition(220, 500);
+    scene->AddObject(std::move(gameObject));
+
+    gameObject = std::make_unique<GameEngine::GameObject>(static_cast<int>(GameId::text));
+    gameObject->AddComponent<GameEngine::TextureComponent>();
+    textComp = gameObject->AddComponent<GameEngine::TextComponent>(font, "A");
+    nameSelectionComp->AddTextComponent(textComp);
+    gameObject->SetPosition(240, 500);
+    scene->AddObject(std::move(gameObject));
+
+    input.BindCommand(GameEngine::KeyboardInputKey::UP,
+        std::make_unique<SwitchNameCommand>(nameObject.get(), true));
+    input.BindCommand(GameEngine::KeyboardInputKey::DOWN,
+        std::make_unique<SwitchNameCommand>(nameObject.get(), false));
+    input.BindCommand(GameEngine::KeyboardInputKey::ENTER,
+        std::make_unique<SelectNameCommand>(nameObject.get()));
+
+    input.BindCommand(GameEngine::ControllerInputKey::dpadUp,
+        std::make_unique<SwitchNameCommand>(nameObject.get(), true),0);
+    input.BindCommand(GameEngine::ControllerInputKey::dpadDown,
+        std::make_unique<SwitchNameCommand>(nameObject.get(), false),0);
+    input.BindCommand(GameEngine::ControllerInputKey::A,
+        std::make_unique<SelectNameCommand>(nameObject.get()),0);
+    scene->AddObject(std::move(nameObject));
     
     return scene;
 }
