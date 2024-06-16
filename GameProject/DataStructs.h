@@ -2,7 +2,6 @@
 #include "EventData.h"
 #include "Sound/DerivedSoundSystems.h"
 
-
 enum class ObserverIdentifier
 {
     health,

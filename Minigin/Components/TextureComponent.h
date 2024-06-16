@@ -13,12 +13,12 @@ namespace GameEngine
     public:
         explicit TextureComponent(GameObject* gameObj);
         explicit TextureComponent(GameObject* gameObj, const std::string& filename);
-        explicit TextureComponent(GameObject* gameObj, const std::shared_ptr<Texture2D>& texture);
+        explicit TextureComponent(GameObject* gameObj, std::unique_ptr<Texture2D>&& texture);
         //virtual void Update() override;
         virtual void Render() override;
         [[nodiscard]] Texture2D* GetTexture() const;
         void SetTexture(const std::string& filename);
-        void SetTexture(const std::shared_ptr<Texture2D>& texture);
+        void SetTexture(std::unique_ptr<Texture2D>&& texture);
 
         SDL_Rect m_DestRect{};
         SDL_Rect m_SrcRect{};
@@ -31,7 +31,7 @@ namespace GameEngine
         SDL_Point m_RotationCenter{};
         SDL_RendererFlip m_FlipMode{ SDL_FLIP_NONE };
         void InitRects();
-        std::shared_ptr<Texture2D> m_Texture{};
+        Texture2D* m_Texture{};
     };
 }
 

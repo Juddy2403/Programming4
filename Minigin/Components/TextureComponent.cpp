@@ -24,10 +24,10 @@ void TextureComponent::InitRects()
 
     m_DestRect = m_SrcRect;
 }
-TextureComponent::TextureComponent(GameObject* gameObj, const std::shared_ptr<Texture2D>& texture) :
+TextureComponent::TextureComponent(GameObject* gameObj, std::unique_ptr<Texture2D>&& texture) :
     Component(gameObj)
 {
-    SetTexture(texture);
+    SetTexture(std::move(texture));
 }
 
 void TextureComponent::Render()
@@ -46,17 +46,17 @@ void TextureComponent::Render()
 }
 Texture2D* TextureComponent::GetTexture() const
 {
-    return m_Texture.get();
+    return m_Texture;
 }
 
 void TextureComponent::SetTexture(const std::string& filename)
-{ //TODO: refactor the shared pointer into a unique ptr
+{ 
     m_Texture = ResourceManager::GetInstance().LoadTexture(filename);
     InitRects();
 }
 
-void TextureComponent::SetTexture(const std::shared_ptr<Texture2D>& texture)
+void TextureComponent::SetTexture(std::unique_ptr<Texture2D>&& texture)
 {
-    m_Texture = texture;
+    m_Texture = ResourceManager::GetInstance().LoadTexture(std::move(texture));
     InitRects();
 }

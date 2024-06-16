@@ -6,8 +6,8 @@ using namespace GameEngine;
 SpriteComponent::SpriteComponent(GameObject* gameObj): TextureComponent(gameObj) {}
 SpriteComponent::SpriteComponent(GameObject* gameObj, const std::string& filename):
     TextureComponent(gameObj, filename) {}
-SpriteComponent::SpriteComponent(GameObject* gameObj, const std::shared_ptr<Texture2D>& texture) :
-    TextureComponent(gameObj, texture) {}
+SpriteComponent::SpriteComponent(GameObject* gameObj, std::unique_ptr<Texture2D>&& texture) :
+    TextureComponent(gameObj, std::move(texture)) {}
 
 void SpriteComponent::UpdateSrcRect()
 {

@@ -32,7 +32,7 @@ namespace GameEngine
     public:
         explicit SpriteComponent(GameObject* gameObj);
         explicit SpriteComponent(GameObject* gameObj, const std::string& filename);
-        explicit SpriteComponent(GameObject* gameObj, const std::shared_ptr<Texture2D>& texture);
+        explicit SpriteComponent(GameObject* gameObj, std::unique_ptr<Texture2D>&& texture);
         void UpdateSrcRect();
         virtual void Update() override;
         SpriteInfo m_SpriteInfo{};
